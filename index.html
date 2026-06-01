@@ -88,6 +88,32 @@
         });
         play();
       }
+
+      // Comportamento do menu hambúrguer no mobile
+      const menuBtn = document.getElementById('menu-btn');
+      const mobileMenu = document.getElementById('mobile-menu');
+
+      if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener('click', function() {
+          const isActive = mobileMenu.classList.toggle('active');
+          menuBtn.innerHTML = isActive ? '<i data-lucide="x"></i>' : '<i data-lucide="menu"></i>';
+          if (typeof lucide !== 'undefined') {
+            lucide.createIcons();
+          }
+        });
+      }
+      
+      // Alteração visual da Navbar ao rolar a página
+      const navbar = document.getElementById('navbar');
+      if (navbar) {
+        window.addEventListener('scroll', function() {
+          if (window.scrollY > 20) {
+            navbar.classList.add('header-scrolled');
+          } else {
+            navbar.classList.remove('header-scrolled');
+          }
+        });
+      }
     });
   </script>
 </head>
@@ -105,16 +131,16 @@
 
         <!-- Desktop Navigation -->
         <nav class="nav-links">
-          <a href="/" class="nav-link active">Home</a>
-          <a href="/empresa" class="nav-link">A Empresa</a>
-          <a href="/servicos" class="nav-link">Serviços</a>
-          <a href="/blog" class="nav-link">Blog</a>
-          <a href="/contato" class="nav-link">Contato</a>
+          <a href="index.html" class="nav-link active">Home</a>
+          <a href="empresa.html" class="nav-link">A Empresa</a>
+          <a href="servicos.html" class="nav-link">Serviços</a>
+          <a href="blog.html" class="nav-link">Blog</a>
+          <a href="contato.html" class="nav-link">Contato</a>
         </nav>
 
         <!-- Desktop CTA -->
         <div class="nav-cta">
-          <a href="/contato" class="btn btn-primary">
+          <a href="contato.html" class="btn btn-primary">
             Fale Conosco
           </a>
         </div>
@@ -130,13 +156,13 @@
     <!-- Mobile Navigation Drawer -->
     <div id="mobile-menu" class="mobile-menu">
       <div class="mobile-menu-container">
-        <a href="/" class="mobile-nav-link active">Home</a>
-        <a href="/empresa" class="mobile-nav-link">A Empresa</a>
-        <a href="/servicos" class="mobile-nav-link">Serviços</a>
-        <a href="/blog" class="mobile-nav-link">Blog</a>
-        <a href="/contato" class="mobile-nav-link">Contato</a>
+        <a href="index.html" class="mobile-nav-link active">Home</a>
+        <a href="empresa.html" class="mobile-nav-link">A Empresa</a>
+        <a href="servicos.html" class="mobile-nav-link">Serviços</a>
+        <a href="blog.html" class="mobile-nav-link">Blog</a>
+        <a href="contato.html" class="mobile-nav-link">Contato</a>
         <div class="mobile-cta-wrapper">
-          <a href="/contato" class="btn btn-primary mobile-cta">
+          <a href="contato.html" class="btn btn-primary mobile-cta">
             Fale Conosco
           </a>
         </div>
@@ -296,7 +322,7 @@
             <p class="service-card-desc">
               Diagnóstico operacional completo, extensão natural de shelf-life e aplicação de biotecnologia personalizada para eliminar perdas na sua produção de vegetais higienizados.
             </p>
-            <a href="/servicos" class="service-card-link">
+            <a href="servicos.html" class="service-card-link">
               Saiba mais
               <i data-lucide="arrow-right"></i>
             </a>
@@ -311,7 +337,7 @@
             <p class="service-card-desc">
               Treinamento especializado para equipes em Boas Práticas de Fabricação (BPF), controle sanitário e manipulação técnica, garantindo conformidade com as normas vigentes.
             </p>
-            <a href="/servicos" class="service-card-link">
+            <a href="servicos.html" class="service-card-link">
               Saiba mais
               <i data-lucide="arrow-right"></i>
             </a>
@@ -326,7 +352,7 @@
             <p class="service-card-desc">
               Desenvolvimento estratégico comercial, viabilidade econômica de plantas de processamento e estruturação de novos canais de distribuição B2B.
             </p>
-            <a href="/servicos" class="service-card-link">
+            <a href="servicos.html" class="service-card-link">
               Saiba mais
               <i data-lucide="arrow-right"></i>
             </a>
@@ -341,7 +367,7 @@
             <p class="service-card-desc">
               Substituição tecnológica para sulfitos e metabissulfito de sódio. Antioxidante orgânico seguro e com excelente custo-benefício de apenas 1 centavo por hortaliça.
             </p>
-            <a href="/servicos" class="service-card-link">
+            <a href="servicos.html" class="service-card-link">
               Saiba mais
               <i data-lucide="arrow-right"></i>
             </a>
@@ -478,7 +504,7 @@
             </p>
 
             <!-- CTA direct contact -->
-            <a href="/empresa" class="btn btn-primary hero-btn">
+            <a href="empresa.html" class="btn btn-primary hero-btn">
               Conheça mais
             </a>
 
@@ -636,7 +662,7 @@
               </div>
               <h3 class="blog-card-title">SP endurece inspeção de vegetais processados</h3>
               <p class="blog-card-desc">No último dia 10 de março de 2026, foi publicado o Decreto nº 70.447, que regulamenta a Lei nº 18.154/2025...</p>
-              <a href="/blog/sp-endurece-inspeção" class="blog-card-link">
+              <a href="blog.html" class="blog-card-link">
                 Leia Mais
                 <i data-lucide="arrow-right"></i>
               </a>
@@ -665,7 +691,7 @@
               </div>
               <h3 class="blog-card-title">Quem Planeja Escala, Lucra. Quem Improvisa, Perde.</h3>
               <p class="blog-card-desc">Evite prejuízos na cadeia de hortifrúti. Estruturar processos operacionais de higienização de FLV com clareza...</p>
-              <a href="/blog/planejamento-lucro" class="blog-card-link">
+              <a href="blog.html" class="blog-card-link">
                 Leia Mais
                 <i data-lucide="arrow-right"></i>
               </a>
@@ -694,7 +720,7 @@
               </div>
               <h3 class="blog-card-title">Tendências e Oportunidades para 2026</h3>
               <p class="blog-card-desc">Novas biotecnologias e exigências do mercado para embalagens sustentáveis e eliminação de metabissulfito...</p>
-              <a href="/blog/tendencias-2026" class="blog-card-link">
+              <a href="blog.html" class="blog-card-link">
                 Leia Mais
                 <i data-lucide="arrow-right"></i>
               </a>
@@ -723,7 +749,7 @@
               </div>
               <h3 class="blog-card-title">Colheita de Grandes Resultados</h3>
               <p class="blog-card-desc">Como a combinação de consultoria técnica customizada e o uso de antioxidantes eficientes geram colheitas lucrativas...</p>
-              <a href="/blog/colheita-resultados" class="blog-card-link">
+              <a href="blog.html" class="blog-card-link">
                 Leia Mais
                 <i data-lucide="arrow-right"></i>
               </a>
@@ -752,7 +778,7 @@
               </div>
               <h3 class="blog-card-title">A maturidade e os desafios da agroindústria</h3>
               <p class="blog-card-desc">A transição operacional de produtores tradicionais para agroindústrias modernas de processamento...</p>
-              <a href="/blog/maturidade-desafios" class="blog-card-link">
+              <a href="blog.html" class="blog-card-link">
                 Leia Mais
                 <i data-lucide="arrow-right"></i>
               </a>
@@ -781,7 +807,7 @@
               </div>
               <h3 class="blog-card-title">Veg Oxi 200: mais frescor e durabilidade</h3>
               <p class="blog-card-desc">Descubra como o Veg Oxi 200 atua em nível molecular para reter a oxidação de morangos, batatas e alfaces...</p>
-              <a href="/blog/veg-oxi-mais-frescor" class="blog-card-link">
+              <a href="blog.html" class="blog-card-link">
                 Leia Mais
                 <i data-lucide="arrow-right"></i>
               </a>
@@ -945,11 +971,11 @@
         <div class="footer-col footer-col-links">
           <h3 class="footer-title">Mapa do Site</h3>
           <ul class="footer-links-list">
-            <li><a href="/" class="footer-link">Home</a></li>
-            <li><a href="/empresa" class="footer-link">A Empresa</a></li>
-            <li><a href="/servicos" class="footer-link">Serviços</a></li>
-            <li><a href="/blog" class="footer-link">Blog</a></li>
-            <li><a href="/contato" class="footer-link">Contato</a></li>
+            <li><a href="index.html" class="footer-link">Home</a></li>
+            <li><a href="empresa.html" class="footer-link">A Empresa</a></li>
+            <li><a href="servicos.html" class="footer-link">Serviços</a></li>
+            <li><a href="blog.html" class="footer-link">Blog</a></li>
+            <li><a href="contato.html" class="footer-link">Contato</a></li>
           </ul>
         </div>
 
@@ -994,7 +1020,6 @@
     </div>
   </footer>
 
-  <!-- Script Principal -->
-  <script type="module" src="main.js"></script>
+  <!-- Sem script externo para compatibilidade offline total -->
 </body>
 </html>

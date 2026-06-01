@@ -1,7 +1,9 @@
-// Inicializar os ícones do Lucide carregados via CDN global
-if (typeof lucide !== 'undefined') {
-  lucide.createIcons();
-}
+import { createIcons, icons } from 'lucide';
+
+// Disponibilizar globalmente para scripts inline legados (compatibilidade com a home)
+window.lucide = {
+  createIcons: (options = {}) => createIcons({ icons, ...options })
+};
 
 // Comportamento do menu hambúrguer no mobile
 const menuBtn = document.getElementById('menu-btn');
@@ -18,9 +20,7 @@ if (menuBtn && mobileMenu) {
     }
     
     // Recriar ícones após atualizar o HTML interno
-    if (typeof lucide !== 'undefined') {
-      lucide.createIcons();
-    }
+    createIcons({ icons });
   });
 }
 
@@ -121,11 +121,66 @@ const initCarousel = () => {
   startInterval();
 };
 
+// Lógica de Acordeão do FAQ (Suporte a animação de altura com scrollHeight)
+const initAccordions = () => {
+  const faqQuestions = document.querySelectorAll('.faq-question');
+  
+  faqQuestions.forEach(question => {
+    question.addEventListener('click', () => {
+      const item = question.closest('.faq-item');
+      const answer = item.querySelector('.faq-answer');
+      if (!item || !answer) return;
+      
+      const isActive = item.classList.contains('active');
+      
+      // Fechar outros acordeões no mesmo grupo para visual limpo (opcional)
+      const group = question.closest('.faq-group');
+      if (group) {
+        const activeItems = group.querySelectorAll('.faq-item.active');
+        activeItems.forEach(activeItem => {
+          if (activeItem !== item) {
+            activeItem.classList.remove('active');
+            const activeAnswer = activeItem.querySelector('.faq-answer');
+            if (activeAnswer) {
+              activeAnswer.style.maxHeight = null;
+            }
+          }
+        });
+      }
+      
+      // Toggle do acordeão atual
+      if (isActive) {
+        item.classList.remove('active');
+        answer.style.maxHeight = null;
+      } else {
+        item.classList.add('active');
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      }
+    });
+  });
+};
+
 // Executa imediatamente e também nos eventos para garantir que rode sempre
-if (document.readyState === "complete" || document.readyState === "interactive") {
+const runAllInits = () => {
+  console.log("VegQuality: Iniciando carregamento dos componentes...");
+  try {
+    if (typeof createIcons !== 'undefined' && typeof icons !== 'undefined') {
+      createIcons({ icons });
+      console.log("VegQuality: Ícones Lucide inicializados com sucesso.");
+    } else {
+      console.warn("VegQuality: Lucide ou Ícones não estão definidos no escopo.");
+    }
+  } catch (error) {
+    console.error("VegQuality: Erro ao inicializar ícones Lucide:", error);
+  }
   initCarousel();
+  initAccordions();
+};
+
+if (document.readyState === "complete" || document.readyState === "interactive") {
+  runAllInits();
 } else {
-  document.addEventListener("DOMContentLoaded", initCarousel);
-  window.addEventListener("load", initCarousel);
+  document.addEventListener("DOMContentLoaded", runAllInits);
+  window.addEventListener("load", runAllInits);
 }
 
