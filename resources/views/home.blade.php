@@ -79,24 +79,33 @@
             
             <!-- Image Wrapper with Asymmetric organic border and sliding carousel -->
             <div class="hero-image-wrapper hero-carousel">
+              @php
+                $heroImages = data_get($hero, 'images');
+                if (empty($heroImages) || !is_array($heroImages)) {
+                    $heroImages = [
+                        'assets/hero/farmer-with-crate-of-ripe-vegetables-2025-02-18-13-20-58-utc-scaled.jpg',
+                        'assets/hero/Home-Veg-scaled.jpg',
+                        'assets/hero/colhendo-alface.jpg'
+                    ];
+                    $isAsset = true;
+                } else {
+                    $isAsset = false;
+                }
+              @endphp
               <div class="carousel-slides">
-                <div class="carousel-slide active">
-                  <img src="{{ asset('assets/hero/farmer-with-crate-of-ripe-vegetables-2025-02-18-13-20-58-utc-scaled.jpg') }}" alt="Produtor VegQuality com caixa de vegetais frescos e saudáveis" class="hero-img">
-                </div>
-                <div class="carousel-slide">
-                  <img src="{{ asset('assets/hero/Home-Veg-scaled.jpg') }}" alt="Vegetais frescos processados VegQuality" class="hero-img">
-                </div>
-                <div class="carousel-slide">
-                  <img src="{{ asset('assets/hero/colhendo-alface.jpg') }}" alt="Colheita de alface VegQuality no campo" class="hero-img">
-                </div>
+                @foreach($heroImages as $index => $img)
+                  <div class="carousel-slide @if($index === 0) active @endif">
+                    <img src="{{ $isAsset ? asset($img) : asset('storage/' . $img) }}" alt="{{ data_get($hero, 'title', 'VegQuality') }}" class="hero-img">
+                  </div>
+                @endforeach
               </div>
               <div class="hero-image-overlay"></div>
               
               <!-- Carousel Controls/Dots -->
               <div class="carousel-dots">
-                <span class="carousel-dot active" data-slide="0"></span>
-                <span class="carousel-dot" data-slide="1"></span>
-                <span class="carousel-dot" data-slide="2"></span>
+                @foreach($heroImages as $index => $img)
+                  <span class="carousel-dot @if($index === 0) active @endif" data-slide="{{ $index }}"></span>
+                @endforeach
               </div>
             </div>
 
@@ -264,7 +273,11 @@
           <!-- Comparison Image Right -->
           <div class="compare-container animate-fade-up delay-200">
             <div class="compare-media-wrapper">
-              <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="Comparativo de batata picada sem Veg Oxi 200 (oxidada e escura) versus com Veg Oxi 200 (clara, fresca e saudável)" class="compare-img">
+              @if(data_get($productHighlight, 'image'))
+                <img src="{{ asset('storage/' . data_get($productHighlight, 'image')) }}" alt="{{ data_get($productHighlight, 'title') }}" class="compare-img">
+              @else
+                <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="Comparativo de batata picada sem Veg Oxi 200 (oxidada e escura) versus com Veg Oxi 200 (clara, fresca e saudável)" class="compare-img">
+              @endif
             </div>
           </div>
 
@@ -281,7 +294,11 @@
           <div class="about-media animate-fade-up">
             <div class="about-image-bg-shape"></div>
             <div class="about-image-wrapper">
-              <img src="{{ asset('assets/images/Foto-Roseane-Bob-profissional.jpg') }}" alt="Dra. Roseane Bob - Fundadora da VegQuality" class="about-img">
+              @if(data_get($about, 'image'))
+                <img src="{{ asset('storage/' . data_get($about, 'image')) }}" alt="{{ data_get($about, 'title') }}" class="about-img">
+              @else
+                <img src="{{ asset('assets/images/Foto-Roseane-Bob-profissional.jpg') }}" alt="Dra. Roseane Bob - Fundadora da VegQuality" class="about-img">
+              @endif
             </div>
           </div>
 

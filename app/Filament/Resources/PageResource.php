@@ -26,32 +26,19 @@ class PageResource extends Resource
                 Forms\Components\Card::make()
                     ->schema([
                         Forms\Components\TextInput::make('title')
+                            ->label('Título da Página')
                             ->required()
                             ->maxLength(255),
                         Forms\Components\TextInput::make('slug')
+                            ->label('Slug')
                             ->required()
                             ->maxLength(255)
                             ->unique(Page::class, 'slug', ignoreRecord: true),
                         Forms\Components\Textarea::make('meta_description')
+                            ->label('Meta Description (SEO)')
                             ->rows(3)
                             ->columnSpanFull(),
                     ]),
-                Forms\Components\Section::make('Seções da Página')
-                    ->schema([
-                        Forms\Components\Repeater::make('sections')
-                            ->relationship('sections')
-                            ->schema([
-                                Forms\Components\TextInput::make('key')
-                                    ->required()
-                                    ->maxLength(255),
-                                Forms\Components\KeyValue::make('content')
-                                    ->required()
-                                    ->keyLabel('Propriedade')
-                                    ->valueLabel('Valor')
-                                    ->columnSpanFull(),
-                            ])
-                            ->columnSpanFull()
-                    ])
             ]);
     }
 
@@ -60,13 +47,16 @@ class PageResource extends Resource
         return $table
             ->columns([
                 Tables\Columns\TextColumn::make('title')
+                    ->label('Título')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('slug')
+                    ->label('Slug')
                     ->searchable()
                     ->sortable(),
                 Tables\Columns\TextColumn::make('created_at')
-                    ->dateTime()
+                    ->label('Criado em')
+                    ->dateTime('d/m/Y H:i')
                     ->sortable()
                     ->toggleable(isToggledHiddenByDefault: true),
             ])
@@ -87,7 +77,7 @@ class PageResource extends Resource
     public static function getRelations(): array
     {
         return [
-            //
+            RelationManagers\SectionsRelationManager::class,
         ];
     }
 
