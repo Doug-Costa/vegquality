@@ -10,7 +10,19 @@ class HomeController extends Controller
     public function index()
     {
         $page = \App\Models\Page::with('sections')->where('slug', 'home')->first();
-        return view('home', compact('page'));
+        
+        $articles = \App\Models\Article::with('columnist')
+            ->where('status', 'published')
+            ->where(function ($q) {
+                $q->where('published_at', '<=', now())
+                  ->orWhereNull('published_at');
+            })
+            ->orderBy('published_at', 'desc')
+            ->get();
+            
+        $homepageArticles = $articles->count() >= 6 ? $articles->take(6) : $articles->take(3);
+        
+        return view('home', compact('page', 'homepageArticles'));
     }
 
     public function empresa()

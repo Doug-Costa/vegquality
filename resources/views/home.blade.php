@@ -490,183 +490,49 @@
           </h2>
         </div>
 
-        <!-- Grid of 7 Cards -->
+        <!-- Grid of Cards -->
         <div class="blog-grid animate-fade-up delay-100">
-          
-          <!-- Post 1: SP endurece inspeção -->
-          <div class="blog-card">
-            <div class="blog-card-img-wrapper">
-              <img src="{{ asset('assets/images/blog-lei-1854.png') }}" alt="SP endurece inspeção de vegetais" class="blog-card-img">
-            </div>
-            <div class="blog-card-content">
-              <div class="blog-card-meta">
-                <span class="blog-card-meta-item">
-                  <i data-lucide="calendar"></i>
-                  03 mar, 2026
-                </span>
-                <span class="blog-card-meta-item">
-                  <i data-lucide="user"></i>
-                  Roseane Bob
-                </span>
-                <span class="blog-card-meta-item">
-                  <i data-lucide="message-square"></i>
-                  0
-                </span>
+          @forelse($homepageArticles as $article)
+            <div class="blog-card">
+              <div class="blog-card-img-wrapper">
+                @if($article->cover_image)
+                  <img src="{{ asset('storage/' . $article->cover_image) }}" alt="{{ $article->title }}" class="blog-card-img">
+                @else
+                  <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="{{ $article->title }}" class="blog-card-img">
+                @endif
               </div>
-              <h3 class="blog-card-title">SP endurece inspeção de vegetais processados</h3>
-              <p class="blog-card-desc">No último dia 10 de março de 2026, foi publicado o Decreto nº 70.447, que regulamenta a Lei nº 18.154/2025...</p>
-              <a href="{{ url('/radar') }}" class="blog-card-link">
-                Leia Mais
-                <i data-lucide="arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Post 2: Quem Planeja Escala -->
-          <div class="blog-card">
-            <div class="blog-card-img-wrapper">
-              <img src="{{ asset('assets/images/plano de negocios.jpg') }}" alt="Plano de negócios agrícola" class="blog-card-img">
-            </div>
-            <div class="blog-card-content">
-              <div class="blog-card-meta">
-                <span class="blog-card-meta-item">
-                  <i data-lucide="calendar"></i>
-                  21 jan, 2026
-                </span>
-                <span class="blog-card-meta-item">
-                  <i data-lucide="user"></i>
-                  Roseane Bob
-                </span>
-                <span class="blog-card-meta-item">
-                  <i data-lucide="message-square"></i>
-                  0
-                </span>
+              <div class="blog-card-content">
+                <div class="blog-card-meta">
+                  <span class="blog-card-meta-item">
+                    <i data-lucide="calendar"></i>
+                    {{ $article->published_at ? $article->published_at->translatedFormat('d M, Y') : $article->created_at->translatedFormat('d M, Y') }}
+                  </span>
+                  <span class="blog-card-meta-item">
+                    <i data-lucide="user"></i>
+                    {{ $article->columnist ? $article->columnist->name : ($article->author_name ?: 'Roseane Bob') }}
+                  </span>
+                </div>
+                <h3 class="blog-card-title">{{ $article->title }}</h3>
+                <p class="blog-card-desc">
+                  {{ Str::limit(strip_tags($article->excerpt), 120, '...') }}
+                </p>
+                <a href="{{ url('/radar/' . $article->slug) }}" class="blog-card-link">
+                  Leia Mais
+                  <i data-lucide="arrow-right"></i>
+                </a>
               </div>
-              <h3 class="blog-card-title">Quem Planeja Escala, Lucra. Quem Improvisa, Perde.</h3>
-              <p class="blog-card-desc">Evite prejuízos na cadeia de hortifrúti. Estruturar processos operacionais de higienização de FLV com clareza...</p>
-              <a href="{{ url('/radar') }}" class="blog-card-link">
-                Leia Mais
-                <i data-lucide="arrow-right"></i>
-              </a>
             </div>
-          </div>
+          @empty
+            <p class="text-center text-gray-500" style="grid-column: span 3; padding: 2rem 0;">Nenhum artigo publicado no momento.</p>
+          @endforelse
+        </div>
 
-          <!-- Post 3: Tendências e Oportunidades -->
-          <div class="blog-card">
-            <div class="blog-card-img-wrapper">
-              <img src="{{ asset('assets/images/new_technologies_consulting.jpg') }}" alt="Tendências e oportunidades agroindustriais" class="blog-card-img">
-            </div>
-            <div class="blog-card-content">
-              <div class="blog-card-meta">
-                <span class="blog-card-meta-item">
-                  <i data-lucide="calendar"></i>
-                  12 dez, 2025
-                </span>
-                <span class="blog-card-meta-item">
-                  <i data-lucide="user"></i>
-                  Roseane Bob
-                </span>
-                <span class="blog-card-meta-item">
-                  <i data-lucide="message-square"></i>
-                  0
-                </span>
-              </div>
-              <h3 class="blog-card-title">Tendências e Oportunidades para 2026</h3>
-              <p class="blog-card-desc">Novas biotecnologias e exigências do mercado para embalagens sustentáveis e eliminação de metabissulfito...</p>
-              <a href="{{ url('/radar') }}" class="blog-card-link">
-                Leia Mais
-                <i data-lucide="arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Post 4: Colheita de Grandes Resultados -->
-          <div class="blog-card">
-            <div class="blog-card-img-wrapper">
-              <img src="{{ asset('assets/images/WhatsApp-Image-2025-09-05-at-09.27.20-1.jpeg') }}" alt="Colheita de hortaliças frescas" class="blog-card-img">
-            </div>
-            <div class="blog-card-content">
-              <div class="blog-card-meta">
-                <span class="blog-card-meta-item">
-                  <i data-lucide="calendar"></i>
-                  13 out, 2025
-                </span>
-                <span class="blog-card-meta-item">
-                  <i data-lucide="user"></i>
-                  Roseane Bob
-                </span>
-                <span class="blog-card-meta-item">
-                  <i data-lucide="message-square"></i>
-                  0
-                </span>
-              </div>
-              <h3 class="blog-card-title">Colheita de Grandes Resultados</h3>
-              <p class="blog-card-desc">Como a combinação de consultoria técnica customizada e o uso de antioxidantes eficientes geram colheitas lucrativas...</p>
-              <a href="{{ url('/radar') }}" class="blog-card-link">
-                Leia Mais
-                <i data-lucide="arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Post 5: Maturidade e Desafios -->
-          <div class="blog-card">
-            <div class="blog-card-img-wrapper">
-              <img src="{{ asset('assets/images/talk-of-farmer-and-scientist-2025-03-15-20-53-47-utc-scaled.jpg') }}" alt="Diálogo entre produtor e cientista" class="blog-card-img">
-            </div>
-            <div class="blog-card-content">
-              <div class="blog-card-meta">
-                <span class="blog-card-meta-item">
-                  <i data-lucide="calendar"></i>
-                  03 out, 2025
-                </span>
-                <span class="blog-card-meta-item">
-                  <i data-lucide="user"></i>
-                  Roseane Bob
-                </span>
-                <span class="blog-card-meta-item">
-                  <i data-lucide="message-square"></i>
-                  0
-                </span>
-              </div>
-              <h3 class="blog-card-title">A maturidade e os desafios da agroindústria</h3>
-              <p class="blog-card-desc">A transição operacional de produtores tradicionais para agroindústrias modernas de processamento...</p>
-              <a href="{{ url('/radar') }}" class="blog-card-link">
-                Leia Mais
-                <i data-lucide="arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
-          <!-- Post 6: Veg Oxi 200: mais frescor -->
-          <div class="blog-card">
-            <div class="blog-card-img-wrapper">
-              <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="Galão de Veg Oxi 200" class="blog-card-img">
-            </div>
-            <div class="blog-card-content">
-              <div class="blog-card-meta">
-                <span class="blog-card-meta-item">
-                  <i data-lucide="calendar"></i>
-                  12 ago, 2025
-                </span>
-                <span class="blog-card-meta-item">
-                  <i data-lucide="user"></i>
-                  Roseane Bob
-                </span>
-                <span class="blog-card-meta-item">
-                  <i data-lucide="message-square"></i>
-                  0
-                </span>
-              </div>
-              <h3 class="blog-card-title">Veg Oxi 200: mais frescor e durabilidade</h3>
-              <p class="blog-card-desc">Descubra como o Veg Oxi 200 atua em nível molecular para reter a oxidação de morangos, batatas e alfaces...</p>
-              <a href="{{ url('/radar') }}" class="blog-card-link">
-                Leia Mais
-                <i data-lucide="arrow-right"></i>
-              </a>
-            </div>
-          </div>
-
+        <!-- Action Button -->
+        <div class="animate-fade-up delay-200" style="margin-top: 3.5rem; text-align: center;">
+          <a href="{{ url('/radar') }}" class="btn btn-primary" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none;">
+            Veja Mais
+            <i data-lucide="arrow-right"></i>
+          </a>
         </div>
 
       </div>

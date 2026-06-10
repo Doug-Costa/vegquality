@@ -90,11 +90,8 @@ class ArticleResource extends Resource
                                             ->image()
                                             ->directory('articles')
                                             ->disk('public')
-                                            ->imageResizeMode('cover')
-                                            ->imageCropAspectRatio('16:9')
-                                            ->imageResizeTargetWidth('1200')
-                                            ->imageResizeTargetHeight('675')
-                                            ->helperText('Formato recomendado: 16:9 (ex: 1200x675px). Max 5MB.'),
+                                            ->maxSize(102400)
+                                            ->helperText('Max 100MB.'),
                                     ]),
 
                                 Forms\Components\Section::make('Autoria & Categorização')
@@ -125,7 +122,9 @@ class ArticleResource extends Resource
                                                     ->label('Foto de Perfil')
                                                     ->image()
                                                     ->directory('columnists')
-                                                    ->disk('public'),
+                                                    ->disk('public')
+                                                    ->maxSize(102400)
+                                                    ->helperText('Max 100MB.'),
                                                 Forms\Components\Textarea::make('bio')
                                                     ->label('Biografia')
                                                     ->rows(3)

@@ -27,17 +27,17 @@
     
     <!-- Filtro Ativo Banner -->
     @if($activeCategory || $activeTag)
-      <div class="mb-8 p-4 bg-veg-light border border-veg-primary/20 rounded-2xl flex items-center justify-between animate-fade-up">
-        <span class="text-veg-dark font-medium flex items-center gap-2">
-          <i data-lucide="filter" class="w-5 h-5 text-veg-primary"></i>
+      <div class="blog-filter-banner animate-fade-up">
+        <span class="text-veg-dark font-medium" style="display: inline-flex; align-items: center; gap: 0.5rem;">
+          <i data-lucide="filter" style="width: 1.25rem; height: 1.25rem; color: var(--color-veg-primary);"></i>
           Filtrado por: 
           <strong>
             @if($activeCategory) Categoria: {{ $activeCategory }} @endif
             @if($activeTag) Tag: #{{ $activeTag }} @endif
           </strong>
         </span>
-        <a href="{{ url('/radar') }}" class="text-sm text-veg-primary hover:text-veg-primary-hover underline font-bold flex items-center gap-1">
-          Limpar Filtro <i data-lucide="x" class="w-4 h-4"></i>
+        <a href="{{ url('/radar') }}" class="text-sm text-veg-primary hover:text-veg-primary-hover underline font-bold" style="display: inline-flex; align-items: center; gap: 0.25rem; color: var(--color-veg-primary); font-weight: 700;">
+          Limpar Filtro <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
         </a>
       </div>
     @endif
@@ -62,14 +62,14 @@
               
               <!-- Categoria Flutuante -->
               @if($article->category)
-                <span class="absolute top-4 left-4 bg-veg-primary text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-md">
+                <span class="category-badge">
                   {{ $article->category }}
                 </span>
               @endif
             </div>
 
             <!-- Conteúdo do Artigo -->
-            <div class="md:w-3/5 p-6 md:p-10 flex flex-col justify-between flex-grow">
+            <div class="blog-large-card-content">
               <div>
                 <!-- Metadados -->
                 <div class="flex flex-wrap items-center gap-5 text-xs font-semibold text-gray-400 mb-4">
@@ -118,10 +118,10 @@
 
           </article>
         @empty
-          <div class="text-center py-12 bg-white rounded-3xl border border-gray-100 p-8 shadow-sm">
-            <i data-lucide="book-open" class="w-12 h-12 text-gray-300 mx-auto mb-4"></i>
-            <h3 class="text-lg font-bold text-veg-dark mb-2">Nenhum artigo encontrado</h3>
-            <p class="text-gray-500">Tente buscar por outras categorias ou tags.</p>
+          <div class="blog-empty-state">
+            <i data-lucide="book-open" class="blog-empty-state-icon"></i>
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--color-veg-dark); margin-bottom: 0.5rem;">Nenhum artigo encontrado</h3>
+            <p style="color: #6b7280; font-size: 0.95rem;">Tente buscar por outras categorias ou tags.</p>
           </div>
         @endforelse
 

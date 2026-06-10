@@ -123,7 +123,8 @@ class SectionsRelationManager extends RelationManager
                                     ->directory('hero')
                                     ->disk('public')
                                     ->image()
-                                    ->helperText('Selecione 1 ou mais imagens. Elas rotacionarão automaticamente no carrossel do topo.'),
+                                    ->maxSize(102400)
+                                    ->helperText('Selecione 1 ou mais imagens. Elas rotacionarão automaticamente no carrossel do topo. (Max 100MB por imagem)'),
                             ]),
                     ])
             ],
@@ -177,11 +178,13 @@ class SectionsRelationManager extends RelationManager
                             ])->columns(2),
 
                         Forms\Components\FileUpload::make('image')
-                            ->label('Imagem Comparativa')
-                            ->image()
-                            ->directory('products')
-                            ->disk('public')
-                            ->columnSpanFull(),
+                                    ->label('Imagem Comparativa')
+                                    ->image()
+                                    ->directory('products')
+                                    ->disk('public')
+                                    ->maxSize(102400)
+                                    ->helperText('Max 100MB.')
+                                    ->columnSpanFull(),
 
                         Forms\Components\TextInput::make('cta_text')
                             ->label('Texto do Botão CTA')
@@ -238,11 +241,13 @@ class SectionsRelationManager extends RelationManager
                             ->columnSpanFull(),
 
                         Forms\Components\FileUpload::make('image')
-                            ->label('Imagem de Perfil / Ilustrativa')
-                            ->image()
-                            ->directory('about')
-                            ->disk('public')
-                            ->columnSpanFull(),
+                                    ->label('Imagem de Perfil / Ilustrativa')
+                                    ->image()
+                                    ->directory('about')
+                                    ->disk('public')
+                                    ->maxSize(102400)
+                                    ->helperText('Max 100MB.')
+                                    ->columnSpanFull(),
 
                         Forms\Components\TextInput::make('cta_text')
                             ->label('Texto do Botão CTA')
@@ -327,11 +332,13 @@ class SectionsRelationManager extends RelationManager
                             ->columnSpanFull(),
                         
                         Forms\Components\FileUpload::make('image')
-                            ->label('Imagem do Lado Direito')
-                            ->image()
-                            ->directory('empresa')
-                            ->disk('public')
-                            ->columnSpanFull(),
+                                    ->label('Imagem do Lado Direito')
+                                    ->image()
+                                    ->directory('empresa')
+                                    ->disk('public')
+                                    ->maxSize(102400)
+                                    ->helperText('Max 100MB.')
+                                    ->columnSpanFull(),
 
                         Forms\Components\Section::make('Ponto 1')
                             ->schema([
@@ -385,11 +392,13 @@ class SectionsRelationManager extends RelationManager
                             ->columnSpanFull(),
 
                         Forms\Components\FileUpload::make('image')
-                            ->label('Imagem da Liderança')
-                            ->image()
-                            ->directory('empresa')
-                            ->disk('public')
-                            ->columnSpanFull(),
+                                    ->label('Imagem da Liderança')
+                                    ->image()
+                                    ->directory('empresa')
+                                    ->disk('public')
+                                    ->maxSize(102400)
+                                    ->helperText('Max 100MB.')
+                                    ->columnSpanFull(),
                         Forms\Components\TextInput::make('image_caption')
                             ->label('Legenda da Imagem')
                             ->columnSpanFull(),
@@ -518,7 +527,8 @@ class SectionsRelationManager extends RelationManager
                             ->directory('clientes')
                             ->disk('public')
                             ->image()
-                            ->helperText('Carregue os logotipos das cooperativas e marcas clientes.'),
+                            ->maxSize(102400)
+                            ->helperText('Carregue os logotipos das cooperativas e marcas clientes. (Max 100MB por imagem)'),
                     ])
             ],
 

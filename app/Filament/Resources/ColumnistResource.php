@@ -50,10 +50,8 @@ class ColumnistResource extends Resource
                             ->image()
                             ->directory('columnists')
                             ->disk('public')
-                            ->imageResizeMode('force')
-                            ->imageCropAspectRatio('1:1')
-                            ->imageResizeTargetWidth('200')
-                            ->imageResizeTargetHeight('200'),
+                            ->maxSize(102400)
+                            ->helperText('Max 100MB.'),
                         Forms\Components\Textarea::make('bio')
                             ->label('Biografia')
                             ->placeholder('Escreva uma breve biografia do colunista...')

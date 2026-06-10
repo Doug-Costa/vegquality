@@ -119,7 +119,7 @@
                 @endif
                 
                 @if($related->category)
-                  <span class="absolute top-3 left-3 bg-veg-primary text-white text-[10px] font-bold px-2.5 py-1 rounded-full shadow-sm">
+                  <span class="category-badge-sm">
                     {{ $related->category }}
                   </span>
                 @endif

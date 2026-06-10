@@ -75,7 +75,7 @@
           </div>
 
           <!-- Card 3: Veg Oxi 200 / Tecnologia de Ponta -->
-          <div class="service-card" style="grid-column: span 2; border-color: rgba(46, 125, 50, 0.3); background: linear-gradient(to bottom right, #ffffff, var(--color-veg-light));">
+          <div class="service-card service-card-featured" style="border-color: rgba(46, 125, 50, 0.3); background: linear-gradient(to bottom right, #ffffff, var(--color-veg-light));">
             <div class="service-card-icon" style="background-color: var(--color-veg-primary); color: white;">
               <i data-lucide="shield-check"></i>
             </div>
@@ -254,15 +254,17 @@
     </section>
 
     <!-- Combo Promo Banner -->
-    <div class="promo-banner animate-fade-up delay-300" style="margin: 4rem auto; max-width: 1200px; padding: 0 1rem;">
-      <div class="promo-content-wrapper">
-        <h3 class="promo-title">
-          {{ data_get($contacts, 'promo_title', 'Compre o Veg Oxi 200 e ganhe uma consultoria técnica de 30 minutos para otimizar seu processo e estender o shelf-life dos vegetais frescos.') }}
-        </h3>
-        <a href="{{ data_get($contacts, 'promo_cta_link', 'https://wa.me/5511999999999?text=Ol%C3%A1%2C%20quero%20adquirir%20o%20Veg%20Oxi%20200%20e%20garantir%20minha%20consultoria%20t%C3%A9cnica%20de%2030%20minutos.') }}" target="_blank" rel="noopener noreferrer" class="btn-promo-action" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none;">
-          <i data-lucide="gift" style="width: 1.25rem; height: 1.25rem;"></i>
-          {{ data_get($contacts, 'promo_cta_text', 'GARANTIR VEG OXI + CONSULTORIA') }}
-        </a>
+    <div class="container" style="margin-top: 4rem; margin-bottom: 4rem;">
+      <div class="promo-banner animate-fade-up delay-300">
+        <div class="promo-content-wrapper">
+          <h3 class="promo-title">
+            {{ data_get($contacts, 'promo_title', 'Compre o Veg Oxi 200 e ganhe uma consultoria técnica de 30 minutos para otimizar seu processo e estender o shelf-life dos vegetais frescos.') }}
+          </h3>
+          <a href="{{ data_get($contacts, 'promo_cta_link', 'https://wa.me/5511999999999?text=Ol%C3%A1%2C%20quero%20adquirir%20o%20Veg%20Oxi%20200%20e%20garantir%20minha%20consultoria%20t%C3%A9cnica%20de%2030%20minutos.') }}" target="_blank" rel="noopener noreferrer" class="btn-promo-action" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none;">
+            <i data-lucide="gift" style="width: 1.25rem; height: 1.25rem;"></i>
+            {{ data_get($contacts, 'promo_cta_text', 'GARANTIR VEG OXI + CONSULTORIA') }}
+          </a>
+        </div>
       </div>
     </div>
 @endsection

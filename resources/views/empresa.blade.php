@@ -84,7 +84,7 @@
     <!-- Seção Mantendo o Frescor da Colheita -->
     <section class="about-section" style="background-color: var(--color-veg-light);">
       <div class="container">
-        <div class="about-grid" style="grid-template-columns: 7fr 5fr;">
+        <div class="about-grid about-grid-7-5">
           
           <!-- Content Left -->
           <div class="about-content animate-fade-up">
