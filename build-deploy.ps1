@@ -7,6 +7,12 @@ Write-Host "Iniciando preparacao do deploy..." -ForegroundColor Green
 Write-Host "Compilando assets do frontend (Vite)..." -ForegroundColor Yellow
 npm run build
 
+# Remove o arquivo public/hot se existir, para evitar que o Laravel procure o servidor de desenvolvimento local
+if (Test-Path "public/hot") {
+    Write-Host "Removendo arquivo public/hot residual..." -ForegroundColor Gray
+    Remove-Item "public/hot"
+}
+
 # 2. Define o arquivo ZIP de saida
 $zipFile = "vegquality-deploy.zip"
 if (Test-Path $zipFile) {

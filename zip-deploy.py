@@ -38,7 +38,7 @@ with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
                 dirs[:] = [d for d in dirs if d not in ('.git', '.github')]
                 
                 for file in files:
-                    if file in ('.gitignore', '.gitattributes', '.gitkeep'):
+                    if file in ('.gitignore', '.gitattributes', '.gitkeep', 'hot'):
                         continue
                     file_path = os.path.join(root, file)
                     # Create archive name with forward slashes

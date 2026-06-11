@@ -19,6 +19,14 @@ echo "<pre style='background: #000; color: #0f0; padding: 15px; border-radius: 5
 // Ajusta o diretório para a raiz do Laravel (um nível acima da public)
 $basePath = realpath(__DIR__ . '/..');
 
+// Garante que a pasta temporária exista e tenha permissões adequadas
+$tmpDir = $basePath . '/storage/tmp';
+if (!is_dir($tmpDir)) {
+    @mkdir($tmpDir, 0777, true);
+}
+@chmod($tmpDir, 0777);
+@chmod($basePath . '/storage', 0777);
+
 $commands = [
     // Instala dependências PHP otimizadas (Descomente se a Hostinger permitir exec do composer)
     // "cd {$basePath} && composer install --optimize-autoloader --no-dev 2>&1",
@@ -32,8 +40,9 @@ $commands = [
     // Roda migrations pendentes em produção
     "cd {$basePath} && php artisan migrate --force 2>&1",
     
-    // Garante o link simbólico para os uploads do Filament (Rodar apenas 1x, pode falhar se já existir)
-    "cd {$basePath} && php artisan storage:link 2>&1",
+    // Roda os seeders para criar/atualizar o usuário administrador
+    "cd {$basePath} && php artisan db:seed --force 2>&1",
+    
 ];
 
 foreach ($commands as $cmd) {
