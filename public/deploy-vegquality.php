@@ -19,13 +19,59 @@ echo "<pre style='background: #000; color: #0f0; padding: 15px; border-radius: 5
 // Ajusta o diretório para a raiz do Laravel (um nível acima da public)
 $basePath = realpath(__DIR__ . '/..');
 
-// Garante que a pasta temporária exista e tenha permissões adequadas
-$tmpDir = $basePath . '/storage/tmp';
-if (!is_dir($tmpDir)) {
-    @mkdir($tmpDir, 0777, true);
+// Função auxiliar para aplicar permissões recursivamente via PHP
+function chmod_recursive($path, $dirMode = 0777, $fileMode = 0666) {
+    if (!is_dir($path)) {
+        return @chmod($path, $fileMode);
+    }
+    $dh = @opendir($path);
+    if (!$dh) return false;
+    while (($file = readdir($dh)) !== false) {
+        if ($file != '.' && $file != '..') {
+            $fullpath = $path . '/' . $file;
+            if (is_dir($fullpath)) {
+                chmod_recursive($fullpath, $dirMode, $fileMode);
+            } else {
+                @chmod($fullpath, $fileMode);
+            }
+        }
+    }
+    closedir($dh);
+    return @chmod($path, $dirMode);
 }
-@chmod($tmpDir, 0777);
-@chmod($basePath . '/storage', 0777);
+
+// Lista de pastas críticas de escrita que devem existir no Laravel
+$requiredFolders = [
+    $basePath . '/storage',
+    $basePath . '/storage/app',
+    $basePath . '/storage/app/private',
+    $basePath . '/storage/app/public',
+    $basePath . '/storage/framework',
+    $basePath . '/storage/framework/cache',
+    $basePath . '/storage/framework/cache/data',
+    $basePath . '/storage/framework/sessions',
+    $basePath . '/storage/framework/views',
+    $basePath . '/storage/logs',
+    $basePath . '/storage/tmp',
+    $basePath . '/public/storage',
+];
+
+echo "Garantindo estrutura de pastas de storage/ e permissões...\n";
+foreach ($requiredFolders as $folder) {
+    if (!is_dir($folder)) {
+        if (@mkdir($folder, 0777, true)) {
+            echo "Criada pasta: " . str_replace($basePath, '', $folder) . "\n";
+        } else {
+            echo "Falha ao criar pasta: " . str_replace($basePath, '', $folder) . "\n";
+        }
+    }
+    @chmod($folder, 0777);
+}
+
+// Aplica permissões recursivas para garantir que o PHP possa ler/escrever em tudo
+chmod_recursive($basePath . '/storage', 0777, 0666);
+chmod_recursive($basePath . '/public/storage', 0777, 0666);
+echo "Permissões aplicadas com sucesso em /storage e /public/storage.\n\n";
 
 $commands = [
     // Instala dependências PHP otimizadas (Descomente se a Hostinger permitir exec do composer)

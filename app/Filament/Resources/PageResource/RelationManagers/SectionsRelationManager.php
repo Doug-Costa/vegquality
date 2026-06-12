@@ -42,9 +42,19 @@ class SectionsRelationManager extends RelationManager
                     ->sortable()
                     ->searchable()
                     ->formatStateUsing(fn (string $state): string => match ($state) {
-                        'hero' => 'Home - Hero / Banner Principal',
+                        'hero' => 'Home - Hero / Banner Principal (Carrossel)',
                         'product_highlight' => 'Home - Destaque do Produto (Veg Oxi 200)',
                         'about' => 'Home - Sobre Nós (Dra. Roseane Bob)',
+                        'home_insights' => 'Home - Insights VegQuality (Cards)',
+                        'home_why_choose' => 'Home - Por que nos Escolher?',
+                        'home_contact_cta' => 'Home - Chamada Final para Contato',
+                        'veg_oxi_hero' => 'Veg Oxi - Hero / Banner Superior',
+                        'veg_oxi_facts' => 'Veg Oxi - Fatos sobre o Veg Oxi',
+                        'veg_oxi_downloads' => 'Veg Oxi - Detalhes Adicionais (Downloads)',
+                        'veg_oxi_contacts' => 'Veg Oxi - Canais de Distribuição & Contato',
+                        'insights_hero' => 'Insights - Hero / Banner Superior',
+                        'insights_cards' => 'Insights - Áreas de Atuação Técnica (Cards)',
+                        'insights_why_choose' => 'Insights - Por que nos Escolher?',
                         'empresa_hero' => 'Empresa - Hero / Banner Superior',
                         'empresa_stats' => 'Empresa - Banner de Estatísticas',
                         'empresa_sulfito' => 'Empresa - Seção Livre de Sulfitos',
@@ -81,52 +91,48 @@ class SectionsRelationManager extends RelationManager
 
         return match ($key) {
             'hero' => [
-                Forms\Components\Grid::make(2)
+                Forms\Components\Repeater::make('slides')
+                    ->label('Slides do Carrossel')
                     ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge Superior')
-                            ->required()
-                            ->columnSpanFull(),
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Imagem do Slide')
+                            ->directory('hero')
+                            ->disk('public')
+                            ->image()
+                            ->maxSize(102400)
+                            ->required(),
                         Forms\Components\TextInput::make('title')
                             ->label('Título Principal')
-                            ->helperText('Use tags HTML como <span> para destacar textos se desejar.')
-                            ->required()
-                            ->columnSpanFull(),
+                            ->helperText('Use tags HTML como <span> para destacar se desejar.')
+                            ->required(),
                         Forms\Components\Textarea::make('subtitle')
                             ->label('Subtítulo / Descrição')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('cta_text')
-                            ->label('Texto do Botão CTA')
                             ->required(),
-                        Forms\Components\TextInput::make('cta_link')
-                            ->label('Link do Botão CTA')
-                            ->required(),
-                        
-                        Forms\Components\Section::make('Estatísticas Flutuantes')
+                        Forms\Components\Grid::make(2)
                             ->schema([
-                                Forms\Components\TextInput::make('stat1_title')
-                                    ->label('Título Efeito 1'),
-                                Forms\Components\TextInput::make('stat1_desc')
-                                    ->label('Subtítulo Efeito 1'),
-                                Forms\Components\TextInput::make('stat2_title')
-                                    ->label('Título Efeito 2'),
-                                Forms\Components\TextInput::make('stat2_desc')
-                                    ->label('Subtítulo Efeito 2'),
-                            ])->columns(2),
-
-                        Forms\Components\Section::make('Carrossel de Imagens do Hero')
+                                Forms\Components\TextInput::make('btn1_text')
+                                    ->label('Texto do Botão 1'),
+                                Forms\Components\TextInput::make('btn1_link')
+                                    ->label('Link do Botão 1'),
+                                Forms\Components\TextInput::make('btn2_text')
+                                    ->label('Texto do Botão 2'),
+                                Forms\Components\TextInput::make('btn2_link')
+                                    ->label('Link do Botão 2'),
+                            ]),
+                        Forms\Components\Grid::make(3)
                             ->schema([
-                                Forms\Components\FileUpload::make('images')
-                                    ->label('Imagens do Slide')
-                                    ->multiple()
-                                    ->directory('hero')
-                                    ->disk('public')
-                                    ->image()
-                                    ->maxSize(102400)
-                                    ->helperText('Selecione 1 ou mais imagens. Elas rotacionarão automaticamente no carrossel do topo. (Max 100MB por imagem)'),
+                                Forms\Components\TextInput::make('badge1_text')
+                                    ->label('Texto do Badge 1 (Fade to Right)'),
+                                Forms\Components\TextInput::make('badge2_text')
+                                    ->label('Texto do Badge 2 (Fade to Left)'),
+                                Forms\Components\TextInput::make('badge2_link')
+                                    ->label('Link do Badge 2 (E.g. #contato ou /pagina)'),
                             ]),
                     ])
+                    ->collapsible()
+                    ->orderable()
+                    ->defaultItems(1)
+                    ->columnSpanFull()
             ],
 
             'product_highlight' => [
@@ -565,6 +571,256 @@ class SectionsRelationManager extends RelationManager
                                 Forms\Components\TextInput::make('promo_cta_text')->label('Texto do Botão CTA')->required(),
                                 Forms\Components\TextInput::make('promo_cta_link')->label('Link do Botão CTA')->required(),
                             ])->columnSpanFull(),
+                    ])
+            ],
+
+            'veg_oxi_hero' => [
+                Forms\Components\Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título Principal')
+                            ->required(),
+                        Forms\Components\Textarea::make('subtitle')
+                            ->label('Subtítulo')
+                            ->required(),
+                    ])
+            ],
+
+            'veg_oxi_facts' => [
+                Forms\Components\Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('badge')
+                            ->label('Badge')
+                            ->required(),
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título Principal')
+                            ->required(),
+                        Forms\Components\Repeater::make('cards')
+                            ->label('Fatos sobre o Veg Oxi')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->label('Título do Card')
+                                    ->required(),
+                                Forms\Components\Textarea::make('desc')
+                                    ->label('Breve Descrição (no Card)')
+                                    ->required(),
+                                Forms\Components\Textarea::make('body')
+                                    ->label('Descrição Completa (no Modal)')
+                                    ->required(),
+                                Forms\Components\TextInput::make('icon')
+                                    ->label('Ícone (history, award, factory, settings, etc.)')
+                                    ->required(),
+                            ])
+                            ->collapsible()
+                            ->orderable()
+                            ->defaultItems(3)
+                            ->columnSpanFull(),
+                    ])
+            ],
+
+            'veg_oxi_downloads' => [
+                Forms\Components\Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('badge')
+                            ->label('Badge')
+                            ->required(),
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título Principal')
+                            ->required(),
+                        Forms\Components\Repeater::make('downloads')
+                            ->label('Arquivos para Download')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->label('Título do Arquivo')
+                                    ->required(),
+                                Forms\Components\Textarea::make('desc')
+                                    ->label('Descrição do Arquivo')
+                                    ->required(),
+                                Forms\Components\FileUpload::make('file')
+                                    ->label('Arquivo PDF')
+                                    ->directory('downloads')
+                                    ->disk('public')
+                                    ->maxSize(102400)
+                                    ->required(),
+                            ])
+                            ->collapsible()
+                            ->orderable()
+                            ->defaultItems(2)
+                            ->columnSpanFull(),
+                    ])
+            ],
+
+            'veg_oxi_contacts' => [
+                Forms\Components\Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('badge')
+                            ->label('Badge')
+                            ->required(),
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título Principal')
+                            ->required(),
+                        Forms\Components\Repeater::make('contacts')
+                            ->label('Canais de Distribuição / Contatos Regionais')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->label('Título do Canal')
+                                    ->required(),
+                                Forms\Components\Textarea::make('desc')
+                                    ->label('Descrição / Contato')
+                                    ->required(),
+                                Forms\Components\TextInput::make('link')
+                                    ->label('Link do WhatsApp ou Site')
+                                    ->required(),
+                            ])
+                            ->collapsible()
+                            ->orderable()
+                            ->defaultItems(4)
+                            ->columnSpanFull(),
+                        Forms\Components\Section::make('Faixa Promocional Inferior')
+                            ->schema([
+                                Forms\Components\Textarea::make('promo_title')
+                                    ->label('Texto Promocional')
+                                    ->required(),
+                                Forms\Components\TextInput::make('promo_cta_text')
+                                    ->label('Texto do Botão CTA')
+                                    ->required(),
+                                Forms\Components\TextInput::make('promo_cta_link')
+                                    ->label('Link do Botão CTA')
+                                    ->required(),
+                            ])
+                    ])
+            ],
+
+            'insights_hero' => [
+                Forms\Components\Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título Principal')
+                            ->required(),
+                        Forms\Components\Textarea::make('subtitle')
+                            ->label('Subtítulo')
+                            ->required(),
+                    ])
+            ],
+
+            'insights_cards' => [
+                Forms\Components\Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('badge')
+                            ->label('Badge')
+                            ->required(),
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título Principal')
+                            ->required(),
+                        Forms\Components\Repeater::make('cards')
+                            ->label('Cards de Insights')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->label('Título do Card')
+                                    ->required(),
+                                Forms\Components\TextInput::make('icon')
+                                    ->label('Ícone (settings, cpu, thermometer, box, etc.)')
+                                    ->required(),
+                                Forms\Components\Textarea::make('description')
+                                    ->label('Descrição')
+                                    ->required(),
+                            ])
+                            ->collapsible()
+                            ->orderable()
+                            ->defaultItems(4)
+                            ->columnSpanFull(),
+                    ])
+            ],
+
+            'insights_why_choose' => [
+                Forms\Components\Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('badge')
+                            ->label('Badge')
+                            ->required(),
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título Principal')
+                            ->required(),
+                        Forms\Components\Textarea::make('description')
+                            ->label('Descrição / Diferencial')
+                            ->required(),
+                    ])
+            ],
+
+            'home_insights' => [
+                Forms\Components\Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('badge')
+                            ->label('Badge')
+                            ->required(),
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título Principal')
+                            ->required(),
+                        Forms\Components\Textarea::make('description')
+                            ->label('Descrição Geral')
+                            ->required(),
+                        Forms\Components\Repeater::make('cards')
+                            ->label('Cards de Insights')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->label('Título')
+                                    ->required(),
+                                Forms\Components\TextInput::make('icon')
+                                    ->label('Ícone (settings, cpu, thermometer, box, etc.)')
+                                    ->required(),
+                                Forms\Components\Textarea::make('description')
+                                    ->label('Descrição')
+                                    ->required(),
+                            ])
+                            ->collapsible()
+                            ->orderable()
+                            ->defaultItems(4)
+                            ->columnSpanFull(),
+                    ])
+            ],
+
+            'home_why_choose' => [
+                Forms\Components\Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('badge')
+                            ->label('Badge')
+                            ->required(),
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título Principal')
+                            ->required(),
+                        Forms\Components\Textarea::make('description')
+                            ->label('Descrição / Diferencial')
+                            ->required(),
+                    ])
+            ],
+
+            'home_contact_cta' => [
+                Forms\Components\Grid::make(2)
+                    ->schema([
+                        Forms\Components\TextInput::make('badge')
+                            ->label('Badge')
+                            ->required()
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título Principal')
+                            ->required()
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('subtitle')
+                            ->label('Subtítulo')
+                            ->required()
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('phone')
+                            ->label('Telefone Fixo'),
+                        Forms\Components\TextInput::make('whatsapp')
+                            ->label('WhatsApp'),
+                        Forms\Components\TextInput::make('whatsapp_link')
+                            ->label('Link Direto do WhatsApp')
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('email')
+                            ->label('E-mail'),
+                        Forms\Components\Textarea::make('address')
+                            ->label('Endereço Físico')
+                            ->columnSpanFull(),
                     ])
             ],
 

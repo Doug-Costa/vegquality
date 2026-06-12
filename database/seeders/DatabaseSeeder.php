@@ -33,25 +33,54 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Hero Section
+        // Hero Section (Dynamic Slide Repeater)
         $home->sections()->updateOrCreate(
             ['key' => 'hero'],
             [
                 'content' => [
-                    'badge' => 'Biotecnologia & Agroindústria',
-                    'title' => 'Consultoria que gera resultados na agroindústria de vegetais frescos',
-                    'subtitle' => 'Soluções tecnológicas e biotecnologia de ponta para extensão de shelf-life e segurança dos alimentos na sua produção. Substitua aditivos químicos de forma segura.',
-                    'cta_text' => 'Quero Saber Mais',
-                    'cta_link' => 'https://wa.me/551151940325?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20VegQuality.',
-                    'stat1_title' => '100% Seguro',
-                    'stat1_desc' => 'Rigores sanitários atendidos',
-                    'stat2_title' => 'Biotecnologia Pura',
-                    'stat2_desc' => 'Alta durabilidade natural',
+                    'slides' => [
+                        [
+                            'image' => 'assets/hero/farmer-with-crate-of-ripe-vegetables-2025-02-18-13-20-58-utc-scaled.jpg',
+                            'title' => 'Soluções para a agroindústria de vegetais frescos processados.',
+                            'subtitle' => 'Soluções tecnológicas e biotecnologia de ponta para extensão de shelf-life e segurança dos alimentos na sua produção. Substitua aditivos químicos de forma segura.',
+                            'btn1_text' => 'Serviços',
+                            'btn1_link' => '/servicos',
+                            'btn2_text' => 'Veg Oxi',
+                            'btn2_link' => '/veg-oxi',
+                            'badge1_text' => '+20 anos de experiência.',
+                            'badge2_text' => 'Segurança Alimentar',
+                            'badge2_link' => '#home_contact_cta',
+                        ],
+                        [
+                            'image' => 'assets/hero/Home-Veg-scaled.jpg',
+                            'title' => 'Consultoria técnica especializada para vegetais frescos.',
+                            'subtitle' => 'Diagnóstico operacional, padronização e extensão natural de gôndola. Reduza desperdícios e aumente seus lucros de forma sustentável.',
+                            'btn1_text' => 'A Empresa',
+                            'btn1_link' => '/empresa',
+                            'btn2_text' => '',
+                            'btn2_link' => '',
+                            'badge1_text' => 'Consultoria Focada em Resultados',
+                            'badge2_text' => 'Livre de Sulfitos',
+                            'badge2_link' => '/veg-oxi',
+                        ],
+                        [
+                            'image' => 'assets/hero/colhendo-alface.jpg',
+                            'title' => 'Tecnologia para conservação e qualidade de vegetais frescos.',
+                            'subtitle' => 'Conheça o Veg Oxi 200: antioxidante natural que preserva a cor, sabor e textura originais sem deixar gosto residual.',
+                            'btn1_text' => 'Veg Oxi 200',
+                            'btn1_link' => '/veg-oxi',
+                            'btn2_text' => '',
+                            'btn2_link' => '',
+                            'badge1_text' => '1¢ Custo por Hortaliça',
+                            'badge2_text' => 'Alta Durabilidade',
+                            'badge2_link' => '/veg-oxi',
+                        ]
+                    ]
                 ]
             ]
         );
 
-        // Product Highlight Section
+        // Product Highlight Section (Biotecnologia Propaganda)
         $home->sections()->updateOrCreate(
             ['key' => 'product_highlight'],
             [
@@ -67,8 +96,8 @@ class DatabaseSeeder extends Seeder
                     'cost_without_unit' => 'Cents',
                     'cost_without_desc' => 'Por Vegetal Oxidado',
                     'cost_without_tag' => 'Com Metabissulfito (Tóxico)',
-                    'cta_text' => 'Falar com Especialista',
-                    'cta_link' => 'https://wa.me/5511999999999?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Veg%20Oxi%20200%20para%20minha%20produ%C3%A7%C3%A3o.',
+                    'cta_text' => 'Conhecer Veg Oxi 200',
+                    'cta_link' => '/veg-oxi',
                 ]
             ]
         );
@@ -91,6 +120,68 @@ class DatabaseSeeder extends Seeder
                     'desc4' => 'Com esse ecossistema de soluções, a Dra. Roseane e sua equipe de colaboradores e parceiros unem o crescimento sustentável de negócios agrícolas ao direito do consumidor de ter vegetais mais frescos, duráveis e seguros em casa.',
                     'cta_text' => 'Conheça mais',
                     'cta_link' => '/empresa',
+                ]
+            ]
+        );
+
+        // Home Insights Section (NEW)
+        $home->sections()->updateOrCreate(
+            ['key' => 'home_insights'],
+            [
+                'content' => [
+                    'badge' => 'Insights VegQuality',
+                    'title' => 'Conhecimento que Transforma o Negócio',
+                    'description' => 'Nossos insights e metodologias para apoiar sua agroindústria em todas as etapas da cadeia produtiva.',
+                    'cards' => [
+                        [
+                            'title' => 'Processos',
+                            'icon' => 'settings',
+                            'description' => 'Padronização higiênico-sanitária operacional e processos industriais otimizados para zero desperdício.'
+                        ],
+                        [
+                            'title' => 'Equipamentos',
+                            'icon' => 'cpu',
+                            'description' => 'Dimensionamento de maquinários ideais e escolha de tecnologias corretas para sua linha de processamento.'
+                        ],
+                        [
+                            'title' => 'Cadeia de Frio',
+                            'icon' => 'thermometer',
+                            'description' => 'Monitoramento térmico rigoroso do campo ao ponto de venda, garantindo frescor e conformidade de gôndola.'
+                        ],
+                        [
+                            'title' => 'Embalagens',
+                            'icon' => 'box',
+                            'description' => 'Seleção de filmes técnicos de atmosfera modificada passiva (MAP) adequados para cada hortaliça.'
+                        ]
+                    ]
+                ]
+            ]
+        );
+
+        // Home Why Choose Section (NEW)
+        $home->sections()->updateOrCreate(
+            ['key' => 'home_why_choose'],
+            [
+                'content' => [
+                    'badge' => 'Diferencial',
+                    'title' => 'Por que nos Escolher?',
+                    'description' => 'Conhecimento, vivência e experiência em todas as etapas da cadeia produtiva de vegetais frescos processados.'
+                ]
+            ]
+        );
+
+        $home->sections()->updateOrCreate(
+            ['key' => 'home_contact_cta'],
+            [
+                'content' => [
+                    'badge' => 'Fale Conosco',
+                    'title' => 'Pronto para transformar a sua produção de hortaliças?',
+                    'subtitle' => 'Entre em contato conosco hoje mesmo e fale diretamente com um especialista técnico da VegQuality.',
+                    'phone' => '+55 11 5194-0325',
+                    'whatsapp' => '+55 11 97834-8438',
+                    'whatsapp_link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20VegQuality.',
+                    'email' => 'vegquality@vegquality.com.br',
+                    'address' => 'Avenida Paulista, 1471, Conjunto 511, São Paulo – SP | CEP 01311-927'
                 ]
             ]
         );
@@ -380,6 +471,174 @@ class DatabaseSeeder extends Seeder
                     'promo_title' => 'Compre o Veg Oxi 200 e ganhe uma consultoria técnica de 30 minutos para otimizar seu processo e estender o shelf-life dos vegetais frescos.',
                     'promo_cta_text' => 'GARANTIR VEG OXI + CONSULTORIA',
                     'promo_cta_link' => 'https://wa.me/5511999999999?text=Ol%C3%A1%2C%20quero%20adquirir%20o%20Veg%20Oxi%20200%20e%20garantir%20minha%20consultoria%20t%C3%A9cnica%20de%2030%20minutos.',
+                ]
+            ]
+        );
+
+        // Veg Oxi Page (NEW)
+        $vegOxi = \App\Models\Page::updateOrCreate(
+            ['slug' => 'veg-oxi'],
+            [
+                'title' => 'Veg Oxi 200 | Antioxidante Natural para Vegetais Frescos e FLV',
+                'meta_description' => 'Conheça os fatos, ficha técnica, protocolos de uso e canais de aquisição do Veg Oxi 200. O coadjuvante de tecnologia natural e livre de sulfitos.',
+            ]
+        );
+
+        $vegOxi->sections()->updateOrCreate(
+            ['key' => 'veg_oxi_hero'],
+            [
+                'content' => [
+                    'title' => 'Veg Oxi 200',
+                    'subtitle' => 'Tecnologia inovadora para conservação, shelf-life estendido e eliminação total do metabissulfito de sódio.'
+                ]
+            ]
+        );
+
+        $vegOxi->sections()->updateOrCreate(
+            ['key' => 'veg_oxi_facts'],
+            [
+                'content' => [
+                    'badge' => 'Por Trás do Produto',
+                    'title' => 'Fatos sobre o Veg Oxi 200',
+                    'cards' => [
+                        [
+                            'title' => 'Veg Oxi 200 (Origem)',
+                            'desc' => 'O Veg Oxi 200 nasceu de uma necessidade real identificada no dia a dia da Dra. Roseane Bob, através da consultoria prestada a produtores rurais que processavam vegetais...',
+                            'body' => 'O Veg Oxi 200 nasceu de uma necessidade real identificada no dia a dia da Dra. Roseane Bob, através da consultoria prestada a produtores rurais que processavam vegetais. Essa imersão prática na realidade do campo e do galpão de processamento foi a semente que, dez anos depois, transformou-se na VegQuality, hoje uma robusta consultoria especializada na agroindústria de vegetais frescos. Vivenciando de perto as dores e os desafios reais do setor, a cientista e fundadora da VegQuality percebeu a urgência do mercado por uma solução que retardasse o processo de oxidação e deterioração dos FLV, substituindo os sulfitos com total eficiência e segurança. Após intensas pesquisas no Brasil e no exterior, a Dra. Roseane desenvolveu este inovador coadjuvante de tecnologia, respeitando rigorosamente todas as exigências regulatórias.',
+                            'icon' => 'history'
+                        ],
+                        [
+                            'title' => 'Comercialização (VegQuality)',
+                            'desc' => 'A gestão comercial, a distribuição e o suporte técnico estratégico do Veg Oxi 200 são realizados com exclusividade pela VegQuality. A história do produto está diretamente ligada à origem da nossa empresa...',
+                            'body' => 'A gestão comercial, a distribuição e o suporte técnico estratégico do Veg Oxi 200 são realizados com exclusividade pela VegQuality. A história do produto está diretamente ligada à origem da nossa empresa. O Veg Oxi 200 nasceu há uma década, a partir da necessidade real identificada no dia a dia das consultorias prestadas pela nossa fundadora, a cientista Dra. Roseane Bob, a produtores rurais que processavam vegetais. O que começou no campo, dez anos depois se consolidou na VegQuality: uma robusta consultoria especializada na agroindústria de vegetais frescos. Ao escolher o Veg Oxi 200, o seu negócio não adquire apenas um produto, mas sim toda a bagagem prática, o atendimento especializado e o respaldo técnico de quem vive e respira o mercado de FLV.',
+                            'icon' => 'award'
+                        ],
+                        [
+                            'title' => 'Produção (Chemiquímica)',
+                            'desc' => 'Para transformar a inovação científica da Dra. Roseane Bob em uma solução de alto padrão e escala para o mercado nacional, a produção e a industrialização do Veg Oxi 200 são realizadas pela Chemiquímica...',
+                            'body' => 'Chemiquímica Ltda – Rigor e Escala Industrial: Para transformar a inovação científica da Dra. Roseane Bob em uma solução de alto padrão e escala para o mercado nacional, a produção e a industrialização do Veg Oxi 200 são realizadas pela Chemiquímica Ltda. Localizada em Ponta Grossa, no Paraná, a Chemiquímica é uma indústria moderna, robusta e estruturada, responsável por garantir o rigor analítico, a padronização e a máxima qualidade em cada lote fabricado. Essa estrutura industrial robusta garante que o Veg Oxi 200 seja entregue com total regularidade, segurança regulatória e eficiência logística para atender desde o pequeno produtor até as maiores agroindústrias do país.',
+                            'icon' => 'factory'
+                        ]
+                    ]
+                ]
+            ]
+        );
+
+        $vegOxi->sections()->updateOrCreate(
+            ['key' => 'veg_oxi_downloads'],
+            [
+                'content' => [
+                    'badge' => 'Saiba Mais',
+                    'title' => 'Detalhes Adicionais',
+                    'downloads' => [
+                        [
+                            'title' => 'Ficha técnica',
+                            'desc' => 'Conheça o Veg Oxi 200, o aliado que substitui os sulfitos, aumenta a produtividade, preserva o frescor e garante mais tempo de vida útil aos seus vegetais.',
+                            'file' => 'downloads/ficha-tecnica-veg-oxi.pdf'
+                        ],
+                        [
+                            'title' => 'Protocolos de uso',
+                            'desc' => 'Tem dúvidas sobre como aplicar o Veg Oxi 200? Confira nossos protocolos de uso e boas práticas para potencializar sua eficácia e garantir o máximo desempenho em seus vegetais.',
+                            'file' => 'downloads/protocolos-uso.pdf'
+                        ]
+                    ]
+                ]
+            ]
+        );
+
+        $vegOxi->sections()->updateOrCreate(
+            ['key' => 'veg_oxi_contacts'],
+            [
+                'content' => [
+                    'badge' => 'Canais de Atendimento',
+                    'title' => 'Distribuição Veg Oxi 200',
+                    'contacts' => [
+                        [
+                            'title' => 'Quero Adquirir em SP',
+                            'desc' => 'Em São Paulo o tempo não para. Se você precisa do Veg Oxi 200 para ontem, é só clicar no botão abaixo!',
+                            'link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20adquirir%20o%20Veg%20Oxi%20200%20em%20SP.'
+                        ],
+                        [
+                            'title' => 'No sul de Minas',
+                            'desc' => 'Quer seus vegetais prontos para o consumo, sem sulfitos e sempre fresquinhos em Minas Gerais? Conte com a nossa solução! 👉 Clique no botão abaixo e fale com a gente agora mesmo',
+                            'link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20adquirir%20o%20Veg%20Oxi%20200%20no%20Sul%20de%20Minas.'
+                        ],
+                        [
+                            'title' => 'Outras Localidades',
+                            'desc' => 'Está em outra região desse nosso país continental? Não tem problema! Nossa equipe está pronta para atender clientes em todo o Brasil. 👉 Clique no botão e fale com a gente!',
+                            'link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20estou%20em%20outra%20regi%C3%A3o%20e%20gostaria%20de%20adquirir%20o%20Veg%20Oxi%20200.'
+                        ],
+                        [
+                            'title' => 'Como Distribuir?',
+                            'desc' => '🤝 É distribuidor e se interessou pelo antioxidante Veg Oxi 200? Clique no botão abaixo e fale diretamente com nossa equipe para saber todos os detalhes!',
+                            'link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20tenho%20interesse%20em%20me%20tornar%20distribuidor%20do%20Veg%20Oxi%20200.'
+                        ]
+                    ],
+                    'promo_title' => 'Compre o Veg Oxi 200 e ganhe uma consultoria técnica de 30 minutos para otimizar seu processo e estender o shelf-life dos vegetais frescos.',
+                    'promo_cta_text' => 'GARANTIR VEG OXI + CONSULTORIA',
+                    'promo_cta_link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20quero%20adquirir%20o%20Veg%20Oxi%20200%20e%20garantir%20minha%20consultoria%20t%C3%A9cnica%20de%2030%20minutos.'
+                ]
+            ]
+        );
+
+        // Insights Page (NEW)
+        $insights = \App\Models\Page::updateOrCreate(
+            ['slug' => 'insights'],
+            [
+                'title' => 'Insights VegQuality | Conhecimento Técnico para FLV',
+                'meta_description' => 'Fique por dentro das melhores práticas e metodologias da VegQuality em Processos, Equipamentos, Cadeia de Frio e Embalagens.',
+            ]
+        );
+
+        $insights->sections()->updateOrCreate(
+            ['key' => 'insights_hero'],
+            [
+                'content' => [
+                    'title' => 'Insights VegQuality',
+                    'subtitle' => 'Conhecimento, vivência e experiência em todas as etapas da cadeia produtiva de vegetais frescos processados.'
+                ]
+            ]
+        );
+
+        $insights->sections()->updateOrCreate(
+            ['key' => 'insights_cards'],
+            [
+                'content' => [
+                    'badge' => 'Insights',
+                    'title' => 'Áreas de Atuação Técnica',
+                    'cards' => [
+                        [
+                            'title' => 'Processos',
+                            'icon' => 'settings',
+                            'description' => 'Padronização higiênico-sanitária operacional e processos industriais otimizados para zero desperdício.'
+                        ],
+                        [
+                            'title' => 'Equipamentos',
+                            'icon' => 'cpu',
+                            'description' => 'Dimensionamento de maquinários ideais e escolha de tecnologias corretas para sua linha de processamento.'
+                        ],
+                        [
+                            'title' => 'Cadeia de Frio',
+                            'icon' => 'thermometer',
+                            'description' => 'Monitoramento térmico rigoroso do campo ao ponto de venda, garantindo frescor e conformidade de gôndola.'
+                        ],
+                        [
+                            'title' => 'Embalagens',
+                            'icon' => 'box',
+                            'description' => 'Seleção de filmes técnicos de atmosfera modificada passiva (MAP) adequados para cada hortaliça.'
+                        ]
+                    ]
+                ]
+            ]
+        );
+
+        $insights->sections()->updateOrCreate(
+            ['key' => 'insights_why_choose'],
+            [
+                'content' => [
+                    'badge' => 'Diferencial',
+                    'title' => 'Por que nos Escolher?',
+                    'description' => 'Conhecimento, vivência e experiência em todas as etapas da cadeia produtiva de vegetais frescos processados.'
                 ]
             ]
         );

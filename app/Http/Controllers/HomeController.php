@@ -109,6 +109,18 @@ class HomeController extends Controller
         return view('contato');
     }
 
+    public function vegOxi()
+    {
+        $page = \App\Models\Page::with('sections')->where('slug', 'veg-oxi')->first();
+        return view('veg-oxi', compact('page'));
+    }
+
+    public function insights()
+    {
+        $page = \App\Models\Page::with('sections')->where('slug', 'insights')->first();
+        return view('insights', compact('page'));
+    }
+
     public function showArticle($slug)
     {
         $article = \App\Models\Article::with('columnist')
