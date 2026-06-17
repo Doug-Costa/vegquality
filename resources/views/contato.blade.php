@@ -43,9 +43,21 @@
                   <i data-lucide="phone"></i>
                 </div>
                 <div class="contact-card-details">
-                  <h4>Telefone e WhatsApp</h4>
-                  <p><a href="https://wa.me/551151940325" target="_blank" rel="noopener noreferrer">+55 11 5194 0325</a></p>
+                  <h4>Telefone</h4>
+                  <p><a href="tel:+551151940325">+55 11 5194-0325</a></p>
                   <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">Atendimento de Seg. a Sex. das 8h às 18h</p>
+                </div>
+              </div>
+              
+              <!-- WhatsApp -->
+              <div class="contact-card-item">
+                <div class="contact-card-icon">
+                  <i data-lucide="message-circle"></i>
+                </div>
+                <div class="contact-card-details">
+                  <h4>WhatsApp</h4>
+                  <p><a href="https://wa.me/5511978348438" target="_blank" rel="noopener noreferrer">+55 11 97834-8438</a></p>
+                  <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">Fale diretamente com nossa equipe</p>
                 </div>
               </div>
               
@@ -56,7 +68,7 @@
                 </div>
                 <div class="contact-card-details">
                   <h4>E-mail Comercial</h4>
-                  <p><a href="mailto:contato@vegquality.com.br">contato@vegquality.com.br</a></p>
+                  <p><a href="mailto:vegquality@vegquality.com.br">vegquality@vegquality.com.br</a></p>
                   <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">Respondemos em até 24 horas úteis</p>
                 </div>
               </div>

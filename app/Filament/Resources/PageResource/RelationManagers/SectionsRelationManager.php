@@ -43,7 +43,7 @@ class SectionsRelationManager extends RelationManager
                     ->searchable()
                     ->formatStateUsing(fn (string $state): string => match ($state) {
                         'hero' => 'Home - Hero / Banner Principal (Carrossel)',
-                        'product_highlight' => 'Home - Destaque do Produto (Veg Oxi 200)',
+                        'product_highlight' => 'Veg Oxi - Destaque do Produto (Veg Oxi 200)',
                         'about' => 'Home - Sobre Nós (Dra. Roseane Bob)',
                         'home_insights' => 'Home - Insights VegQuality (Cards)',
                         'home_why_choose' => 'Home - Por que nos Escolher?',

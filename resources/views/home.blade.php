@@ -6,13 +6,11 @@
 @section('content')
 @php
     $hero = $page?->sections->where('key', 'hero')->first()?->content;
-    $productHighlight = $page?->sections->where('key', 'product_highlight')->first()?->content;
     $about = $page?->sections->where('key', 'about')->first()?->content;
     
-    // Shared Veg Oxi Sections from Veg Oxi Page
+    // Shared Veg Oxi Sections
     $facts = \App\Models\Section::where('key', 'veg_oxi_facts')->first()?->content;
-    $downloads = \App\Models\Section::where('key', 'veg_oxi_downloads')->first()?->content;
-    $contacts = \App\Models\Section::where('key', 'veg_oxi_contacts')->first()?->content;
+    $productHighlight = \App\Models\Section::where('key', 'product_highlight')->first()?->content;
 
     // Homepage specific new sections
     $homeInsights = $page?->sections->where('key', 'home_insights')->first()?->content;
@@ -49,11 +47,21 @@
 
     @foreach($slides as $index => $slide)
       <div class="carousel-slide @if($index === 0) active @endif" data-index="{{ $index }}">
+        <!-- Background Image covering the entire slide -->
+        <div class="hero-bg-image-wrapper">
+          @if(Str::startsWith(data_get($slide, 'image'), 'assets/'))
+            <img src="{{ asset(data_get($slide, 'image')) }}" alt="{{ strip_tags(data_get($slide, 'title')) }}" class="hero-bg-img-el">
+          @else
+            <img src="{{ asset('storage/' . data_get($slide, 'image')) }}" alt="{{ strip_tags(data_get($slide, 'title')) }}" class="hero-bg-img-el">
+          @endif
+          <div class="hero-bg-image-overlay"></div>
+        </div>
+
         <div class="container">
           <div class="hero-grid">
             
-            <!-- Text Content -->
-            <div class="hero-content">
+            <!-- Text Content in Glassmorphic Card -->
+            <div class="hero-content hero-glass-card">
               @if(data_get($slide, 'badge1_text'))
                 <div class="micro-badge">
                   <span class="micro-badge-dot"></span>
@@ -76,25 +84,15 @@
                   </a>
                 @endif
                 @if(data_get($slide, 'btn2_text'))
-                  <a href="{{ data_get($slide, 'btn2_link') }}" class="btn btn-ghost hero-btn" style="border: 2px solid rgba(27, 94, 32, 0.3); background-color: transparent; color: var(--color-veg-dark);">
+                  <a href="{{ data_get($slide, 'btn2_link') }}" class="btn btn-ghost hero-btn hero-btn-ghost-glass">
                     {{ data_get($slide, 'btn2_text') }}
                   </a>
                 @endif
               </div>
             </div>
 
-            <!-- Media Content with Floating Badges -->
-            <div class="hero-media">
-              <div class="hero-media-bg-shape"></div>
-              <div class="hero-image-wrapper">
-                @if(Str::startsWith(data_get($slide, 'image'), 'assets/'))
-                  <img src="{{ asset(data_get($slide, 'image')) }}" alt="{{ strip_tags(data_get($slide, 'title')) }}" class="hero-img">
-                @else
-                  <img src="{{ asset('storage/' . data_get($slide, 'image')) }}" alt="{{ strip_tags(data_get($slide, 'title')) }}" class="hero-img">
-                @endif
-                <div class="hero-image-overlay"></div>
-              </div>
-
+            <!-- Floating Badges Container -->
+            <div class="hero-badges-wrapper">
               <!-- Badge 1 (Fade to Right) -->
               @if(data_get($slide, 'badge1_text'))
                 <div class="badge-floating badge-1 animate-fade-to-right">
@@ -304,70 +302,22 @@
   </div>
 </section>
 
-<!-- Section 3.5: Biotecnologia / Veg Oxi 200 Propaganda Section (As requested) -->
-@if($productHighlight)
-<section class="product-highlight-section" style="background-color: #ffffff;">
+<!-- Section 4: Por que nos Escolher? (NEW - Moved here as requested) -->
+@if($homeWhyChoose)
+<section class="why-choose-section" style="background-color: #ffffff;">
   <div class="container">
-    <div class="product-highlight-grid">
-      
-      <!-- Content Left -->
-      <div class="product-highlight-content animate-fade-up">
-        <div class="product-tag">
-          <span class="micro-badge-dot"></span>
-          {{ data_get($productHighlight, 'badge', 'Biotecnologia') }}
-        </div>
-        <h2 class="product-highlight-title">
-          {{ data_get($productHighlight, 'title', 'Veg Oxi 200 - Coadjuvante de tecnologia') }}
-        </h2>
-        <p class="product-highlight-subtitle">
-          {{ data_get($productHighlight, 'subtitle', 'Um Investimento que Vale a Pena!') }}
-        </p>
-
-        <div class="badges-container">
-          <!-- Badge 1: Com Veg Oxi 200 -->
-          <div class="product-cost-badge">
-            <div class="cost-value-wrapper">
-              <span class="cost-number">{{ data_get($productHighlight, 'cost_with', '30') }}</span>
-              <span class="cost-unit">{{ data_get($productHighlight, 'cost_with_unit', 'Cents') }}</span>
-            </div>
-            <p class="cost-desc">{{ data_get($productHighlight, 'cost_with_desc', 'Por Vegetal Fresco') }}</p>
-            <span class="cost-sub-badge">{{ data_get($productHighlight, 'cost_with_tag', 'Livre de Sulfitos (Seguro)') }}</span>
-          </div>
-
-          <!-- Badge 2: Sem Veg Oxi 200 -->
-          <div class="product-cost-badge product-cost-badge-bad">
-            <div class="cost-value-wrapper">
-              <span class="cost-number cost-number-bad">{{ data_get($productHighlight, 'cost_without', '80') }}</span>
-              <span class="cost-unit">{{ data_get($productHighlight, 'cost_without_unit', 'Cents') }}</span>
-            </div>
-            <p class="cost-desc">{{ data_get($productHighlight, 'cost_without_desc', 'Por Vegetal Oxidado') }}</p>
-            <span class="cost-sub-badge cost-sub-badge-bad">{{ data_get($productHighlight, 'cost_without_tag', 'Com Metabissulfito (Tóxico)') }}</span>
-          </div>
-        </div>
-
-        <a href="{{ url('/veg-oxi') }}" class="btn btn-primary hero-btn">
-          <i data-lucide="shield-check"></i>
-          {{ data_get($productHighlight, 'cta_text', 'Conhecer Veg Oxi 200') }}
-        </a>
-      </div>
-
-      <!-- Comparison Image Right -->
-      <div class="compare-container animate-fade-up delay-200">
-        <div class="compare-media-wrapper">
-          @if(data_get($productHighlight, 'image'))
-            <img src="{{ asset('storage/' . data_get($productHighlight, 'image')) }}" alt="{{ data_get($productHighlight, 'title') }}" class="compare-img">
-          @else
-            <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="Comparativo Veg Oxi 200" class="compare-img">
-          @endif
-        </div>
-      </div>
-
+    <div class="why-choose-banner animate-fade-up">
+      <span class="why-choose-badge">{{ data_get($homeWhyChoose, 'badge', 'Diferencial') }}</span>
+      <h2 class="why-choose-title">{{ data_get($homeWhyChoose, 'title', 'Por que nos Escolher?') }}</h2>
+      <p class="why-choose-text">
+        {{ data_get($homeWhyChoose, 'description') }}
+      </p>
     </div>
   </div>
 </section>
 @endif
 
-<!-- Section 4: Fatos sobre o Veg Oxi -->
+<!-- Section 5: Fatos sobre o Veg Oxi (Moved here as requested) -->
 @if($facts)
 <section class="facts-section" style="background-color: #f9fafb; padding: 5rem 0;">
   <div class="container">
@@ -419,90 +369,65 @@
 @endforeach
 @endif
 
-<!-- Section 5: Distribuição Veg Oxi 200 -->
-@if($contacts)
-<section class="resources-section" style="background-color: #ffffff; padding: 5rem 0;">
+<!-- Section 6: Biotecnologia / Veg Oxi 200 Coadjuvante de Tecnologia Section (NEW for Home page, moved here) -->
+@if($productHighlight)
+<section class="product-highlight-section" style="background-color: #ffffff; padding: 5rem 0;">
   <div class="container">
-    
-    <div class="services-header animate-fade-up">
-      <div class="services-tag">
-        <span class="micro-badge-dot"></span>
-        {{ data_get($contacts, 'badge', 'Distribuição') }}
-      </div>
-      <h2 class="services-title">
-        {{ data_get($contacts, 'title', 'Distribuição Veg Oxi 200') }}
-      </h2>
-    </div>
+    <div class="product-highlight-grid">
+      
+      <!-- Content Left -->
+      <div class="product-highlight-content animate-fade-up">
+        <div class="product-tag">
+          <span class="micro-badge-dot"></span>
+          {{ data_get($productHighlight, 'badge', 'Biotecnologia') }}
+        </div>
+        <h2 class="product-highlight-title">
+          {{ data_get($productHighlight, 'title', 'Veg Oxi 200 - Coadjuvante de tecnologia') }}
+        </h2>
+        <p class="product-highlight-subtitle">
+          {{ data_get($productHighlight, 'subtitle', 'Um Investimento que Vale a Pena!') }}
+        </p>
 
-    <div class="local-grid animate-fade-up delay-100">
-      @foreach(data_get($contacts, 'contacts', []) as $contact)
-        <div class="local-card">
-          <div class="local-card-icon">
-            <i data-lucide="map-pin"></i>
+        <div class="badges-container">
+          <!-- Badge 1: Com Veg Oxi 200 -->
+          <div class="product-cost-badge">
+            <div class="cost-value-wrapper">
+              <span class="cost-number">{{ data_get($productHighlight, 'cost_with', '30') }}</span>
+              <span class="cost-unit">{{ data_get($productHighlight, 'cost_with_unit', 'Cents') }}</span>
+            </div>
+            <p class="cost-desc">{{ data_get($productHighlight, 'cost_with_desc', 'Por Vegetal Fresco') }}</p>
+            <span class="cost-sub-badge">{{ data_get($productHighlight, 'cost_with_tag', 'Livre de Sulfitos (Seguro)') }}</span>
           </div>
-          <h4>{{ data_get($contact, 'title') }}</h4>
-          <p>{{ data_get($contact, 'desc') }}</p>
-          <a href="{{ data_get($contact, 'link') }}" target="_blank" rel="noopener noreferrer" class="btn-local-cta">
-            Fale Conosco
-          </a>
-        </div>
-      @endforeach
-    </div>
 
-    <!-- Combo Promo Banner -->
-    @if(data_get($contacts, 'promo_title'))
-      <div class="promo-banner animate-fade-up delay-200" style="margin-top: 4rem;">
-        <div class="promo-content-wrapper">
-          <h3 class="promo-title">
-            {{ data_get($contacts, 'promo_title') }}
-          </h3>
-          <a href="{{ data_get($contacts, 'promo_cta_link') }}" target="_blank" rel="noopener noreferrer" class="btn-promo-action">
-            <i data-lucide="gift" style="margin-right: 0.5rem; width: 1.25rem; height: 1.25rem;"></i>
-            {{ data_get($contacts, 'promo_cta_text') }}
-          </a>
-        </div>
-      </div>
-    @endif
-
-  </div>
-</section>
-@endif
-
-<!-- Section 6: Detalhes Adicionais (Saiba Mais) -->
-@if($downloads)
-<section class="resources-section" style="background-color: #f9fafb; padding: 5rem 0; border-top: 1px solid var(--color-border);">
-  <div class="container">
-    
-    <div class="services-header animate-fade-up">
-      <div class="services-tag">
-        <span class="micro-badge-dot"></span>
-        {{ data_get($downloads, 'badge', 'Saiba Mais') }}
-      </div>
-      <h2 class="services-title">
-        {{ data_get($downloads, 'title', 'Detalhes Adicionais') }}
-      </h2>
-    </div>
-
-    <div class="download-grid animate-fade-up delay-100">
-      @foreach(data_get($downloads, 'downloads', []) as $dl)
-        <div class="download-card">
-          <div class="download-card-icon">
-            <i data-lucide="file-text"></i>
+          <!-- Badge 2: Sem Veg Oxi 200 -->
+          <div class="product-cost-badge product-cost-badge-bad">
+            <div class="cost-value-wrapper">
+              <span class="cost-number cost-number-bad">{{ data_get($productHighlight, 'cost_without', '80') }}</span>
+              <span class="cost-unit">{{ data_get($productHighlight, 'cost_without_unit', 'Cents') }}</span>
+            </div>
+            <p class="cost-desc">{{ data_get($productHighlight, 'cost_without_desc', 'Por Vegetal Oxidado') }}</p>
+            <span class="cost-sub-badge cost-sub-badge-bad">{{ data_get($productHighlight, 'cost_without_tag', 'Com Metabissulfito (Tóxico)') }}</span>
           </div>
-          <h3>{{ data_get($dl, 'title') }}</h3>
-          <p>{{ data_get($dl, 'desc') }}</p>
-          @php
-            $fileUrl = data_get($dl, 'file');
-            $isAssetFile = Str::startsWith($fileUrl, 'downloads/');
-          @endphp
-          <a href="{{ $isAssetFile ? asset($fileUrl) : asset('storage/' . $fileUrl) }}" download class="btn-download">
-            <i data-lucide="download"></i>
-            Baixe o PDF
-          </a>
         </div>
-      @endforeach
-    </div>
 
+        <a href="{{ url('/veg-oxi') }}" class="btn btn-primary hero-btn">
+          <i data-lucide="shield-check"></i>
+          {{ data_get($productHighlight, 'cta_text', 'Adquirir Veg Oxi 200') }}
+        </a>
+      </div>
+
+      <!-- Comparison Image Right -->
+      <div class="compare-container animate-fade-up delay-200">
+        <div class="compare-media-wrapper">
+          @if(data_get($productHighlight, 'image'))
+            <img src="{{ asset('storage/' . data_get($productHighlight, 'image')) }}" alt="{{ data_get($productHighlight, 'title') }}" class="compare-img">
+          @else
+            <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="Comparativo Veg Oxi 200" class="compare-img">
+          @endif
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 @endif
@@ -550,23 +475,8 @@
 </section>
 @endif
 
-<!-- Section 8: Por que nos Escolher? (NEW) -->
-@if($homeWhyChoose)
-<section class="why-choose-section" style="background-color: #ffffff;">
-  <div class="container">
-    <div class="why-choose-banner animate-fade-up">
-      <span class="why-choose-badge">{{ data_get($homeWhyChoose, 'badge', 'Diferencial') }}</span>
-      <h2 class="why-choose-title">{{ data_get($homeWhyChoose, 'title', 'Por que nos Escolher?') }}</h2>
-      <p class="why-choose-text">
-        {{ data_get($homeWhyChoose, 'description') }}
-      </p>
-    </div>
-  </div>
-</section>
-@endif
-
-<!-- Section 9: Radar FLV -->
-<section class="blog-section" style="background-color: #f9fafb;">
+<!-- Section 8: Radar FLV -->
+<section class="blog-section" style="background-color: #ffffff;">
   <div class="container">
     
     <!-- Header -->
@@ -628,7 +538,7 @@
   </div>
 </section>
 
-<!-- Section 10: Chamada Final para Contato (NEW) -->
+<!-- Section 9: Chamada Final para Contato (NEW) -->
 @if($homeContactCta)
 <section class="contact-cta-section" id="home_contact_cta">
   <div class="container">

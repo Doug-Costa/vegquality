@@ -121,15 +121,15 @@ return new class extends Migration
                     'service1_badge' => 'Projetos',
                     'service1_title' => 'Plano de Negócios',
                     'service1_desc' => 'Auxiliamos empreendedores que desejam iniciar, estruturar, ampliar ou profissionalizar operações na produção de vegetais frescos processados.',
-                    'service1_link' => 'https://wa.me/551151940325?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20consultoria%20em%20Plano%20de%20Neg%C3%B3cios.',
+                    'service1_link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20consultoria%20em%20Plano%20de%20Neg%C3%B3cios.',
                     'service2_badge' => 'Treinamentos',
                     'service2_title' => 'Treinamentos Direcionados',
                     'service2_desc' => 'Treinamentos práticos e teóricos para auxiliar sua equipe na execução dos processos de produção de vegetais frescos processados, do campo à gôndola.',
-                    'service2_link' => 'https://wa.me/551151940325?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20Treinamentos%20Direcionados.',
+                    'service2_link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20Treinamentos%20Direcionados.',
                     'service3_badge' => 'Tecnologia de Ponta',
                     'service3_title' => 'Veg Oxi 200',
                     'service3_desc' => 'O Veg Oxi 200 contribui para o aumento do shelf-life de FLV pós-colheita e vegetais frescos processados, contribuindo para a substituição definitiva do metabissulfito de sódio e demais sulfitos químicos que prejudicam a saúde.',
-                    'service3_link' => 'https://wa.me/551151940325?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Veg%20Oxi%20200.',
+                    'service3_link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Veg%20Oxi%20200.',
                 ]
             ]
         );
@@ -265,14 +265,14 @@ return new class extends Migration
                     'action_box_title' => 'Transforme sua Produção',
                     'action_box_desc' => 'Conte com a expertise e a inovação tecnológica da VegQuality para otimizar seus processos de FLV.',
                     'action_box_cta_text' => 'Falar Conosco',
-                    'action_box_cta_link' => 'https://wa.me/551151940325?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20VegQuality.',
+                    'action_box_cta_link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20VegQuality.',
                     'indicator1_num' => '100%',
                     'indicator1_label' => 'Livre de Sulfitos',
                     'indicator2_num' => '60%',
                     'indicator2_label' => 'Lucro sob perdas',
                     'promo_title' => 'Compre o Veg Oxi 200 e ganhe uma consultoria técnica de 30 minutos para otimizar seu processo e estender o shelf-life dos vegetais frescos.',
                     'promo_cta_text' => 'GARANTIR VEG OXI + CONSULTORIA',
-                    'promo_cta_link' => 'https://wa.me/5511999999999?text=Ol%C3%A1%2C%20quero%20adquirir%20o%20Veg%20Oxi%20200%20e%20garantir%20minha%20consultoria%20t%C3%A9cnica%20de%2030%20minutos.',
+                    'promo_cta_link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20quero%20adquirir%20o%20Veg%20Oxi%20200%20e%20garantir%20minha%20consultoria%20t%C3%A9cnica%20de%2030%20minutos.',
                 ]
             ]
         );

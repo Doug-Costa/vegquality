@@ -93,7 +93,7 @@
         <i data-lucide="arrow-left"></i>
         Voltar para o Radar FLV
       </a>
-      <a href="https://wa.me/551151940325" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="border-radius: 9999px;">
+      <a href="https://wa.me/5511978348438" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="border-radius: 9999px;">
         <i data-lucide="message-circle"></i>
         Fale Conosco
       </a>

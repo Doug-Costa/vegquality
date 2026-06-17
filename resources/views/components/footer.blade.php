@@ -11,8 +11,11 @@
           Biotecnologia inovadora e consultoria de alto impacto para a extensão natural do shelf-life e a máxima segurança dos alimentos na agroindústria.
         </p>
         <div class="footer-socials">
-          <a href="https://instagram.com/vegquality" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="Instagram">
+          <a href="https://www.instagram.com/veg_quality" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="Instagram">
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-instagram"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a href="https://www.facebook.com/vegquality" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="Facebook">
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-facebook"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
           </a>
           <a href="https://wa.me/5511978348438" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="WhatsApp">
             <i data-lucide="message-circle"></i>

@@ -52,7 +52,7 @@
             <p class="service-card-desc">
               {{ data_get($catalog, 'service1_desc', 'Auxiliamos empreendedores que desejam iniciar, estruturar, ampliar ou profissionalizar operações na produção de vegetais frescos processados.') }}
             </p>
-            <a href="{{ data_get($catalog, 'service1_link', 'https://wa.me/551151940325?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20consultoria%20em%20Plano%20de%20Neg%C3%B3cios.') }}" target="_blank" rel="noopener noreferrer" class="service-card-link">
+            <a href="{{ data_get($catalog, 'service1_link', 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20consultoria%20em%20Plano%20de%20Neg%C3%B3cios.') }}" target="_blank" rel="noopener noreferrer" class="service-card-link">
               Solicitar Informações
               <i data-lucide="arrow-right"></i>
             </a>
@@ -68,7 +68,7 @@
             <p class="service-card-desc">
               {{ data_get($catalog, 'service2_desc', 'Treinamentos práticos e teóricos para auxiliar sua equipe na execução dos processos de produção de vegetais frescos processados, do campo à gôndola.') }}
             </p>
-            <a href="{{ data_get($catalog, 'service2_link', 'https://wa.me/551151940325?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20Treinamentos%20Direcionados.') }}" target="_blank" rel="noopener noreferrer" class="service-card-link">
+            <a href="{{ data_get($catalog, 'service2_link', 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20Treinamentos%20Direcionados.') }}" target="_blank" rel="noopener noreferrer" class="service-card-link">
               Solicitar Informações
               <i data-lucide="arrow-right"></i>
             </a>
@@ -84,7 +84,7 @@
             <p class="service-card-desc" style="font-size: 0.95rem;">
               {{ data_get($catalog, 'service3_desc', 'O Veg Oxi 200 contribui para o aumento do shelf-life de FLV pós-colheita e vegetais frescos processados, contribui para a substituição definitiva do metabissulfito de sódio e demais sulfitos químicos que prejudicam a saúde.') }}
             </p>
-            <a href="{{ data_get($catalog, 'service3_link', 'https://wa.me/551151940325?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Veg%20Oxi%20200.') }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top: 1rem; display: inline-flex; width: fit-content; align-items: center; gap: 0.5rem; text-decoration: none;">
+            <a href="{{ data_get($catalog, 'service3_link', 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Veg%20Oxi%20200.') }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top: 1rem; display: inline-flex; width: fit-content; align-items: center; gap: 0.5rem; text-decoration: none;">
               <i data-lucide="shopping-cart"></i>
               Quero Adquirir
             </a>
@@ -195,7 +195,7 @@
                 {{ data_get($contacts, 'action_box_desc', 'Conte com a expertise e a inovação tecnológica da VegQuality para otimizar seus processos de FLV.') }}
               </p>
               
-              <a href="{{ data_get($contacts, 'action_box_cta_link', 'https://wa.me/551151940325?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20VegQuality.') }}" target="_blank" rel="noopener noreferrer" class="btn-conversar" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none;">
+              <a href="{{ data_get($contacts, 'action_box_cta_link', 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20VegQuality.') }}" target="_blank" rel="noopener noreferrer" class="btn-conversar" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none;">
                 <i data-lucide="message-circle"></i>
                 {{ data_get($contacts, 'action_box_cta_text', 'Falar Conosco') }}
               </a>
@@ -253,18 +253,5 @@
       </div>
     </section>
 
-    <!-- Combo Promo Banner -->
-    <div class="container" style="margin-top: 4rem; margin-bottom: 4rem;">
-      <div class="promo-banner animate-fade-up delay-300">
-        <div class="promo-content-wrapper">
-          <h3 class="promo-title">
-            {{ data_get($contacts, 'promo_title', 'Compre o Veg Oxi 200 e ganhe uma consultoria técnica de 30 minutos para otimizar seu processo e estender o shelf-life dos vegetais frescos.') }}
-          </h3>
-          <a href="{{ data_get($contacts, 'promo_cta_link', 'https://wa.me/5511999999999?text=Ol%C3%A1%2C%20quero%20adquirir%20o%20Veg%20Oxi%20200%20e%20garantir%20minha%20consultoria%20t%C3%A9cnica%20de%2030%20minutos.') }}" target="_blank" rel="noopener noreferrer" class="btn-promo-action" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none;">
-            <i data-lucide="gift" style="width: 1.25rem; height: 1.25rem;"></i>
-            {{ data_get($contacts, 'promo_cta_text', 'GARANTIR VEG OXI + CONSULTORIA') }}
-          </a>
-        </div>
-      </div>
-    </div>
+
 @endsection
