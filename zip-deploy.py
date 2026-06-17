@@ -35,7 +35,10 @@ with zipfile.ZipFile(zip_filename, 'w', zipfile.ZIP_DEFLATED) as zipf:
         if os.path.isdir(item):
             for root, dirs, files in os.walk(item):
                 # Filter out .git, .github and temporary runtime folders that cause locks
-                dirs_to_ignore = ('.git', '.github', 'sessions', 'cache', 'logs')
+                dirs_to_ignore = ['.git', '.github']
+                # Only ignore sessions, cache, logs if we are walking inside storage
+                if 'storage' in root.split(os.sep):
+                    dirs_to_ignore.extend(['sessions', 'cache', 'logs'])
                 dirs[:] = [d for d in dirs if d not in dirs_to_ignore]
                 
                 for file in files:

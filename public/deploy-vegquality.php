@@ -42,6 +42,7 @@ function chmod_recursive($path, $dirMode = 0777, $fileMode = 0666) {
 
 // Lista de pastas críticas de escrita que devem existir no Laravel
 $requiredFolders = [
+    $basePath . '/bootstrap/cache',
     $basePath . '/storage',
     $basePath . '/storage/app',
     $basePath . '/storage/app/private',
@@ -56,7 +57,7 @@ $requiredFolders = [
     $basePath . '/public/storage',
 ];
 
-echo "Garantindo estrutura de pastas de storage/ e permissões...\n";
+echo "Garantindo estrutura de pastas de storage/ , bootstrap/ e permissões...\n";
 foreach ($requiredFolders as $folder) {
     if (!is_dir($folder)) {
         if (@mkdir($folder, 0777, true)) {
@@ -69,9 +70,10 @@ foreach ($requiredFolders as $folder) {
 }
 
 // Aplica permissões recursivas para garantir que o PHP possa ler/escrever em tudo
+chmod_recursive($basePath . '/bootstrap/cache', 0777, 0666);
 chmod_recursive($basePath . '/storage', 0777, 0666);
 chmod_recursive($basePath . '/public/storage', 0777, 0666);
-echo "Permissões aplicadas com sucesso em /storage e /public/storage.\n\n";
+echo "Permissões aplicadas com sucesso em /bootstrap/cache, /storage e /public/storage.\n\n";
 
 $commands = [
     // Instala dependências PHP otimizadas (Descomente se a Hostinger permitir exec do composer)
