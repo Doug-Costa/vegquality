@@ -40,7 +40,10 @@
           </div>
           <h3 class="home-insight-title">{{ data_get($card, 'title') }}</h3>
           <p class="home-insight-desc">
-            {{ data_get($card, 'description') }}
+            {{ Str::limit(data_get($card, 'description'), 300, '...') }}
+            @if(strlen(data_get($card, 'description')) > 300)
+              <button type="button" class="leia-mais-btn" data-title="{{ data_get($card, 'title') }}" data-text="{{ data_get($card, 'description') }}">Leia mais</button>
+            @endif
           </p>
         </div>
       @endforeach
@@ -63,4 +66,46 @@
   </div>
 </section>
 @endif
+
+<!-- Modal de "Leia Mais" -->
+<div id="leia-mais-modal" class="custom-modal">
+  <div class="custom-modal-content">
+    <button type="button" class="custom-modal-close" id="close-modal-btn">&times;</button>
+    <h3 id="modal-title" class="custom-modal-title"></h3>
+    <div id="modal-body" class="custom-modal-body"></div>
+  </div>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const modal = document.getElementById('leia-mais-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalBody = document.getElementById('modal-body');
+    const closeBtn = document.getElementById('close-modal-btn');
+
+    document.querySelectorAll('.leia-mais-btn').forEach(btn => {
+      btn.addEventListener('click', function () {
+        const title = this.getAttribute('data-title');
+        const text = this.getAttribute('data-text');
+
+        modalTitle.textContent = title;
+        modalBody.textContent = text;
+
+        modal.classList.add('active');
+      });
+    });
+
+    if (closeBtn && modal) {
+      closeBtn.addEventListener('click', function () {
+        modal.classList.remove('active');
+      });
+      
+      modal.addEventListener('click', function (e) {
+        if (e.target === modal) {
+          modal.classList.remove('active');
+        }
+      });
+    }
+  });
+</script>
 @endsection

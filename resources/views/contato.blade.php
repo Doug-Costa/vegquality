@@ -31,7 +31,7 @@
             <div>
               <h2 class="contact-info-title">Nossos Canais</h2>
               <p class="contact-info-desc">
-                Escolha o canal de sua preferência para falar conosco. Se preferir, visite nossa sede administrativa ou envie uma mensagem no formulário ao lado.
+                Escolha o canal de sua preferência para falar conosco ou envie uma mensagem no formulário ao lado.
               </p>
             </div>
             
@@ -69,34 +69,10 @@
                 <div class="contact-card-details">
                   <h4>E-mail Comercial</h4>
                   <p><a href="mailto:vegquality@vegquality.com.br">vegquality@vegquality.com.br</a></p>
-                  <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">Respondemos em até 24 horas úteis</p>
+                  <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">Nós respondemos em até um dia útil</p>
                 </div>
               </div>
               
-              <!-- Endereço -->
-              <div class="contact-card-item">
-                <div class="contact-card-icon">
-                  <i data-lucide="map-pin"></i>
-                </div>
-                <div class="contact-card-details">
-                  <h4>Sede Administrativa</h4>
-                  <p>
-                    Av. Paulista, 1471 - Conj 511<br>
-                    Bela Vista, São Paulo - SP - CEP 01311-927
-                  </p>
-                </div>
-              </div>
-              
-            </div>
-
-            <!-- Mapa Administrativo -->
-            <div class="contact-map-card">
-              <iframe 
-                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.1975765792945!2d-46.65863868502224!3d-23.561349684682057!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%201471%20-%20Bela%20Vista%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2001311-927!5e0!3m2!1spt-BR!2sbr!4v1625123456789!5m2!1spt-BR!2sbr" 
-                allowfullscreen="" 
-                loading="lazy" 
-                title="Sede VegQuality - Avenida Paulista">
-              </iframe>
             </div>
             
           </div>
@@ -134,10 +110,11 @@
                 <label for="contact-subject" class="form-label">Assunto de Interesse *</label>
                 <select id="contact-subject" name="subject" class="form-select" required>
                   <option value="" disabled selected>Selecione uma opção</option>
-                  <option value="veg-oxi">Adquirir Veg Oxi 200</option>
-                  <option value="consultoria">Consultoria e Projetos</option>
-                  <option value="treinamento">Treinamento Direcionado</option>
-                  <option value="parceria">Seja um Distribuidor</option>
+                  <option value="veg-oxi">Veg Oxi 200</option>
+                  <option value="consultoria">Consultoria</option>
+                  <option value="plano-de-negocios">Plano de Negócios</option>
+                  <option value="treinamento">Treinamento</option>
+                  <option value="seja-distribuidor">Seja um Distribuidor</option>
                   <option value="outro">Outro Assunto</option>
                 </select>
               </div>
@@ -173,4 +150,63 @@
         </div>
       </div>
     </section>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // 1. Auto-select subject from URL parameters
+        const urlParams = new URLSearchParams(window.location.search);
+        const subjectParam = urlParams.get('subject');
+        if (subjectParam) {
+          const subjectSelect = document.getElementById('contact-subject');
+          if (subjectSelect) {
+            for (let i = 0; i < subjectSelect.options.length; i++) {
+              if (subjectSelect.options[i].value === subjectParam) {
+                subjectSelect.options[i].selected = true;
+                break;
+              }
+            }
+          }
+        }
+
+        // 2. Local contact form submit validation and success overlay
+        const contactForm = document.getElementById('contact-form');
+        const successOverlay = document.getElementById('success-overlay');
+        const successCloseBtn = document.getElementById('success-close-btn');
+
+        if (contactForm && successOverlay) {
+          contactForm.addEventListener('submit', function (e) {
+            e.preventDefault();
+            
+            // Simular envio
+            const submitBtn = document.getElementById('submit-btn');
+            if (submitBtn) {
+              submitBtn.disabled = true;
+              submitBtn.innerHTML = '<i class="animate-spin" data-lucide="loader"></i> Enviando...';
+              if (window.lucide) window.lucide.createIcons();
+            }
+
+            setTimeout(function () {
+              // Reset form
+              contactForm.reset();
+              
+              // Reset submit button
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i data-lucide="send"></i> Enviar Mensagem';
+              }
+              
+              // Show overlay
+              successOverlay.classList.add('active');
+              if (window.lucide) window.lucide.createIcons();
+            }, 1000);
+          });
+        }
+
+        if (successCloseBtn && successOverlay) {
+          successCloseBtn.addEventListener('click', function () {
+            successOverlay.classList.remove('active');
+          });
+        }
+      });
+    </script>
 @endsection

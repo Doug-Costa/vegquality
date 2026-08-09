@@ -8,7 +8,7 @@
           <img src="{{ asset('assets/logos/logo-colorida-sem-funddo.png') }}" alt="VegQuality" class="footer-logo-img-large">
         </a>
         <p class="footer-about-text">
-          Biotecnologia inovadora e consultoria de alto impacto para a extensão natural do shelf-life e a máxima segurança dos alimentos na agroindústria.
+          Consultoria para indústria de FLV processados
         </p>
         <div class="footer-socials">
           <a href="https://www.instagram.com/veg_quality" target="_blank" rel="noopener noreferrer" class="social-icon-link" aria-label="Instagram">

@@ -4,6 +4,74 @@
 @section('meta_description', 'Conheça nossos serviços de planos de negócios, treinamentos direcionados e a tecnologia exclusiva do Veg Oxi 200. Tire suas dúvidas sobre o processamento de vegetais frescos.')
 
 @section('content')
+<style>
+  /* Overrides para melhorar a legibilidade e contraste na página de Serviços */
+  
+  /* Títulos Principais (Hero) */
+  .internal-hero-title {
+    color: #111827 !important; /* Cinza quase preto para máximo contraste */
+    font-weight: 800 !important; /* Peso extra para destaque visual */
+    letter-spacing: -0.02em;
+    line-height: 1.2 !important;
+  }
+  
+  .internal-hero-desc {
+    color: #374151 !important; /* Cinza chumbo escuro */
+    font-weight: 450 !important; /* Um pouco mais encorpada que o normal */
+    line-height: 1.75 !important; /* Mais espaçamento entre linhas */
+    font-size: 1.15rem !important;
+  }
+
+  /* Cabeçalho das Seções */
+  .services-title {
+    color: #111827 !important;
+    font-weight: 800 !important;
+    letter-spacing: -0.01em;
+  }
+  
+  .services-desc {
+    color: #4b5563 !important;
+    font-size: 1.05rem !important;
+    line-height: 1.7 !important;
+  }
+
+  /* Cards de Serviços */
+  .service-card-title {
+    color: var(--color-veg-dark) !important;
+    font-weight: 700 !important;
+    font-size: 1.35rem !important;
+  }
+
+  .service-card-desc {
+    color: #2d3748 !important; /* Tom mais escuro de cinza para leitura confortável */
+    font-size: 0.95rem !important; /* Fonte ligeiramente maior */
+    line-height: 1.7 !important; /* Mais respiro visual */
+    font-weight: 400;
+  }
+
+  /* Perguntas Frequentes (FAQ) */
+  .faq-category-title {
+    color: var(--color-veg-dark) !important;
+    font-weight: 700 !important;
+    border-bottom: 2px solid var(--color-veg-light);
+    padding-bottom: 0.5rem;
+  }
+
+  .faq-question {
+    color: #1f2937 !important;
+    font-weight: 600 !important;
+    font-size: 1rem !important;
+  }
+
+  .faq-answer p {
+    color: #374151 !important;
+    font-size: 0.95rem !important;
+    line-height: 1.75 !important;
+  }
+
+
+</style>
+
 @php
     $hero = $page?->sections->where('key', 'servicos_hero')->first()?->content;
     $catalog = $page?->sections->where('key', 'servicos_catalog')->first()?->content;
@@ -42,51 +110,60 @@
 
         <div class="services-grid animate-fade-up delay-100">
           
-          <!-- Card 1: Plano de Negócios / Projetos -->
+          <!-- Card 1: Consultoria -->
           <div class="service-card">
             <div class="service-card-icon">
-              <i data-lucide="briefcase"></i>
+              <i data-lucide="leaf"></i>
             </div>
-            <span class="micro-badge" style="margin-bottom: 0.75rem; padding: 0.25rem 0.5rem; font-size: 0.65rem;">{{ data_get($catalog, 'service1_badge', 'Projetos') }}</span>
-            <h3 class="service-card-title">{{ data_get($catalog, 'service1_title', 'Plano de Negócios') }}</h3>
+            <span class="micro-badge" style="margin-bottom: 0.75rem; padding: 0.25rem 0.5rem; font-size: 0.65rem;">{{ data_get($catalog, 'service1_badge', 'Consultoria') }}</span>
+            <h3 class="service-card-title">{{ data_get($catalog, 'service1_title', 'Consultoria') }}</h3>
             <p class="service-card-desc">
-              {{ data_get($catalog, 'service1_desc', 'Auxiliamos empreendedores que desejam iniciar, estruturar, ampliar ou profissionalizar operações na produção de vegetais frescos processados.') }}
+              {{ Str::limit(data_get($catalog, 'service1_desc'), 300, '...') }}
+              @if(strlen(data_get($catalog, 'service1_desc')) > 300)
+                <button type="button" class="leia-mais-btn" data-title="{{ data_get($catalog, 'service1_title') }}" data-text="{{ data_get($catalog, 'service1_desc') }}">Leia mais</button>
+              @endif
             </p>
-            <a href="{{ data_get($catalog, 'service1_link', 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20consultoria%20em%20Plano%20de%20Neg%C3%B3cios.') }}" target="_blank" rel="noopener noreferrer" class="service-card-link">
+            <a href="{{ url('/contato?subject=consultoria') }}" class="service-card-link">
               Solicitar Informações
               <i data-lucide="arrow-right"></i>
             </a>
           </div>
 
-          <!-- Card 2: Treinamentos Direcionados -->
+          <!-- Card 2: Treinamentos -->
           <div class="service-card">
             <div class="service-card-icon">
               <i data-lucide="graduation-cap"></i>
             </div>
             <span class="micro-badge" style="margin-bottom: 0.75rem; padding: 0.25rem 0.5rem; font-size: 0.65rem;">{{ data_get($catalog, 'service2_badge', 'Treinamentos') }}</span>
-            <h3 class="service-card-title">{{ data_get($catalog, 'service2_title', 'Treinamentos Direcionados') }}</h3>
+            <h3 class="service-card-title">{{ data_get($catalog, 'service2_title', 'Treinamentos') }}</h3>
             <p class="service-card-desc">
-              {{ data_get($catalog, 'service2_desc', 'Treinamentos práticos e teóricos para auxiliar sua equipe na execução dos processos de produção de vegetais frescos processados, do campo à gôndola.') }}
+              {{ Str::limit(data_get($catalog, 'service2_desc'), 300, '...') }}
+              @if(strlen(data_get($catalog, 'service2_desc')) > 300)
+                <button type="button" class="leia-mais-btn" data-title="{{ data_get($catalog, 'service2_title') }}" data-text="{{ data_get($catalog, 'service2_desc') }}">Leia mais</button>
+              @endif
             </p>
-            <a href="{{ data_get($catalog, 'service2_link', 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20Treinamentos%20Direcionados.') }}" target="_blank" rel="noopener noreferrer" class="service-card-link">
+            <a href="{{ url('/contato?subject=treinamento') }}" class="service-card-link">
               Solicitar Informações
               <i data-lucide="arrow-right"></i>
             </a>
           </div>
 
-          <!-- Card 3: Veg Oxi 200 / Tecnologia de Ponta -->
-          <div class="service-card service-card-featured" style="border-color: rgba(46, 125, 50, 0.3); background: linear-gradient(to bottom right, #ffffff, var(--color-veg-light));">
-            <div class="service-card-icon" style="background-color: var(--color-veg-primary); color: white;">
-              <i data-lucide="shield-check"></i>
+          <!-- Card 3: Plano de Negócios -->
+          <div class="service-card">
+            <div class="service-card-icon">
+              <i data-lucide="briefcase"></i>
             </div>
-            <span class="micro-badge" style="margin-bottom: 0.75rem; padding: 0.25rem 0.5rem; font-size: 0.65rem; background-color: var(--color-veg-dark); color: white; border-color: transparent;">{{ data_get($catalog, 'service3_badge', 'Tecnologia de Ponta') }}</span>
-            <h3 class="service-card-title">{{ data_get($catalog, 'service3_title', 'Veg Oxi 200') }}</h3>
-            <p class="service-card-desc" style="font-size: 0.95rem;">
-              {{ data_get($catalog, 'service3_desc', 'O Veg Oxi 200 contribui para o aumento do shelf-life de FLV pós-colheita e vegetais frescos processados, contribui para a substituição definitiva do metabissulfito de sódio e demais sulfitos químicos que prejudicam a saúde.') }}
+            <span class="micro-badge" style="margin-bottom: 0.75rem; padding: 0.25rem 0.5rem; font-size: 0.65rem;">{{ data_get($catalog, 'service3_badge', 'Projetos') }}</span>
+            <h3 class="service-card-title">{{ data_get($catalog, 'service3_title', 'Plano de Negócios') }}</h3>
+            <p class="service-card-desc">
+              {{ Str::limit(data_get($catalog, 'service3_desc'), 300, '...') }}
+              @if(strlen(data_get($catalog, 'service3_desc')) > 300)
+                <button type="button" class="leia-mais-btn" data-title="{{ data_get($catalog, 'service3_title') }}" data-text="{{ data_get($catalog, 'service3_desc') }}">Leia mais</button>
+              @endif
             </p>
-            <a href="{{ data_get($catalog, 'service3_link', 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Veg%20Oxi%20200.') }}" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="margin-top: 1rem; display: inline-flex; width: fit-content; align-items: center; gap: 0.5rem; text-decoration: none;">
-              <i data-lucide="shopping-cart"></i>
-              Quero Adquirir
+            <a href="{{ url('/contato?subject=plano-de-negocios') }}" class="service-card-link">
+              Solicitar Informações
+              <i data-lucide="arrow-right"></i>
             </a>
           </div>
 
@@ -254,4 +331,45 @@
     </section>
 
 
+    <!-- Modal de "Leia Mais" -->
+    <div id="leia-mais-modal" class="custom-modal">
+      <div class="custom-modal-content">
+        <button type="button" class="custom-modal-close" id="close-modal-btn">&times;</button>
+        <h3 id="modal-title" class="custom-modal-title"></h3>
+        <div id="modal-body" class="custom-modal-body"></div>
+      </div>
+    </div>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const modal = document.getElementById('leia-mais-modal');
+        const modalTitle = document.getElementById('modal-title');
+        const modalBody = document.getElementById('modal-body');
+        const closeBtn = document.getElementById('close-modal-btn');
+
+        document.querySelectorAll('.leia-mais-btn').forEach(btn => {
+          btn.addEventListener('click', function () {
+            const title = this.getAttribute('data-title');
+            const text = this.getAttribute('data-text');
+
+            modalTitle.textContent = title;
+            modalBody.textContent = text;
+
+            modal.classList.add('active');
+          });
+        });
+
+        if (closeBtn && modal) {
+          closeBtn.addEventListener('click', function () {
+            modal.classList.remove('active');
+          });
+          
+          modal.addEventListener('click', function (e) {
+            if (e.target === modal) {
+              modal.classList.remove('active');
+            }
+          });
+        }
+      });
+    </script>
 @endsection

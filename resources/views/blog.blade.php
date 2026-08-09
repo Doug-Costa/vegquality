@@ -4,18 +4,17 @@
 @section('meta_description', 'Acompanhe as últimas notícias, tendências de mercado, inovações tecnológicas e mudanças na legislação sanitária de vegetais frescos higienizados.')
 
 @section('content')
-<!-- Hero Interno -->
 <section class="internal-hero" style="background: linear-gradient(135deg, var(--color-veg-dark) 0%, #0d3c0f 100%);">
   <div class="container">
-    <div class="breadcrumb animate-fade-up">
-      <a href="{{ url('/') }}">Início</a>
-      <span class="breadcrumb-separator">/</span>
-      <span>Radar FLV</span>
+    <div class="breadcrumb animate-fade-up" style="color: rgba(255, 255, 255, 0.6) !important;">
+      <a href="{{ url('/') }}" style="color: rgba(255, 255, 255, 0.85) !important;">Início</a>
+      <span class="breadcrumb-separator" style="color: rgba(255, 255, 255, 0.4) !important;">/</span>
+      <span style="color: rgba(255, 255, 255, 0.6) !important;">Radar FLV</span>
     </div>
-    <h1 class="internal-hero-title animate-fade-up delay-100">
+    <h1 class="internal-hero-title animate-fade-up delay-100" style="color: #ffffff !important; text-shadow: none !important;">
       Radar FLV
     </h1>
-    <p class="internal-hero-desc animate-fade-up delay-200">
+    <p class="internal-hero-desc animate-fade-up delay-200" style="color: rgba(255, 255, 255, 0.8) !important;">
       Novidades, legislação, tecnologia alimentar e estratégias de mercado para impulsionar sua agroindústria.
     </p>
   </div>

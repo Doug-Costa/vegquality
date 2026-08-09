@@ -144,8 +144,8 @@ class ArticleResource extends Resource
                                             ->options([
                                                 'Legislação' => 'Legislação',
                                                 'Tecnologia' => 'Tecnologia',
+                                                'Regulatório' => 'Regulatório',
                                                 'Planejamento' => 'Planejamento',
-                                                'Agricultura Familiar' => 'Agricultura Familiar',
                                                 'Geral' => 'Geral',
                                             ])
                                             ->default('Geral')

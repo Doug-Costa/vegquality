@@ -20,70 +20,6 @@
   </div>
 </section>
 
-<!-- Section 3.5: Biotecnologia / Veg Oxi 200 Propaganda Section (As requested) -->
-@if($productHighlight)
-<section class="product-highlight-section" style="background-color: #ffffff;">
-  <div class="container">
-    <div class="product-highlight-grid">
-      
-      <!-- Content Left -->
-      <div class="product-highlight-content animate-fade-up">
-        <div class="product-tag">
-          <span class="micro-badge-dot"></span>
-          {{ data_get($productHighlight, 'badge', 'Biotecnologia') }}
-        </div>
-        <h2 class="product-highlight-title">
-          {{ data_get($productHighlight, 'title', 'Veg Oxi 200 - Coadjuvante de tecnologia') }}
-        </h2>
-        <p class="product-highlight-subtitle">
-          {{ data_get($productHighlight, 'subtitle', 'Um Investimento que Vale a Pena!') }}
-        </p>
-
-        <div class="badges-container">
-          <!-- Badge 1: Com Veg Oxi 200 -->
-          <div class="product-cost-badge">
-            <div class="cost-value-wrapper">
-              <span class="cost-number">{{ data_get($productHighlight, 'cost_with', '30') }}</span>
-              <span class="cost-unit">{{ data_get($productHighlight, 'cost_with_unit', 'Cents') }}</span>
-            </div>
-            <p class="cost-desc">{{ data_get($productHighlight, 'cost_with_desc', 'Por Vegetal Fresco') }}</p>
-            <span class="cost-sub-badge">{{ data_get($productHighlight, 'cost_with_tag', 'Livre de Sulfitos (Seguro)') }}</span>
-          </div>
-
-          <!-- Badge 2: Sem Veg Oxi 200 -->
-          <div class="product-cost-badge product-cost-badge-bad">
-            <div class="cost-value-wrapper">
-              <span class="cost-number cost-number-bad">{{ data_get($productHighlight, 'cost_without', '80') }}</span>
-              <span class="cost-unit">{{ data_get($productHighlight, 'cost_without_unit', 'Cents') }}</span>
-            </div>
-            <p class="cost-desc">{{ data_get($productHighlight, 'cost_without_desc', 'Por Vegetal Oxidado') }}</p>
-            <span class="cost-sub-badge cost-sub-badge-bad">{{ data_get($productHighlight, 'cost_without_tag', 'Com Metabissulfito (Tóxico)') }}</span>
-          </div>
-        </div>
-
-        <a href="{{ data_get($productHighlight, 'cta_link', '#veg_oxi_contacts') }}" class="btn btn-primary hero-btn">
-          <i data-lucide="shield-check"></i>
-          {{ data_get($productHighlight, 'cta_text', 'Adquirir Veg Oxi 200') }}
-        </a>
-      </div>
-
-      <!-- Comparison Image Right -->
-      <div class="compare-container animate-fade-up delay-200">
-        <div class="compare-media-wrapper">
-          @if(data_get($productHighlight, 'image'))
-            <img src="{{ asset('storage/' . data_get($productHighlight, 'image')) }}" alt="{{ data_get($productHighlight, 'title') }}" class="compare-img">
-          @else
-            <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="Comparativo Veg Oxi 200" class="compare-img">
-          @endif
-        </div>
-      </div>
-
-    </div>
-  </div>
-</section>
-@endif
-
-
 <!-- Facts Section -->
 @if($facts)
 <section class="facts-section" style="background-color: #ffffff; padding: 5rem 0;">
@@ -166,6 +102,69 @@
           </a>
         </div>
       @endforeach
+    </div>
+  </div>
+</section>
+@endif
+
+<!-- Section 3.5: Biotecnologia / Veg Oxi 200 Propaganda Section (As requested) -->
+@if($productHighlight)
+<section class="product-highlight-section" style="background-color: #ffffff;">
+  <div class="container">
+    <div class="product-highlight-grid">
+      
+      <!-- Content Left -->
+      <div class="product-highlight-content animate-fade-up">
+        <div class="product-tag">
+          <span class="micro-badge-dot"></span>
+          {{ data_get($productHighlight, 'badge', 'Biotecnologia') }}
+        </div>
+        <h2 class="product-highlight-title">
+          {{ data_get($productHighlight, 'title', 'Veg Oxi 200 - Coadjuvante de tecnologia') }}
+        </h2>
+        <p class="product-highlight-subtitle">
+          {{ data_get($productHighlight, 'subtitle', 'Um Investimento que Vale a Pena!') }}
+        </p>
+
+        <div class="badges-container">
+          <!-- Badge 1: Com Veg Oxi 200 -->
+          <div class="product-cost-badge">
+            <div class="cost-value-wrapper">
+              <span class="cost-number">{{ data_get($productHighlight, 'cost_with', '30') }}</span>
+              <span class="cost-unit">{{ data_get($productHighlight, 'cost_with_unit', 'Cents') }}</span>
+            </div>
+            <p class="cost-desc">{{ data_get($productHighlight, 'cost_with_desc', 'Por Vegetal Fresco') }}</p>
+            <span class="cost-sub-badge">{{ data_get($productHighlight, 'cost_with_tag', 'Livre de Sulfitos (Seguro)') }}</span>
+          </div>
+
+          <!-- Badge 2: Sem Veg Oxi 200 -->
+          <div class="product-cost-badge product-cost-badge-bad">
+            <div class="cost-value-wrapper">
+              <span class="cost-number cost-number-bad">{{ data_get($productHighlight, 'cost_without', '80') }}</span>
+              <span class="cost-unit">{{ data_get($productHighlight, 'cost_without_unit', 'Cents') }}</span>
+            </div>
+            <p class="cost-desc">{{ data_get($productHighlight, 'cost_without_desc', 'Por Vegetal Oxidado') }}</p>
+            <span class="cost-sub-badge cost-sub-badge-bad">{{ data_get($productHighlight, 'cost_without_tag', 'Com Metabissulfito (Tóxico)') }}</span>
+          </div>
+        </div>
+
+        <a href="{{ data_get($productHighlight, 'cta_link', '#veg_oxi_contacts') }}" class="btn btn-primary hero-btn">
+          <i data-lucide="shield-check"></i>
+          {{ data_get($productHighlight, 'cta_text', 'Adquirir Veg Oxi 200') }}
+        </a>
+      </div>
+
+      <!-- Comparison Image Right -->
+      <div class="compare-container animate-fade-up delay-200">
+        <div class="compare-media-wrapper">
+          @if(data_get($productHighlight, 'image'))
+            <img src="{{ asset('storage/' . data_get($productHighlight, 'image')) }}" alt="{{ data_get($productHighlight, 'title') }}" class="compare-img">
+          @else
+            <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="Comparativo Veg Oxi 200" class="compare-img">
+          @endif
+        </div>
+      </div>
+
     </div>
   </div>
 </section>

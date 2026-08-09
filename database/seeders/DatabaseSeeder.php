@@ -167,26 +167,281 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Seeding some dummy blog posts (articles)
-        \App\Models\Article::updateOrCreate(
-            ['slug' => 'sp-endurece-inspecao-de-vegetais'],
+        // Seed Columnist (Dra. Roseane Bob)
+        $columnist = \App\Models\Columnist::updateOrCreate(
+            ['slug' => 'roseane-bob'],
             [
-                'title' => 'SP endurece inspeção de vegetais processados',
-                'excerpt' => 'No último dia 10 de março de 2026, foi publicado o Decreto nº 70.447, que regulamenta a Lei nº 18.154/2025...',
-                'content' => '<p>No último dia 10 de março de 2026, foi publicado o Decreto nº 70.447, que regulamenta a Lei nº 18.154/2025, endurecendo as regras sanitárias no estado de São Paulo...</p>',
-                'published_at' => now(),
+                'name' => 'Roseane Bob',
+                'role' => 'Diretora Técnica — VegQuality',
+                'bio' => 'Nutricionista especialista em segurança de alimentos e sustentabilidade, com mais de 20 anos de atuação.',
+            ]
+        );
+
+        // Delete old dummy articles
+        \App\Models\Article::whereIn('slug', ['sp-endurece-inspecao-de-vegetais', 'quem-planeja-escala-lucra'])->delete();
+
+        // Seeding 5 articles
+        \App\Models\Article::updateOrCreate(
+            ['slug' => 'sp-endurece-a-inspecao-de-flv-processados'],
+            [
+                'title' => 'SP Endurece a Inspeção de FLV Processados',
+                'excerpt' => 'No último dia 10 de março de 2026, foi publicado o Decreto nº 70.447, que regulamenta a Lei nº 18.154/2025. Com este passo, o Governo do Estado de São Paulo oficializa as regras práticas para o funcionamento do SISP-POV...',
+                'content' => '<p>No último dia 10 de março de 2026, foi publicado o Decreto nº 70.447, que regulamenta a Lei nº 18.154/2025. Com este passo, o Governo do Estado de São Paulo oficializa as regras práticas para o funcionamento do SISP-POV e estabelece como as agroindústrias devem se registrar através do sistema GEDAVE.</p>
+<p>Agora, o que era uma previsão legal tornou-se uma realidade operacional. Esta é a mudança mais significativa para o setor de vegetais das últimas décadas, estabelecendo diretrizes claras sobre segurança alimentar, qualidade sanitária e rastreabilidade para toda a cadeia produtiva.</p>
+<h3>Criação do Serviço de Inspeção de Produtos de Origem Vegetal</h3>
+<p>A grande novidade é a operação do Serviço de Inspeção de Produtos de Origem Vegetal (SISP-POV). Sob a coordenação da Secretaria de Agricultura e Abastecimento (CIPOAV), este sistema é o braço executor de:</p>
+<ul>
+  <li><strong>Inspeção e Fiscalização:</strong> Monitoramento constante das linhas de produção.</li>
+  <li><strong>Auditorias e Certificação:</strong> Validação de estabelecimentos e produtos.</li>
+  <li><strong>Garantia de Identidade:</strong> Assegurar que o consumidor receba exatamente o que está descrito no rótulo.</li>
+</ul>
+<h3>Integração com o Sistema Brasileiro de Inspeção (SISBI-POV)</h3>
+<p>Um dos pontos mais estratégicos da nova legislação é a integração ao sistema federal.</p>
+<p>O impacto é direto: Empresas paulistas certificadas poderão comercializar seus produtos em todo o território nacional, eliminando barreiras burocráticas estaduais, desde que comprovem equivalência aos requisitos sanitários federais.</p>
+<h3>Impactos para a Agroindústria de Vegetais Frescos e Processados</h3>
+<p>A nova legislação tem impacto direto em empresas que atuam no processamento de:</p>
+<ul>
+  <li>Vegetais higienizados e folhosos prontos para consumo;</li>
+  <li>Mix de saladas, legumes cortados e embalados;</li>
+  <li>Produtos vegetais industrializados, algas e cogumelos.</li>
+</ul>
+<p>Para estas empresas, a lei reforça a obrigatoriedade de processos estruturados, com destaque para:</p>
+<ul>
+  <li>Implementação de Boas Práticas de Fabricação (BPF);</li>
+  <li>Adoção de programas de autocontrole sanitário;</li>
+  <li>Sistemas de rastreabilidade da matéria-prima e do produto final;</li>
+  <li>Monitoramento rigoroso da cadeia de frio e das condições de processamento.</li>
+</ul>
+<h3>Próximos Passos: Como se preparar para o SISP-POV?</h3>
+<p>Se a sua operação envolve vegetais frescos, minimamente processados ou industrializados em São Paulo, o cronograma de adequação já está em curso. Confira o roteiro básico:</p>
+<ul>
+  <li><strong>Diagnóstico de Infraestrutura:</strong> Avalie se o layout de produção e armazenamento atende às normas sanitárias para evitar contaminação cruzada.</li>
+  <li><strong>Documentação Técnica:</strong> Organize ou atualize seus Manuais de BPF e os Procedimentos Operacionais Padronizados (POPs).</li>
+  <li><strong>Rastreabilidade:</strong> Implemente registros que conectem a origem da matéria-prima no campo até o lote final distribuído.</li>
+  <li><strong>Treinamento:</strong> Garanta que a equipe de produção esteja capacitada para as novas exigências de higiene e auditorias técnicas.</li>
+  <li><strong>Consulta ao GEDAVE:</strong> Monitore o sistema de Defesa Agropecuária para os prazos e procedimentos de registro da sua categoria.</li>
+</ul>
+<h3>Oportunidade de Modernização</h3>
+<p>A adequação às novas exigências representa uma oportunidade para as agroindústrias investirem na melhoria da gestão da qualidade e na redução de perdas. Empresas que adotam práticas estruturadas tendem a obter melhores resultados em termos de shelf life, eficiência operacional e, sobretudo, no fortalecimento da confiança do consumidor final.</p>
+<p><strong>Links para Consulta Oficial:</strong><br>
+<a href="https://www.agricultura.sp.gov.br" target="_blank" rel="noopener">Decreto nº 70.447/2026 (Regulamentação e GEDAVE)</a><br>
+<a href="https://www.al.sp.gov.br" target="_blank" rel="noopener">Lei nº 18.154/2025 (Texto Integral na ALESP)</a><br>
+<a href="https://gedave.defesaagropecuaria.sp.gov.br" target="_blank" rel="noopener">Acesso ao Sistema GEDAVE (Secretaria de Agricultura)</a></p>',
+                'published_at' => \Carbon\Carbon::create(2026, 3, 16),
                 'status' => 'published',
+                'category' => 'Legislação',
+                'columnist_id' => $columnist->id,
+                'author_name' => 'Roseane Bob',
             ]
         );
 
         \App\Models\Article::updateOrCreate(
-            ['slug' => 'quem-planeja-escala-lucra'],
+            ['slug' => 'quem-planeja-escala-lucra-quem-improvisa-perde'],
             [
                 'title' => 'Quem Planeja Escala, Lucra. Quem Improvisa, Perde.',
-                'excerpt' => 'Evite prejuízos na cadeia de hortifrúti. Estruturar processos operacionais de higienização de FLV com clareza...',
-                'content' => '<p>Evite prejuízos na cadeia de hortifrúti. Estruturar processos operacionais de higienização de FLV com clareza...</p>',
-                'published_at' => now(),
+                'excerpt' => 'Na agroindústria de vegetais frescos e minimamente processados (FLV), decisões tomadas na fase de concepção do projeto determinam o desempenho operacional e financeiro por muitos anos...',
+                'content' => '<p>Na agroindústria de vegetais frescos e minimamente processados (FLV), decisões tomadas na fase de concepção do projeto determinam o desempenho operacional e financeiro por muitos anos.</p>
+<p>Ainda assim, é comum que investimentos sejam iniciados com foco prioritário em equipamentos e obras civis, enquanto o dimensionamento de volume, a previsão de crescimento e a escalabilidade do sistema permanecem baseados em estimativas genéricas.</p>
+<p>Esse é um erro estrutural.</p>
+<p><strong>Tecnologia de processamento não começa na compra do equipamento. Começa no projeto: capacidade, fluxo sanitário, cadeia de frio, controle e crescimento planejado.</strong></p>
+<h3>Capacidade produtiva: o ponto mais sensível do projeto</h3>
+<p>A pergunta central que deve anteceder qualquer investimento é objetiva: <em>Qual volume diário viabiliza a operação hoje, e qual volume será exigido em 2, 5 e 10 anos?</em></p>
+<p>Sem essa resposta, o projeto nasce vulnerável.</p>
+<ul>
+  <li><strong>Subdimensionamento</strong> gera gargalos, pressão sobre a cadeia de frio, perda de qualidade, redução de shelf life, aumento de risco sanitário e crescimento bloqueado pela própria estrutura.</li>
+  <li><strong>Superdimensionamento</strong> gera capital imobilizado, custo fixo elevado, baixa eficiência energética, ociosidade e retorno sobre investimento comprometido.</li>
+</ul>
+<p>Ambos reduzem a competitividade.</p>
+<h3>Crescimento não pode ser improvisado: a planta deve nascer escalável!</h3>
+<p>Projetos maduros não “crescem por puxadinho”. Eles nascem com escalabilidade incorporada no desenho. Isso inclui:</p>
+<ul>
+  <li>Layout modular com possibilidade de expansão por etapas;</li>
+  <li>Zonas técnicas planejadas (areas futuras, corredores de serviço, utilidades);</li>
+  <li>Capacidade elétrica/hidráulica preparada para aumento de carga;</li>
+  <li>Cadeia de frio dimensionada com lógica de crescimento (expansão em módulos);</li>
+  <li>Fluxo sanitário preservado mesmo em cenários de ampliação.</li>
+</ul>
+<p>Em outras palavras: crescer sem redesenhar o risco sanitário.</p>
+<h3>Equipamentos e máquinas: modularidade como estratégia de investimento</h3>
+<p>Existe um equívoco recorrente: tratar aquisição de equipamentos como “pacote fechado” e definitivo. Na agroindústria moderna, o correto é projetar a tecnologia como um sistema modular, com evolução planejada.</p>
+<p>Na prática, isso significa que é possível:</p>
+<h4>1) Projetar para crescer dentro da estrutura física atual</h4>
+<p>Com desenho inteligente do layout e da sequência de processo, é viável aumentar capacidade sem mudar de planta, por exemplo:</p>
+<ul>
+  <li>Linhas de lavagem e higienização em módulos adicionais (paralelização)</li>
+  <li>Centrifugação com expansão por unidades independentes</li>
+  <li>Mesas e esteiras com extensão e novos pontos de inspeção</li>
+  <li>Embalagem escalável (ex.: ampliar cabeçotes, adicionar seladoras, incorporar MAP por fases)</li>
+  <li>Câmaras frias em módulos (aumentando volume útil e controle por zona)</li>
+</ul>
+<p>Essa lógica permite aumentar volume mantendo o fluxo sanitário, a separação técnica de áreas, o tempo máximo fora de refrigeração e os pontos de controle operacionais.</p>
+<h4>2) Projetar para crescer em caso de mudança de planta</h4>
+<p>Quando a empresa prevê migração futura (nova unidade, expansão regional ou centralização), o projeto de equipamentos pode ser planejado para “mudar junto”, evitando perda de investimento.</p>
+<p>Isso envolve:</p>
+<ul>
+  <li>Máquinas e linhas concebidas em módulos transportáveis</li>
+  <li>Padronização de interfaces (layout, utilidades, conexões)</li>
+  <li>Skids de processo (água, dosagem, sanitização) que podem ser realocados</li>
+  <li>Sistema de embalagem e utilidades dimensionados em estágios, com reaproveitamento</li>
+</ul>
+<p>A consequência executiva é clara: o investimento deixa de ser “fixo e rígido” e passa a ser ativo estratégico, preparado para acompanhar o crescimento do negócio.</p>
+<h3>Segurança do alimento e responsabilidade executiva</h3>
+<p>A segurança do alimento disponibilizado ao consumidor não é apenas responsabilidade do time operacional. É responsabilidade estratégica da liderança.</p>
+<p>Quando o crescimento não é planejado, os impactos aparecem primeiro nos pilares de segurança:</p>
+<ul>
+  <li>Acúmulo de matéria-prima fora da temperatura ideal</li>
+  <li>Aumento de tempos entre etapas</li>
+  <li>Pressão sobre higienização e monitoramentos</li>
+  <li>Redução do controle efetivo de pontos críticos (APPCC/HACCP)</li>
+</ul>
+<p>Uma planta operando acima da capacidade real aumenta o risco de insegurança do alimento e compromete a rastreabilidade e a conformidade.</p>
+<p>Em mercados cada vez mais exigentes (varejo, exportação, alimentos infantis, hospitais, "private label"), falhas deixam de ser operacionais e passam a ser reputacionais.</p>
+<h3>Previsibilidade financeira: sem volume, não há resultado</h3>
+<p>Planejamento de capacidade (e do crescimento) impacta diretamente no custo por kg processado, na margem operacional e perdas técnicas, na necessidade real de mão de obra e turnos, na energia, água, insumos e logística, e no retorno sobre investimento.</p>
+<p>Sem clareza de volume, não há previsibilidade de resultado. E sem previsibilidade, não há sustentabilidade.</p>
+<p>A tecnologia de processamento na agroindústria de vegetais frescos é a integração entre: <strong>Projeto + Capacidade + Controle + Escalabilidade + Responsabilidade</strong>.</p>
+<p>A planta mais eficiente não é a maior, nem a mais cara. É a que foi dimensionada e estruturada com base em dados, mercado e visão de longo prazo, com tecnologia desenhada para acompanhar o crescimento. Crescimento sustentável começa no papel antes do concreto.</p>
+<p>A diferença entre custo e investimento está na forma como se planeja. Quem projeta com visão colhe previsibilidade. E quem estrutura com técnica constrói vantagem competitiva duradoura.</p>
+<p>Até a próxima!</p>',
+                'published_at' => \Carbon\Carbon::create(2026, 3, 3),
                 'status' => 'published',
+                'category' => 'Planejamento',
+                'columnist_id' => $columnist->id,
+                'author_name' => 'Roseane Bob',
+            ]
+        );
+
+        \App\Models\Article::updateOrCreate(
+            ['slug' => 'tendencias-e-oportunidades-para-2026'],
+            [
+                'title' => 'Tendências e Oportunidades para 2026',
+                'excerpt' => 'Iniciamos mais um ano com renovada energia, compromisso e responsabilidade com a agroindústria de vegetais frescos e minimamente processados...',
+                'content' => '<p>Iniciamos mais um ano com renovada energia, compromisso e responsabilidade com a agroindústria de vegetais frescos e minimamente processados. Desejamos a toda a cadeia produtiva que este seja um ano de boas colheitas, processos mais eficientes e operações cada vez mais sustentáveis e resilientes.</p>
+<p>Seguimos firmes na nossa missão de apoiar empresas a produzirem vegetais prontos para o consumo seguros, nutritivos e com menos desperdício — sempre aliando ciência, prática operacional e gestão responsável dos recursos.</p>
+<p>Com esse espírito de parceria e melhoria contínua, compartilhamos algumas reflexões importantes sobre o uso eficiente de insumos no processamento de vegetais.</p>
+<h3>Eficiência no uso de insumos começa no processo</h3>
+<p>Na agroindústria de vegetais frescos e minimamente processados, é comum associar ganhos ou perdas diretamente aos insumos utilizados. Entretanto, a experiência prática mostra que a eficiência de qualquer insumo comprovadamente eficaz — tais como sanitizante, antioxidante, embalagens — depende diretamente de como ele é aplicado dentro do processo operacional.</p>
+<p>Quando processos não estão bem definidos, padronizados e controlados, mesmo insumos tecnicamente e operacionalmente validados tendem a apresentar resultados inconsistentes.</p>
+<h3>Insumos não corrigem falhas de processo, nem lacunas de treinamento</h3>
+<p>Nenhum insumo por mais eficaz que seja consegue compensar fragilidades no processo operacional. Resultados consistentes dependem, antes de tudo, de etapas bem definidas e padronizadas, diluições corretas, água dentro dos parâmetros adequados, tempo de contato suficiente e registros claros de qualquer mudança operacional.</p>
+<p>Mas, acima de tudo, dependem de equipes capacitadas, que compreendam não apenas o “como fazer”, mas o porquê de cada etapa do processo. Quando os resultados variam, o caminho mais eficiente é sempre começar avaliando o processo e o nível de treinamento da equipe e só então revisar o insumo utilizado. Essa abordagem é o que garante qualidade, previsibilidade e melhores resultados para o negócio.</p>
+<h3>Processo claro + equipe preparada = resultados consistentes</h3>
+<p>Para garantir eficiência no uso de insumos, é fundamental:</p>
+<ul>
+  <li>Mapear com precisão cada etapa do processo;</li>
+  <li>Padronizar procedimentos operacionais;</li>
+  <li>Assegurar que a equipe compreenda o papel e a importância de cada insumo e em qual etapa utilizar;</li>
+  <li>Investir em capacitação contínua, minimizando erros e aumentando a previsibilidade dos resultados.</li>
+</ul>
+<p>Esse alinhamento técnico-operacional cria as bases para maior qualidade, estabilidade produtiva e melhor desempenho do negócio.</p>
+<h3>Veg Oxi 200: eficiência de uso aplicada ao processo</h3>
+<p>Dentro desse contexto, o Veg Oxi 200 se destaca como um antioxidante natural, sem sulfitos, desenvolvido para preservar cor, frescor e qualidade dos vegetais.</p>
+<p>Assim como qualquer insumo comprovadamente eficaz, seu desempenho depende da correta aplicação no processo operacional e da capacitação da equipe.</p>
+<p>Quando utilizado conforme protocolo e integrado a um processo bem controlado, o Veg Oxi contribui para:</p>
+<ul>
+  <li>Preservação da qualidade sensorial (cor, textura, frescor) e nutricional;</li>
+  <li>Redução significativa de perdas por oxidação;</li>
+  <li>Otimização do antioxidante;</li>
+  <li>Aumento da vida útil do produto.</li>
+</ul>
+<h3>Eficiência de uso = optimização e redução de custos</h3>
+<p>O uso eficiente de insumos reflete diretamente nos resultados da operação: menos desperdício, menor retrabalho, menos erros operacionais, melhor controle de custos e maior previsibilidade produtiva. Eficiência de uso não é custo adicional, é gestão inteligente de recursos e pessoas.</p>
+<h3>Planejamento, processos administrativos e capacitação completam o ciclo</h3>
+<p>A eficiência técnica operacional só se sustenta quando acompanhada de planejamento claro e consistente, etapas produtivas bem definidas, protocols técnicos atualizados e validados, alinhamento entre áreas e treinamento contínuo das equipes.</p>
+<p>Isso garante consistência ao longo do ano, mesmo diante de desafios como clima, sazonalidade e variações de matéria-prima.</p>
+<p>Insumos eficientes exigem processos eficientes e equipes bem preparadas.</p>
+<p>O Veg Oxi 200 entrega seu melhor desempenho quando integrado a um processo claro, padronizado e conduzido por times capacitados.</p>
+<p>Seguimos à disposição para caminhar junto com nossos parceiros ao longo deste ano, sempre com foco em qualidade, eficiência, redução de perdas e sustentabilidade.</p>
+<p>Até a próxima, seguimos juntos!</p>',
+                'published_at' => \Carbon\Carbon::create(2026, 1, 21),
+                'status' => 'published',
+                'category' => 'Planejamento',
+                'columnist_id' => $columnist->id,
+                'author_name' => 'Roseane Bob',
+            ]
+        );
+
+        \App\Models\Article::updateOrCreate(
+            ['slug' => 'colheita-de-grandes-resultados'],
+            [
+                'title' => 'Colheita de Grandes Resultados',
+                'excerpt' => 'Neste ano, ampliamos e fortalecemos nossos programas de consultoria técnica e soluções personalizadas, impulsionando resultados reais para nossos clientes...',
+                'content' => '<p>Neste ano, ampliamos e fortalecemos nossos programas de consultoria técnica e soluções personalizadas, impulsionando resultados reais para nossos clientes.</p>
+<p>Nossas soluções têm gerado resultados concretos para empresas de todos os portes, incluindo:</p>
+<ul>
+  <li>Aumento significativo da eficiência operacional, com capacitação prática em técnicas e processos essenciais para o preparo de vegetais frescos e higienizados;</li>
+  <li>Redução consistente das perdas ao longo de toda a cadeia, desde o campo até a distribuição, por meio da qualificação estratégica de fornecedores e da elaboração de planos de negócio personalizados para empresas que desejam iniciar ou expandir suas operações de processamento;</li>
+  <li>Implantação de controles de qualidade modernos e robustos, que garantem processos mais seguros, padronizados e competitivos;</li>
+  <li>Maior estabilidade, uniformidade e valor agregado nos vegetais prontos para consumo, resultando em alimentos mais frescos, nutritivos e visualmente atrativos para o mercado.</li>
+</ul>
+<h3>Segurança Alimentar & Sustentabilidade</h3>
+<p>Contribuímos para que toda a agroindústria de vegetais frescos e higienizados — incluindo o produtor rural, parte essencial dessa cadeia — adote práticas mais seguras, eficientes e sustentáveis, sempre de forma colaborativa e alinhada às necessidades de cada cliente.</p>
+<p>Trabalhamos lado a lado com as equipes para fortalecer rotinas, reduzir riscos e apoiar a entrega de alimentos mais confiáveis, nutritivos e de qualidade superior ao consumidor.</p>
+<h3>Veg Oxi 200: Expansão, Desempenho e Sustentabilidade</h3>
+<p>Em 2025, o Veg Oxi 200 ganhou ainda mais destaque como a solução antioxidante preferida pela agroindústria de FLV.</p>
+<p>Resultados obtidos por nossos clientes:</p>
+<ul>
+  <li>Retardamento da oxidação e do escurecimento dos vegetais frescos e prontos para o consumo, garantindo aparência superior por mais tempo;</li>
+  <li>Vida útil ampliada, menor índice de devoluções e maior estabilidade na distribuição;</li>
+  <li>Produtos mais frescos, atrativos e nutritivos, que conquistam o consumidor pela qualidade;</li>
+  <li>Redução significativa do descarte, fortalecendo a sustentabilidade e a rentabilidade do negócio;</li>
+  <li>Processos totalmente livres de sulfito, mais seguros para o consumidor e mais responsáveis para o meio ambiente.</li>
+</ul>
+<h3>Sustentabilidade & Futuro da Alimentação</h3>
+<p>Em 2025, atuamos fortemente em projetos que promovem a economia circular e redução do impacto ambiental, a melhoria no uso de água, energia e embalagens, o menor desperdício ao longo da cadeia de valor e programas educativos e ações de conscientização.</p>
+<p>Acreditamos que um futuro alimentar mais justo e sustentável começa com decisões técnicas bem orientadas e seguimos comprometidos com esse propósito.</p>
+<h3>Novidades no Website</h3>
+<p>Nosso site — <a href="http://www.vegquality.com.br" target="_blank" rel="noopener">www.vegquality.com.br</a> — passou por aprimoramentos importantes. Em 2026, continuará evoluindo com mais conteúdos técnicos, materiais educativos e soluções para apoiar ainda mais a cadeia de vegetais frescos.</p>
+<p>Agradecemos profundamente a todos os clientes, parceiros, fornecedores e equipes da agroindústria que caminharam conosco em 2025. O compromisso de vocês inspira o nosso e, juntos, chegamos mais longe. Desejamos um 2026 repleto de saúde, prosperidade e colheitas de excelentes resultados.</p>',
+                'published_at' => \Carbon\Carbon::create(2025, 12, 12),
+                'status' => 'published',
+                'category' => 'Geral',
+                'columnist_id' => $columnist->id,
+                'author_name' => 'Roseane Bob',
+            ]
+        );
+
+        \App\Models\Article::updateOrCreate(
+            ['slug' => 'os-desafios-da-agroindustria-de-flv-processados-no-brasil'],
+            [
+                'title' => 'Os Desafios da Agroindústria de FLV Processados no Brasil',
+                'excerpt' => 'Trabalhar com vegetais frescos e higienizados é mais do que uma profissão: é um compromisso diário com a natureza, o alimento e a ciência...',
+                'content' => '<p>Trabalhar com vegetais frescos e higienizados é mais do que uma profissão: é um compromisso diário com a natureza, o alimento e a ciência.</p>
+<p>Em mais de 20 anos de atuação na cadeia dos vegetais frescos e higienizados, prontos para o consumo, acompanhei o amadurecimento de um sector que vem se solidificando com muito esforço, e hoje busca o reconhecimento que merece dentro do agronegócio brasileiro.</p>
+<p>Recently, a CNVeg (Câmara Nacional de Vegetais Frescos e Higienizados) e o Ibrahort (Instituto Brasileiro de Horticultura) publicaram uma Pesquisa de Mercado (2023) que retrata com precisão esse cenário: um setor em expansão, com grande potencial, mas que ainda enfrenta obstáculos estruturais que comprometem seu crescimento sustentável.</p>
+<h3>O campo: onde a qualidade realmente começa</h3>
+<p>A preservação da qualidade de um vegetal fresco e higienizado começa muito antes da indústria. No campo, produtores lidam com pragas, doenças, intempéries e variações climáticas que exigem controle técnico, manejo sustentável e decisões diárias que impactam diretamente o resultado final.</p>
+<p>Grande parte dos cultivos ainda ocorre a céu aberto, o que torna o controle de qualidade um desafio constante. Manter o padrão visual, a textura e a segurança alimentar requer planejamento agrícola, colheita no ponto fisiológico ideal e logística eficiente.</p>
+<p>Como sempre digo: <em>não há produto final de excelência sem uma matéria-prima de excelência, e não há matéria-prima de excelência sem integração entre o campo e a indústria.</em></p>
+<h3>Processamento: o elo que define confiança</h3>
+<p>Segundo a pesquisa CNVeg & Ibrahort, apenas 61% das empresas mantêm a temperatura de produção abaixo de 15 °C e apenas 45% utilizam água refrigerada no processamento. Esses dados revelam uma fragilidade crítica: a cadeia de frio ainda é o ponto mais sensível da cadeia produtiva.</p>
+<p>Ao longo dos anos, testemunhei transformações significativas em operações que compreenderam que uma cadeia de frio eficiente do campo à distribuição, aliada à higienização adequada, ao uso de antioxidantes, à padronização de processos, à escolha criteriosa de maquinários, equipamentos e embalagens, à capacitação e profissionalização das equipes e ao foco na qualidade final e na segurança higiênico-sanitária, não representam custos, mas sim investimentos estratégicos em qualidade, segurança e reputação.</p>
+<h3>O retrato do setor</h3>
+<p>O levantamento do CNVeg & Ibrahort mostra um setor composto majoritariamente por pequenas e médias empresas (80%), com faturamento médio mensal de R$ 900 mil, concentradas nas regiões Sudeste e Sul. As principais linhas de produtos são:</p>
+<ul>
+  <li>Folhosas (96%)</li>
+  <li>Legumes (85%)</li>
+  <li>Temperos (65%)</li>
+  <li>Saladas prontas (56%)</li>
+</ul>
+<p>Os maiores desafios identificados foram:</p>
+<ul>
+  <li>Mão de obra e capacitação técnica (34%)</li>
+  <li>Falta de cultura do cliente e valorização do produto (32%)</li>
+  <li>Dificuldades comerciais e de posicionamento (25%)</li>
+  <li>Logística e transporte refrigerado (17%)</li>
+  <li>Falta de regulamentação e fiscalização (15%)</li>
+</ul>
+<p>Mesmo com tantos obstáculos, 82% das empresas projetam crescimento nos próximos 12 meses — prova da resiliência e da paixão de quem trabalha com alimentos vivos, saudáveis e altamente perecíveis.</p>
+<h3>O que precisamos fortalecer</h3>
+<p>Os dados refletem um setor que amadureceu, mas ainda carece de profissionalização, padronização e cultura de qualidade contínua. Evoluímos em tecnologia, conhecimento e profissionais capacitados, entretanto precisamos integrar os elos da cadeia e alinhar estratégias entre o campo, a indústria e o consumidor.</p>
+<p>O produtor e a agroindústria de vegetais frescos e higienizados precisam compreender o padrão que o mercado exige. A indústria deve valorizar quem garante a base da qualidade: o cultivo. E o consumidor, cada vez mais atento, precisa reconhecer, valorizar e confiar nos vegetais frescos, higienizados e prontos para o consumo.</p>
+<p>E você, que vive o dia a dia do VFH (vegetais frescos higienizados)? Na sua realidade, qual é o seu maior desafio na cadeia produtiva de vegetais frescos e higienizados?</p>',
+                'published_at' => \Carbon\Carbon::create(2025, 10, 13),
+                'status' => 'published',
+                'category' => 'Geral',
+                'columnist_id' => $columnist->id,
+                'author_name' => 'Roseane Bob',
             ]
         );
 
@@ -209,15 +464,8 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        $empresa->sections()->updateOrCreate(
-            ['key' => 'empresa_stats'],
-            [
-                'content' => [
-                    'stat_number' => '25 M',
-                    'stat_text' => 'de Toneladas Salvas do Desperdício',
-                ]
-            ]
-        );
+        // Delete stats banner if it exists
+        $empresa->sections()->where('key', 'empresa_stats')->delete();
 
         $empresa->sections()->updateOrCreate(
             ['key' => 'empresa_sulfito'],
@@ -238,7 +486,7 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'badge' => 'VegQuality',
-                    'title' => 'Mantendo o frescor da colheita',
+                    'title' => 'Consultoria 360°',
                     'highlight_text' => 'Transforme sua linha de vegetais frescos prontos para o consumo!',
                     'description' => 'Na Veg Quality, oferecemos soluções personalizadas e consultoria especializada para impulsionar a eficiência técnica e a segurança operacional da sua planta de processamento.',
                     'image' => 'assets/hero/Home-Veg-scaled.jpg',
@@ -257,7 +505,7 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'badge' => 'Liderança e Ciência',
-                    'title' => 'VegQuality<br><span style="color: var(--color-veg-primary);">Consultoria que gera resultados!</span>',
+                    'title' => 'História da VegQuality<br><span style="color: var(--color-veg-primary);">Consultoria que gera resultados!</span>',
                     'description1' => 'A VegQuality é mais que uma consultoria: é uma parceira estratégica para empresas que atuam na agroindústria de vegetais frescos, do campo aos pontos de distribuição.',
                     'description2' => 'Combinando ciência, inovação, experiência prática e propósito, entregamos soluções personalizadas que fortalecem a qualidade, a segurança, a sustentabilidade e a rentabilidade da agroindústria de vegetais frescos higienizados.',
                     'image' => 'assets/images/Foto-Roseane-Bob-profissional.jpg',
@@ -295,20 +543,20 @@ class DatabaseSeeder extends Seeder
             ['key' => 'servicos_catalog'],
             [
                 'content' => [
-                    'badge' => 'Nossos Serviços',
-                    'title' => 'Soluções Completas & Especializadas',
-                    'service1_badge' => 'Projetos',
-                    'service1_title' => 'Plano de Negócios',
-                    'service1_desc' => 'Auxiliamos empreendedores que desejam iniciar, estruturar, ampliar ou profissionalizar operações na produção de vegetais frescos processados.',
-                    'service1_link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20a%20consultoria%20em%20Plano%20de%20Neg%C3%B3cios.',
+                    'badge' => 'Nossos Serviços - Soluções',
+                    'title' => 'Consultoria 360° para a Agroindústria de FLV: Do Campo à Gôndola',
+                    'service1_badge' => 'Consultoria',
+                    'service1_title' => 'Consultoria',
+                    'service1_desc' => 'Sua produção agroindustrial mais eficiente, segura e lucrativa. Nossa consultoria técnica acompanha o seu produto do campo à gôndola. Nós mergulhamos na sua operação para ajustar processos, otimizar maquinários, inovar em embalagens e estruturar sistemas rígidos de higienização. Onde houver uma não conformidade, nós entregamos a solução técnica. Deixe a burocracia e os gargalos operacionais conosco e foque exclusivamente no crescimento do seu negócio.',
+                    'service1_link' => '/contato?subject=consultoria',
                     'service2_badge' => 'Treinamentos',
-                    'service2_title' => 'Treinamentos Direcionados',
-                    'service2_desc' => 'Treinamentos práticos e teóricos para auxiliar sua equipe na execução dos processos de produção de vegetais frescos processados, do campo à gôndola.',
-                    'service2_link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20os%20Treinamentos%20Direcionados.',
-                    'service3_badge' => 'Tecnologia de Ponta',
-                    'service3_title' => 'Veg Oxi 200',
-                    'service3_desc' => 'O Veg Oxi 200 contribui para o aumento do shelf-life de FLV pós-colheita e vegetais frescos processados, contribuindo para a substituição definitiva do metabissulfito de sódio e demais sulfitos químicos que prejudicam a saúde.',
-                    'service3_link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20saber%20mais%20sobre%20o%20Veg%20Oxi%20200.',
+                    'service2_title' => 'Treinamentos',
+                    'service2_desc' => 'Capacitação Prática para Resultados Reais. Ter procedimentos, manuais e POPs bem elaborados é fundamental, mas o verdadeiro desafio é transformá-los em ações consistentes no dia a dia da produção. Na VegQuality, nós levamos o conhecimento direto para o chão de fábrica. Atuamos lado a lado com operadores, líderes e manipuladores, integrando a capacitação à rotina real da sua agroindústria. O resultado? Processos que deixam de ser apenas papéis guardados e passam a ser compreendidos, aplicados e mantidos por todos.',
+                    'service2_link' => '/contato?subject=treinamento',
+                    'service3_badge' => 'Projetos',
+                    'service3_title' => 'Plano de Negócios',
+                    'service3_desc' => 'Agroindústria de FLV Processado: O mercado que mais cresce, mas que não aceita amadorismo. Investir em uma agroindústria sem um mapa claro é o caminho mais rápido para ver o seu capital evaporar. A falta de clareza sobre o tamanho real do investimento, o medo de comprar o maquinário errado e a incerteza se a conta vai fechar no final do mês podem transformar um grande sonho em uma enorme dor de cabeça financeira. Antes de colocar o seu dinheiro em jogo, você precisa de clareza absoluta sobre o que realmente funciona no dia a dia de uma fábrica. É preciso transformar a sua ideia em um negócio viável, seguro e altamente lucrativo.',
+                    'service3_link' => '/contato?subject=plano-de-negocios',
                 ]
             ]
         );
@@ -608,27 +856,27 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'badge' => 'Insights',
-                    'title' => 'Áreas de Atuação Técnica',
+                    'title' => 'Como a VegQuality Pode Apoiar seu Negócio',
                     'cards' => [
                         [
-                            'title' => 'Processos',
-                            'icon' => 'settings',
-                            'description' => 'Padronização higiênico-sanitária operacional e processos industriais otimizados para zero desperdício.'
+                            'title' => 'Consultoria',
+                            'icon' => 'leaf',
+                            'description' => 'Consultoria Especializada do Campo à Gôndola Combinamos bagagem técnica e vivência prática na agroindústria de FLV para transformar a eficiência do seu negócio. Ajudamos sua empresa a implementar as melhores tecnologias de processamento, sistemas de higienização e gestão da cadeia de frio. O resultado? Máxima extensão de shelf life, conformidade regulatória rigorosa, segurança dos alimentos e uma redução drástica nas perdas e desperdícios.'
                         ],
                         [
-                            'title' => 'Equipamentos',
-                            'icon' => 'cpu',
-                            'description' => 'Dimensionamento de maquinários ideais e escolha de tecnologias corretas para sua linha de processamento.'
+                            'title' => 'Plano de Negócios',
+                            'icon' => 'briefcase',
+                            'description' => 'Transforme sua ideia em uma Agroindústria de FLV Lucrativa e Segura Tirar um projeto de processamento mínimo do papel exige precisão técnica e financeira. Nosso suporte especializado apoia empreendedores em todas as etapas de estruturação e expansão de negócios de FLV. Entregamos um estudo de viabilidade técnica e econômica de ponta a ponta: do dimensionamento do chão de fábrica e seleção de maquinário até a análise de mercado, custos operacionais e projeções de faturamento. Proporcionamos a visão clara e a segurança estratégica que o seu investimento precisa para prosperar.'
                         ],
                         [
-                            'title' => 'Cadeia de Frio',
-                            'icon' => 'thermometer',
-                            'description' => 'Monitoramento térmico rigoroso do campo ao ponto de venda, garantindo frescor e conformidade de gôndola.'
+                            'title' => 'Treinamento',
+                            'icon' => 'graduation-cap',
+                            'description' => 'Oferecemos treinamentos práticos e personalizados, desenvolvidos de acordo com a realidade operacional de cada agroindústria. A capacitação é baseada nos processos, equipamentos e tecnologias efetivamente utilizados pela empresa, abordando etapas de processamento, técnicas de corte, centrifugação e embalagem, boas práticas de armazenamento e transporte, higiene e segurança dos alimentos.'
                         ],
                         [
-                            'title' => 'Embalagens',
-                            'icon' => 'box',
-                            'description' => 'Seleção de filmes técnicos de atmosfera modificada passiva (MAP) adequados para cada hortaliça.'
+                            'title' => 'Veg Oxi 200',
+                            'icon' => 'shield-check',
+                            'description' => 'O Veg Oxi 200 é uma tecnologia inovadora que retarda a oxidação de saladas, legumes, couve-manteiga e outras hortaliças e vegetais frescos processados. Ao evitar o escurecimento precoce, ele preserva a cor viva, o frescor e a qualidade original dos alimentos. O resultado é um produto visualmente muito mais atraente para o consumidor, com maior tempo de prateleira (shelf life) e redução significativa do desperdício na cadeia produtiva.'
                         ]
                     ]
                 ]

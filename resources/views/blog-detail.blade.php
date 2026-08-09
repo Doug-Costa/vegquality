@@ -7,27 +7,27 @@
 <!-- Hero Interno -->
 <section class="internal-hero" style="background: linear-gradient(135deg, var(--color-veg-dark) 0%, #0d3c0f 100%);">
   <div class="container">
-    <div class="breadcrumb animate-fade-up">
-      <a href="{{ url('/') }}">Início</a>
-      <span class="breadcrumb-separator">/</span>
-      <a href="{{ url('/radar') }}">Radar FLV</a>
-      <span class="breadcrumb-separator">/</span>
-      <span>Artigo</span>
+    <div class="breadcrumb animate-fade-up" style="color: rgba(255, 255, 255, 0.6) !important;">
+      <a href="{{ url('/') }}" style="color: rgba(255, 255, 255, 0.85) !important;">Início</a>
+      <span class="breadcrumb-separator" style="color: rgba(255, 255, 255, 0.4) !important;">/</span>
+      <a href="{{ url('/radar') }}" style="color: rgba(255, 255, 255, 0.85) !important;">Radar FLV</a>
+      <span class="breadcrumb-separator" style="color: rgba(255, 255, 255, 0.4) !important;">/</span>
+      <span style="color: rgba(255, 255, 255, 0.6) !important;">Artigo</span>
     </div>
-    <h1 class="internal-hero-title animate-fade-up delay-100" style="font-size: 2.25rem; line-height: 1.2; max-width: 900px;">
+    <h1 class="internal-hero-title animate-fade-up delay-100" style="font-size: 2.25rem; line-height: 1.2; max-width: 900px; color: #ffffff !important; text-shadow: none !important;">
       {{ $article->title }}
     </h1>
-    <div class="blog-card-meta animate-fade-up delay-200" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 1.5rem; color: rgba(255, 255, 255, 0.9); font-size: 0.875rem;">
-      <span class="blog-card-meta-item" style="display: inline-flex; align-items: center; gap: 0.375rem;">
+    <div class="blog-card-meta animate-fade-up delay-200" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 1.5rem; color: rgba(255, 255, 255, 0.9) !important; font-size: 0.875rem;">
+      <span class="blog-card-meta-item" style="display: inline-flex; align-items: center; gap: 0.375rem; color: rgba(255, 255, 255, 0.9) !important;">
         <i data-lucide="calendar" style="width: 1rem; height: 1rem; color: var(--color-veg-accent);"></i> 
         {{ $article->published_at ? $article->published_at->translatedFormat('d \d\e M, Y') : $article->created_at->translatedFormat('d \d\e M, Y') }}
       </span>
-      <span class="blog-card-meta-item" style="display: inline-flex; align-items: center; gap: 0.375rem;">
+      <span class="blog-card-meta-item" style="display: inline-flex; align-items: center; gap: 0.375rem; color: rgba(255, 255, 255, 0.9) !important;">
         <i data-lucide="user" style="width: 1rem; height: 1rem; color: var(--color-veg-accent);"></i> 
         {{ $article->columnist ? $article->columnist->name : ($article->author_name ?: 'Roseane Bob') }}
       </span>
       @if($article->category)
-        <span class="blog-card-meta-item" style="display: inline-flex; align-items: center; gap: 0.375rem;">
+        <span class="blog-card-meta-item" style="display: inline-flex; align-items: center; gap: 0.375rem; color: rgba(255, 255, 255, 0.9) !important;">
           <i data-lucide="tag" style="width: 1rem; height: 1rem; color: var(--color-veg-accent);"></i> 
           {{ $article->category }}
         </span>

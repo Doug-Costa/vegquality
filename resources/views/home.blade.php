@@ -47,8 +47,9 @@
 
     @foreach($slides as $index => $slide)
       <div class="carousel-slide @if($index === 0) active @endif" data-index="{{ $index }}">
-        <!-- Background Image covering the entire slide -->
-        <div class="hero-bg-image-wrapper">
+        
+        <!-- DESKTOP VERSION -->
+        <div class="hero-bg-image-wrapper hero-desktop-only">
           @if(Str::startsWith(data_get($slide, 'image'), 'assets/'))
             <img src="{{ asset(data_get($slide, 'image')) }}" alt="{{ strip_tags(data_get($slide, 'title')) }}" class="hero-bg-img-el">
           @else
@@ -57,7 +58,7 @@
           <div class="hero-bg-image-overlay"></div>
         </div>
 
-        <div class="container">
+        <div class="container hero-desktop-only">
           <div class="hero-grid">
             
             <!-- Text Content in Glassmorphic Card -->
@@ -122,6 +123,84 @@
 
           </div>
         </div>
+
+        <!-- MOBILE VERSION -->
+        <div class="container hero-mobile-only">
+          <div class="hero-grid">
+            
+            <!-- Text Content -->
+            <div class="hero-content">
+              @if(data_get($slide, 'badge1_text'))
+                <div class="micro-badge">
+                  <span class="micro-badge-dot"></span>
+                  {{ data_get($slide, 'badge1_text') }}
+                </div>
+              @endif
+
+              <h1 class="hero-title">
+                {!! data_get($slide, 'title') !!}
+              </h1>
+
+              <p class="hero-desc">
+                {{ data_get($slide, 'subtitle') }}
+              </p>
+
+              <div class="hero-actions">
+                @if(data_get($slide, 'btn1_text'))
+                  <a href="{{ data_get($slide, 'btn1_link') }}" class="btn btn-primary hero-btn">
+                    {{ data_get($slide, 'btn1_text') }}
+                  </a>
+                @endif
+                @if(data_get($slide, 'btn2_text'))
+                  <a href="{{ data_get($slide, 'btn2_link') }}" class="btn btn-ghost hero-btn" style="border: 2px solid rgba(27, 94, 32, 0.3); background-color: transparent; color: var(--color-veg-dark);">
+                    {{ data_get($slide, 'btn2_text') }}
+                  </a>
+                @endif
+              </div>
+            </div>
+
+            <!-- Media Content with Floating Badges (Card style) -->
+            <div class="hero-media">
+              <div class="hero-media-bg-shape"></div>
+              <div class="hero-image-wrapper">
+                @if(Str::startsWith(data_get($slide, 'image'), 'assets/'))
+                  <img src="{{ asset(data_get($slide, 'image')) }}" alt="{{ strip_tags(data_get($slide, 'title')) }}" class="hero-img">
+                @else
+                  <img src="{{ asset('storage/' . data_get($slide, 'image')) }}" alt="{{ strip_tags(data_get($slide, 'title')) }}" class="hero-img">
+                @endif
+                <div class="hero-image-overlay"></div>
+              </div>
+
+              <!-- Badge 1 (Fade to Right) -->
+              @if(data_get($slide, 'badge1_text'))
+                <div class="badge-floating badge-1 animate-fade-to-right">
+                  <div class="badge-icon">
+                    <i data-lucide="sprout"></i>
+                  </div>
+                  <div>
+                    <span class="badge-text-primary">Destaque</span>
+                    <span class="badge-text-secondary">{{ data_get($slide, 'badge1_text') }}</span>
+                  </div>
+                </div>
+              @endif
+
+              <!-- Badge 2 (Fade to Left with Link) -->
+              @if(data_get($slide, 'badge2_text'))
+                <a href="{{ data_get($slide, 'badge2_link', '#') }}" class="badge-floating badge-2 animate-fade-to-left block-link-badge">
+                  <div class="badge-icon">
+                    <i data-lucide="arrow-right-circle" class="badge-icon-accent"></i>
+                  </div>
+                  <div>
+                    <span class="badge-text-title">{{ data_get($slide, 'badge2_text') }}</span>
+                    <span class="badge-text-subtitle">Saiba mais <i data-lucide="chevron-right" style="width:12px;height:12px;display:inline-block;vertical-align:middle;"></i></span>
+                  </div>
+                </a>
+              @endif
+            </div>
+
+          </div>
+        </div>
+
       </div>
     @endforeach
   </div>

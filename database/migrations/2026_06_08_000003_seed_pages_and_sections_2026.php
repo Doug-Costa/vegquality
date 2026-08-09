@@ -30,15 +30,8 @@ return new class extends Migration
             ]
         );
 
-        $empresa->sections()->updateOrCreate(
-            ['key' => 'empresa_stats'],
-            [
-                'content' => [
-                    'stat_number' => '25 M',
-                    'stat_text' => 'de Toneladas Salvas do Desperdício',
-                ]
-            ]
-        );
+        // Delete stats banner if it exists
+        $empresa->sections()->where('key', 'empresa_stats')->delete();
 
         $empresa->sections()->updateOrCreate(
             ['key' => 'empresa_sulfito'],
@@ -59,7 +52,7 @@ return new class extends Migration
             [
                 'content' => [
                     'badge' => 'VegQuality',
-                    'title' => 'Mantendo o frescor da colheita',
+                    'title' => 'Consultoria 360°',
                     'highlight_text' => 'Transforme sua linha de vegetais frescos prontos para o consumo!',
                     'description' => 'Na Veg Quality, oferecemos soluções personalizadas e consultoria especializada para impulsionar a eficiência técnica e a segurança operacional da sua planta de processamento.',
                     'image' => 'assets/hero/Home-Veg-scaled.jpg',
@@ -78,7 +71,7 @@ return new class extends Migration
             [
                 'content' => [
                     'badge' => 'Liderança e Ciência',
-                    'title' => 'VegQuality<br><span style="color: var(--color-veg-primary);">Consultoria que gera resultados!</span>',
+                    'title' => 'História da VegQuality<br><span style="color: var(--color-veg-primary);">Consultoria que gera resultados!</span>',
                     'description1' => 'A VegQuality é mais que uma consultoria: é uma parceira estratégica para empresas que atuam na agroindústria de vegetais frescos, do campo aos pontos de distribuição.',
                     'description2' => 'Combinando ciência, inovação, experiência prática e propósito, entregamos soluções personalizadas que fortalecem a qualidade, a segurança, a sustentabilidade e a rentabilidade da agroindústria de vegetais frescos higienizados.',
                     'image' => 'assets/images/Foto-Roseane-Bob-profissional.jpg',

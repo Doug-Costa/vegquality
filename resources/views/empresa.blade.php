@@ -6,7 +6,6 @@
 @section('content')
 @php
     $hero = $page?->sections->where('key', 'empresa_hero')->first()?->content;
-    $stats = $page?->sections->where('key', 'empresa_stats')->first()?->content;
     $sulfito = $page?->sections->where('key', 'empresa_sulfito')->first()?->content;
     $frescor = $page?->sections->where('key', 'empresa_frescor')->first()?->content;
     $quemSomos = $page?->sections->where('key', 'empresa_quem_somos')->first()?->content;
@@ -28,61 +27,8 @@
       </div>
     </section>
 
-    <!-- Stats Banner -->
-    <section class="stats-banner">
-      <div class="container">
-        <div class="stats-banner-container animate-fade-up">
-          <span class="stats-banner-number">{{ data_get($stats, 'stat_number', '25 M') }}</span>
-          <span class="stats-banner-text">{{ data_get($stats, 'stat_text', 'de Toneladas Salvas do Desperdício') }}</span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Seção Livre de Sulfitos -->
-    <section class="sulfito-section">
-      <div class="container">
-        <div class="sulfito-grid">
-          
-          <!-- Content Left -->
-          <div class="sulfito-content animate-fade-up">
-            <div class="product-tag">
-              <span class="micro-badge-dot"></span>
-              {{ data_get($sulfito, 'badge', 'VegQuality') }}
-            </div>
-            <h2 class="sulfito-title">
-              {{ data_get($sulfito, 'title', '100% Livre de sulfitos') }}
-            </h2>
-            <p class="sulfito-desc">
-              {!! data_get($sulfito, 'description', 'Você sabia que o metabissulfito de sódio (dióxido de enxofre) é amplamente usado como conservante nos vegetais frescos processados? 🌱 Com o <strong>Veg Oxi 200</strong>, isso fica definitivamente no passado! Oferecemos um coadjuvante de tecnologia inovador que substitui aditivos químicos nocivos com total eficácia.') !!}
-            </p>
-          </div>
-
-          <!-- Card Checklist Right -->
-          <div class="animate-fade-up delay-100">
-            <div class="checklist-card">
-              <ul class="checklist-list">
-                <li class="checklist-item">
-                  <i data-lucide="shield-check"></i>
-                  <span>{{ data_get($sulfito, 'check1', 'Livre de dióxido de enxofre.') }}</span>
-                </li>
-                <li class="checklist-item">
-                  <i data-lucide="leaf"></i>
-                  <span>{{ data_get($sulfito, 'check2', 'Preserva alimentos de forma natural.') }}</span>
-                </li>
-                <li class="checklist-item">
-                  <i data-lucide="heart"></i>
-                  <span>{{ data_get($sulfito, 'check3', 'Respeita a saúde do consumidor e do operador.') }}</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- Seção Mantendo o Frescor da Colheita -->
-    <section class="about-section" style="background-color: var(--color-veg-light);">
+    <!-- Seção Mantendo o Frescor da Colheita (Consultoria 360) -->
+    <section class="about-section">
       <div class="container">
         <div class="about-grid about-grid-7-5">
           
@@ -93,7 +39,7 @@
               {{ data_get($frescor, 'badge', 'VegQuality') }}
             </div>
             <h2 class="about-title">
-              {{ data_get($frescor, 'title', 'Mantendo o frescor da colheita') }}
+              {{ data_get($frescor, 'title', 'Consultoria 360°') }}
             </h2>
             <p class="about-highlight-text">
               {{ data_get($frescor, 'highlight_text', 'Transforme sua linha de vegetais frescos prontos para o consumo!') }}
@@ -151,7 +97,50 @@
       </div>
     </section>
 
-    <!-- Seção Quem Somos -->
+    <!-- Seção Livre de Sulfitos (Veg Oxi 200) -->
+    <section class="sulfito-section" style="background-color: var(--color-veg-light);">
+      <div class="container">
+        <div class="sulfito-grid">
+          
+          <!-- Content Left -->
+          <div class="sulfito-content animate-fade-up">
+            <div class="product-tag">
+              <span class="micro-badge-dot"></span>
+              {{ data_get($sulfito, 'badge', 'VegQuality') }}
+            </div>
+            <h2 class="sulfito-title">
+              {{ data_get($sulfito, 'title', '100% Livre de sulfitos') }}
+            </h2>
+            <p class="sulfito-desc">
+              {!! data_get($sulfito, 'description', 'Você sabia que o metabissulfito de sódio (dióxido de enxofre) é amplamente usado como conservante nos vegetais frescos processados? 🌱 Com o <strong>Veg Oxi 200</strong>, isso fica definitivamente no passado! Oferecemos um coadjuvante de tecnologia inovador que substitui aditivos químicos nocivos com total eficácia.') !!}
+            </p>
+          </div>
+
+          <!-- Card Checklist Right -->
+          <div class="animate-fade-up delay-100">
+            <div class="checklist-card">
+              <ul class="checklist-list">
+                <li class="checklist-item">
+                  <i data-lucide="shield-check"></i>
+                  <span>{{ data_get($sulfito, 'check1', 'Livre de dióxido de enxofre.') }}</span>
+                </li>
+                <li class="checklist-item">
+                  <i data-lucide="leaf"></i>
+                  <span>{{ data_get($sulfito, 'check2', 'Preserva alimentos de forma natural.') }}</span>
+                </li>
+                <li class="checklist-item">
+                  <i data-lucide="heart"></i>
+                  <span>{{ data_get($sulfito, 'check3', 'Respeita a saúde do consumidor e do operador.') }}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- Seção Quem Somos / História -->
     <section class="product-highlight-section">
       <div class="container">
         
@@ -160,7 +149,7 @@
             <span class="micro-badge-dot"></span>
             {{ data_get($quemSomos, 'badge', 'Fundadora') }}
           </div>
-          <h2 class="services-title">{{ strip_tags(data_get($quemSomos, 'title', 'Quem Somos')) }}</h2>
+          <h2 class="services-title">{{ strip_tags(data_get($quemSomos, 'title', 'História da VegQuality - Consultoria que gera resultados!')) }}</h2>
         </div>
 
         <div class="about-grid">
@@ -187,7 +176,7 @@
               {{ data_get($quemSomos, 'badge', 'Liderança e Ciência') }}
             </div>
             <h2 class="about-title" style="font-size: 2.25rem;">
-              {!! data_get($quemSomos, 'title', 'VegQuality<br><span style="color: var(--color-veg-primary);">Consultoria que gera resultados!</span>') !!}
+              {!! data_get($quemSomos, 'title', 'História da VegQuality<br><span style="color: var(--color-veg-primary);">Consultoria que gera resultados!</span>') !!}
             </h2>
             <p class="about-desc-paragraph">
               {{ data_get($quemSomos, 'description1', 'A VegQuality é mais que uma consultoria: é uma parceira estratégica para empresas que atuam na agroindústria de vegetais frescos, do campo aos pontos de distribuição.') }}
