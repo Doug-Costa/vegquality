@@ -7,6 +7,10 @@ set_error_handler(function ($severity, $message) {
     }
     return false; // Retorna false para permitir que o PHP ou o Laravel processe outros erros normalmente
 });
+// Carrega o arquivo de helpers globais (trans_content, etc.)
+if (file_exists(__DIR__ . '/../app/helpers.php')) {
+    require_once __DIR__ . '/../app/helpers.php';
+}
 
 
 // Configura o diretório temporário para evitar avisos/erros do tempnam() em hospedagens compartilhadas (como a Hostinger)
