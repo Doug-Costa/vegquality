@@ -34,8 +34,52 @@
       </h2>
     </div>
 
+    @php
+      $factCards = data_get($facts, 'cards', []);
+      if (empty($factCards) || count($factCards) < 4) {
+          $factCards = [
+              [
+                  'icon' => 'flask-conical',
+                  'title' => "Desenvolvido\nCientificamente",
+                  'title_en' => "Scientifically\nDeveloped",
+                  'desc' => 'Formulado com base em anos de pesquisa em tecnologia pós-colheita.',
+                  'desc_en' => 'Formulated based on years of research in post-harvest food technology.',
+                  'body' => 'Desenvolvido para substituir o metabissulfito de sódio sem deixar resíduos tóxicos nem alterar sabor e aroma dos alimentos.',
+                  'body_en' => 'Developed to replace sodium metabisulfite without leaving toxic residues or altering taste and aroma.',
+              ],
+              [
+                  'icon' => 'leaf',
+                  'title' => "Livre de Sulfitos\n& Orgânico",
+                  'title_en' => "Sulfite-Free\n& Organic",
+                  'desc' => 'Elimina conservantes químicos nocivos à saúde.',
+                  'desc_en' => 'Eliminates chemical preservatives harmful to health.',
+                  'body' => 'Fórmula 100% natural em conformidade com as normas regulatórias sanitárias e ambientais mais exigentes.',
+                  'body_en' => '100% natural formula compliant with health and environmental regulatory standards.',
+              ],
+              [
+                  'icon' => 'trending-up',
+                  'title' => "Custo-Benefício\nComprovado",
+                  'title_en' => "Proven\nCost-Benefit",
+                  'desc' => 'Reduz drasticamente o desperdício e perdas por quebra.',
+                  'desc_en' => 'Drastically reduces waste and breakdown losses.',
+                  'body' => 'Custa apenas cerca de 1 centavo por hortaliça processada, gerando lucro real ao preservar a qualidade.',
+                  'body_en' => 'Costs only around 1 cent per processed vegetable, generating real profit by preserving quality.',
+              ],
+              [
+                  'icon' => 'settings',
+                  'title' => "Fácil Aplicação\nIndustrial",
+                  'title_en' => "Easy Industrial\nApplication",
+                  'desc' => 'Integra-se perfeitamente em linhas de lavagem existentes.',
+                  'desc_en' => 'Integrates seamlessly into existing wash and sanitization lines.',
+                  'body' => 'Não exige reformas estruturais em maquinários; facilmente dosado em tanques de lavagem padrão.',
+                  'body_en' => 'Requires no costly machinery overhauls; easily dosed into standard processing wash tanks.',
+              ],
+          ];
+      }
+    @endphp
+
     <div class="facts-grid animate-fade-up delay-100">
-      @foreach(data_get($facts, 'cards', []) as $index => $card)
+      @foreach($factCards as $index => $card)
         <div class="fact-card">
           <div class="fact-card-icon">
             <i data-lucide="{{ data_get($card, 'icon', 'info') }}"></i>
@@ -55,7 +99,7 @@
 </section>
 
 <!-- Modals for Facts -->
-@foreach(data_get($facts, 'cards', []) as $index => $card)
+@foreach($factCards as $index => $card)
   <div id="modal-fact-{{ $index }}" class="modal-overlay">
     <div class="modal-container">
       <button class="modal-close" aria-label="Fechar Modal">
@@ -84,8 +128,37 @@
       </h2>
     </div>
 
+    @php
+      $downloadCards = data_get($downloads, 'downloads', []);
+      if (empty($downloadCards) || count($downloadCards) < 3) {
+          $downloadCards = [
+              [
+                  'title' => 'Ficha técnica',
+                  'title_en' => 'Technical Spec Sheet',
+                  'desc' => 'Consulte a ficha técnica do Veg Oxi 200 e conheça todos os detalhes sobre sua composição, aplicação, propriedades físico-químicas, armazenamento, regulamentação e recomendações de uso.',
+                  'desc_en' => 'Consult the Veg Oxi 200 technical data sheet and find all details on composition, application, physical-chemical properties, storage, regulation, and usage recommendations.',
+                  'file' => 'downloads/ficha-tecnica-veg-oxi-200.pdf',
+              ],
+              [
+                  'title' => 'Protocolos de uso',
+                  'title_en' => 'Usage Protocols',
+                  'desc' => 'Acesse os protocolos de uso e descubra como aplicar o Veg Oxi 200 em cada grupo de vegetais para obter máxima eficiência, desempenho e vida útil dos FLV minimamente processados.',
+                  'desc_en' => 'Access the usage protocols to learn how to apply Veg Oxi 200 to each vegetable group for maximum efficiency, performance, and shelf life.',
+                  'file' => 'downloads/protocolos-de-uso-veg-oxi-200.pdf',
+              ],
+              [
+                  'title' => 'FDS',
+                  'title_en' => 'MSDS (Safety Data Sheet)',
+                  'desc' => 'Acesse a FDS do Veg Oxi 200 e consulte informações sobre segurança, manuseio, armazenamento, transporte, medidas de emergência e recomendações para o uso seguro do produto.',
+                  'desc_en' => 'Access the Veg Oxi 200 MSDS to consult safety, handling, storage, transport, emergency measures, and recommendations for safe product use.',
+                  'file' => 'downloads/fds-veg-oxi-200.pdf',
+              ],
+          ];
+      }
+    @endphp
+
     <div class="download-grid animate-fade-up delay-100">
-      @foreach(data_get($downloads, 'downloads', []) as $dl)
+      @foreach($downloadCards as $dl)
         <div class="download-card">
           <div class="download-card-icon">
             <i data-lucide="file-text"></i>

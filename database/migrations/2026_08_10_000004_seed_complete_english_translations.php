@@ -230,18 +230,54 @@ return new class extends Migration
                 case 'veg_oxi_facts':
                     $setEn($content, 'badge_en', 'Behind the Product');
                     $setEn($content, 'title_en', 'Facts about Veg Oxi 200');
-                    if (isset($content['cards']) && is_array($content['cards'])) {
-                        $enFactCards = [
-                            ['title_en' => 'Scientifically Developed', 'desc_en' => 'Formulated based on years of research in post-harvest food technology.', 'body_en' => 'Developed to replace sodium metabisulfite without leaving toxic residues or altering taste and aroma.'],
-                            ['title_en' => 'Sulfite-Free & Organic', 'desc_en' => 'Eliminates chemical preservatives harmful to health.', 'body_en' => '100% natural formula compliant with health and environmental regulatory standards.'],
-                            ['title_en' => 'Proven Cost-Benefit', 'desc_en' => 'Drastically reduces waste and breakdown losses.', 'body_en' => 'Costs only around 1 cent per processed vegetable, generating real profit by preserving quality.'],
-                            ['title_en' => 'Easy Industrial Application', 'desc_en' => 'Integrates seamlessly into existing wash and sanitization lines.', 'body_en' => 'Requires no costly machinery overhauls; easily dosed into standard processing wash tanks.'],
-                        ];
+                    $defaultFactCards = [
+                        [
+                            'icon' => 'flask-conical',
+                            'title' => "Desenvolvido\nCientificamente",
+                            'title_en' => "Scientifically\nDeveloped",
+                            'desc' => 'Formulado com base em anos de pesquisa em tecnologia pós-colheita.',
+                            'desc_en' => 'Formulated based on years of research in post-harvest food technology.',
+                            'body' => "Desenvolvido para substituir o metabissulfito de sódio sem deixar resíduos tóxicos nem alterar sabor e aroma dos alimentos.",
+                            'body_en' => 'Developed to replace sodium metabisulfite without leaving toxic residues or altering taste and aroma.',
+                        ],
+                        [
+                            'icon' => 'leaf',
+                            'title' => "Livre de Sulfitos\n& Orgânico",
+                            'title_en' => "Sulfite-Free\n& Organic",
+                            'desc' => 'Elimina conservantes químicos nocivos à saúde.',
+                            'desc_en' => 'Eliminates chemical preservatives harmful to health.',
+                            'body' => 'Fórmula 100% natural em conformidade com as normas regulatórias sanitárias e ambientais mais exigentes.',
+                            'body_en' => '100% natural formula compliant with health and environmental regulatory standards.',
+                        ],
+                        [
+                            'icon' => 'trending-up',
+                            'title' => "Custo-Benefício\nComprovado",
+                            'title_en' => "Proven\nCost-Benefit",
+                            'desc' => 'Reduz drasticamente o desperdício e perdas por quebra.',
+                            'desc_en' => 'Drastically reduces waste and breakdown losses.',
+                            'body' => 'Custa apenas cerca de 1 centavo por hortaliça processada, gerando lucro real ao preservar a qualidade.',
+                            'body_en' => 'Costs only around 1 cent per processed vegetable, generating real profit by preserving quality.',
+                        ],
+                        [
+                            'icon' => 'settings',
+                            'title' => "Fácil Aplicação\nIndustrial",
+                            'title_en' => "Easy Industrial\nApplication",
+                            'desc' => 'Integra-se perfeitamente em linhas de lavagem existentes.',
+                            'desc_en' => 'Integrates seamlessly into existing wash and sanitization lines.',
+                            'body' => 'Não exige reformas estruturais em maquinários; facilmente dosado em tanques de lavagem padrão.',
+                            'body_en' => 'Requires no costly machinery overhauls; easily dosed into standard processing wash tanks.',
+                        ],
+                    ];
+
+                    $existingCards = $content['cards'] ?? [];
+                    if (empty($existingCards) || count($existingCards) < 4) {
+                        $content['cards'] = $defaultFactCards;
+                    } else {
                         foreach ($content['cards'] as $i => &$card) {
-                            if (isset($enFactCards[$i])) {
-                                $setEn($card, 'title_en', $enFactCards[$i]['title_en']);
-                                $setEn($card, 'desc_en', $enFactCards[$i]['desc_en']);
-                                $setEn($card, 'body_en', $enFactCards[$i]['body_en']);
+                            if (isset($defaultFactCards[$i])) {
+                                $setEn($card, 'title_en', $defaultFactCards[$i]['title_en']);
+                                $setEn($card, 'desc_en', $defaultFactCards[$i]['desc_en']);
+                                $setEn($card, 'body_en', $defaultFactCards[$i]['body_en']);
                             }
                         }
                         unset($card);
@@ -251,25 +287,38 @@ return new class extends Migration
                 case 'veg_oxi_downloads':
                     $setEn($content, 'badge_en', 'Learn More');
                     $setEn($content, 'title_en', 'Additional Details');
-                    if (isset($content['downloads']) && is_array($content['downloads'])) {
-                        $enDlItems = [
-                            [
-                                'title_en' => 'Technical Spec Sheet',
-                                'desc_en' => 'Consult the Veg Oxi 200 technical data sheet and find all details on composition, application, physical-chemical properties, storage, regulation, and usage recommendations.',
-                            ],
-                            [
-                                'title_en' => 'Usage Protocols',
-                                'desc_en' => 'Access the usage protocols to learn how to apply Veg Oxi 200 to each vegetable group for maximum efficiency, performance, and shelf life.',
-                            ],
-                            [
-                                'title_en' => 'MSDS (Safety Data Sheet)',
-                                'desc_en' => 'Access the Veg Oxi 200 MSDS to consult safety, handling, storage, transport, emergency measures, and recommendations for safe product use.',
-                            ],
-                        ];
+                    $defaultDlItems = [
+                        [
+                            'title' => 'Ficha técnica',
+                            'title_en' => 'Technical Spec Sheet',
+                            'desc' => 'Consulte a ficha técnica do Veg Oxi 200 e conheça todos os detalhes sobre sua composição, aplicação, propriedades físico-químicas, armazenamento, regulamentação e recomendações de uso.',
+                            'desc_en' => 'Consult the Veg Oxi 200 technical data sheet and find all details on composition, application, physical-chemical properties, storage, regulation, and usage recommendations.',
+                            'file' => 'downloads/ficha-tecnica-veg-oxi-200.pdf',
+                        ],
+                        [
+                            'title' => 'Protocolos de uso',
+                            'title_en' => 'Usage Protocols',
+                            'desc' => 'Acesse os protocolos de uso e descubra como aplicar o Veg Oxi 200 em cada grupo de vegetais para obter máxima eficiência, desempenho e vida útil dos FLV minimamente processados.',
+                            'desc_en' => 'Access the usage protocols to learn how to apply Veg Oxi 200 to each vegetable group for maximum efficiency, performance, and shelf life.',
+                            'file' => 'downloads/protocolos-de-uso-veg-oxi-200.pdf',
+                        ],
+                        [
+                            'title' => 'FDS',
+                            'title_en' => 'MSDS (Safety Data Sheet)',
+                            'desc' => 'Acesse a FDS do Veg Oxi 200 e consulte informações sobre segurança, manuseio, armazenamento, transporte, medidas de emergência e recomendações para o uso seguro do produto.',
+                            'desc_en' => 'Access the Veg Oxi 200 MSDS to consult safety, handling, storage, transport, emergency measures, and recommendations for safe product use.',
+                            'file' => 'downloads/fds-veg-oxi-200.pdf',
+                        ],
+                    ];
+
+                    $existingDls = $content['downloads'] ?? [];
+                    if (empty($existingDls) || count($existingDls) < 3) {
+                        $content['downloads'] = $defaultDlItems;
+                    } else {
                         foreach ($content['downloads'] as $i => &$dl) {
-                            if (isset($enDlItems[$i])) {
-                                $setEn($dl, 'title_en', $enDlItems[$i]['title_en']);
-                                $setEn($dl, 'desc_en', $enDlItems[$i]['desc_en']);
+                            if (isset($defaultDlItems[$i])) {
+                                $setEn($dl, 'title_en', $defaultDlItems[$i]['title_en']);
+                                $setEn($dl, 'desc_en', $defaultDlItems[$i]['desc_en']);
                             }
                         }
                         unset($dl);
