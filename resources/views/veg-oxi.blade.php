@@ -35,64 +35,33 @@
     </div>
 
     @php
-      $factCards = data_get($facts, 'cards', []);
-      $defaultFactCards = [
+      $isEn = app()->getLocale() === 'en' || str_starts_with(app()->getLocale(), 'en');
+      $factCards = [
           [
               'icon' => 'flask-conical',
-              'title' => "Desenvolvido\nCientificamente",
-              'title_en' => "Scientifically\nDeveloped",
-              'desc' => 'Formulado com base em anos de pesquisa em tecnologia pós-colheita.',
-              'desc_en' => 'Formulated based on years of research in post-harvest food technology.',
-              'body' => 'Desenvolvido para substituir o metabissulfito de sódio sem deixar resíduos tóxicos nem alterar sabor e aroma dos alimentos.',
-              'body_en' => 'Developed to replace sodium metabisulfite without leaving toxic residues or altering taste and aroma.',
+              'title' => $isEn ? "Scientifically\nDeveloped" : "Desenvolvido\nCientificamente",
+              'desc' => $isEn ? 'Formulated based on years of research in post-harvest food technology.' : 'Formulado com base em anos de pesquisa em tecnologia pós-colheita.',
+              'body' => $isEn ? 'Developed to replace sodium metabisulfite without leaving toxic residues or altering taste and aroma.' : 'Desenvolvido para substituir o metabissulfito de sódio sem deixar resíduos tóxicos nem alterar sabor e aroma dos alimentos.',
           ],
           [
               'icon' => 'leaf',
-              'title' => "Livre de Sulfitos\n& Orgânico",
-              'title_en' => "Sulfite-Free\n& Organic",
-              'desc' => 'Elimina conservantes químicos nocivos à saúde.',
-              'desc_en' => 'Eliminates chemical preservatives harmful to health.',
-              'body' => 'Fórmula 100% natural em conformidade com as normas regulatórias sanitárias e ambientais mais exigentes.',
-              'body_en' => '100% natural formula compliant with health and environmental regulatory standards.',
+              'title' => $isEn ? "Sulfite-Free\n& Organic" : "Livre de Sulfitos\n& Orgânico",
+              'desc' => $isEn ? 'Eliminates chemical preservatives harmful to health.' : 'Elimina conservantes químicos nocivos à saúde.',
+              'body' => $isEn ? '100% natural formula compliant with health and environmental regulatory standards.' : 'Fórmula 100% natural em conformidade com as normas regulatórias sanitárias e ambientais mais exigentes.',
           ],
           [
               'icon' => 'trending-up',
-              'title' => "Custo-Benefício\nComprovado",
-              'title_en' => "Proven\nCost-Benefit",
-              'desc' => 'Reduz drasticamente o desperdício e perdas por quebra.',
-              'desc_en' => 'Drastically reduces waste and breakdown losses.',
-              'body' => 'Custa apenas cerca de 1 centavo por hortaliça processada, gerando lucro real ao preservar a qualidade.',
-              'body_en' => 'Costs only around 1 cent per processed vegetable, generating real profit by preserving quality.',
+              'title' => $isEn ? "Proven\nCost-Benefit" : "Custo-Benefício\nComprovado",
+              'desc' => $isEn ? 'Drastically reduces waste and breakdown losses.' : 'Reduz drasticamente o desperdício e perdas por quebra.',
+              'body' => $isEn ? 'Costs only around 1 cent per processed vegetable, generating real profit by preserving quality.' : 'Custa apenas cerca de 1 centavo por hortaliça processada, gerando lucro real ao preservar a qualidade.',
           ],
           [
               'icon' => 'settings',
-              'title' => "Fácil Aplicação\nIndustrial",
-              'title_en' => "Easy Industrial\nApplication",
-              'desc' => 'Integra-se perfeitamente em linhas de lavagem existentes.',
-              'desc_en' => 'Integrates seamlessly into existing wash and sanitization lines.',
-              'body' => 'Não exige reformas estruturais em maquinários; facilmente dosado em tanques de lavagem padrão.',
-              'body_en' => 'Requires no costly machinery overhauls; easily dosed into standard processing wash tanks.',
+              'title' => $isEn ? "Easy Industrial\nApplication" : "Fácil Aplicação\nIndustrial",
+              'desc' => $isEn ? 'Integrates seamlessly into existing wash and sanitization lines.' : 'Integra-se perfeitamente em linhas de lavagem existentes.',
+              'body' => $isEn ? 'Requires no costly machinery overhauls; easily dosed into standard processing wash tanks.' : 'Não exige reformas estruturais em maquinários; facilmente dosado em tanques de lavagem padrão.',
           ],
       ];
-
-      if (empty($factCards) || count($factCards) < 4) {
-          $factCards = $defaultFactCards;
-      } else {
-          foreach ($factCards as $i => &$fCard) {
-              if (isset($defaultFactCards[$i])) {
-                  if (empty($fCard['title_en'])) {
-                      $fCard['title_en'] = $defaultFactCards[$i]['title_en'];
-                  }
-                  if (empty($fCard['desc_en'])) {
-                      $fCard['desc_en'] = $defaultFactCards[$i]['desc_en'];
-                  }
-                  if (empty($fCard['body_en'])) {
-                      $fCard['body_en'] = $defaultFactCards[$i]['body_en'];
-                  }
-              }
-          }
-          unset($fCard);
-      }
     @endphp
 
     <div class="facts-grid animate-fade-up delay-100">
@@ -101,9 +70,9 @@
           <div class="fact-card-icon">
             <i data-lucide="{{ data_get($card, 'icon', 'info') }}"></i>
           </div>
-          <h3 class="fact-card-title">{!! nl2br(e(trans_content($card, 'title'))) !!}</h3>
+          <h3 class="fact-card-title">{!! nl2br(e($card['title'])) !!}</h3>
           <p class="fact-card-desc">
-            {{ trans_content($card, 'desc') }}
+            {{ $card['desc'] }}
           </p>
           <span class="fact-card-link" data-modal-target="modal-fact-{{ $index }}">
             {{ __('Saiba Mais') }}
@@ -122,9 +91,9 @@
       <button class="modal-close" aria-label="Fechar Modal">
         <i data-lucide="x"></i>
       </button>
-      <h3 class="modal-title">{{ trans_content($card, 'title') }}</h3>
+      <h3 class="modal-title">{{ $card['title'] }}</h3>
       <div class="modal-body">
-        <p>{!! nl2br(e(trans_content($card, 'body'))) !!}</p>
+        <p>{!! nl2br(e($card['body'])) !!}</p>
       </div>
     </div>
   </div>
@@ -146,63 +115,33 @@
     </div>
 
     @php
-      $downloadCards = data_get($downloads, 'downloads', []);
-      $defaultEnTitles = [
-          'Technical Spec Sheet',
-          'Usage Protocols',
-          'MSDS (Safety Data Sheet)'
+      $downloadCards = [
+          [
+              'title' => $isEn ? 'Technical Spec Sheet' : 'Ficha técnica',
+              'desc' => $isEn ? 'Consult the Veg Oxi 200 technical data sheet and find all details on composition, application, physical-chemical properties, storage, regulation, and usage recommendations.' : 'Consulte a ficha técnica do Veg Oxi 200 e conheça todos os detalhes sobre sua composição, aplicação, propriedades físico-químicas, armazenamento, regulamentação e recomendações de uso.',
+              'file' => 'downloads/ficha-tecnica-veg-oxi-200.pdf',
+          ],
+          [
+              'title' => $isEn ? 'Usage Protocols' : 'Protocolos de uso',
+              'desc' => $isEn ? 'Access the usage protocols to learn how to apply Veg Oxi 200 to each vegetable group for maximum efficiency, performance, and shelf life.' : 'Acesse os protocolos de uso e descubra como aplicar o Veg Oxi 200 em cada grupo de vegetais para obter máxima eficiência, desempenho e vida útil dos FLV minimamente processados.',
+              'file' => 'downloads/protocolos-de-uso-veg-oxi-200.pdf',
+          ],
+          [
+              'title' => $isEn ? 'MSDS (Safety Data Sheet)' : 'FDS',
+              'desc' => $isEn ? 'Access the Veg Oxi 200 MSDS to consult safety, handling, storage, transport, emergency measures, and recommendations for safe product use.' : 'Acesse a FDS do Veg Oxi 200 e consulte informações sobre segurança, manuseio, armazenamento, transporte, medidas de emergência e recomendações para o uso seguro do produto.',
+              'file' => 'downloads/fds-veg-oxi-200.pdf',
+          ],
       ];
-      $defaultEnDescs = [
-          'Consult the Veg Oxi 200 technical data sheet and find all details on composition, application, physical-chemical properties, storage, regulation, and usage recommendations.',
-          'Access the usage protocols to learn how to apply Veg Oxi 200 to each vegetable group for maximum efficiency, performance, and shelf life.',
-          'Access the Veg Oxi 200 MSDS to consult safety, handling, storage, transport, emergency measures, and recommendations for safe product use.'
-      ];
-
-      if (empty($downloadCards) || count($downloadCards) < 3) {
-          $downloadCards = [
-              [
-                  'title' => 'Ficha técnica',
-                  'title_en' => 'Technical Spec Sheet',
-                  'desc' => 'Consulte a ficha técnica do Veg Oxi 200 e conheça todos os detalhes sobre sua composição, aplicação, propriedades físico-químicas, armazenamento, regulamentação e recomendações de uso.',
-                  'desc_en' => 'Consult the Veg Oxi 200 technical data sheet and find all details on composition, application, physical-chemical properties, storage, regulation, and usage recommendations.',
-                  'file' => 'downloads/ficha-tecnica-veg-oxi-200.pdf',
-              ],
-              [
-                  'title' => 'Protocolos de uso',
-                  'title_en' => 'Usage Protocols',
-                  'desc' => 'Acesse os protocolos de uso e descubra como aplicar o Veg Oxi 200 em cada grupo de vegetais para obter máxima eficiência, desempenho e vida útil dos FLV minimamente processados.',
-                  'desc_en' => 'Access the usage protocols to learn how to apply Veg Oxi 200 to each vegetable group for maximum efficiency, performance, and shelf life.',
-                  'file' => 'downloads/protocolos-de-uso-veg-oxi-200.pdf',
-              ],
-              [
-                  'title' => 'FDS',
-                  'title_en' => 'MSDS (Safety Data Sheet)',
-                  'desc' => 'Acesse a FDS do Veg Oxi 200 e consulte informações sobre segurança, manuseio, armazenamento, transporte, medidas de emergência e recomendações para o uso seguro do produto.',
-                  'desc_en' => 'Access the Veg Oxi 200 MSDS to consult safety, handling, storage, transport, emergency measures, and recommendations for safe product use.',
-                  'file' => 'downloads/fds-veg-oxi-200.pdf',
-              ],
-          ];
-      } else {
-          foreach ($downloadCards as $i => &$dCard) {
-              if (empty($dCard['title_en'])) {
-                  $dCard['title_en'] = $defaultEnTitles[$i] ?? null;
-              }
-              if (empty($dCard['desc_en'])) {
-                  $dCard['desc_en'] = $defaultEnDescs[$i] ?? null;
-              }
-          }
-          unset($dCard);
-      }
     @endphp
 
     <div class="download-grid animate-fade-up delay-100">
-      @foreach($downloadCards as $index => $dl)
+      @foreach($downloadCards as $dl)
         <div class="download-card">
           <div class="download-card-icon">
             <i data-lucide="file-text"></i>
           </div>
-          <h3>{{ trans_content($dl, 'title') }}</h3>
-          <p>{{ trans_content($dl, 'desc') }}</p>
+          <h3>{{ $dl['title'] }}</h3>
+          <p>{{ $dl['desc'] }}</p>
           @php
             $fileUrl = data_get($dl, 'file');
             $isAssetFile = Str::startsWith($fileUrl, 'downloads/');
