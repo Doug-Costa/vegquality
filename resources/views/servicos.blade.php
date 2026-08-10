@@ -186,7 +186,119 @@
         </div>
 
         @php
-          $faqItems = collect(data_get($faq, 'faqs', []))->groupBy('category');
+          $isEn = app()->getLocale() === 'en' || str_starts_with(app()->getLocale(), 'en');
+          $rawFaqs = data_get($faq, 'faqs', []);
+
+          $categoryMapEn = [
+              'Categoria 1: Mercado e Estratégia' => 'Category 1: Market & Strategy',
+              'Categoria 2: Tecnologia e Conservação (Veg Oxi 200)' => 'Category 2: Technology & Shelf-Life (Veg Oxi 200)',
+              'Categoria 3: Maquinários e Layout' => 'Category 3: Machinery & Plant Layout',
+              'Categoria 4: Operação e Qualidade' => 'Category 4: Operations & Quality Control',
+              'Categoria 5: Legislação (SISP-POV)' => 'Category 5: Legislation & Food Safety (SISP-POV)',
+          ];
+
+          $qaMapEn = [
+              'Já produzo no campo, vale a pena industrializar meus vegetais?' => [
+                  'q' => 'I already produce in the field, is it worth processing my vegetables?',
+                  'a' => 'Yes. Processing adds value to fresh vegetables, increases business profitability, and lets you meet the growing demand for convenient, ready-to-eat foods.'
+              ],
+              'O que são vegetais frescos higienizados processados e por que esse mercado está crescendo tanto?' => [
+                  'q' => 'What are processed fresh vegetables and why is this market growing so fast?',
+                  'a' => 'They are fresh produce subjected to selection, cutting, technical washing/sanitizing, centrifugal drying, and proper packaging, preserving natural freshness for immediate consumption. The market grows rapidly as it solves time constraints in modern routines and reduces domestic waste.'
+              ],
+              'Preciso de um nutricionista ou engenheiro de alimentos fixo na minha pequena fábrica?' => [
+                  'q' => 'Do I need a full-time nutritionist or food engineer in my small processing facility?',
+                  'a' => 'A full-time professional is not mandatory initially. You can rely on periodic external consulting or specialized technical advisory (such as VegQuality) to implement Good Manufacturing Practices (GMP) cost-effectively.'
+              ],
+              'O Veg Oxi 200 substitui o metabissulfito? Ele é aceito pela fiscalização?' => [
+                  'q' => 'Does Veg Oxi 200 replace metabisulfite? Is it accepted by regulatory authorities?',
+                  'a' => 'Completely. Veg Oxi 200 is a natural Vitamin C-based processing aid specifically formulated to replace sodium metabisulfite, fully compliant with ANVISA and MAPA standards for clean label products.'
+              ],
+              'Como garantir que o vegetal picado não escureça na prateleira?' => [
+                  'q' => 'How do I ensure cut vegetables do not brown on the shelf?',
+                  'a' => 'To prevent enzymatic browning, maintain a cold chain below 5°C, use proper gas-permeable packaging, and apply a safe antioxidant like Veg Oxi 200 post-wash.'
+              ],
+              'É possível processar vegetais e manter o sabor original sem conservantes químicos?' => [
+                  'q' => 'Is it possible to process vegetables while preserving original taste without chemical preservatives?',
+                  'a' => 'Yes, through clean biotechnology. Veg Oxi 200 controls enzymatic oxidative browning without leaving residual taste or altering texture.'
+              ],
+              'Preciso de máquinas caríssimas para começar a processar?' => [
+                  'q' => 'Do I need extremely expensive machinery to start processing?',
+                  'a' => 'Not necessarily. Success depends on correct technical sizing based on production volume rather than high machinery costs.'
+              ],
+              'Qual a diferença entre uma cortadora industrial e um processador comum?' => [
+                  'q' => 'What is the difference between an industrial cutter and a common processor?',
+                  'a' => 'Industrial cutters use ultra-sharp blades and precise cutting shapes that minimize tissue stress, whereas common processors crush plant cells and release fluids that accelerate browning.'
+              ],
+              'Como saber se minha centrífuga está danificando as folhosas?' => [
+                  'q' => 'How do I know if my centrifuge is damaging leafy greens?',
+                  'a' => 'If leaves emerge bruised, translucent, or spotted after centrifugation, the RPM speed or cycle duration is too high. Proper calibration is crucial.'
+              ],
+              'Vale a pena comprar máquinas usadas para começar a agroindústria?' => [
+                  'q' => 'Is it worth buying used machinery to launch an agro-industry?',
+                  'a' => 'Yes, provided the frame is AISI 304 stainless steel without porous welds that accumulate bacteria. Technical inspection is essential for food safety and NR-12 compliance.'
+              ],
+              'Existe uma ordem correta para a disposição das máquinas (Layout)?' => [
+                  'q' => 'Is there a correct machinery layout order?',
+                  'a' => 'Yes. Layout must follow a linear or U-shaped unidirectional flow without backtracking to prevent cross-contamination between raw and sanitized produce.'
+              ],
+              'Como reduzir o desperdício (quebra) na minha linha de produção?' => [
+                  'q' => 'How can I reduce waste and losses on my processing line?',
+                  'a' => 'Waste typically originates from cutting/sanitizing flaws, cold chain breaks, or improper respiration-control packaging. Our technical assessment identifies and resolves these bottlenecks.'
+              ],
+              'O que é o "Calor de Campo" e como as máquinas ajudam a retirá-lo?' => [
+                  'q' => 'What is "Field Heat" and how is it removed?',
+                  'a' => 'Field heat is internal thermal energy accumulated from pre-harvest sun exposure. It is rapidly removed via cold water hydro-cooling or forced-air cooling post-harvest to slow down respiration.'
+              ],
+              'Qual a importância da "Cadeia do Frio" na industrialização de vegetais?' => [
+                  'q' => 'Why is the "Cold Chain" so critical in fresh produce processing?',
+                  'a' => 'Temperature control at 2°C–5°C throughout processing, transport, and retail slows metabolism and microbial growth, tripling shelf life.'
+              ],
+              'Como escolher a embalagem correta para o meu mix de produtos?' => [
+                  'q' => 'How do I choose the correct packaging for my product mix?',
+                  'a' => 'Selection depends on crop respiration rates. Technical films with controlled permeability (such as passive MAP) establish ideal oxygen/CO2 equilibrium to delay senescence.'
+              ],
+              'O que muda com o novo Decreto nº 70.447 em São Paulo?' => [
+                  'q' => 'What changes under the new Decree No. 70,447 in São Paulo?',
+                  'a' => 'Decree 70,447 introduced strict regulatory enforcement in SP, requiring formal sanitary registration (SISP-POV) for all processed fresh produce facilities.'
+              ],
+              'O que é o SISP-POV e como funciona o registro oficial?' => [
+                  'q' => 'What is SISP-POV and how does official registration work?',
+                  'a' => 'SISP-POV is São Paulo\'s Plant Product Inspection Service. Registration certifies facility safety and requires architectural layout approval, proper labeling, and audited process documentation.'
+              ],
+              'Quais os riscos de operar uma planta de vegetais frescos processados sem registro regulatório?' => [
+                  'q' => 'What are the risks of operating an uninspected fresh produce plant?',
+                  'a' => 'Operating without registration risks severe administrative fines, facility shutdown, and product seizure. Major supermarket chains are legally barred from purchasing uninspected goods.'
+              ],
+          ];
+
+          $mappedFaqs = [];
+          foreach ($rawFaqs as $f) {
+              $cat = data_get($f, 'category', 'Geral');
+              $q = data_get($f, 'question', '');
+              $a = data_get($f, 'answer', '');
+
+              if ($isEn) {
+                  $cat = $categoryMapEn[$cat] ?? (data_get($f, 'category_en') ?: $cat);
+                  $qEn = data_get($f, 'question_en');
+                  $aEn = data_get($f, 'answer_en');
+
+                  if (empty($qEn) && isset($qaMapEn[$q])) {
+                      $qEn = $qaMapEn[$q]['q'];
+                  }
+                  if (empty($aEn) && isset($qaMapEn[$q])) {
+                      $aEn = $qaMapEn[$q]['a'];
+                  }
+
+                  $f['category'] = $cat;
+                  $f['question'] = $qEn ?: $q;
+                  $f['answer'] = $aEn ?: $a;
+              }
+
+              $mappedFaqs[] = $f;
+          }
+
+          $faqItems = collect($mappedFaqs)->groupBy('category');
         @endphp
 
         <div class="faq-container">
@@ -195,24 +307,24 @@
               <h3 class="faq-category-title">
                 @php
                   $icon = 'help-circle';
-                  if (str_contains($categoryName, 'Mercado')) $icon = 'trending-up';
-                  elseif (str_contains($categoryName, 'Tecnologia')) $icon = 'sprout';
-                  elseif (str_contains($categoryName, 'Maquinários')) $icon = 'settings';
-                  elseif (str_contains($categoryName, 'Operação')) $icon = 'award';
-                  elseif (str_contains($categoryName, 'Legislação')) $icon = 'file-text';
+                  if (str_contains($categoryName, 'Mercado') || str_contains($categoryName, 'Market')) $icon = 'trending-up';
+                  elseif (str_contains($categoryName, 'Tecnologia') || str_contains($categoryName, 'Technology')) $icon = 'sprout';
+                  elseif (str_contains($categoryName, 'Maquinários') || str_contains($categoryName, 'Machinery')) $icon = 'settings';
+                  elseif (str_contains($categoryName, 'Operação') || str_contains($categoryName, 'Operations')) $icon = 'award';
+                  elseif (str_contains($categoryName, 'Legislação') || str_contains($categoryName, 'Legislation')) $icon = 'file-text';
                 @endphp
                 <i data-lucide="{{ $icon }}" style="width: 1.25rem; height: 1.25rem;"></i>
-                {{ __($categoryName) }}
+                {{ $categoryName }}
               </h3>
               <div class="faq-group">
                 @foreach($items as $item)
                   <div class="faq-item">
                     <button class="faq-question">
-                      <span>{{ trans_content($item, 'question') }}</span>
+                      <span>{{ data_get($item, 'question') }}</span>
                       <i data-lucide="chevron-down" class="faq-icon-chevron"></i>
                     </button>
                     <div class="faq-answer">
-                      <p>{{ trans_content($item, 'answer') }}</p>
+                      <p>{{ data_get($item, 'answer') }}</p>
                     </div>
                   </div>
                 @endforeach
@@ -234,7 +346,7 @@
           <!-- Content Left -->
           <div class="cta-conversar-content animate-fade-up">
             <h2 class="cta-conversar-title">
-              {!! trans_content($contacts, 'conversar_title', 'Ainda tem dúvidas sobre a adequação da sua planta ou quer aplicar a tecnologia Veg Oxi 200 no seu negócio?<br><span style="color: var(--color-veg-primary);">VAMOS CONVERSAR!</span>') !!}
+              {!! $isEn ? 'Still have questions about adjusting your processing plant or applying Veg Oxi 200 to your business?<br><span style="color: var(--color-veg-primary);">LET\'S TALK!</span>' : trans_content($contacts, 'conversar_title', 'Ainda tem dúvidas sobre a adequação da sua planta ou quer aplicar a tecnologia Veg Oxi 200 no seu negócio?<br><span style="color: var(--color-veg-primary);">VAMOS CONVERSAR!</span>') !!}
             </h2>
             
             <div class="conversar-pillars">
@@ -245,8 +357,8 @@
                   <i data-lucide="heart"></i>
                 </div>
                 <div class="conversar-pillar-text">
-                  <h4>{{ trans_content($contacts, 'conversar_p1_title', 'Livre de Sulfitos') }}</h4>
-                  <p>{{ trans_content($contacts, 'conversar_p1_desc', 'Se você atua com vegetais frescos, higienizados e prontos para o consumo, o Veg Oxi 200 é a alternativa saudável e eficaz para substituir o metabissulfito e demais sulfitos.') }}</p>
+                  <h4>{{ $isEn ? 'Sulfite-Free' : trans_content($contacts, 'conversar_p1_title', 'Livre de Sulfitos') }}</h4>
+                  <p>{{ $isEn ? 'If you work with fresh, sanitized, ready-to-eat vegetables, Veg Oxi 200 is the healthy, effective alternative to sodium metabisulfite and other sulfites.' : trans_content($contacts, 'conversar_p1_desc', 'Se você atua com vegetais frescos, higienizados e prontos para o consumo, o Veg Oxi 200 é a alternativa saudável e eficaz para substituir o metabissulfito e demais sulfitos.') }}</p>
                 </div>
               </div>
 
@@ -256,8 +368,8 @@
                   <i data-lucide="trending-up"></i>
                 </div>
                 <div class="conversar-pillar-text">
-                  <h4>{{ trans_content($contacts, 'conversar_p2_title', 'Lucro Real') }}</h4>
-                  <p>{{ trans_content($contacts, 'conversar_p2_desc', 'Veg Oxi 200, o único antioxidante natural e eficaz que substitui os sulfitos, aumenta a vida útil dos vegetais prontos para o consumo, preserva a qualidade e a saudabilidade desses alimentos, além de reduzir perdas (quebras).') }}</p>
+                  <h4>{{ $isEn ? 'Real Profit' : trans_content($contacts, 'conversar_p2_title', 'Lucro Real') }}</h4>
+                  <p>{{ $isEn ? 'Veg Oxi 200, the unique natural antioxidant that replaces sulfites, extends fresh produce shelf life, preserves quality and healthiness, and reduces breakdown losses.' : trans_content($contacts, 'conversar_p2_desc', 'Veg Oxi 200, o único antioxidante natural e eficaz que substitui os sulfitos, aumenta a vida útil dos vegetais prontos para o consumo, preserva a qualidade e a saudabilidade desses alimentos, além de reduzir perdas (quebras).') }}</p>
                 </div>
               </div>
 
@@ -267,25 +379,25 @@
           <!-- Action Box Right -->
           <div class="animate-fade-up delay-100">
             <div class="conversar-action-box">
-              <h3 class="action-box-title">{{ trans_content($contacts, 'action_box_title', 'Transforme sua Produção') }}</h3>
+              <h3 class="action-box-title">{{ $isEn ? 'Transform Your Production' : trans_content($contacts, 'action_box_title', 'Transforme sua Produção') }}</h3>
               <p class="action-box-desc">
-                {{ trans_content($contacts, 'action_box_desc', 'Conte com a expertise e a inovação tecnológica da VegQuality para otimizar seus processos de FLV.') }}
+                {{ $isEn ? 'Rely on VegQuality expertise and technological innovation to optimize your fresh produce processes.' : trans_content($contacts, 'action_box_desc', 'Conte com a expertise e a inovação tecnológica da VegQuality para otimizar seus processos de FLV.') }}
               </p>
               
               <a href="{{ data_get($contacts, 'action_box_cta_link', 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20VegQuality.') }}" target="_blank" rel="noopener noreferrer" class="btn-conversar" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none;">
                 <i data-lucide="message-circle"></i>
-                {{ trans_content($contacts, 'action_box_cta_text', 'Falar Conosco') }}
+                {{ $isEn ? 'Talk to Us' : trans_content($contacts, 'action_box_cta_text', 'Falar Conosco') }}
               </a>
 
               <!-- Counters inline -->
               <div class="conversar-indicators">
                 <div class="conversar-indicator-card">
                   <div class="conversar-indicator-number">{{ data_get($contacts, 'indicator1_num', '100%') }}</div>
-                  <div class="conversar-indicator-label">{{ trans_content($contacts, 'indicator1_label', 'Livre de Sulfitos') }}</div>
+                  <div class="conversar-indicator-label">{{ $isEn ? 'Sulfite-Free' : trans_content($contacts, 'indicator1_label', 'Livre de Sulfitos') }}</div>
                 </div>
                 <div class="conversar-indicator-card">
                   <div class="conversar-indicator-number">{{ data_get($contacts, 'indicator2_num', '60%') }}</div>
-                  <div class="conversar-indicator-label">{{ trans_content($contacts, 'indicator2_label', 'Lucro sob perdas') }}</div>
+                  <div class="conversar-indicator-label">{{ $isEn ? 'Profit from Reduced Waste' : trans_content($contacts, 'indicator2_label', 'Lucro sob perdas') }}</div>
                 </div>
               </div>
 
@@ -303,10 +415,10 @@
         <div class="services-header animate-fade-up">
           <div class="services-tag">
             <span class="micro-badge-dot"></span>
-            {{ trans_content($clientes, 'badge', 'Parcerias de Sucesso') }}
+            {{ $isEn ? 'Successful Partnerships' : trans_content($clientes, 'badge', 'Parcerias de Sucesso') }}
           </div>
-          <h2 class="services-title">{{ trans_content($clientes, 'title', 'Alguns de Nossos Clientes') }}</h2>
-          <p class="services-desc">{{ trans_content($clientes, 'description', 'Marcas e cooperativas agrícolas que confiam no suporte técnico e biotecnológico da VegQuality.') }}</p>
+          <h2 class="services-title">{{ $isEn ? 'Some of Our Clients' : trans_content($clientes, 'title', 'Alguns de Nossos Clientes') }}</h2>
+          <p class="services-desc">{{ $isEn ? 'Brands and agricultural cooperatives trusting VegQuality technical and biotechnological support.' : trans_content($clientes, 'description', 'Marcas e cooperativas agrícolas que confiam no suporte técnico e biotecnológico da VegQuality.') }}</p>
         </div>
 
         @php
