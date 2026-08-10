@@ -166,6 +166,20 @@ class HomeController extends Controller
     {
         $appLocale = $lang === 'en' ? 'en' : 'pt_BR';
         session(['locale' => $appLocale]);
-        return redirect($any ? '/' . $any : '/');
+
+        $cleanPath = trim((string) $any, '/');
+        $aliasMap = [
+            'about-us' => 'empresa',
+            'about' => 'empresa',
+            'services' => 'servicos',
+            'contact' => 'contato',
+            'contact-us' => 'contato',
+        ];
+
+        if (isset($aliasMap[$cleanPath])) {
+            $cleanPath = $aliasMap[$cleanPath];
+        }
+
+        return redirect($cleanPath ? '/' . $cleanPath : '/');
     }
 }

@@ -62,7 +62,7 @@
               <!-- Categoria Flutuante -->
               @if($article->category)
                 <span class="category-badge">
-                  {{ $article->category }}
+                  {{ __($article->category) }}
                 </span>
               @endif
             </div>

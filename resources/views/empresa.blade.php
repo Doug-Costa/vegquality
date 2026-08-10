@@ -164,10 +164,14 @@
           <div class="about-media animate-fade-up">
             <div class="about-image-bg-shape"></div>
             <div class="about-image-wrapper">
-              <img src="{{ $qsImageSrc }}" alt="{{ strip_tags(data_get($quemSomos, 'image_caption')) }}" class="about-img">
+              <img src="{{ $qsImageSrc }}" alt="{{ strip_tags(trans_content($quemSomos, 'image_caption')) }}" class="about-img">
             </div>
             <p style="text-align: center; margin-top: 1.5rem; font-size: 0.9rem; font-weight: 600; color: var(--color-veg-dark);">
-              {{ data_get($quemSomos, 'image_caption', 'Drª Roseane Bob, fundadora e diretora           <!-- Content Right -->
+              {{ trans_content($quemSomos, 'image_caption', 'Drª Roseane Bob, fundadora e diretora da VegQuality') }}
+            </p>
+          </div>
+
+          <!-- Content Right -->
           <div class="about-content animate-fade-up delay-100">
             <div class="about-tag">
               <span class="micro-badge-dot"></span>
@@ -198,10 +202,6 @@
                 <div class="indicator-label">{{ trans_content($quemSomos, 'card3_label', 'Resultados') }}</div>
               </div>
             </div>
-          </div>tados') }}</div>
-              </div>
-            </div>
-
           </div>
 
         </div>

@@ -29,7 +29,7 @@
       @if($article->category)
         <span class="blog-card-meta-item" style="display: inline-flex; align-items: center; gap: 0.375rem; color: rgba(255, 255, 255, 0.9) !important;">
           <i data-lucide="tag" style="width: 1rem; height: 1rem; color: var(--color-veg-accent);"></i> 
-          {{ $article->category }}
+          {{ __($article->category) }}
         </span>
       @endif
     </div>
