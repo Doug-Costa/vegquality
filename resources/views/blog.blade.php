@@ -7,15 +7,15 @@
 <section class="internal-hero" style="background: linear-gradient(135deg, var(--color-veg-dark) 0%, #0d3c0f 100%);">
   <div class="container">
     <div class="breadcrumb animate-fade-up" style="color: rgba(255, 255, 255, 0.6) !important;">
-      <a href="{{ url('/') }}" style="color: rgba(255, 255, 255, 0.85) !important;">Início</a>
+      <a href="{{ url('/') }}" style="color: rgba(255, 255, 255, 0.85) !important;">{{ __('Início') }}</a>
       <span class="breadcrumb-separator" style="color: rgba(255, 255, 255, 0.4) !important;">/</span>
-      <span style="color: rgba(255, 255, 255, 0.6) !important;">Radar FLV</span>
+      <span style="color: rgba(255, 255, 255, 0.6) !important;">{{ __('Radar FLV') }}</span>
     </div>
     <h1 class="internal-hero-title animate-fade-up delay-100" style="color: #ffffff !important; text-shadow: none !important;">
-      Radar FLV
+      {{ __('Radar FLV') }}
     </h1>
     <p class="internal-hero-desc animate-fade-up delay-200" style="color: rgba(255, 255, 255, 0.8) !important;">
-      Novidades, legislação, tecnologia alimentar e estratégias de mercado para impulsionar sua agroindústria.
+      {{ __('Novidades, legislação, tecnologia alimentar e estratégias de mercado para impulsionar sua agroindústria.') }}
     </p>
   </div>
 </section>
@@ -85,13 +85,13 @@
                 <!-- Título -->
                 <h2 class="text-xl md:text-2xl lg:text-[1.6rem] font-extrabold text-veg-dark mb-4 group-hover:text-veg-primary transition-colors duration-300 leading-tight">
                   <a href="{{ url('/radar/' . $article->slug) }}">
-                    {{ $article->title }}
+                    {{ $article->display_title }}
                   </a>
                 </h2>
 
                 <!-- Resumo -->
                 <p class="text-sm md:text-base text-gray-500 leading-relaxed mb-5">
-                  {{ Str::limit($article->excerpt, 240, '...') }}
+                  {{ Str::limit($article->display_excerpt, 240, '...') }}
                 </p>
               </div>
 

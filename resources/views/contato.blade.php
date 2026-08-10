@@ -4,6 +4,11 @@
 @section('meta_description', 'Entre em contato com a VegQuality. Tire suas dúvidas, solicite orçamentos para consultoria, implementação do Veg Oxi 200 ou treinamentos.')
 
 @section('content')
+@php
+    $hero = $page?->sections->where('key', 'contato_hero')->first()?->content;
+    $info = $page?->sections->where('key', 'contato_info')->first()?->content;
+    $form = $page?->sections->where('key', 'contato_form')->first()?->content;
+@endphp
 <!-- Hero Interno -->
     <section class="internal-hero">
       <div class="container">
@@ -13,10 +18,10 @@
           <span>Contato</span>
         </div>
         <h1 class="internal-hero-title animate-fade-up delay-100">
-          Fale Conosco
+          {{ data_get($hero, 'title', 'Fale Conosco') }}
         </h1>
         <p class="internal-hero-desc animate-fade-up delay-200">
-          Tire suas dúvidas ou envie uma solicitação para nossa equipe. Estamos prontos para ajudar sua agroindústria.
+          {{ data_get($hero, 'subtitle', 'Tire suas dúvidas ou envie uma solicitação para nossa equipe. Estamos prontos para ajudar sua agroindústria.') }}
         </p>
       </div>
     </section>
@@ -29,49 +34,61 @@
           <!-- Coluna 1: Informações de Contato -->
           <div class="contact-info-panel animate-fade-up">
             <div>
-              <h2 class="contact-info-title">Nossos Canais</h2>
+              <h2 class="contact-info-title">{{ data_get($info, 'title', 'Nossos Canais') }}</h2>
               <p class="contact-info-desc">
-                Escolha o canal de sua preferência para falar conosco ou envie uma mensagem no formulário ao lado.
+                {{ data_get($info, 'description', 'Escolha o canal de sua preferência para falar conosco ou envie uma mensagem no formulário ao lado.') }}
               </p>
             </div>
             
             <div class="contact-cards-container">
               
               <!-- Telefone -->
+              @if(data_get($info, 'phone', '+55 11 5194-0325'))
               <div class="contact-card-item">
                 <div class="contact-card-icon">
                   <i data-lucide="phone"></i>
                 </div>
                 <div class="contact-card-details">
                   <h4>Telefone</h4>
-                  <p><a href="tel:+551151940325">+55 11 5194-0325</a></p>
-                  <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">Atendimento de Seg. a Sex. das 8h às 18h</p>
+                  <p><a href="tel:{{ preg_replace('/[^0-9+]/', '', data_get($info, 'phone', '+55 11 5194-0325')) }}">{{ data_get($info, 'phone', '+55 11 5194-0325') }}</a></p>
+                  @if(data_get($info, 'phone_hours'))
+                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ data_get($info, 'phone_hours') }}</p>
+                  @endif
                 </div>
               </div>
+              @endif
               
               <!-- WhatsApp -->
+              @if(data_get($info, 'whatsapp', '+55 11 97834-8438'))
               <div class="contact-card-item">
                 <div class="contact-card-icon">
                   <i data-lucide="message-circle"></i>
                 </div>
                 <div class="contact-card-details">
                   <h4>WhatsApp</h4>
-                  <p><a href="https://wa.me/5511978348438" target="_blank" rel="noopener noreferrer">+55 11 97834-8438</a></p>
-                  <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">Fale diretamente com nossa equipe</p>
+                  <p><a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', data_get($info, 'whatsapp', '5511978348438')) }}" target="_blank" rel="noopener noreferrer">{{ data_get($info, 'whatsapp', '+55 11 97834-8438') }}</a></p>
+                  @if(data_get($info, 'whatsapp_desc'))
+                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ data_get($info, 'whatsapp_desc') }}</p>
+                  @endif
                 </div>
               </div>
+              @endif
               
               <!-- E-mail -->
+              @if(data_get($info, 'email', 'vegquality@vegquality.com.br'))
               <div class="contact-card-item">
                 <div class="contact-card-icon">
                   <i data-lucide="mail"></i>
                 </div>
                 <div class="contact-card-details">
                   <h4>E-mail Comercial</h4>
-                  <p><a href="mailto:vegquality@vegquality.com.br">vegquality@vegquality.com.br</a></p>
-                  <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">Nós respondemos em até um dia útil</p>
+                  <p><a href="mailto:{{ data_get($info, 'email', 'vegquality@vegquality.com.br') }}">{{ data_get($info, 'email', 'vegquality@vegquality.com.br') }}</a></p>
+                  @if(data_get($info, 'email_desc'))
+                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ data_get($info, 'email_desc') }}</p>
+                  @endif
                 </div>
               </div>
+              @endif
               
             </div>
             
@@ -80,7 +97,7 @@
           <!-- Coluna 2: Formulário de Contato -->
           <div class="contact-form-panel animate-fade-up delay-100">
             
-            <h2 class="contact-form-title">Envie uma Mensagem</h2>
+            <h2 class="contact-form-title">{{ data_get($form, 'title', 'Envie uma Mensagem') }}</h2>
             
             <form id="contact-form">
               
@@ -126,7 +143,7 @@
 
               <button type="submit" class="btn btn-primary form-submit-btn" id="submit-btn">
                 <i data-lucide="send"></i>
-                Enviar Mensagem
+                {{ data_get($form, 'submit_text', 'Enviar Mensagem') }}
               </button>
               
             </form>
@@ -136,9 +153,9 @@
               <div class="form-success-icon">
                 <i data-lucide="check-circle-2"></i>
               </div>
-              <h3 class="form-success-title">Mensagem Enviada!</h3>
+              <h3 class="form-success-title">{{ data_get($form, 'success_title', 'Mensagem Enviada!') }}</h3>
               <p class="form-success-text">
-                Obrigado pelo seu contato. Nossa equipe técnica analisará sua mensagem e entrará em contato em breve.
+                {{ data_get($form, 'success_message', 'Obrigado pelo seu contato. Nossa equipe técnica analisará sua mensagem e entrará em contato em breve.') }}
               </p>
               <button type="button" class="btn btn-primary" id="success-close-btn" style="padding: 0.75rem 2rem;">
                 Voltar

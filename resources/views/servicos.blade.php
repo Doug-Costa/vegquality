@@ -83,15 +83,15 @@
     <section class="internal-hero">
       <div class="container">
         <div class="breadcrumb animate-fade-up">
-          <a href="{{ url('/') }}">Início</a>
+          <a href="{{ url('/') }}">{{ __('Início') }}</a>
           <span class="breadcrumb-separator">/</span>
-          <span>Serviços Oferecidos</span>
+          <span>{{ __('Serviços') }}</span>
         </div>
         <h1 class="internal-hero-title animate-fade-up delay-100">
-          {{ data_get($hero, 'title', 'Serviços Oferecidos') }}
+          {{ trans_content($hero, 'title', 'Serviços Oferecidos') }}
         </h1>
         <p class="internal-hero-desc animate-fade-up delay-200">
-          {{ data_get($hero, 'subtitle', 'Soluções estratégicas e operacionais de ponta para elevar a rentabilidade e o padrão de qualidade na agroindústria.') }}
+          {{ trans_content($hero, 'subtitle', 'Soluções estratégicas e operacionais de ponta para elevar a rentabilidade e o padrão de qualidade na agroindústria.') }}
         </p>
       </div>
     </section>
@@ -103,9 +103,9 @@
         <div class="services-header animate-fade-up">
           <div class="services-tag">
             <span class="micro-badge-dot"></span>
-            {{ data_get($catalog, 'badge', 'Nossos Serviços') }}
+            {{ trans_content($catalog, 'badge', 'Nossos Serviços') }}
           </div>
-          <h2 class="services-title">{{ data_get($catalog, 'title', 'Soluções Completas & Especializadas') }}</h2>
+          <h2 class="services-title">{{ trans_content($catalog, 'title', 'Soluções Completas & Especializadas') }}</h2>
         </div>
 
         <div class="services-grid animate-fade-up delay-100">

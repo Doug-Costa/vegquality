@@ -83,6 +83,48 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        // Home Offering Section ("O que oferecemos")
+        $home->sections()->updateOrCreate(
+            ['key' => 'home_offering'],
+            [
+                'content' => [
+                    'badge' => 'O que oferecemos',
+                    'title' => 'Soluções completas para a agroindústria de vegetais frescos',
+                    'description' => 'Há mais de duas décadas, somos referência em consultoria e soluções para a cadeia produtiva de FLV (Frutas, Legumes e Verduras).',
+                    'cards' => [
+                        [
+                            'title' => 'Consultoria',
+                            'icon' => 'leaf',
+                            'description' => 'Diagnóstico operacional completo, extensão natural de shelf-life e aplicação de biotecnologia personalizada para eliminar perdas na sua produção de vegetais higienizados.',
+                            'link_text' => 'Saiba mais',
+                            'link_url' => '/servicos',
+                        ],
+                        [
+                            'title' => 'Capacitação',
+                            'icon' => 'graduation-cap',
+                            'description' => 'Treinamento especializado para equipes em Boas Práticas de Fabricação (BPF), controle sanitário e manipulação técnica, garantindo conformidade com as normas vigentes.',
+                            'link_text' => 'Saiba mais',
+                            'link_url' => '/servicos',
+                        ],
+                        [
+                            'title' => 'Plano de Negócios',
+                            'icon' => 'briefcase',
+                            'description' => 'Desenvolvimento estratégico comercial, viabilidade econômica de plantas de processamento e estruturação de novos canais de distribuição B2B.',
+                            'link_text' => 'Saiba mais',
+                            'link_url' => '/servicos',
+                        ],
+                        [
+                            'title' => 'Veg Oxi 200',
+                            'icon' => 'shield-check',
+                            'description' => 'Substituição tecnológica para sulfitos e metabissulfito de sódio. Antioxidante orgânico seguro e com excelente custo-benefício de apenas 1 centavo por hortaliça.',
+                            'link_text' => 'Saiba mais',
+                            'link_url' => '/veg-oxi',
+                        ],
+                    ]
+                ]
+            ]
+        );
+
         // About Section
         $home->sections()->updateOrCreate(
             ['key' => 'about'],
@@ -890,6 +932,53 @@ class DatabaseSeeder extends Seeder
                     'badge' => 'Diferencial',
                     'title' => 'Por que nos Escolher?',
                     'description' => 'Conhecimento, vivência e experiência em todas as etapas da cadeia produtiva de vegetais frescos processados.'
+                ]
+            ]
+        );
+
+        // 5. Page: Contato
+        $contatoPage = \App\Models\Page::updateOrCreate(
+            ['slug' => 'contato'],
+            [
+                'title' => 'Fale Conosco | VegQuality - Consultoria para Agroindústria',
+                'meta_description' => 'Entre em contato com a VegQuality. Tire suas dúvidas, solicite orçamentos para consultoria, implementação do Veg Oxi 200 ou treinamentos.',
+            ]
+        );
+
+        $contatoPage->sections()->updateOrCreate(
+            ['key' => 'contato_hero'],
+            [
+                'content' => [
+                    'title' => 'Fale Conosco',
+                    'subtitle' => 'Tire suas dúvidas ou envie uma solicitação para nossa equipe. Estamos prontos para ajudar sua agroindústria.',
+                ]
+            ]
+        );
+
+        $contatoPage->sections()->updateOrCreate(
+            ['key' => 'contato_info'],
+            [
+                'content' => [
+                    'title' => 'Nossos Canais',
+                    'description' => 'Escolha o canal de sua preferência para falar conosco ou envie uma mensagem no formulário ao lado.',
+                    'phone' => '+55 11 5194-0325',
+                    'phone_hours' => 'Atendimento de Seg. a Sex. das 8h às 18h',
+                    'whatsapp' => '+55 11 97834-8438',
+                    'whatsapp_desc' => 'Fale diretamente com nossa equipe',
+                    'email' => 'vegquality@vegquality.com.br',
+                    'email_desc' => 'Nós respondemos em até um dia útil',
+                ]
+            ]
+        );
+
+        $contatoPage->sections()->updateOrCreate(
+            ['key' => 'contato_form'],
+            [
+                'content' => [
+                    'title' => 'Envie uma Mensagem',
+                    'submit_text' => 'Enviar Mensagem',
+                    'success_title' => 'Mensagem Enviada!',
+                    'success_message' => 'Obrigado pelo seu contato. Nossa equipe técnica analisará sua mensagem e entrará em contato em breve.',
                 ]
             ]
         );

@@ -35,32 +35,52 @@ class ArticleResource extends Resource
                         Forms\Components\Grid::make(1)
                             ->columnSpan(8)
                             ->schema([
-                                Forms\Components\Section::make('Conteúdo do Artigo')
-                                    ->schema([
-                                        Forms\Components\TextInput::make('title')
-                                            ->label('Título do Artigo')
-                                            ->required()
-                                            ->maxLength(255)
-                                            ->live(onBlur: true)
-                                            ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => 
-                                                $operation === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null
-                                            ),
-                                        Forms\Components\TextInput::make('slug')
-                                            ->label('Slug / URL do Artigo')
-                                            ->required()
-                                            ->maxLength(255)
-                                            ->prefix('/radar/')
-                                            ->unique(Article::class, 'slug', ignoreRecord: true),
-                                        Forms\Components\Textarea::make('excerpt')
-                                            ->label('Resumo (Excerpt)')
-                                            ->placeholder('Escreva uma breve introdução que aparecerá nos cards do Radar FLV...')
-                                            ->rows(3)
-                                            ->columnSpanFull(),
-                                        Forms\Components\RichEditor::make('content')
-                                            ->label('Corpo do Artigo')
-                                            ->required()
-                                            ->columnSpanFull(),
+                                Forms\Components\Tabs::make('MultilingualArticle')
+                                    ->tabs([
+                                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                                            ->schema([
+                                                Forms\Components\TextInput::make('title')
+                                                    ->label('Título do Artigo (PT)')
+                                                    ->required()
+                                                    ->maxLength(255)
+                                                    ->live(onBlur: true)
+                                                    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => 
+                                                        $operation === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null
+                                                    ),
+                                                Forms\Components\TextInput::make('slug')
+                                                    ->label('Slug / URL do Artigo')
+                                                    ->required()
+                                                    ->maxLength(255)
+                                                    ->prefix('/radar/')
+                                                    ->unique(Article::class, 'slug', ignoreRecord: true),
+                                                Forms\Components\Textarea::make('excerpt')
+                                                    ->label('Resumo (PT)')
+                                                    ->placeholder('Escreva uma breve introdução em português...')
+                                                    ->rows(3)
+                                                    ->columnSpanFull(),
+                                                Forms\Components\RichEditor::make('content')
+                                                    ->label('Corpo do Artigo (PT)')
+                                                    ->required()
+                                                    ->columnSpanFull(),
+                                            ]),
+
+                                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                                            ->schema([
+                                                Forms\Components\TextInput::make('title_en')
+                                                    ->label('Título do Artigo (English)')
+                                                    ->placeholder('Article title in English')
+                                                    ->maxLength(255),
+                                                Forms\Components\Textarea::make('excerpt_en')
+                                                    ->label('Resumo (English)')
+                                                    ->placeholder('Write a short introduction in English...')
+                                                    ->rows(3)
+                                                    ->columnSpanFull(),
+                                                Forms\Components\RichEditor::make('content_en')
+                                                    ->label('Corpo do Artigo (English)')
+                                                    ->columnSpanFull(),
+                                            ]),
                                     ])
+                                    ->columnSpanFull()
                             ]),
 
                         // Coluna Lateral (Configurações)

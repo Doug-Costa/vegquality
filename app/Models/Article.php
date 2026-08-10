@@ -8,9 +8,12 @@ class Article extends Model
 {
     protected $fillable = [
         'title',
+        'title_en',
         'slug',
         'excerpt',
+        'excerpt_en',
         'content',
+        'content_en',
         'cover_image',
         'published_at',
         'status',
@@ -19,6 +22,30 @@ class Article extends Model
         'author_name',
         'columnist_id',
     ];
+
+    public function getDisplayTitleAttribute(): string
+    {
+        if (app()->getLocale() === 'en' && !empty($this->title_en)) {
+            return $this->title_en;
+        }
+        return $this->title ?? '';
+    }
+
+    public function getDisplayExcerptAttribute(): string
+    {
+        if (app()->getLocale() === 'en' && !empty($this->excerpt_en)) {
+            return $this->excerpt_en;
+        }
+        return $this->excerpt ?? '';
+    }
+
+    public function getDisplayContentAttribute(): string
+    {
+        if (app()->getLocale() === 'en' && !empty($this->content_en)) {
+            return $this->content_en;
+        }
+        return $this->content ?? '';
+    }
 
     protected $casts = [
         'published_at' => 'datetime',

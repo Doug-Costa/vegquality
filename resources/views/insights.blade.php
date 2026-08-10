@@ -13,8 +13,8 @@
   <div class="hero-bg-shape-1"></div>
   <div class="hero-bg-shape-2"></div>
   <div class="container">
-    <h1 class="subpage-hero-title animate-fade-up">{{ data_get($hero, 'title', 'Insights VegQuality') }}</h1>
-    <p class="subpage-hero-subtitle animate-fade-up delay-100">{{ data_get($hero, 'subtitle', 'Conhecimento e vivência na cadeia produtiva de vegetais frescos.') }}</p>
+    <h1 class="subpage-hero-title animate-fade-up">{{ trans_content($hero, 'title', 'Insights VegQuality') }}</h1>
+    <p class="subpage-hero-subtitle animate-fade-up delay-100">{{ trans_content($hero, 'subtitle', 'Conhecimento e vivência na cadeia produtiva de vegetais frescos.') }}</p>
   </div>
 </section>
 
@@ -25,10 +25,10 @@
     <div class="services-header animate-fade-up">
       <div class="services-tag">
         <span class="micro-badge-dot"></span>
-        {{ data_get($cards, 'badge', 'Insights') }}
+        {{ trans_content($cards, 'badge', 'Insights') }}
       </div>
       <h2 class="services-title">
-        {{ data_get($cards, 'title', 'Áreas de Atuação Técnica') }}
+        {{ trans_content($cards, 'title', 'Áreas de Atuação Técnica') }}
       </h2>
     </div>
 

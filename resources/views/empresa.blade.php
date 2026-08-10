@@ -14,15 +14,15 @@
     <section class="internal-hero">
       <div class="container">
         <div class="breadcrumb animate-fade-up">
-          <a href="{{ url('/') }}">Início</a>
+          <a href="{{ url('/') }}">{{ __('Início') }}</a>
           <span class="breadcrumb-separator">/</span>
-          <span>A Empresa</span>
+          <span>{{ __('A Empresa') }}</span>
         </div>
         <h1 class="internal-hero-title animate-fade-up delay-100">
-          {{ data_get($hero, 'title', 'Consultoria e Soluções para a Agroindústria') }}
+          {{ trans_content($hero, 'title', 'Consultoria e Soluções para a Agroindústria') }}
         </h1>
         <p class="internal-hero-desc animate-fade-up delay-200">
-          {{ data_get($hero, 'subtitle', 'Ciência e tecnologia aliadas para garantir alimentos mais seguros, saudáveis e lucrativos.') }}
+          {{ trans_content($hero, 'subtitle', 'Ciência e tecnologia aliadas para garantir alimentos mais seguros, saudáveis e lucrativos.') }}
         </p>
       </div>
     </section>
@@ -36,16 +36,16 @@
           <div class="about-content animate-fade-up">
             <div class="about-tag">
               <span class="micro-badge-dot"></span>
-              {{ data_get($frescor, 'badge', 'VegQuality') }}
+              {{ trans_content($frescor, 'badge', 'VegQuality') }}
             </div>
             <h2 class="about-title">
-              {{ data_get($frescor, 'title', 'Consultoria 360°') }}
+              {{ trans_content($frescor, 'title', 'Consultoria 360°') }}
             </h2>
             <p class="about-highlight-text">
-              {{ data_get($frescor, 'highlight_text', 'Transforme sua linha de vegetais frescos prontos para o consumo!') }}
+              {{ trans_content($frescor, 'highlight_text', 'Transforme sua linha de vegetais frescos prontos para o consumo!') }}
             </p>
             <p class="about-desc-paragraph">
-              {{ data_get($frescor, 'description', 'Na Veg Quality, oferecemos soluções personalizadas e consultoria especializada para impulsionar a eficiência técnica e a segurança operacional da sua planta de processamento.') }}
+              {{ trans_content($frescor, 'description', 'Na Veg Quality, oferecemos soluções personalizadas e consultoria especializada para impulsionar a eficiência técnica e a segurança operacional da sua planta de processamento.') }}
             </p>
             
             <div class="about-features-container" style="width: 100%;">

@@ -13,6 +13,7 @@
     $productHighlight = \App\Models\Section::where('key', 'product_highlight')->first()?->content;
 
     // Homepage specific new sections
+    $homeOffering = $page?->sections->where('key', 'home_offering')->first()?->content;
     $homeInsights = $page?->sections->where('key', 'home_insights')->first()?->content;
     $homeWhyChoose = $page?->sections->where('key', 'home_why_choose')->first()?->content;
     $homeContactCta = $page?->sections->where('key', 'home_contact_cta')->first()?->content;
@@ -221,78 +222,69 @@
     <div class="services-header animate-fade-up">
       <div class="services-tag">
         <span class="micro-badge-dot"></span>
-        O que oferecemos
+        {{ data_get($homeOffering, 'badge', 'O que oferecemos') }}
       </div>
       <h2 class="services-title">
-        Soluções completas para a agroindústria de vegetais frescos
+        {{ data_get($homeOffering, 'title', 'Soluções completas para a agroindústria de vegetais frescos') }}
       </h2>
       <p class="services-desc">
-        Há mais de duas décadas, somos referência em consultoria e soluções para a cadeia produtiva de FLV (Frutas, Legumes e Verduras).
+        {{ data_get($homeOffering, 'description', 'Há mais de duas décadas, somos referência em consultoria e soluções para a cadeia produtiva de FLV (Frutas, Legumes e Verduras).') }}
       </p>
     </div>
 
     <!-- Grid -->
     <div class="services-grid animate-fade-up delay-100">
+      @php
+        $offeringCards = data_get($homeOffering, 'cards', []);
+        if (empty($offeringCards)) {
+            $offeringCards = [
+                [
+                    'title' => 'Consultoria',
+                    'icon' => 'leaf',
+                    'description' => 'Diagnóstico operacional completo, extensão natural de shelf-life e aplicação de biotecnologia personalizada para eliminar perdas na sua produção de vegetais higienizados.',
+                    'link_text' => 'Saiba mais',
+                    'link_url' => '/servicos',
+                ],
+                [
+                    'title' => 'Capacitação',
+                    'icon' => 'graduation-cap',
+                    'description' => 'Treinamento especializado para equipes em Boas Práticas de Fabricação (BPF), controle sanitário e manipulação técnica, garantindo conformidade com as normas vigentes.',
+                    'link_text' => 'Saiba mais',
+                    'link_url' => '/servicos',
+                ],
+                [
+                    'title' => 'Plano de Negócios',
+                    'icon' => 'briefcase',
+                    'description' => 'Desenvolvimento estratégico comercial, viabilidade econômica de plantas de processamento e estruturação de novos canais de distribuição B2B.',
+                    'link_text' => 'Saiba mais',
+                    'link_url' => '/servicos',
+                ],
+                [
+                    'title' => 'Veg Oxi 200',
+                    'icon' => 'shield-check',
+                    'description' => 'Substituição tecnológica para sulfitos e metabissulfito de sódio. Antioxidante orgânico seguro e com excelente custo-benefício de apenas 1 centavo por hortaliça.',
+                    'link_text' => 'Saiba mais',
+                    'link_url' => '/veg-oxi',
+                ],
+            ];
+        }
+      @endphp
       
-      <!-- Card 1: Consultoria -->
-      <div class="service-card">
-        <div class="service-card-icon">
-          <i data-lucide="leaf"></i>
+      @foreach($offeringCards as $card)
+        <div class="service-card">
+          <div class="service-card-icon">
+            <i data-lucide="{{ data_get($card, 'icon', 'leaf') }}"></i>
+          </div>
+          <h3 class="service-card-title">{{ data_get($card, 'title') }}</h3>
+          <p class="service-card-desc">
+            {{ data_get($card, 'description') }}
+          </p>
+          <a href="{{ url(data_get($card, 'link_url', '/servicos')) }}" class="service-card-link">
+            {{ data_get($card, 'link_text', 'Saiba mais') }}
+            <i data-lucide="arrow-right"></i>
+          </a>
         </div>
-        <h3 class="service-card-title">Consultoria</h3>
-        <p class="service-card-desc">
-          Diagnóstico operacional completo, extensão natural de shelf-life e aplicação de biotecnologia personalizada para eliminar perdas na sua produção de vegetais higienizados.
-        </p>
-        <a href="{{ url('/servicos') }}" class="service-card-link">
-          Saiba mais
-          <i data-lucide="arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- Card 2: Capacitação -->
-      <div class="service-card">
-        <div class="service-card-icon">
-          <i data-lucide="graduation-cap"></i>
-        </div>
-        <h3 class="service-card-title">Capacitação</h3>
-        <p class="service-card-desc">
-          Treinamento especializado para equipes em Boas Práticas de Fabricação (BPF), controle sanitário e manipulação técnica, garantindo conformidade com as normas vigentes.
-        </p>
-        <a href="{{ url('/servicos') }}" class="service-card-link">
-          Saiba mais
-          <i data-lucide="arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- Card 3: Plano de Negócios -->
-      <div class="service-card">
-        <div class="service-card-icon">
-          <i data-lucide="briefcase"></i>
-        </div>
-        <h3 class="service-card-title">Plano de Negócios</h3>
-        <p class="service-card-desc">
-          Desenvolvimento estratégico comercial, viabilidade econômica de plantas de processamento e estruturação de novos canais de distribuição B2B.
-        </p>
-        <a href="{{ url('/servicos') }}" class="service-card-link">
-          Saiba mais
-          <i data-lucide="arrow-right"></i>
-        </a>
-      </div>
-
-      <!-- Card 4: Veg Oxi 200 -->
-      <div class="service-card">
-        <div class="service-card-icon">
-          <i data-lucide="shield-check"></i>
-        </div>
-        <h3 class="service-card-title">Veg Oxi 200</h3>
-        <p class="service-card-desc">
-          Substituição tecnológica para sulfitos e metabissulfito de sódio. Antioxidante orgânico seguro e com excelente custo-benefício de apenas 1 centavo por hortaliça.
-        </p>
-        <a href="{{ url('/veg-oxi') }}" class="service-card-link">
-          Saiba mais
-          <i data-lucide="arrow-right"></i>
-        </a>
-      </div>
+      @endforeach
 
     </div>
 

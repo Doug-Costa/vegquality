@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
-@section('title', $article->title . ' | VegQuality - Radar FLV')
-@section('meta_description', $article->excerpt)
+@section('title', $article->display_title . ' | VegQuality - Radar FLV')
+@section('meta_description', $article->display_excerpt)
 
 @section('content')
 <!-- Hero Interno -->
 <section class="internal-hero" style="background: linear-gradient(135deg, var(--color-veg-dark) 0%, #0d3c0f 100%);">
   <div class="container">
     <div class="breadcrumb animate-fade-up" style="color: rgba(255, 255, 255, 0.6) !important;">
-      <a href="{{ url('/') }}" style="color: rgba(255, 255, 255, 0.85) !important;">Início</a>
+      <a href="{{ url('/') }}" style="color: rgba(255, 255, 255, 0.85) !important;">{{ __('Início') }}</a>
       <span class="breadcrumb-separator" style="color: rgba(255, 255, 255, 0.4) !important;">/</span>
-      <a href="{{ url('/radar') }}" style="color: rgba(255, 255, 255, 0.85) !important;">Radar FLV</a>
+      <a href="{{ url('/radar') }}" style="color: rgba(255, 255, 255, 0.85) !important;">{{ __('Radar FLV') }}</a>
       <span class="breadcrumb-separator" style="color: rgba(255, 255, 255, 0.4) !important;">/</span>
       <span style="color: rgba(255, 255, 255, 0.6) !important;">Artigo</span>
     </div>
     <h1 class="internal-hero-title animate-fade-up delay-100" style="font-size: 2.25rem; line-height: 1.2; max-width: 900px; color: #ffffff !important; text-shadow: none !important;">
-      {{ $article->title }}
+      {{ $article->display_title }}
     </h1>
     <div class="blog-card-meta animate-fade-up delay-200" style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 1.5rem; color: rgba(255, 255, 255, 0.9) !important; font-size: 0.875rem;">
       <span class="blog-card-meta-item" style="display: inline-flex; align-items: center; gap: 0.375rem; color: rgba(255, 255, 255, 0.9) !important;">
@@ -49,7 +49,7 @@
 
     <!-- Corpo do Artigo -->
     <div class="blog-detail-body" style="font-size: 1.125rem; line-height: 1.8; color: var(--color-text-base);">
-      {!! $article->content !!}
+      {!! $article->display_content !!}
     </div>
 
     <!-- Tags do Artigo -->
@@ -91,11 +91,11 @@
     <div style="margin-top: 3rem; padding-top: 2rem; border-top: 1px solid var(--color-border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
       <a href="{{ url('/radar') }}" class="btn btn-ghost" style="border-radius: 9999px;">
         <i data-lucide="arrow-left"></i>
-        Voltar para o Radar FLV
+        {{ __('Voltar para o Radar FLV') }}
       </a>
       <a href="https://wa.me/5511978348438" target="_blank" rel="noopener noreferrer" class="btn btn-primary" style="border-radius: 9999px;">
         <i data-lucide="message-circle"></i>
-        Fale Conosco
+        {{ __('Fale Conosco') }}
       </a>
     </div>
 

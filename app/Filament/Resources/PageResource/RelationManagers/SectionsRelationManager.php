@@ -65,6 +65,10 @@ class SectionsRelationManager extends RelationManager
                         'servicos_faq' => 'Serviços - FAQ (Perguntas Frequentes)',
                         'servicos_clientes' => 'Serviços - Nossos Clientes',
                         'servicos_contacts' => 'Serviços - Seção Vamos Conversar & Promo',
+                        'home_offering' => 'Home - O que Oferecemos (Soluções Completas)',
+                        'contato_hero' => 'Contato - Hero / Banner Superior',
+                        'contato_info' => 'Contato - Canais de Atendimento',
+                        'contato_form' => 'Contato - Formulário e Mensagens',
                         default => ucwords(str_replace('_', ' ', $state)),
                     }),
             ])
@@ -821,6 +825,100 @@ class SectionsRelationManager extends RelationManager
                         Forms\Components\Textarea::make('address')
                             ->label('Endereço Físico')
                             ->columnSpanFull(),
+                    ])
+            ],
+
+            'home_offering' => [
+                Forms\Components\Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('badge')
+                            ->label('Badge')
+                            ->required(),
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título Principal')
+                            ->required(),
+                        Forms\Components\Textarea::make('description')
+                            ->label('Subtítulo / Descrição')
+                            ->required(),
+                        Forms\Components\Repeater::make('cards')
+                            ->label('Cards de Serviços (O que Oferecemos)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')
+                                    ->label('Título do Card')
+                                    ->required(),
+                                Forms\Components\Textarea::make('description')
+                                    ->label('Descrição do Card')
+                                    ->required(),
+                                Forms\Components\TextInput::make('icon')
+                                    ->label('Ícone (leaf, graduation-cap, briefcase, shield-check)')
+                                    ->required(),
+                                Forms\Components\TextInput::make('link_text')
+                                    ->label('Texto do Link')
+                                    ->default('Saiba mais'),
+                                Forms\Components\TextInput::make('link_url')
+                                    ->label('URL do Link')
+                                    ->default('/servicos'),
+                            ])
+                            ->collapsible()
+                            ->orderable()
+                            ->defaultItems(4)
+                            ->columnSpanFull(),
+                    ])
+            ],
+
+            'contato_hero' => [
+                Forms\Components\Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título Principal')
+                            ->required(),
+                        Forms\Components\Textarea::make('subtitle')
+                            ->label('Subtítulo')
+                            ->required(),
+                    ])
+            ],
+
+            'contato_info' => [
+                Forms\Components\Grid::make(2)
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título do Painel')
+                            ->required()
+                            ->columnSpanFull(),
+                        Forms\Components\Textarea::make('description')
+                            ->label('Descrição do Painel')
+                            ->required()
+                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('phone')
+                            ->label('Telefone Fixo'),
+                        Forms\Components\TextInput::make('phone_hours')
+                            ->label('Horário do Telefone'),
+                        Forms\Components\TextInput::make('whatsapp')
+                            ->label('WhatsApp'),
+                        Forms\Components\TextInput::make('whatsapp_desc')
+                            ->label('Descrição do WhatsApp'),
+                        Forms\Components\TextInput::make('email')
+                            ->label('E-mail Comercial'),
+                        Forms\Components\TextInput::make('email_desc')
+                            ->label('Descrição do E-mail'),
+                    ])
+            ],
+
+            'contato_form' => [
+                Forms\Components\Grid::make(1)
+                    ->schema([
+                        Forms\Components\TextInput::make('title')
+                            ->label('Título do Formulário')
+                            ->required(),
+                        Forms\Components\TextInput::make('submit_text')
+                            ->label('Texto do Botão Enviar')
+                            ->required(),
+                        Forms\Components\TextInput::make('success_title')
+                            ->label('Título da Mensagem de Sucesso')
+                            ->required(),
+                        Forms\Components\Textarea::make('success_message')
+                            ->label('Texto da Mensagem de Sucesso')
+                            ->required(),
                     ])
             ],
 

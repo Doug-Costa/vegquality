@@ -106,7 +106,8 @@ class HomeController extends Controller
 
     public function contato()
     {
-        return view('contato');
+        $page = \App\Models\Page::with('sections')->where('slug', 'contato')->first();
+        return view('contato', compact('page'));
     }
 
     public function vegOxi()
