@@ -29,14 +29,14 @@
       <div class="blog-filter-banner animate-fade-up">
         <span class="text-veg-dark font-medium" style="display: inline-flex; align-items: center; gap: 0.5rem;">
           <i data-lucide="filter" style="width: 1.25rem; height: 1.25rem; color: var(--color-veg-primary);"></i>
-          Filtrado por: 
+          {{ __('Filtrado por:') }} 
           <strong>
-            @if($activeCategory) Categoria: {{ $activeCategory }} @endif
-            @if($activeTag) Tag: #{{ $activeTag }} @endif
+            @if($activeCategory) {{ __('Categoria:') }} {{ $activeCategory }} @endif
+            @if($activeTag) {{ __('Tag:') }} #{{ $activeTag }} @endif
           </strong>
         </span>
         <a href="{{ url('/radar') }}" class="text-sm text-veg-primary hover:text-veg-primary-hover underline font-bold" style="display: inline-flex; align-items: center; gap: 0.25rem; color: var(--color-veg-primary); font-weight: 700;">
-          Limpar Filtro <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
+          {{ __('Limpar Filtro') }} <i data-lucide="x" style="width: 1rem; height: 1rem;"></i>
         </a>
       </div>
     @endif
@@ -54,9 +54,9 @@
             <!-- Imagem do Artigo -->
             <div class="w-full md:w-[320px] relative overflow-hidden bg-gray-50 aspect-video md:aspect-auto md:self-stretch flex-shrink-0">
               @if($article->cover_image)
-                <img src="{{ asset('storage/' . $article->cover_image) }}" alt="{{ $article->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <img src="{{ asset('storage/' . $article->cover_image) }}" alt="{{ $article->display_title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               @else
-                <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="{{ $article->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="{{ $article->display_title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
               @endif
               
               <!-- Categoria Flutuante -->
@@ -109,7 +109,7 @@
 
                 <!-- Link Ler Mais -->
                 <a href="{{ url('/radar/' . $article->slug) }}" class="inline-flex items-center gap-1.5 text-sm font-bold text-veg-primary hover:text-veg-primary-hover group-hover:translate-x-1 transition-transform duration-300">
-                  Ler Artigo Completo 
+                  {{ __('Ler Artigo Completo') }} 
                   <i data-lucide="arrow-right" class="w-4 h-4"></i>
                 </a>
               </div>
@@ -119,8 +119,8 @@
         @empty
           <div class="blog-empty-state">
             <i data-lucide="book-open" class="blog-empty-state-icon"></i>
-            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--color-veg-dark); margin-bottom: 0.5rem;">Nenhum artigo encontrado</h3>
-            <p style="color: #6b7280; font-size: 0.95rem;">Tente buscar por outras categorias ou tags.</p>
+            <h3 style="font-size: 1.25rem; font-weight: 800; color: var(--color-veg-dark); margin-bottom: 0.5rem;">{{ __('Nenhum artigo encontrado') }}</h3>
+            <p style="color: #6b7280; font-size: 0.95rem;">{{ __('Tente buscar por outras categorias ou tags.') }}</p>
           </div>
         @endforelse
 
@@ -142,7 +142,7 @@
             @if($articles->hasMorePages())
               <a href="{{ $articles->nextPageUrl() }}" 
                  class="px-5 h-12 rounded-full flex items-center justify-center font-bold bg-white text-veg-primary border-2 border-gray-100 hover:border-veg-primary hover:bg-veg-light transition-all duration-300 hover:scale-105 gap-1 text-sm shadow-sm">
-                próxima página <i data-lucide="chevrons-right" class="w-4 h-4"></i>
+                {{ __('próxima página') }} <i data-lucide="chevrons-right" class="w-4 h-4"></i>
               </a>
             @endif
           </nav>
@@ -157,7 +157,7 @@
         <div class="bg-white rounded-[32px] border border-gray-100 shadow-md" style="padding: 2.25rem 2rem;">
           <h3 class="text-base font-extrabold text-veg-dark mb-6 pb-4 border-b border-veg-primary/10 flex items-center gap-2">
             <i data-lucide="sparkles" class="w-5 h-5 text-veg-primary animate-pulse"></i>
-            Artigos Recentes
+            {{ __('Artigos Recentes') }}
           </h3>
           <div style="height: 1.5rem;"></div>
           <div class="flex flex-col gap-6">
@@ -165,14 +165,14 @@
               <a href="{{ url('/radar/' . $recent->slug) }}" class="group flex items-start gap-6 pb-6 border-b border-gray-100 last:border-b-0 last:pb-0 first:pt-0">
                 <div class="w-16 h-16 rounded-2xl overflow-hidden bg-gray-50 flex-shrink-0 relative">
                   @if($recent->cover_image)
-                    <img src="{{ asset('storage/' . $recent->cover_image) }}" alt="{{ $recent->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <img src="{{ asset('storage/' . $recent->cover_image) }}" alt="{{ $recent->display_title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                   @else
-                    <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="{{ $recent->title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
+                    <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="{{ $recent->display_title }}" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-300">
                   @endif
                 </div>
                 <div class="flex-grow pt-0.5">
                   <h4 class="text-xs font-extrabold text-gray-700 group-hover:text-veg-primary transition-colors leading-snug line-clamp-2">
-                    {{ $recent->title }}
+                    {{ $recent->display_title }}
                   </h4>
                   <span class="text-[10px] text-gray-400 mt-2 block font-semibold">
                     {{ $recent->published_at ? $recent->published_at->translatedFormat('d M, Y') : $recent->created_at->translatedFormat('d M, Y') }}
@@ -180,7 +180,7 @@
                 </div>
               </a>
             @empty
-              <p class="text-xs text-gray-400">Nenhum artigo recente.</p>
+              <p class="text-xs text-gray-400">{{ __('Nenhum artigo recente.') }}</p>
             @endforelse
           </div>
         </div>
@@ -189,7 +189,7 @@
         <div class="bg-white rounded-[32px] border border-gray-100 shadow-md" style="padding: 2.25rem 2rem;">
           <h3 class="text-base font-extrabold text-veg-dark mb-5 pb-3 border-b border-veg-primary/10 flex items-center gap-2">
             <i data-lucide="tag" class="w-5 h-5 text-veg-primary"></i>
-            Categorias
+            {{ __('Categorias') }}
           </h3>
           
           <ul class="flex flex-col gap-3 list-none">
@@ -210,7 +210,7 @@
                 </a>
               </li>
             @empty
-              <li class="text-xs text-gray-400">Nenhuma categoria cadastrada.</li>
+              <li class="text-xs text-gray-400">{{ __('Nenhuma categoria cadastrada.') }}</li>
             @endforelse
           </ul>
         </div>
@@ -219,7 +219,7 @@
         <div class="bg-white rounded-[32px] border border-gray-100 shadow-md" style="padding: 2.25rem 2rem;">
           <h3 class="text-base font-extrabold text-veg-dark mb-5 pb-3 border-b border-veg-primary/10 flex items-center gap-2">
             <i data-lucide="hash" class="w-5 h-5 text-veg-primary"></i>
-            Tags Principais
+            {{ __('Tags Principais') }}
           </h3>
           
           <div class="flex flex-wrap gap-2">
@@ -232,7 +232,7 @@
                 #{{ $tag }}
               </a>
             @empty
-              <p class="text-xs text-gray-400">Nenhuma tag cadastrada.</p>
+              <p class="text-xs text-gray-400">{{ __('Nenhuma tag cadastrada.') }}</p>
             @endforelse
           </div>
         </div>

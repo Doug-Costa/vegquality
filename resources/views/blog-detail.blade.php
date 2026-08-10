@@ -102,7 +102,7 @@
     <!-- Seção de Artigos Recomendados/Relacionados -->
     <div style="margin-top: 6rem;">
       <h3 style="font-size: 1.75rem; font-weight: 800; color: var(--color-veg-dark); margin-bottom: 2rem; position: relative; display: inline-block;">
-        Leituras Recomendadas
+        {{ __('Leituras Recomendadas') }}
         <span style="display: block; width: 60px; height: 4px; background-color: var(--color-veg-primary); margin-top: 8px; border-radius: 2px;"></span>
       </h3>
 
@@ -113,9 +113,9 @@
               <!-- Imagem da Recomendação -->
               <div style="width: 100%; aspect-ratio: 16/9; overflow: hidden; background-color: #f3f4f6; position: relative;">
                 @if($related->cover_image)
-                  <img src="{{ asset('storage/' . $related->cover_image) }}" alt="{{ $related->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <img src="{{ asset('storage/' . $related->cover_image) }}" alt="{{ $related->display_title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 @else
-                  <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="{{ $related->title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                  <img src="{{ asset('assets/images/Veg-Oxi-200-Website.jpg') }}" alt="{{ $related->display_title }}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
                 @endif
                 
                 @if($related->category)
@@ -133,18 +133,18 @@
                 </div>
 
                 <h4 style="font-size: 1.1rem; font-weight: 800; color: var(--color-veg-dark); line-height: 1.4; margin-bottom: 0.75rem;" class="group-hover:text-veg-primary transition-colors duration-300">
-                  {{ $related->title }}
+                  {{ $related->display_title }}
                 </h4>
 
                 <p style="font-size: 0.825rem; color: #6b7280; line-height: 1.5; margin-bottom: 1rem;">
-                  {{ Str::limit(strip_tags($related->content), 300, '...') }}
+                  {{ Str::limit(strip_tags($related->display_content), 300, '...') }}
                 </p>
               </div>
             </div>
 
             <div style="padding: 0 1.5rem 1.5rem 1.5rem;">
               <a href="{{ url('/radar/' . $related->slug) }}" class="btn btn-ghost" style="border-radius: 9999px; width: 100%; font-size: 0.75rem; padding: 0.5rem 1rem;">
-                Acessar Artigo <i data-lucide="arrow-right" class="w-4 h-4"></i>
+                {{ __('Acessar Artigo') }} <i data-lucide="arrow-right" class="w-4 h-4"></i>
               </a>
             </div>
           </div>
