@@ -252,9 +252,25 @@ return new class extends Migration
                     $setEn($content, 'badge_en', 'Learn More');
                     $setEn($content, 'title_en', 'Additional Details');
                     if (isset($content['downloads']) && is_array($content['downloads'])) {
-                        foreach ($content['downloads'] as &$dl) {
-                            $setEn($dl, 'title_en', $dl['title']);
-                            $setEn($dl, 'desc_en', $dl['desc']);
+                        $enDlItems = [
+                            [
+                                'title_en' => 'Technical Spec Sheet',
+                                'desc_en' => 'Consult the Veg Oxi 200 technical data sheet and find all details on composition, application, physical-chemical properties, storage, regulation, and usage recommendations.',
+                            ],
+                            [
+                                'title_en' => 'Usage Protocols',
+                                'desc_en' => 'Access the usage protocols to learn how to apply Veg Oxi 200 to each vegetable group for maximum efficiency, performance, and shelf life.',
+                            ],
+                            [
+                                'title_en' => 'MSDS (Safety Data Sheet)',
+                                'desc_en' => 'Access the Veg Oxi 200 MSDS to consult safety, handling, storage, transport, emergency measures, and recommendations for safe product use.',
+                            ],
+                        ];
+                        foreach ($content['downloads'] as $i => &$dl) {
+                            if (isset($enDlItems[$i])) {
+                                $setEn($dl, 'title_en', $enDlItems[$i]['title_en']);
+                                $setEn($dl, 'desc_en', $enDlItems[$i]['desc_en']);
+                            }
                         }
                         unset($dl);
                     }
@@ -264,9 +280,21 @@ return new class extends Migration
                     $setEn($content, 'badge_en', 'Distribution');
                     $setEn($content, 'title_en', 'Veg Oxi 200 Distribution');
                     if (isset($content['contacts']) && is_array($content['contacts'])) {
-                        foreach ($content['contacts'] as &$ct) {
-                            $setEn($ct, 'title_en', $ct['title']);
-                            $setEn($ct, 'desc_en', $ct['desc']);
+                        $enContactItems = [
+                            [
+                                'title_en' => 'Commercial Department',
+                                'desc_en' => 'Direct sales and technical inquiries for agro-industries.',
+                            ],
+                            [
+                                'title_en' => 'Regional Distributors',
+                                'desc_en' => 'Find authorized distributors near your region.',
+                            ],
+                        ];
+                        foreach ($content['contacts'] as $i => &$ct) {
+                            if (isset($enContactItems[$i])) {
+                                $setEn($ct, 'title_en', $enContactItems[$i]['title_en']);
+                                $setEn($ct, 'desc_en', $enContactItems[$i]['desc_en']);
+                            }
                         }
                         unset($ct);
                     }
