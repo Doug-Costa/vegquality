@@ -64,6 +64,27 @@
       ];
     @endphp
 
+    <style>
+      .facts-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+      @media (min-width: 992px) {
+        .facts-grid {
+          grid-template-columns: repeat(4, 1fr) !important;
+        }
+      }
+      @media (min-width: 640px) and (max-width: 991px) {
+        .facts-grid {
+          grid-template-columns: repeat(2, 1fr) !important;
+        }
+      }
+      .fact-card {
+        padding: 2.25rem 1.5rem !important;
+      }
+    </style>
+
     <div class="facts-grid animate-fade-up delay-100">
       @foreach($factCards as $index => $card)
         <div class="fact-card">
