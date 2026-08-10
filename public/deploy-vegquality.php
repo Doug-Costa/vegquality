@@ -130,21 +130,20 @@ chmod_recursive($basePath . '/public/storage', 0777, 0666);
 echo "Permissões aplicadas com sucesso em /bootstrap/cache, /storage e /public/storage.\n\n";
 
 $commands = [
-    // Instala dependências PHP otimizadas (Descomente se a Hostinger permitir exec do composer)
-    // "cd {$basePath} && composer install --optimize-autoloader --no-dev 2>&1",
+    // 1. Puxa as alterações do Git (se o repositório estiver clonado no servidor)
+    "cd {$basePath} && git pull origin dev 2>&1",
     
-    // Limpa os caches da aplicação
+    // 2. Limpa os caches da aplicação
     "cd {$basePath} && php artisan optimize:clear 2>&1",
     "cd {$basePath} && php artisan config:cache 2>&1",
     "cd {$basePath} && php artisan route:cache 2>&1",
     "cd {$basePath} && php artisan view:cache 2>&1",
     
-    // Roda migrations pendentes em produção
+    // 3. Roda migrations pendentes em produção (seguro - não apaga dados existentes)
     "cd {$basePath} && php artisan migrate --force 2>&1",
     
-    // Roda os seeders para criar/atualizar o usuário administrador
-    "cd {$basePath} && php artisan db:seed --force 2>&1",
-    
+    // ATENÇÃO: db:seed foi DESATIVADO para não sobrescrever/resetar os dados cadastrados no painel administrativo pela dona do site!
+    // "cd {$basePath} && php artisan db:seed --force 2>&1",
 ];
 
 foreach ($commands as $cmd) {
