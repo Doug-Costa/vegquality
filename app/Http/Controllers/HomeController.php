@@ -152,4 +152,20 @@ class HomeController extends Controller
 
         return view('blog-detail', compact('article', 'relatedArticles'));
     }
+
+    public function switchLang($locale)
+    {
+        if (in_array($locale, ['pt', 'pt_BR', 'en'])) {
+            $appLocale = $locale === 'en' ? 'en' : 'pt_BR';
+            session(['locale' => $appLocale]);
+        }
+        return redirect()->back();
+    }
+
+    public function handleLocalizedRoute($lang, $any = null)
+    {
+        $appLocale = $lang === 'en' ? 'en' : 'pt_BR';
+        session(['locale' => $appLocale]);
+        return redirect($any ? '/' . $any : '/');
+    }
 }

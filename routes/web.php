@@ -4,20 +4,12 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 
 // Language Switcher Route
-Route::get('/lang/{locale}', function ($locale) {
-    if (in_array($locale, ['pt', 'pt_BR', 'en'])) {
-        $appLocale = $locale === 'en' ? 'en' : 'pt_BR';
-        session(['locale' => $appLocale]);
-    }
-    return redirect()->back();
-})->name('lang.switch');
+Route::get('/lang/{locale}', [HomeController::class, 'switchLang'])->name('lang.switch');
 
 // Redirect /en/* or /pt/* to set session locale and remove prefix cleanly
-Route::get('/{lang}/{any?}', function ($lang, $any = null) {
-    $appLocale = $lang === 'en' ? 'en' : 'pt_BR';
-    session(['locale' => $appLocale]);
-    return redirect($any ? '/' . $any : '/');
-})->where('lang', 'en|pt')->where('any', '.*');
+Route::get('/{lang}/{any?}', [HomeController::class, 'handleLocalizedRoute'])
+    ->where('lang', 'en|pt')
+    ->where('any', '.*');
 
 // Standard Application Routes
 Route::get('/', [HomeController::class, 'index'])->name('home');
