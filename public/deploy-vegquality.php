@@ -131,7 +131,7 @@ echo "Permissões aplicadas com sucesso em /bootstrap/cache, /storage e /public/
 
 $commands = [
     // 1. Puxa as alterações do Git (se o repositório estiver clonado no servidor)
-    "cd {$basePath} && git pull origin dev 2>&1",
+    "cd {$basePath} && git pull origin main 2>&1",
     
     // 2. Limpa os caches da aplicação
     "cd {$basePath} && php artisan optimize:clear 2>&1",

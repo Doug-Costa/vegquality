@@ -9,7 +9,7 @@ cd "$DIR"
 
 # 1. Puxa as alterações mais recentes do repositório Git
 echo "📥 Puxando código atualizado do Git (git pull)..."
-git pull origin dev
+git pull origin main
 
 # 2. Executa as migrações de banco de dados pendentes
 echo "🗄️ Executando migrações de banco (php artisan migrate)..."
