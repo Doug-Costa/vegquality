@@ -19,6 +19,11 @@ if (!function_exists('trans_content')) {
             if (!is_null($enVal) && trim((string) $enVal) !== '') {
                 return $enVal;
             }
+
+            // If an explicit English default was provided by the view
+            if (!is_null($default) && $default !== data_get($content, $key)) {
+                return is_string($default) ? __($default) : $default;
+            }
         }
 
         $val = data_get($content, $key);
@@ -37,13 +42,6 @@ if (!function_exists('trans_content')) {
             $translatedTrimmed = __($trimmed);
             if ($translatedTrimmed !== $trimmed) {
                 return $translatedTrimmed;
-            }
-
-            if (is_string($default)) {
-                $translatedDefault = __($default);
-                if ($translatedDefault !== $default) {
-                    return $translatedDefault;
-                }
             }
         }
 
