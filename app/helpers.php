@@ -7,22 +7,22 @@ if (!function_exists('trans_content')) {
      */
     function trans_content(?array $content, string $key, mixed $default = null): mixed
     {
-        if (!$content) {
-            return is_string($default) ? __($default) : $default;
-        }
-
         $locale = app()->getLocale();
         $isEnglish = ($locale === 'en' || str_starts_with($locale, 'en'));
 
+        if (!$content) {
+            return ($isEnglish && is_string($default)) ? __($default) : $default;
+        }
+
         if ($isEnglish) {
             $enVal = data_get($content, $key . '_en');
-            if (!is_null($enVal) && $enVal !== '') {
+            if (!is_null($enVal) && trim((string) $enVal) !== '') {
                 return $enVal;
             }
         }
 
         $val = data_get($content, $key);
-        if (is_null($val) || $val === '') {
+        if (is_null($val) || trim((string) $val) === '') {
             $val = $default;
         }
 
@@ -30,6 +30,20 @@ if (!function_exists('trans_content')) {
             $translated = __($val);
             if ($translated !== $val) {
                 return $translated;
+            }
+
+            // Clean leading/trailing spaces or newlines for dictionary lookup
+            $trimmed = trim($val);
+            $translatedTrimmed = __($trimmed);
+            if ($translatedTrimmed !== $trimmed) {
+                return $translatedTrimmed;
+            }
+
+            if (is_string($default)) {
+                $translatedDefault = __($default);
+                if ($translatedDefault !== $default) {
+                    return $translatedDefault;
+                }
             }
         }
 
