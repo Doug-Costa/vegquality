@@ -180,48 +180,62 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
-        // Home Insights Section (NEW)
+        // Home Insights Section
         $home->sections()->updateOrCreate(
             ['key' => 'home_insights'],
             [
                 'content' => [
                     'badge' => 'Insights VegQuality',
+                    'badge_en' => 'VegQuality Insights',
                     'title' => 'Conhecimento que Transforma o Negócio',
+                    'title_en' => 'Knowledge that Transforms Business',
                     'description' => 'Nossos insights e metodologias para apoiar sua agroindústria em todas as etapas da cadeia produtiva.',
+                    'description_en' => 'Our insights and methodologies to support your agro-industry at every stage of the production chain.',
                     'cards' => [
                         [
                             'title' => 'Processos',
+                            'title_en' => 'Processes',
                             'icon' => 'settings',
-                            'description' => 'Padronização higiênico-sanitária operacional e processos industriais otimizados para zero desperdício.'
+                            'description' => 'Padronização higiênico-sanitária operacional e processos industriais otimizados para zero desperdício.',
+                            'description_en' => 'Hygienic-sanitary operational standardization and industrial processes optimized for zero waste.'
                         ],
                         [
                             'title' => 'Equipamentos',
+                            'title_en' => 'Equipment',
                             'icon' => 'cpu',
-                            'description' => 'Dimensionamento de maquinários ideais e escolha de tecnologias corretas para sua linha de processamento.'
+                            'description' => 'Dimensionamento de maquinários ideais e escolha de tecnologias corretas para sua linha de processamento.',
+                            'description_en' => 'Sizing of ideal machinery and selection of correct technologies for your processing line.'
                         ],
                         [
                             'title' => 'Cadeia de Frio',
+                            'title_en' => 'Cold Chain',
                             'icon' => 'thermometer',
-                            'description' => 'Monitoramento térmico rigoroso do campo ao ponto de venda, garantindo frescor e conformidade de gôndola.'
+                            'description' => 'Monitoramento térmico rigoroso do campo ao ponto de venda, garantindo frescor e conformidade de gôndola.',
+                            'description_en' => 'Strict thermal monitoring from field to point of sale, ensuring freshness and shelf compliance.'
                         ],
                         [
                             'title' => 'Embalagens',
+                            'title_en' => 'Packaging',
                             'icon' => 'box',
-                            'description' => 'Seleção de filmes técnicos de atmosfera modificada passiva (MAP) adequados para cada hortaliça.'
+                            'description' => 'Seleção de filmes técnicos de atmosfera modificada passiva (MAP) adequados para cada hortaliça.',
+                            'description_en' => 'Selection of technical passive modified atmosphere (MAP) films suitable for each vegetable.'
                         ]
                     ]
                 ]
             ]
         );
 
-        // Home Why Choose Section (NEW)
+        // Home Why Choose Section
         $home->sections()->updateOrCreate(
             ['key' => 'home_why_choose'],
             [
                 'content' => [
                     'badge' => 'Diferencial',
+                    'badge_en' => 'Our Edge',
                     'title' => 'Por que nos Escolher?',
-                    'description' => 'Conhecimento, vivência e experiência em todas as etapas da cadeia produtiva de vegetais frescos processados.'
+                    'title_en' => 'Why Choose Us?',
+                    'description' => 'Conhecimento, vivência e experiência em todas as etapas da cadeia produtiva de vegetais frescos processados.',
+                    'description_en' => 'Knowledge, practical background, and experience across all stages of the processed fresh produce chain.'
                 ]
             ]
         );
@@ -231,8 +245,11 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'badge' => 'Fale Conosco',
+                    'badge_en' => 'Contact Us',
                     'title' => 'Pronto para transformar a sua produção de hortaliças?',
+                    'title_en' => 'Ready to transform your vegetable production?',
                     'subtitle' => 'Entre em contato conosco hoje mesmo e fale diretamente com um especialista técnico da VegQuality.',
+                    'subtitle_en' => 'Get in touch with us today and speak directly with a VegQuality technical specialist.',
                     'phone' => '+55 11 5194-0325',
                     'whatsapp' => '+55 11 97834-8438',
                     'whatsapp_link' => 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20VegQuality.',
@@ -534,7 +551,9 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'title' => 'Consultoria e Soluções para a Agroindústria',
+                    'title_en' => 'Consulting and Solutions for Agro-Industry',
                     'subtitle' => 'Ciência e tecnologia aliadas para garantir alimentos mais seguros, saudáveis e lucrativos.',
+                    'subtitle_en' => 'Science and technology united to ensure safer, healthier, and more profitable food.',
                 ]
             ]
         );
@@ -547,11 +566,17 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'badge' => 'VegQuality',
+                    'badge_en' => 'VegQuality',
                     'title' => '100% Livre de sulfitos',
+                    'title_en' => '100% Sulfite-Free',
                     'description' => 'Você sabia que o metabissulfito de sódio (dióxido de enxofre) é amplamente usado como conservante nos vegetais frescos processados? 🌱 Com o <strong>Veg Oxi 200</strong>, isso fica definitivamente no passado! Oferecemos um coadjuvante de tecnologia inovador que substitui aditivos químicos nocivos com total eficácia.',
+                    'description_en' => 'Did you know that sodium metabisulfite is widely used as a preservative in fresh processed produce? 🌱 With <strong>Veg Oxi 200</strong>, that is a thing of the past! We offer an innovative processing aid that replaces harmful chemical additives with total efficacy.',
                     'check1' => 'Livre de dióxido de enxofre.',
+                    'check1_en' => 'Sulfur dioxide free.',
                     'check2' => 'Preserva alimentos de forma natural.',
+                    'check2_en' => 'Preserves food naturally.',
                     'check3' => 'Respeita a saúde do consumidor e do operador.',
+                    'check3_en' => 'Respects consumer and operator health.',
                 ]
             ]
         );
@@ -561,16 +586,26 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'badge' => 'VegQuality',
+                    'badge_en' => 'VegQuality',
                     'title' => 'Consultoria 360°',
+                    'title_en' => '360° Consulting',
                     'highlight_text' => 'Transforme sua linha de vegetais frescos prontos para o consumo!',
+                    'highlight_text_en' => 'Transform your line of fresh, ready-to-eat produce!',
                     'description' => 'Na Veg Quality, oferecemos soluções personalizadas e consultoria especializada para impulsionar a eficiência técnica e a segurança operacional da sua planta de processamento.',
+                    'description_en' => 'At VegQuality, we offer customized solutions and expert consulting to boost the technical efficiency and operational safety of your processing plant.',
                     'image' => 'assets/hero/Home-Veg-scaled.jpg',
                     'feature1_title' => 'Aumentar a durabilidade',
+                    'feature1_title_en' => 'Extend Shelf Life',
                     'feature1_desc' => 'Amplie consideravelmente o shelf-life e mantenha o frescor natural dos produtos por mais tempo.',
+                    'feature1_desc_en' => 'Significantly extend shelf life and maintain natural product freshness for longer.',
                     'feature2_title' => 'Reduzir custos e perdas',
+                    'feature2_title_en' => 'Reduce Costs & Losses',
                     'feature2_desc' => 'Minimize desperdícios na produção por meio de processos padronizados e tecnologia de ponta.',
+                    'feature2_desc_en' => 'Minimize production waste through standardized processes and cutting-edge technology.',
                     'feature3_title' => 'Elevar os padrões',
+                    'feature3_title_en' => 'Raise Standards',
                     'feature3_desc' => 'Garanta conformidade estrita com normas sanitárias e entregue máxima qualidade ao mercado.',
+                    'feature3_desc_en' => 'Ensure strict compliance with sanitary standards and deliver top quality to the market.',
                 ]
             ]
         );
@@ -580,17 +615,24 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'badge' => 'Liderança e Ciência',
+                    'badge_en' => 'Leadership & Science',
                     'title' => 'História da VegQuality<br><span style="color: var(--color-veg-primary);">Consultoria que gera resultados!</span>',
+                    'title_en' => 'VegQuality Story<br><span style="color: var(--color-veg-primary);">Consulting that delivers results!</span>',
                     'description1' => 'A VegQuality é mais que uma consultoria: é uma parceira estratégica para empresas que atuam na agroindústria de vegetais frescos, do campo aos pontos de distribuição.',
+                    'description1_en' => 'VegQuality is more than a consultancy: it is a strategic partner for companies in the fresh produce agro-industry, from the field to distribution points.',
                     'description2' => 'Combinando ciência, inovação, experiência prática e propósito, entregamos soluções personalizadas que fortalecem a qualidade, a segurança, a sustentabilidade e a rentabilidade da agroindústria de vegetais frescos higienizados.',
+                    'description2_en' => 'Combining science, innovation, practical experience, and purpose, we deliver tailored solutions that strengthen quality, safety, sustainability, and profitability in the fresh produce industry.',
                     'image' => 'assets/images/Foto-Roseane-Bob-profissional.jpg',
                     'image_caption' => 'Drª Roseane Bob, fundadora e diretora da VegQuality',
                     'card1_num' => '100%',
                     'card1_label' => 'Expertise',
+                    'card1_label_en' => 'Expertise',
                     'card2_num' => '100%',
                     'card2_label' => 'Experiência',
+                    'card2_label_en' => 'Experience',
                     'card3_num' => '100%',
                     'card3_label' => 'Resultados',
+                    'card3_label_en' => 'Results',
                 ]
             ]
         );
@@ -609,7 +651,9 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'title' => 'Serviços Oferecidos',
+                    'title_en' => 'Services Offered',
                     'subtitle' => 'Soluções estratégicas e operacionais de ponta para elevar a rentabilidade e o padrão de qualidade na agroindústria.',
+                    'subtitle_en' => 'Cutting-edge strategic and operational solutions to boost profitability and quality standards in agro-industry.',
                 ]
             ]
         );
@@ -619,18 +663,29 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'badge' => 'Nossos Serviços - Soluções',
+                    'badge_en' => 'Our Services & Solutions',
                     'title' => 'Consultoria 360° para a Agroindústria de FLV: Do Campo à Gôndola',
+                    'title_en' => '360° Consulting for Fresh Produce: From Field to Shelf',
                     'service1_badge' => 'Consultoria',
+                    'service1_badge_en' => 'Consulting',
                     'service1_title' => 'Consultoria',
+                    'service1_title_en' => 'Consulting',
                     'service1_desc' => 'Sua produção agroindustrial mais eficiente, segura e lucrativa. Nossa consultoria técnica acompanha o seu produto do campo à gôndola. Nós mergulhamos na sua operação para ajustar processos, otimizar maquinários, inovar em embalagens e estruturar sistemas rígidos de higienização. Onde houver uma não conformidade, nós entregamos a solução técnica. Deixe a burocracia e os gargalos operacionais conosco e foque exclusivamente no crescimento do seu negócio.',
+                    'service1_desc_en' => 'Make your agro-industrial production more efficient, safe, and profitable. Our technical consulting accompanies your product from field to shelf. We dive into your operation to adjust processes, optimize machinery, innovate packaging, and structure rigid sanitization systems.',
                     'service1_link' => '/contato?subject=consultoria',
                     'service2_badge' => 'Treinamentos',
+                    'service2_badge_en' => 'Training',
                     'service2_title' => 'Treinamentos',
+                    'service2_title_en' => 'Training',
                     'service2_desc' => 'Capacitação Prática para Resultados Reais. Ter procedimentos, manuais e POPs bem elaborados é fundamental, mas o verdadeiro desafio é transformá-los em ações consistentes no dia a dia da produção. Na VegQuality, nós levamos o conhecimento direto para o chão de fábrica. Atuamos lado a lado com operadores, líderes e manipuladores, integrando a capacitação à rotina real da sua agroindústria. O resultado? Processos que deixam de ser apenas papéis guardados e passam a ser compreendidos, aplicados e mantidos por todos.',
+                    'service2_desc_en' => 'Practical Training for Real Results. Having well-crafted procedures, manuals, and SOPs is essential, but the real challenge is turning them into consistent daily production actions. At VegQuality, we bring knowledge straight to the factory floor.',
                     'service2_link' => '/contato?subject=treinamento',
                     'service3_badge' => 'Projetos',
+                    'service3_badge_en' => 'Projects',
                     'service3_title' => 'Plano de Negócios',
+                    'service3_title_en' => 'Business Plan',
                     'service3_desc' => 'Agroindústria de FLV Processado: O mercado que mais cresce, mas que não aceita amadorismo. Investir em uma agroindústria sem um mapa claro é o caminho mais rápido para ver o seu capital evaporar. A falta de clareza sobre o tamanho real do investimento, o medo de comprar o maquinário errado e a incerteza se a conta vai fechar no final do mês podem transformar um grande sonho em uma enorme dor de cabeça financeira. Antes de colocar o seu dinheiro em jogo, você precisa de clareza absoluta sobre o que realmente funciona no dia a dia de uma fábrica. É preciso transformar a sua ideia em um negócio viável, seguro e altamente lucrativo.',
+                    'service3_desc_en' => 'Processed Fresh Produce Agro-Industry: The fastest growing market that demands professionalism. Investing without a clear roadmap is a risk. Before putting capital at play, gain absolute clarity on what works daily in a processing plant.',
                     'service3_link' => '/contato?subject=plano-de-negocios',
                 ]
             ]
@@ -793,7 +848,9 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'title' => 'Veg Oxi 200',
-                    'subtitle' => 'Tecnologia inovadora para conservação, shelf-life estendido e eliminação total do metabissulfito de sódio.'
+                    'title_en' => 'Veg Oxi 200',
+                    'subtitle' => 'Tecnologia inovadora para conservação, shelf-life estendido e eliminação total do metabissulfito de sódio.',
+                    'subtitle_en' => 'Innovative technology for preservation, extended shelf life, and complete elimination of sodium metabisulfite.',
                 ]
             ]
         );
@@ -803,24 +860,35 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'badge' => 'Por Trás do Produto',
+                    'badge_en' => 'Behind the Product',
                     'title' => 'Fatos sobre o Veg Oxi 200',
+                    'title_en' => 'Facts about Veg Oxi 200',
                     'cards' => [
                         [
                             'title' => 'Veg Oxi 200 (Origem)',
-                            'desc' => 'O Veg Oxi 200 nasceu de uma necessidade real identificada no dia a dia da Dra. Roseane Bob, através da consultoria prestada a produtores rurais que processavam vegetais...',
-                            'body' => 'O Veg Oxi 200 nasceu de uma necessidade real identificada no dia a dia da Dra. Roseane Bob, através da consultoria prestada a produtores rurais que processavam vegetais. Essa imersão prática na realidade do campo e do galpão de processamento foi a semente que, dez anos depois, transformou-se na VegQuality, hoje uma robusta consultoria especializada na agroindústria de vegetais frescos. Vivenciando de perto as dores e os desafios reais do setor, a cientista e fundadora da VegQuality percebeu a urgência do mercado por uma solução que retardasse o processo de oxidação e deterioração dos FLV, substituindo os sulfitos com total eficiência e segurança. Após intensas pesquisas no Brasil e no exterior, a Dra. Roseane desenvolveu este inovador coadjuvante de tecnologia, respeitando rigorosamente todas as exigências regulatórias.',
+                            'title_en' => 'Veg Oxi 200 (Origin)',
+                            'desc' => 'O Veg Oxi 200 nasceu de uma necessidade real identificada no dia a dia da Dra. Roseane Bob...',
+                            'desc_en' => 'Veg Oxi 200 was born out of a real need identified by Dr. Roseane Bob...',
+                            'body' => 'O Veg Oxi 200 nasceu de uma necessidade real identificada no dia a dia da Dra. Roseane Bob...',
+                            'body_en' => 'Veg Oxi 200 was born out of a real need identified in the daily work of Dr. Roseane Bob through consulting provided to produce growers...',
                             'icon' => 'history'
                         ],
                         [
                             'title' => 'Comercialização (VegQuality)',
-                            'desc' => 'A gestão comercial, a distribuição e o suporte técnico estratégico do Veg Oxi 200 são realizados com exclusividade pela VegQuality. A história do produto está diretamente ligada à origem da nossa empresa...',
-                            'body' => 'A gestão comercial, a distribuição e o suporte técnico estratégico do Veg Oxi 200 são realizados com exclusividade pela VegQuality. A história do produto está diretamente ligada à origem da nossa empresa. O Veg Oxi 200 nasceu há uma década, a partir da necessidade real identificada no dia a dia das consultorias prestadas pela nossa fundadora, a cientista Dra. Roseane Bob, a produtores rurais que processavam vegetais. O que começou no campo, dez anos depois se consolidou na VegQuality: uma robusta consultoria especializada na agroindústria de vegetais frescos. Ao escolher o Veg Oxi 200, o seu negócio não adquire apenas um produto, mas sim toda a bagagem prática, o atendimento especializado e o respaldo técnico de quem vive e respira o mercado de FLV.',
+                            'title_en' => 'Commercialization (VegQuality)',
+                            'desc' => 'A gestão comercial, a distribuição e o suporte técnico estratégico do Veg Oxi 200 são realizados com exclusividade pela VegQuality...',
+                            'desc_en' => 'Commercial management, distribution, and strategic technical support for Veg Oxi 200 are exclusively provided by VegQuality...',
+                            'body' => 'A gestão comercial, a distribuição e o suporte técnico estratégico do Veg Oxi 200 são realizados com exclusividade pela VegQuality...',
+                            'body_en' => 'Commercial management, distribution, and strategic technical support for Veg Oxi 200 are exclusively provided by VegQuality...',
                             'icon' => 'award'
                         ],
                         [
                             'title' => 'Produção (Chemiquímica)',
-                            'desc' => 'Para transformar a inovação científica da Dra. Roseane Bob em uma solução de alto padrão e escala para o mercado nacional, a produção e a industrialização do Veg Oxi 200 são realizadas pela Chemiquímica...',
-                            'body' => 'Chemiquímica Ltda – Rigor e Escala Industrial: Para transformar a inovação científica da Dra. Roseane Bob em uma solução de alto padrão e escala para o mercado nacional, a produção e a industrialização do Veg Oxi 200 são realizadas pela Chemiquímica Ltda. Localizada em Ponta Grossa, no Paraná, a Chemiquímica é uma indústria moderna, robusta e estruturada, responsável por garantir o rigor analítico, a padronização e a máxima qualidade em cada lote fabricado. Essa estrutura industrial robusta garante que o Veg Oxi 200 seja entregue com total regularidade, segurança regulatória e eficiência logística para atender desde o pequeno produtor até as maiores agroindústrias do país.',
+                            'title_en' => 'Production (Chemiquímica)',
+                            'desc' => 'Para transformar a inovação científica da Dra. Roseane Bob em uma solução de alto padrão e escala para o mercado nacional, a produção é realizada pela Chemiquímica...',
+                            'desc_en' => 'To turn scientific innovation into high-standard solutions at scale, production is carried out by Chemiquímica...',
+                            'body' => 'Para transformar a inovação científica da Dra. Roseane Bob em uma solução de alto padrão e escala para o mercado nacional...',
+                            'body_en' => 'To turn scientific innovation into high-standard solutions at scale, production is carried out by Chemiquímica Ltda in Ponta Grossa, PR...',
                             'icon' => 'factory'
                         ]
                     ]
@@ -921,7 +989,9 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'title' => 'Insights VegQuality',
-                    'subtitle' => 'Conhecimento, vivência e experiência em todas as etapas da cadeia produtiva de vegetais frescos processados.'
+                    'title_en' => 'VegQuality Insights',
+                    'subtitle' => 'Conhecimento, vivência e experiência em todas as etapas da cadeia produtiva de vegetais frescos processados.',
+                    'subtitle_en' => 'Knowledge, practical background, and experience across all stages of the processed fresh produce chain.',
                 ]
             ]
         );
@@ -931,27 +1001,37 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'badge' => 'Insights',
+                    'badge_en' => 'Insights',
                     'title' => 'Como a VegQuality Pode Apoiar seu Negócio',
+                    'title_en' => 'How VegQuality Can Support Your Business',
                     'cards' => [
                         [
                             'title' => 'Consultoria',
+                            'title_en' => 'Consulting',
                             'icon' => 'leaf',
-                            'description' => 'Consultoria Especializada do Campo à Gôndola Combinamos bagagem técnica e vivência prática na agroindústria de FLV para transformar a eficiência do seu negócio. Ajudamos sua empresa a implementar as melhores tecnologias de processamento, sistemas de higienização e gestão da cadeia de frio. O resultado? Máxima extensão de shelf life, conformidade regulatória rigorosa, segurança dos alimentos e uma redução drástica nas perdas e desperdícios.'
+                            'description' => 'Consultoria Especializada do Campo à Gôndola. Combinamos bagagem técnica e vivência prática na agroindústria de FLV para transformar a eficiência do seu negócio.',
+                            'description_en' => 'Specialized Consulting from Field to Shelf. We combine technical expertise and practical experience in the fresh produce industry to transform business efficiency.'
                         ],
                         [
                             'title' => 'Plano de Negócios',
+                            'title_en' => 'Business Plan',
                             'icon' => 'briefcase',
-                            'description' => 'Transforme sua ideia em uma Agroindústria de FLV Lucrativa e Segura Tirar um projeto de processamento mínimo do papel exige precisão técnica e financeira. Nosso suporte especializado apoia empreendedores em todas as etapas de estruturação e expansão de negócios de FLV. Entregamos um estudo de viabilidade técnica e econômica de ponta a ponta: do dimensionamento do chão de fábrica e seleção de maquinário até a análise de mercado, custos operacionais e projeções de faturamento. Proporcionamos a visão clara e a segurança estratégica que o seu investimento precisa para prosperar.'
+                            'description' => 'Transforme sua ideia em uma Agroindústria de FLV Lucrativa e Segura. Estudo de viabilidade técnica e econômica de ponta a ponta.',
+                            'description_en' => 'Turn your idea into a Profitable and Safe Fresh Produce Agro-Industry. End-to-end technical and economic feasibility studies.'
                         ],
                         [
                             'title' => 'Treinamento',
+                            'title_en' => 'Training',
                             'icon' => 'graduation-cap',
-                            'description' => 'Oferecemos treinamentos práticos e personalizados, desenvolvidos de acordo com a realidade operacional de cada agroindústria. A capacitação é baseada nos processos, equipamentos e tecnologias efetivamente utilizados pela empresa, abordando etapas de processamento, técnicas de corte, centrifugação e embalagem, boas práticas de armazenamento e transporte, higiene e segurança dos alimentos.'
+                            'description' => 'Oferecemos treinamentos práticos e personalizados, desenvolvidos de acordo com a realidade operacional de cada agroindústria.',
+                            'description_en' => 'We offer practical, customized training developed in line with the operational reality of each processing plant.'
                         ],
                         [
                             'title' => 'Veg Oxi 200',
+                            'title_en' => 'Veg Oxi 200',
                             'icon' => 'shield-check',
-                            'description' => 'O Veg Oxi 200 é uma tecnologia inovadora que retarda a oxidação de saladas, legumes, couve-manteiga e outras hortaliças e vegetais frescos processados. Ao evitar o escurecimento precoce, ele preserva a cor viva, o frescor e a qualidade original dos alimentos. O resultado é um produto visualmente muito mais atraente para o consumidor, com maior tempo de prateleira (shelf life) e redução significativa do desperdício na cadeia produtiva.'
+                            'description' => 'O Veg Oxi 200 é uma tecnologia inovadora que retarda a oxidação de saladas, legumes e hortaliças frescas processadas.',
+                            'description_en' => 'Veg Oxi 200 is an innovative technology that delays the oxidation of processed salads, vegetables, and greens.'
                         ]
                     ]
                 ]
@@ -963,8 +1043,11 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'badge' => 'Diferencial',
+                    'badge_en' => 'Our Edge',
                     'title' => 'Por que nos Escolher?',
-                    'description' => 'Conhecimento, vivência e experiência em todas as etapas da cadeia produtiva de vegetais frescos processados.'
+                    'title_en' => 'Why Choose Us?',
+                    'description' => 'Conhecimento, vivência e experiência em todas as etapas da cadeia produtiva de vegetais frescos processados.',
+                    'description_en' => 'Knowledge, practical background, and experience across all stages of the processed fresh produce chain.'
                 ]
             ]
         );
@@ -983,7 +1066,9 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'title' => 'Fale Conosco',
+                    'title_en' => 'Contact Us',
                     'subtitle' => 'Tire suas dúvidas ou envie uma solicitação para nossa equipe. Estamos prontos para ajudar sua agroindústria.',
+                    'subtitle_en' => 'Have questions or need assistance? Our team is ready to support your agro-industry.',
                 ]
             ]
         );
@@ -993,13 +1078,18 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'title' => 'Nossos Canais',
+                    'title_en' => 'Our Channels',
                     'description' => 'Escolha o canal de sua preferência para falar conosco ou envie uma mensagem no formulário ao lado.',
+                    'description_en' => 'Choose your preferred channel to contact us or send a message using the form.',
                     'phone' => '+55 11 5194-0325',
                     'phone_hours' => 'Atendimento de Seg. a Sex. das 8h às 18h',
+                    'phone_hours_en' => 'Mon to Fri, 8am to 6pm (BRT)',
                     'whatsapp' => '+55 11 97834-8438',
                     'whatsapp_desc' => 'Fale diretamente com nossa equipe',
+                    'whatsapp_desc_en' => 'Speak directly with our technical team',
                     'email' => 'vegquality@vegquality.com.br',
                     'email_desc' => 'Nós respondemos em até um dia útil',
+                    'email_desc_en' => 'We reply within 1 business day',
                 ]
             ]
         );
@@ -1009,9 +1099,13 @@ class DatabaseSeeder extends Seeder
             [
                 'content' => [
                     'title' => 'Envie uma Mensagem',
+                    'title_en' => 'Send Us a Message',
                     'submit_text' => 'Enviar Mensagem',
+                    'submit_text_en' => 'Send Message',
                     'success_title' => 'Mensagem Enviada!',
+                    'success_title_en' => 'Message Sent!',
                     'success_message' => 'Obrigado pelo seu contato. Nossa equipe técnica analisará sua mensagem e entrará em contato em breve.',
+                    'success_message_en' => 'Thank you for getting in touch. Our technical team will analyze your message and respond shortly.',
                 ]
             ]
         );
