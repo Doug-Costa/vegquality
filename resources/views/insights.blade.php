@@ -38,11 +38,11 @@
           <div class="home-insight-icon-box">
             <i data-lucide="{{ data_get($card, 'icon', 'settings') }}"></i>
           </div>
-          <h3 class="home-insight-title">{{ data_get($card, 'title') }}</h3>
+          <h3 class="home-insight-title">{{ trans_content($card, 'title') }}</h3>
           <p class="home-insight-desc">
-            {{ Str::limit(data_get($card, 'description'), 300, '...') }}
-            @if(strlen(data_get($card, 'description')) > 300)
-              <button type="button" class="leia-mais-btn" data-title="{{ data_get($card, 'title') }}" data-text="{{ data_get($card, 'description') }}">Leia mais</button>
+            {{ Str::limit(trans_content($card, 'description'), 300, '...') }}
+            @if(strlen(trans_content($card, 'description')) > 300)
+              <button type="button" class="leia-mais-btn" data-title="{{ trans_content($card, 'title') }}" data-text="{{ trans_content($card, 'description') }}">{{ __('Leia mais') }}</button>
             @endif
           </p>
         </div>
@@ -57,10 +57,10 @@
 <section class="why-choose-section">
   <div class="container">
     <div class="why-choose-banner animate-fade-up">
-      <span class="why-choose-badge">{{ data_get($whyChoose, 'badge', 'Diferencial') }}</span>
-      <h2 class="why-choose-title">{{ data_get($whyChoose, 'title', 'Por que nos Escolher?') }}</h2>
+      <span class="why-choose-badge">{{ trans_content($whyChoose, 'badge', 'Diferencial') }}</span>
+      <h2 class="why-choose-title">{{ trans_content($whyChoose, 'title', 'Por que nos Escolher?') }}</h2>
       <p class="why-choose-text">
-        {{ data_get($whyChoose, 'description') }}
+        {{ trans_content($whyChoose, 'description') }}
       </p>
     </div>
   </div>

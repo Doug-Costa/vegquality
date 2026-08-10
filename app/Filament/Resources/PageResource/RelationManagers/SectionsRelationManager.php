@@ -105,32 +105,39 @@ class SectionsRelationManager extends RelationManager
                             ->image()
                             ->maxSize(102400)
                             ->required(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->helperText('Use tags HTML como <span> para destacar se desejar.')
-                            ->required(),
-                        Forms\Components\Textarea::make('subtitle')
-                            ->label('Subtítulo / Descrição')
-                            ->required(),
-                        Forms\Components\Grid::make(2)
-                            ->schema([
-                                Forms\Components\TextInput::make('btn1_text')
-                                    ->label('Texto do Botão 1'),
-                                Forms\Components\TextInput::make('btn1_link')
-                                    ->label('Link do Botão 1'),
-                                Forms\Components\TextInput::make('btn2_text')
-                                    ->label('Texto do Botão 2'),
-                                Forms\Components\TextInput::make('btn2_link')
-                                    ->label('Link do Botão 2'),
+                        Forms\Components\Tabs::make('Idioma Slide')
+                            ->tabs([
+                                Forms\Components\Tabs\Tab::make('Português (PT)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title')
+                                            ->label('Título Principal (PT)')
+                                            ->helperText('Use tags HTML como <span> para destacar se desejar.')
+                                            ->required(),
+                                        Forms\Components\Textarea::make('subtitle')
+                                            ->label('Subtítulo / Descrição (PT)')
+                                            ->required(),
+                                        Forms\Components\TextInput::make('btn1_text')->label('Texto Botão 1 (PT)'),
+                                        Forms\Components\TextInput::make('btn2_text')->label('Texto Botão 2 (PT)'),
+                                        Forms\Components\TextInput::make('badge1_text')->label('Badge 1 (PT)'),
+                                        Forms\Components\TextInput::make('badge2_text')->label('Badge 2 (PT)'),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title_en')
+                                            ->label('Título Principal (EN)'),
+                                        Forms\Components\Textarea::make('subtitle_en')
+                                            ->label('Subtítulo / Descrição (EN)'),
+                                        Forms\Components\TextInput::make('btn1_text_en')->label('Texto Botão 1 (EN)'),
+                                        Forms\Components\TextInput::make('btn2_text_en')->label('Texto Botão 2 (EN)'),
+                                        Forms\Components\TextInput::make('badge1_text_en')->label('Badge 1 (EN)'),
+                                        Forms\Components\TextInput::make('badge2_text_en')->label('Badge 2 (EN)'),
+                                    ]),
                             ]),
                         Forms\Components\Grid::make(3)
                             ->schema([
-                                Forms\Components\TextInput::make('badge1_text')
-                                    ->label('Texto do Badge 1 (Fade to Right)'),
-                                Forms\Components\TextInput::make('badge2_text')
-                                    ->label('Texto do Badge 2 (Fade to Left)'),
-                                Forms\Components\TextInput::make('badge2_link')
-                                    ->label('Link do Badge 2 (E.g. #contato ou /pagina)'),
+                                Forms\Components\TextInput::make('btn1_link')->label('Link do Botão 1'),
+                                Forms\Components\TextInput::make('btn2_link')->label('Link do Botão 2'),
+                                Forms\Components\TextInput::make('badge2_link')->label('Link do Badge 2'),
                             ]),
                     ])
                     ->collapsible()
@@ -140,785 +147,843 @@ class SectionsRelationManager extends RelationManager
             ],
 
             'product_highlight' => [
-                Forms\Components\Grid::make(2)
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título (PT)')->required(),
+                                Forms\Components\TextInput::make('subtitle')->label('Subtítulo (PT)')->required(),
+                                Forms\Components\TextInput::make('cta_text')->label('Texto Botão CTA (PT)')->required(),
+
+                                Forms\Components\Section::make('Card Verde (Com Veg Oxi 200)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('cost_with_unit')->label('Unidade do Custo'),
+                                        Forms\Components\TextInput::make('cost_with_desc')->label('Descrição do Custo'),
+                                        Forms\Components\TextInput::make('cost_with_tag')->label('Etiqueta do Custo'),
+                                    ])->columns(3),
+
+                                Forms\Components\Section::make('Card Vermelho (Sem Veg Oxi 200)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('cost_without_unit')->label('Unidade do Custo'),
+                                        Forms\Components\TextInput::make('cost_without_desc')->label('Descrição do Custo'),
+                                        Forms\Components\TextInput::make('cost_without_tag')->label('Etiqueta do Custo'),
+                                    ])->columns(3),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título (EN)'),
+                                Forms\Components\TextInput::make('subtitle_en')->label('Subtítulo (EN)'),
+                                Forms\Components\TextInput::make('cta_text_en')->label('Texto Botão CTA (EN)'),
+
+                                Forms\Components\Section::make('Card Verde (Com Veg Oxi 200) - EN')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('cost_with_unit_en')->label('Unidade do Custo (EN)'),
+                                        Forms\Components\TextInput::make('cost_with_desc_en')->label('Descrição do Custo (EN)'),
+                                        Forms\Components\TextInput::make('cost_with_tag_en')->label('Etiqueta do Custo (EN)'),
+                                    ])->columns(3),
+
+                                Forms\Components\Section::make('Card Vermelho (Sem Veg Oxi 200) - EN')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('cost_without_unit_en')->label('Unidade do Custo (EN)'),
+                                        Forms\Components\TextInput::make('cost_without_desc_en')->label('Descrição do Custo (EN)'),
+                                        Forms\Components\TextInput::make('cost_without_tag_en')->label('Etiqueta do Custo (EN)'),
+                                    ])->columns(3),
+                            ]),
+                    ]),
+                Forms\Components\Grid::make(3)
                     ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('subtitle')
-                            ->label('Subtítulo')
-                            ->required()
-                            ->columnSpanFull(),
-                        
-                        Forms\Components\Section::make('Card Verde (Com Veg Oxi 200)')
-                            ->schema([
-                                Forms\Components\TextInput::make('cost_with')
-                                    ->label('Número do Custo')
-                                    ->placeholder('Ex: 30'),
-                                Forms\Components\TextInput::make('cost_with_unit')
-                                    ->label('Unidade do Custo')
-                                    ->placeholder('Ex: Cents'),
-                                Forms\Components\TextInput::make('cost_with_desc')
-                                    ->label('Descrição do Custo')
-                                    ->placeholder('Ex: Por Vegetal Fresco'),
-                                Forms\Components\TextInput::make('cost_with_tag')
-                                    ->label('Etiqueta do Custo')
-                                    ->placeholder('Ex: Livre de Sulfitos (Seguro)'),
-                            ])->columns(2),
-
-                        Forms\Components\Section::make('Card Vermelho (Sem Veg Oxi 200)')
-                            ->schema([
-                                Forms\Components\TextInput::make('cost_without')
-                                    ->label('Número do Custo')
-                                    ->placeholder('Ex: 80'),
-                                Forms\Components\TextInput::make('cost_without_unit')
-                                    ->label('Unidade do Custo')
-                                    ->placeholder('Ex: Cents'),
-                                Forms\Components\TextInput::make('cost_without_desc')
-                                    ->label('Descrição do Custo')
-                                    ->placeholder('Ex: Por Vegetal Oxidado'),
-                                Forms\Components\TextInput::make('cost_without_tag')
-                                    ->label('Etiqueta do Custo')
-                                    ->placeholder('Ex: Com Metabissulfito (Tóxico)'),
-                            ])->columns(2),
-
+                        Forms\Components\TextInput::make('cost_with')->label('Número do Custo Verde (Ex: 30)'),
+                        Forms\Components\TextInput::make('cost_without')->label('Número do Custo Vermelho (Ex: 80)'),
+                        Forms\Components\TextInput::make('cta_link')->label('Link do Botão CTA')->required(),
                         Forms\Components\FileUpload::make('image')
-                                    ->label('Imagem Comparativa')
-                                    ->image()
-                                    ->directory('products')
-                                    ->disk('public')
-                                    ->maxSize(102400)
-                                    ->helperText('Max 100MB.')
-                                    ->columnSpanFull(),
-
-                        Forms\Components\TextInput::make('cta_text')
-                            ->label('Texto do Botão CTA')
-                            ->required(),
-                        Forms\Components\TextInput::make('cta_link')
-                            ->label('Link do Botão CTA')
-                            ->required(),
+                            ->label('Imagem Comparativa')
+                            ->image()
+                            ->directory('products')
+                            ->disk('public')
+                            ->maxSize(102400)
+                            ->columnSpanFull(),
                     ])
             ],
 
             'about' => [
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\Textarea::make('highlight_text')->label('Texto em Destaque (PT)')->required(),
+                                Forms\Components\Textarea::make('desc1')->label('Parágrafo 1 (PT)'),
+                                Forms\Components\Textarea::make('desc2')->label('Parágrafo 2 (PT)'),
+                                Forms\Components\Textarea::make('desc3')->label('Parágrafo 3 (PT)'),
+                                Forms\Components\Textarea::make('desc4')->label('Parágrafo 4 (PT)'),
+                                Forms\Components\TextInput::make('feature1_title')->label('Pilar 1 Título (PT)'),
+                                Forms\Components\Textarea::make('feature1_desc')->label('Pilar 1 Descrição (PT)'),
+                                Forms\Components\TextInput::make('feature2_title')->label('Pilar 2 Título (PT)'),
+                                Forms\Components\Textarea::make('feature2_desc')->label('Pilar 2 Descrição (PT)'),
+                                Forms\Components\TextInput::make('cta_text')->label('Texto Botão CTA (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\Textarea::make('highlight_text_en')->label('Texto em Destaque (EN)'),
+                                Forms\Components\Textarea::make('desc1_en')->label('Parágrafo 1 (EN)'),
+                                Forms\Components\Textarea::make('desc2_en')->label('Parágrafo 2 (EN)'),
+                                Forms\Components\Textarea::make('desc3_en')->label('Parágrafo 3 (EN)'),
+                                Forms\Components\Textarea::make('desc4_en')->label('Parágrafo 4 (EN)'),
+                                Forms\Components\TextInput::make('feature1_title_en')->label('Pilar 1 Título (EN)'),
+                                Forms\Components\Textarea::make('feature1_desc_en')->label('Pilar 1 Descrição (EN)'),
+                                Forms\Components\TextInput::make('feature2_title_en')->label('Pilar 2 Título (EN)'),
+                                Forms\Components\Textarea::make('feature2_desc_en')->label('Pilar 2 Descrição (EN)'),
+                                Forms\Components\TextInput::make('cta_text_en')->label('Texto Botão CTA (EN)'),
+                            ]),
+                    ]),
                 Forms\Components\Grid::make(2)
                     ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\Textarea::make('highlight_text')
-                            ->label('Texto em Destaque')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\Textarea::make('desc1')
-                            ->label('Parágrafo 1')
-                            ->columnSpanFull(),
-                        Forms\Components\Textarea::make('desc2')
-                            ->label('Parágrafo 2')
-                            ->columnSpanFull(),
-                        Forms\Components\Textarea::make('desc3')
-                            ->label('Parágrafo 3')
-                            ->columnSpanFull(),
-                        
-                        Forms\Components\Section::make('Pilar 1')
-                            ->schema([
-                                Forms\Components\TextInput::make('feature1_title')
-                                    ->label('Título'),
-                                Forms\Components\Textarea::make('feature1_desc')
-                                    ->label('Descrição'),
-                            ])->columns(1),
-
-                        Forms\Components\Section::make('Pilar 2')
-                            ->schema([
-                                Forms\Components\TextInput::make('feature2_title')
-                                    ->label('Título'),
-                                Forms\Components\Textarea::make('feature2_desc')
-                                    ->label('Descrição'),
-                            ])->columns(1),
-
-                        Forms\Components\Textarea::make('desc4')
-                            ->label('Parágrafo 4 (Final)')
-                            ->columnSpanFull(),
-
+                        Forms\Components\TextInput::make('cta_link')->label('Link do Botão CTA')->required(),
                         Forms\Components\FileUpload::make('image')
-                                    ->label('Imagem de Perfil / Ilustrativa')
-                                    ->image()
-                                    ->directory('about')
-                                    ->disk('public')
-                                    ->maxSize(102400)
-                                    ->helperText('Max 100MB.')
-                                    ->columnSpanFull(),
-
-                        Forms\Components\TextInput::make('cta_text')
-                            ->label('Texto do Botão CTA')
-                            ->required(),
-                        Forms\Components\TextInput::make('cta_link')
-                            ->label('Link do Botão CTA')
-                            ->required(),
+                            ->label('Imagem de Perfil')
+                            ->image()
+                            ->directory('about')
+                            ->disk('public')
+                            ->maxSize(102400)
+                            ->columnSpanFull(),
                     ])
             ],
 
             'empresa_hero' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título')
-                            ->required(),
-                        Forms\Components\Textarea::make('subtitle')
-                            ->label('Subtítulo')
-                            ->required(),
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')->label('Título (PT)')->required(),
+                                Forms\Components\Textarea::make('subtitle')->label('Subtítulo (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title_en')->label('Título (EN)'),
+                                Forms\Components\Textarea::make('subtitle_en')->label('Subtítulo (EN)'),
+                            ]),
                     ])
             ],
 
             'empresa_stats' => [
-                Forms\Components\Grid::make(2)
-                    ->schema([
-                        Forms\Components\TextInput::make('stat_number')
-                            ->label('Número / Indicador')
-                            ->placeholder('Ex: 25 M')
-                            ->required(),
-                        Forms\Components\TextInput::make('stat_text')
-                            ->label('Descrição do Indicador')
-                            ->placeholder('Ex: de Toneladas Salvas do Desperdício')
-                            ->required(),
-                    ])
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('stat_text')->label('Descrição do Indicador (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('stat_text_en')->label('Descrição do Indicador (EN)'),
+                            ]),
+                    ]),
+                Forms\Components\TextInput::make('stat_number')->label('Número / Indicador (Ex: 25 M)')->required(),
             ],
 
             'empresa_sulfito' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título')
-                            ->required(),
-                        Forms\Components\Textarea::make('description')
-                            ->label('Descrição')
-                            ->required(),
-                        Forms\Components\Section::make('Itens do Checklist')
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
                             ->schema([
-                                Forms\Components\TextInput::make('check1')
-                                    ->label('Check 1')
-                                    ->required(),
-                                Forms\Components\TextInput::make('check2')
-                                    ->label('Check 2')
-                                    ->required(),
-                                Forms\Components\TextInput::make('check3')
-                                    ->label('Check 3')
-                                    ->required(),
-                            ])
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título (PT)')->required(),
+                                Forms\Components\Textarea::make('description')->label('Descrição (PT)')->required(),
+                                Forms\Components\TextInput::make('check1')->label('Check 1 (PT)')->required(),
+                                Forms\Components\TextInput::make('check2')->label('Check 2 (PT)')->required(),
+                                Forms\Components\TextInput::make('check3')->label('Check 3 (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título (EN)'),
+                                Forms\Components\Textarea::make('description_en')->label('Descrição (EN)'),
+                                Forms\Components\TextInput::make('check1_en')->label('Check 1 (EN)'),
+                                Forms\Components\TextInput::make('check2_en')->label('Check 2 (EN)'),
+                                Forms\Components\TextInput::make('check3_en')->label('Check 3 (EN)'),
+                            ]),
                     ])
             ],
 
             'empresa_frescor' => [
-                Forms\Components\Grid::make(2)
-                    ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('highlight_text')
-                            ->label('Texto em Destaque')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\Textarea::make('description')
-                            ->label('Descrição Geral')
-                            ->required()
-                            ->columnSpanFull(),
-                        
-                        Forms\Components\FileUpload::make('image')
-                                    ->label('Imagem do Lado Direito')
-                                    ->image()
-                                    ->directory('empresa')
-                                    ->disk('public')
-                                    ->maxSize(102400)
-                                    ->helperText('Max 100MB.')
-                                    ->columnSpanFull(),
-
-                        Forms\Components\Section::make('Ponto 1')
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
                             ->schema([
-                                Forms\Components\TextInput::make('feature1_title')
-                                    ->label('Título')
-                                    ->required(),
-                                Forms\Components\Textarea::make('feature1_desc')
-                                    ->label('Descrição')
-                                    ->required(),
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\TextInput::make('highlight_text')->label('Texto em Destaque (PT)')->required(),
+                                Forms\Components\Textarea::make('description')->label('Descrição Geral (PT)')->required(),
+                                Forms\Components\TextInput::make('feature1_title')->label('Ponto 1 Título (PT)')->required(),
+                                Forms\Components\Textarea::make('feature1_desc')->label('Ponto 1 Descrição (PT)')->required(),
+                                Forms\Components\TextInput::make('feature2_title')->label('Ponto 2 Título (PT)')->required(),
+                                Forms\Components\Textarea::make('feature2_desc')->label('Ponto 2 Descrição (PT)')->required(),
+                                Forms\Components\TextInput::make('feature3_title')->label('Ponto 3 Título (PT)')->required(),
+                                Forms\Components\Textarea::make('feature3_desc')->label('Ponto 3 Descrição (PT)')->required(),
                             ]),
-                        Forms\Components\Section::make('Ponto 2')
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
                             ->schema([
-                                Forms\Components\TextInput::make('feature2_title')
-                                    ->label('Título')
-                                    ->required(),
-                                Forms\Components\Textarea::make('feature2_desc')
-                                    ->label('Descrição')
-                                    ->required(),
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\TextInput::make('highlight_text_en')->label('Texto em Destaque (EN)'),
+                                Forms\Components\Textarea::make('description_en')->label('Descrição Geral (EN)'),
+                                Forms\Components\TextInput::make('feature1_title_en')->label('Ponto 1 Título (EN)'),
+                                Forms\Components\Textarea::make('feature1_desc_en')->label('Ponto 1 Descrição (EN)'),
+                                Forms\Components\TextInput::make('feature2_title_en')->label('Ponto 2 Título (EN)'),
+                                Forms\Components\Textarea::make('feature2_desc_en')->label('Ponto 2 Descrição (EN)'),
+                                Forms\Components\TextInput::make('feature3_title_en')->label('Ponto 3 Título (EN)'),
+                                Forms\Components\Textarea::make('feature3_desc_en')->label('Ponto 3 Descrição (EN)'),
                             ]),
-                        Forms\Components\Section::make('Ponto 3')
-                            ->schema([
-                                Forms\Components\TextInput::make('feature3_title')
-                                    ->label('Título')
-                                    ->required(),
-                                Forms\Components\Textarea::make('feature3_desc')
-                                    ->label('Descrição')
-                                    ->required(),
-                            ])->columnSpanFull(),
-                    ])
+                    ]),
+                Forms\Components\FileUpload::make('image')
+                    ->label('Imagem do Lado Direito')
+                    ->image()
+                    ->directory('empresa')
+                    ->disk('public')
+                    ->maxSize(102400)
+                    ->columnSpanFull(),
             ],
 
             'empresa_quem_somos' => [
-                Forms\Components\Grid::make(2)
-                    ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->helperText('Pode usar tags HTML como <br> e <span>')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\Textarea::make('description1')
-                            ->label('Descrição - Parágrafo 1')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\Textarea::make('description2')
-                            ->label('Descrição - Parágrafo 2')
-                            ->required()
-                            ->columnSpanFull(),
-
-                        Forms\Components\FileUpload::make('image')
-                                    ->label('Imagem da Liderança')
-                                    ->image()
-                                    ->directory('empresa')
-                                    ->disk('public')
-                                    ->maxSize(102400)
-                                    ->helperText('Max 100MB.')
-                                    ->columnSpanFull(),
-                        Forms\Components\TextInput::make('image_caption')
-                            ->label('Legenda da Imagem')
-                            ->columnSpanFull(),
-
-                        Forms\Components\Section::make('Indicadores (Cards Inferiores)')
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
                             ->schema([
-                                Forms\Components\TextInput::make('card1_num')->label('Card 1 - Número'),
-                                Forms\Components\TextInput::make('card1_label')->label('Card 1 - Rótulo'),
-                                Forms\Components\TextInput::make('card2_num')->label('Card 2 - Número'),
-                                Forms\Components\TextInput::make('card2_label')->label('Card 2 - Rótulo'),
-                                Forms\Components\TextInput::make('card3_num')->label('Card 3 - Número'),
-                                Forms\Components\TextInput::make('card3_label')->label('Card 3 - Rótulo'),
-                            ])->columns(2)->columnSpanFull(),
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\Textarea::make('description1')->label('Parágrafo 1 (PT)')->required(),
+                                Forms\Components\Textarea::make('description2')->label('Parágrafo 2 (PT)')->required(),
+                                Forms\Components\TextInput::make('image_caption')->label('Legenda Imagem (PT)'),
+                                Forms\Components\TextInput::make('card1_label')->label('Card 1 Rótulo (PT)'),
+                                Forms\Components\TextInput::make('card2_label')->label('Card 2 Rótulo (PT)'),
+                                Forms\Components\TextInput::make('card3_label')->label('Card 3 Rótulo (PT)'),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\Textarea::make('description1_en')->label('Parágrafo 1 (EN)'),
+                                Forms\Components\Textarea::make('description2_en')->label('Parágrafo 2 (EN)'),
+                                Forms\Components\TextInput::make('image_caption_en')->label('Legenda Imagem (EN)'),
+                                Forms\Components\TextInput::make('card1_label_en')->label('Card 1 Rótulo (EN)'),
+                                Forms\Components\TextInput::make('card2_label_en')->label('Card 2 Rótulo (EN)'),
+                                Forms\Components\TextInput::make('card3_label_en')->label('Card 3 Rótulo (EN)'),
+                            ]),
+                    ]),
+                Forms\Components\Grid::make(3)
+                    ->schema([
+                        Forms\Components\TextInput::make('card1_num')->label('Card 1 Número'),
+                        Forms\Components\TextInput::make('card2_num')->label('Card 2 Número'),
+                        Forms\Components\TextInput::make('card3_num')->label('Card 3 Número'),
+                        Forms\Components\FileUpload::make('image')
+                            ->label('Imagem da Liderança')
+                            ->image()
+                            ->directory('empresa')
+                            ->disk('public')
+                            ->maxSize(102400)
+                            ->columnSpanFull(),
                     ])
             ],
 
             'servicos_hero' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título')
-                            ->required(),
-                        Forms\Components\Textarea::make('subtitle')
-                            ->label('Subtítulo')
-                            ->required(),
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')->label('Título (PT)')->required(),
+                                Forms\Components\Textarea::make('subtitle')->label('Subtítulo (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title_en')->label('Título (EN)'),
+                                Forms\Components\Textarea::make('subtitle_en')->label('Subtítulo (EN)'),
+                            ]),
                     ])
             ],
 
             'servicos_catalog' => [
-                Forms\Components\Grid::make(2)
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\Section::make('Serviço 1')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('service1_badge')->label('Mini Badge (PT)')->required(),
+                                        Forms\Components\TextInput::make('service1_title')->label('Título (PT)')->required(),
+                                        Forms\Components\Textarea::make('service1_desc')->label('Descrição (PT)')->required(),
+                                    ]),
+                                Forms\Components\Section::make('Serviço 2')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('service2_badge')->label('Mini Badge (PT)')->required(),
+                                        Forms\Components\TextInput::make('service2_title')->label('Título (PT)')->required(),
+                                        Forms\Components\Textarea::make('service2_desc')->label('Descrição (PT)')->required(),
+                                    ]),
+                                Forms\Components\Section::make('Serviço 3')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('service3_badge')->label('Mini Badge (PT)')->required(),
+                                        Forms\Components\TextInput::make('service3_title')->label('Título (PT)')->required(),
+                                        Forms\Components\Textarea::make('service3_desc')->label('Descrição (PT)')->required(),
+                                    ]),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\Section::make('Serviço 1 - EN')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('service1_badge_en')->label('Mini Badge (EN)'),
+                                        Forms\Components\TextInput::make('service1_title_en')->label('Título (EN)'),
+                                        Forms\Components\Textarea::make('service1_desc_en')->label('Descrição (EN)'),
+                                    ]),
+                                Forms\Components\Section::make('Serviço 2 - EN')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('service2_badge_en')->label('Mini Badge (EN)'),
+                                        Forms\Components\TextInput::make('service2_title_en')->label('Título (EN)'),
+                                        Forms\Components\Textarea::make('service2_desc_en')->label('Descrição (EN)'),
+                                    ]),
+                                Forms\Components\Section::make('Serviço 3 - EN')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('service3_badge_en')->label('Mini Badge (EN)'),
+                                        Forms\Components\TextInput::make('service3_title_en')->label('Título (EN)'),
+                                        Forms\Components\Textarea::make('service3_desc_en')->label('Descrição (EN)'),
+                                    ]),
+                            ]),
+                    ]),
+                Forms\Components\Grid::make(3)
                     ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required()
-                            ->columnSpanFull(),
-
-                        Forms\Components\Section::make('Serviço 1')
-                            ->schema([
-                                Forms\Components\TextInput::make('service1_badge')->label('Mini Badge')->required(),
-                                Forms\Components\TextInput::make('service1_title')->label('Título')->required(),
-                                Forms\Components\Textarea::make('service1_desc')->label('Descrição')->required(),
-                                Forms\Components\TextInput::make('service1_link')->label('Link do WhatsApp')->required(),
-                            ]),
-                        
-                        Forms\Components\Section::make('Serviço 2')
-                            ->schema([
-                                Forms\Components\TextInput::make('service2_badge')->label('Mini Badge')->required(),
-                                Forms\Components\TextInput::make('service2_title')->label('Título')->required(),
-                                Forms\Components\Textarea::make('service2_desc')->label('Descrição')->required(),
-                                Forms\Components\TextInput::make('service2_link')->label('Link do WhatsApp')->required(),
-                            ]),
-
-                        Forms\Components\Section::make('Serviço 3 (Destaque Grande)')
-                            ->schema([
-                                Forms\Components\TextInput::make('service3_badge')->label('Mini Badge')->required(),
-                                Forms\Components\TextInput::make('service3_title')->label('Título')->required(),
-                                Forms\Components\Textarea::make('service3_desc')->label('Descrição')->required(),
-                                Forms\Components\TextInput::make('service3_link')->label('Link do Botão')->required(),
-                            ])->columnSpanFull(),
+                        Forms\Components\TextInput::make('service1_link')->label('Link Serviço 1')->required(),
+                        Forms\Components\TextInput::make('service2_link')->label('Link Serviço 2')->required(),
+                        Forms\Components\TextInput::make('service3_link')->label('Link Serviço 3')->required(),
                     ])
             ],
 
             'servicos_faq' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required(),
-                        Forms\Components\Textarea::make('description')
-                            ->label('Subtítulo / Descrição')
-                            ->required(),
-                        
-                        Forms\Components\Section::make('Lista de Perguntas Frequentes (FAQ)')
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
                             ->schema([
-                                Forms\Components\Repeater::make('faqs')
-                                    ->label('FAQ')
-                                    ->schema([
-                                        Forms\Components\Select::make('category')
-                                            ->label('Categoria do FAQ')
-                                            ->options([
-                                                'Categoria 1: Mercado e Estratégia' => 'Mercado e Estratégia',
-                                                'Categoria 2: Tecnologia e Conservação (Veg Oxi 200)' => 'Tecnologia e Conservação (Veg Oxi 200)',
-                                                'Categoria 3: Maquinários e Layout' => 'Maquinários e Layout',
-                                                'Categoria 4: Operação e Qualidade' => 'Operação e Qualidade',
-                                                'Categoria 5: Legislação (SISP-POV)' => 'Legislação (SISP-POV)',
-                                            ])
-                                            ->required(),
-                                        Forms\Components\TextInput::make('question')
-                                            ->label('Pergunta')
-                                            ->required(),
-                                        Forms\Components\Textarea::make('answer')
-                                            ->label('Resposta')
-                                            ->required(),
-                                    ])
-                                    ->collapsible()
-                                    ->orderable()
-                                    ->defaultItems(1)
-                                    ->columnSpanFull(),
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\Textarea::make('description')->label('Descrição (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\Textarea::make('description_en')->label('Descrição (EN)'),
+                            ]),
+                    ]),
+                Forms\Components\Repeater::make('faqs')
+                    ->label('Perguntas Frequentes (FAQ)')
+                    ->schema([
+                        Forms\Components\Select::make('category')
+                            ->label('Categoria do FAQ')
+                            ->options([
+                                'Mercado e Estratégia' => 'Mercado e Estratégia',
+                                'Tecnologia e Conservação (Veg Oxi 200)' => 'Tecnologia e Conservação (Veg Oxi 200)',
+                                'Maquinários e Layout' => 'Maquinários e Layout',
+                                'Operação e Qualidade' => 'Operação e Qualidade',
+                                'Legislação (SISP-POV)' => 'Legislação (SISP-POV)',
                             ])
+                            ->required(),
+                        Forms\Components\Tabs::make('Traduções FAQ')
+                            ->tabs([
+                                Forms\Components\Tabs\Tab::make('Português (PT)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('question')->label('Pergunta (PT)')->required(),
+                                        Forms\Components\Textarea::make('answer')->label('Resposta (PT)')->required(),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('question_en')->label('Pergunta (EN)'),
+                                        Forms\Components\Textarea::make('answer_en')->label('Resposta (EN)'),
+                                    ]),
+                            ]),
                     ])
+                    ->collapsible()
+                    ->orderable()
+                    ->defaultItems(1)
+                    ->columnSpanFull()
             ],
 
             'servicos_clientes' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título')
-                            ->required(),
-                        Forms\Components\Textarea::make('description')
-                            ->label('Descrição')
-                            ->required(),
-                        
-                        Forms\Components\FileUpload::make('logos')
-                            ->label('Logos dos Clientes')
-                            ->multiple()
-                            ->directory('clientes')
-                            ->disk('public')
-                            ->image()
-                            ->maxSize(102400)
-                            ->helperText('Carregue os logotipos das cooperativas e marcas clientes. (Max 100MB por imagem)'),
-                    ])
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título (PT)')->required(),
+                                Forms\Components\Textarea::make('description')->label('Descrição (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título (EN)'),
+                                Forms\Components\Textarea::make('description_en')->label('Descrição (EN)'),
+                            ]),
+                    ]),
+                Forms\Components\FileUpload::make('logos')
+                    ->label('Logos dos Clientes')
+                    ->multiple()
+                    ->directory('clientes')
+                    ->disk('public')
+                    ->image()
+                    ->maxSize(102400)
+                    ->columnSpanFull(),
             ],
 
             'servicos_contacts' => [
-                Forms\Components\Grid::make(2)
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\Textarea::make('conversar_title')->label('Título Seção (PT)')->required(),
+                                Forms\Components\TextInput::make('conversar_p1_title')->label('Pilar 1 Título (PT)')->required(),
+                                Forms\Components\Textarea::make('conversar_p1_desc')->label('Pilar 1 Descrição (PT)')->required(),
+                                Forms\Components\TextInput::make('conversar_p2_title')->label('Pilar 2 Título (PT)')->required(),
+                                Forms\Components\Textarea::make('conversar_p2_desc')->label('Pilar 2 Descrição (PT)')->required(),
+                                Forms\Components\TextInput::make('action_box_title')->label('Card Título (PT)')->required(),
+                                Forms\Components\Textarea::make('action_box_desc')->label('Card Descrição (PT)')->required(),
+                                Forms\Components\TextInput::make('action_box_cta_text')->label('Card CTA Texto (PT)')->required(),
+                                Forms\Components\TextInput::make('indicator1_label')->label('Indicador 1 Rótulo (PT)')->required(),
+                                Forms\Components\TextInput::make('indicator2_label')->label('Indicador 2 Rótulo (PT)')->required(),
+                                Forms\Components\Textarea::make('promo_title')->label('Texto Promocional (PT)')->required(),
+                                Forms\Components\TextInput::make('promo_cta_text')->label('Promo CTA Texto (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\Textarea::make('conversar_title_en')->label('Título Seção (EN)'),
+                                Forms\Components\TextInput::make('conversar_p1_title_en')->label('Pilar 1 Título (EN)'),
+                                Forms\Components\Textarea::make('conversar_p1_desc_en')->label('Pilar 1 Descrição (EN)'),
+                                Forms\Components\TextInput::make('conversar_p2_title_en')->label('Pilar 2 Título (EN)'),
+                                Forms\Components\Textarea::make('conversar_p2_desc_en')->label('Pilar 2 Descrição (EN)'),
+                                Forms\Components\TextInput::make('action_box_title_en')->label('Card Título (EN)'),
+                                Forms\Components\Textarea::make('action_box_desc_en')->label('Card Descrição (EN)'),
+                                Forms\Components\TextInput::make('action_box_cta_text_en')->label('Card CTA Texto (EN)'),
+                                Forms\Components\TextInput::make('indicator1_label_en')->label('Indicador 1 Rótulo (EN)'),
+                                Forms\Components\TextInput::make('indicator2_label_en')->label('Indicador 2 Rótulo (EN)'),
+                                Forms\Components\Textarea::make('promo_title_en')->label('Texto Promocional (EN)'),
+                                Forms\Components\TextInput::make('promo_cta_text_en')->label('Promo CTA Texto (EN)'),
+                            ]),
+                    ]),
+                Forms\Components\Grid::make(3)
                     ->schema([
-                        Forms\Components\Section::make('Painel Esquerdo - Fale Conosco')
-                            ->schema([
-                                Forms\Components\Textarea::make('conversar_title')
-                                    ->label('Título da Seção')
-                                    ->helperText('Pode usar tags HTML como <br> e <span>')
-                                    ->required(),
-                                Forms\Components\TextInput::make('conversar_p1_title')->label('Pilar 1 - Título')->required(),
-                                Forms\Components\Textarea::make('conversar_p1_desc')->label('Pilar 1 - Descrição')->required(),
-                                Forms\Components\TextInput::make('conversar_p2_title')->label('Pilar 2 - Título')->required(),
-                                Forms\Components\Textarea::make('conversar_p2_desc')->label('Pilar 2 - Descrição')->required(),
-                            ])->columnSpanFull(),
-
-                        Forms\Components\Section::make('Card Direito - Caixa de Ação')
-                            ->schema([
-                                Forms\Components\TextInput::make('action_box_title')->label('Título do Card')->required(),
-                                Forms\Components\Textarea::make('action_box_desc')->label('Descrição')->required(),
-                                Forms\Components\TextInput::make('action_box_cta_text')->label('Texto do Botão CTA')->required(),
-                                Forms\Components\TextInput::make('action_box_cta_link')->label('Link do Botão CTA')->required(),
-                                Forms\Components\TextInput::make('indicator1_num')->label('Indicador 1 - Número')->required(),
-                                Forms\Components\TextInput::make('indicator1_label')->label('Indicador 1 - Descrição')->required(),
-                                Forms\Components\TextInput::make('indicator2_num')->label('Indicador 2 - Número')->required(),
-                                Forms\Components\TextInput::make('indicator2_label')->label('Indicador 2 - Descrição')->required(),
-                            ])->columns(2)->columnSpanFull(),
-
-                        Forms\Components\Section::make('Banner Promocional Superior/Inferior')
-                            ->schema([
-                                Forms\Components\Textarea::make('promo_title')->label('Texto Promocional')->required(),
-                                Forms\Components\TextInput::make('promo_cta_text')->label('Texto do Botão CTA')->required(),
-                                Forms\Components\TextInput::make('promo_cta_link')->label('Link do Botão CTA')->required(),
-                            ])->columnSpanFull(),
+                        Forms\Components\TextInput::make('action_box_cta_link')->label('Link Card CTA')->required(),
+                        Forms\Components\TextInput::make('indicator1_num')->label('Indicador 1 Número')->required(),
+                        Forms\Components\TextInput::make('indicator2_num')->label('Indicador 2 Número')->required(),
+                        Forms\Components\TextInput::make('promo_cta_link')->label('Link Promo CTA')->required(),
                     ])
             ],
 
             'veg_oxi_hero' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required(),
-                        Forms\Components\Textarea::make('subtitle')
-                            ->label('Subtítulo')
-                            ->required(),
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\Textarea::make('subtitle')->label('Subtítulo (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\Textarea::make('subtitle_en')->label('Subtítulo (EN)'),
+                            ]),
                     ])
             ],
 
             'veg_oxi_facts' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required(),
-                        Forms\Components\Repeater::make('cards')
-                            ->label('Fatos sobre o Veg Oxi')
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
                             ->schema([
-                                Forms\Components\TextInput::make('title')
-                                    ->label('Título do Card')
-                                    ->required(),
-                                Forms\Components\Textarea::make('desc')
-                                    ->label('Breve Descrição (no Card)')
-                                    ->required(),
-                                Forms\Components\Textarea::make('body')
-                                    ->label('Descrição Completa (no Modal)')
-                                    ->required(),
-                                Forms\Components\TextInput::make('icon')
-                                    ->label('Ícone (history, award, factory, settings, etc.)')
-                                    ->required(),
-                            ])
-                            ->collapsible()
-                            ->orderable()
-                            ->defaultItems(3)
-                            ->columnSpanFull(),
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                            ]),
+                    ]),
+                Forms\Components\Repeater::make('cards')
+                    ->label('Fatos sobre o Veg Oxi')
+                    ->schema([
+                        Forms\Components\TextInput::make('icon')->label('Ícone (history, award, factory, settings, etc.)')->required(),
+                        Forms\Components\Tabs::make('Traduções Fato')
+                            ->tabs([
+                                Forms\Components\Tabs\Tab::make('Português (PT)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title')->label('Título Card (PT)')->required(),
+                                        Forms\Components\Textarea::make('desc')->label('Descrição Card (PT)')->required(),
+                                        Forms\Components\Textarea::make('body')->label('Descrição Modal (PT)')->required(),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title_en')->label('Título Card (EN)'),
+                                        Forms\Components\Textarea::make('desc_en')->label('Descrição Card (EN)'),
+                                        Forms\Components\Textarea::make('body_en')->label('Descrição Modal (EN)'),
+                                    ]),
+                            ]),
                     ])
+                    ->collapsible()
+                    ->orderable()
+                    ->defaultItems(3)
+                    ->columnSpanFull()
             ],
 
             'veg_oxi_downloads' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required(),
-                        Forms\Components\Repeater::make('downloads')
-                            ->label('Arquivos para Download')
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
                             ->schema([
-                                Forms\Components\TextInput::make('title')
-                                    ->label('Título do Arquivo')
-                                    ->required(),
-                                Forms\Components\Textarea::make('desc')
-                                    ->label('Descrição do Arquivo')
-                                    ->required(),
-                                Forms\Components\FileUpload::make('file')
-                                    ->label('Arquivo PDF')
-                                    ->directory('downloads')
-                                    ->disk('public')
-                                    ->maxSize(102400)
-                                    ->required(),
-                            ])
-                            ->collapsible()
-                            ->orderable()
-                            ->defaultItems(2)
-                            ->columnSpanFull(),
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                            ]),
+                    ]),
+                Forms\Components\Repeater::make('downloads')
+                    ->label('Arquivos para Download')
+                    ->schema([
+                        Forms\Components\FileUpload::make('file')
+                            ->label('Arquivo PDF')
+                            ->directory('downloads')
+                            ->disk('public')
+                            ->maxSize(102400)
+                            ->required(),
+                        Forms\Components\Tabs::make('Traduções Download')
+                            ->tabs([
+                                Forms\Components\Tabs\Tab::make('Português (PT)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title')->label('Título Arquivo (PT)')->required(),
+                                        Forms\Components\Textarea::make('desc')->label('Descrição Arquivo (PT)')->required(),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title_en')->label('Título Arquivo (EN)'),
+                                        Forms\Components\Textarea::make('desc_en')->label('Descrição Arquivo (EN)'),
+                                    ]),
+                            ]),
                     ])
+                    ->collapsible()
+                    ->orderable()
+                    ->defaultItems(2)
+                    ->columnSpanFull()
             ],
 
             'veg_oxi_contacts' => [
-                Forms\Components\Grid::make(1)
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\Textarea::make('promo_title')->label('Texto Promocional (PT)')->required(),
+                                Forms\Components\TextInput::make('promo_cta_text')->label('Texto Botão CTA (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\Textarea::make('promo_title_en')->label('Texto Promocional (EN)'),
+                                Forms\Components\TextInput::make('promo_cta_text_en')->label('Texto Botão CTA (EN)'),
+                            ]),
+                    ]),
+                Forms\Components\Repeater::make('contacts')
+                    ->label('Canais de Distribuição / Contatos Regionais')
                     ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required(),
-                        Forms\Components\Repeater::make('contacts')
-                            ->label('Canais de Distribuição / Contatos Regionais')
-                            ->schema([
-                                Forms\Components\TextInput::make('title')
-                                    ->label('Título do Canal')
-                                    ->required(),
-                                Forms\Components\Textarea::make('desc')
-                                    ->label('Descrição / Contato')
-                                    ->required(),
-                                Forms\Components\TextInput::make('link')
-                                    ->label('Link do WhatsApp ou Site')
-                                    ->required(),
-                            ])
-                            ->collapsible()
-                            ->orderable()
-                            ->defaultItems(4)
-                            ->columnSpanFull(),
-                        Forms\Components\Section::make('Faixa Promocional Inferior')
-                            ->schema([
-                                Forms\Components\Textarea::make('promo_title')
-                                    ->label('Texto Promocional')
-                                    ->required(),
-                                Forms\Components\TextInput::make('promo_cta_text')
-                                    ->label('Texto do Botão CTA')
-                                    ->required(),
-                                Forms\Components\TextInput::make('promo_cta_link')
-                                    ->label('Link do Botão CTA')
-                                    ->required(),
-                            ])
+                        Forms\Components\TextInput::make('link')->label('Link do WhatsApp ou Site')->required(),
+                        Forms\Components\Tabs::make('Traduções Distribuição')
+                            ->tabs([
+                                Forms\Components\Tabs\Tab::make('Português (PT)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title')->label('Título Canal (PT)')->required(),
+                                        Forms\Components\Textarea::make('desc')->label('Descrição / Contato (PT)')->required(),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title_en')->label('Título Canal (EN)'),
+                                        Forms\Components\Textarea::make('desc_en')->label('Descrição / Contato (EN)'),
+                                    ]),
+                            ]),
                     ])
+                    ->collapsible()
+                    ->orderable()
+                    ->defaultItems(4)
+                    ->columnSpanFull(),
+                Forms\Components\TextInput::make('promo_cta_link')->label('Link Promo CTA')->required(),
             ],
 
             'insights_hero' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required(),
-                        Forms\Components\Textarea::make('subtitle')
-                            ->label('Subtítulo')
-                            ->required(),
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\Textarea::make('subtitle')->label('Subtítulo (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\Textarea::make('subtitle_en')->label('Subtítulo (EN)'),
+                            ]),
                     ])
             ],
 
             'insights_cards' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required(),
-                        Forms\Components\Repeater::make('cards')
-                            ->label('Cards de Insights')
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
                             ->schema([
-                                Forms\Components\TextInput::make('title')
-                                    ->label('Título do Card')
-                                    ->required(),
-                                Forms\Components\TextInput::make('icon')
-                                    ->label('Ícone (settings, cpu, thermometer, box, etc.)')
-                                    ->required(),
-                                Forms\Components\Textarea::make('description')
-                                    ->label('Descrição')
-                                    ->required(),
-                            ])
-                            ->collapsible()
-                            ->orderable()
-                            ->defaultItems(4)
-                            ->columnSpanFull(),
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                            ]),
+                    ]),
+                Forms\Components\Repeater::make('cards')
+                    ->label('Cards de Insights')
+                    ->schema([
+                        Forms\Components\TextInput::make('icon')->label('Ícone (settings, cpu, thermometer, box, etc.)')->required(),
+                        Forms\Components\Tabs::make('Traduções Card')
+                            ->tabs([
+                                Forms\Components\Tabs\Tab::make('Português (PT)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title')->label('Título (PT)')->required(),
+                                        Forms\Components\Textarea::make('description')->label('Descrição (PT)')->required(),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title_en')->label('Título (EN)'),
+                                        Forms\Components\Textarea::make('description_en')->label('Descrição (EN)'),
+                                    ]),
+                            ]),
                     ])
+                    ->collapsible()
+                    ->orderable()
+                    ->defaultItems(4)
+                    ->columnSpanFull()
             ],
 
             'insights_why_choose' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required(),
-                        Forms\Components\Textarea::make('description')
-                            ->label('Descrição / Diferencial')
-                            ->required(),
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\Textarea::make('description')->label('Descrição (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\Textarea::make('description_en')->label('Descrição (EN)'),
+                            ]),
                     ])
             ],
 
             'home_insights' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required(),
-                        Forms\Components\Textarea::make('description')
-                            ->label('Descrição Geral')
-                            ->required(),
-                        Forms\Components\Repeater::make('cards')
-                            ->label('Cards de Insights')
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
                             ->schema([
-                                Forms\Components\TextInput::make('title')
-                                    ->label('Título')
-                                    ->required(),
-                                Forms\Components\TextInput::make('icon')
-                                    ->label('Ícone (settings, cpu, thermometer, box, etc.)')
-                                    ->required(),
-                                Forms\Components\Textarea::make('description')
-                                    ->label('Descrição')
-                                    ->required(),
-                            ])
-                            ->collapsible()
-                            ->orderable()
-                            ->defaultItems(4)
-                            ->columnSpanFull(),
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\Textarea::make('description')->label('Descrição Geral (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\Textarea::make('description_en')->label('Descrição Geral (EN)'),
+                            ]),
+                    ]),
+                Forms\Components\Repeater::make('cards')
+                    ->label('Cards de Insights')
+                    ->schema([
+                        Forms\Components\TextInput::make('icon')->label('Ícone (settings, cpu, thermometer, box, etc.)')->required(),
+                        Forms\Components\Tabs::make('Traduções Card')
+                            ->tabs([
+                                Forms\Components\Tabs\Tab::make('Português (PT)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title')->label('Título (PT)')->required(),
+                                        Forms\Components\Textarea::make('description')->label('Descrição (PT)')->required(),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title_en')->label('Título (EN)'),
+                                        Forms\Components\Textarea::make('description_en')->label('Descrição (EN)'),
+                                    ]),
+                            ]),
                     ])
+                    ->collapsible()
+                    ->orderable()
+                    ->defaultItems(4)
+                    ->columnSpanFull()
             ],
 
             'home_why_choose' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required(),
-                        Forms\Components\Textarea::make('description')
-                            ->label('Descrição / Diferencial')
-                            ->required(),
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\Textarea::make('description')->label('Descrição (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\Textarea::make('description_en')->label('Descrição (EN)'),
+                            ]),
                     ])
             ],
 
             'home_contact_cta' => [
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\Textarea::make('subtitle')->label('Subtítulo (PT)')->required(),
+                                Forms\Components\Textarea::make('address')->label('Endereço Físico (PT)'),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\Textarea::make('subtitle_en')->label('Subtítulo (EN)'),
+                                Forms\Components\Textarea::make('address_en')->label('Endereço Físico (EN)'),
+                            ]),
+                    ]),
                 Forms\Components\Grid::make(2)
                     ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\Textarea::make('subtitle')
-                            ->label('Subtítulo')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('phone')
-                            ->label('Telefone Fixo'),
-                        Forms\Components\TextInput::make('whatsapp')
-                            ->label('WhatsApp'),
-                        Forms\Components\TextInput::make('whatsapp_link')
-                            ->label('Link Direto do WhatsApp')
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('email')
-                            ->label('E-mail'),
-                        Forms\Components\Textarea::make('address')
-                            ->label('Endereço Físico')
-                            ->columnSpanFull(),
+                        Forms\Components\TextInput::make('phone')->label('Telefone Fixo'),
+                        Forms\Components\TextInput::make('whatsapp')->label('WhatsApp'),
+                        Forms\Components\TextInput::make('whatsapp_link')->label('Link Direto do WhatsApp')->columnSpanFull(),
+                        Forms\Components\TextInput::make('email')->label('E-mail'),
                     ])
             ],
 
             'home_offering' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('badge')
-                            ->label('Badge')
-                            ->required(),
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required(),
-                        Forms\Components\Textarea::make('description')
-                            ->label('Subtítulo / Descrição')
-                            ->required(),
-                        Forms\Components\Repeater::make('cards')
-                            ->label('Cards de Serviços (O que Oferecemos)')
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
                             ->schema([
-                                Forms\Components\TextInput::make('title')
-                                    ->label('Título do Card')
-                                    ->required(),
-                                Forms\Components\Textarea::make('description')
-                                    ->label('Descrição do Card')
-                                    ->required(),
-                                Forms\Components\TextInput::make('icon')
-                                    ->label('Ícone (leaf, graduation-cap, briefcase, shield-check)')
-                                    ->required(),
-                                Forms\Components\TextInput::make('link_text')
-                                    ->label('Texto do Link')
-                                    ->default('Saiba mais'),
-                                Forms\Components\TextInput::make('link_url')
-                                    ->label('URL do Link')
-                                    ->default('/servicos'),
-                            ])
-                            ->collapsible()
-                            ->orderable()
-                            ->defaultItems(4)
-                            ->columnSpanFull(),
+                                Forms\Components\TextInput::make('badge')->label('Badge (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\Textarea::make('description')->label('Subtítulo / Descrição (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('badge_en')->label('Badge (EN)'),
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\Textarea::make('description_en')->label('Subtítulo / Descrição (EN)'),
+                            ]),
+                    ]),
+                Forms\Components\Repeater::make('cards')
+                    ->label('Cards de Serviços (O que Oferecemos)')
+                    ->schema([
+                        Forms\Components\TextInput::make('icon')->label('Ícone (leaf, graduation-cap, briefcase, shield-check)')->required(),
+                        Forms\Components\TextInput::make('link_url')->label('URL do Link')->default('/servicos'),
+                        Forms\Components\Tabs::make('Traduções Card')
+                            ->tabs([
+                                Forms\Components\Tabs\Tab::make('Português (PT)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title')->label('Título Card (PT)')->required(),
+                                        Forms\Components\Textarea::make('description')->label('Descrição Card (PT)')->required(),
+                                        Forms\Components\TextInput::make('link_text')->label('Texto do Link (PT)')->default('Saiba mais'),
+                                    ]),
+                                Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                                    ->schema([
+                                        Forms\Components\TextInput::make('title_en')->label('Título Card (EN)'),
+                                        Forms\Components\Textarea::make('description_en')->label('Descrição Card (EN)'),
+                                        Forms\Components\TextInput::make('link_text_en')->label('Texto do Link (EN)'),
+                                    ]),
+                            ]),
                     ])
+                    ->collapsible()
+                    ->orderable()
+                    ->defaultItems(4)
+                    ->columnSpanFull()
             ],
 
             'contato_hero' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título Principal')
-                            ->required(),
-                        Forms\Components\Textarea::make('subtitle')
-                            ->label('Subtítulo')
-                            ->required(),
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')->label('Título Principal (PT)')->required(),
+                                Forms\Components\Textarea::make('subtitle')->label('Subtítulo (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title_en')->label('Título Principal (EN)'),
+                                Forms\Components\Textarea::make('subtitle_en')->label('Subtítulo (EN)'),
+                            ]),
                     ])
             ],
 
             'contato_info' => [
-                Forms\Components\Grid::make(2)
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')->label('Título Painel (PT)')->required(),
+                                Forms\Components\Textarea::make('description')->label('Descrição Painel (PT)')->required(),
+                                Forms\Components\TextInput::make('phone_hours')->label('Horário Telefone (PT)'),
+                                Forms\Components\TextInput::make('whatsapp_desc')->label('Descrição WhatsApp (PT)'),
+                                Forms\Components\TextInput::make('email_desc')->label('Descrição E-mail (PT)'),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title_en')->label('Título Painel (EN)'),
+                                Forms\Components\Textarea::make('description_en')->label('Descrição Painel (EN)'),
+                                Forms\Components\TextInput::make('phone_hours_en')->label('Horário Telefone (EN)'),
+                                Forms\Components\TextInput::make('whatsapp_desc_en')->label('Descrição WhatsApp (EN)'),
+                                Forms\Components\TextInput::make('email_desc_en')->label('Descrição E-mail (EN)'),
+                            ]),
+                    ]),
+                Forms\Components\Grid::make(3)
                     ->schema([
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título do Painel')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\Textarea::make('description')
-                            ->label('Descrição do Painel')
-                            ->required()
-                            ->columnSpanFull(),
-                        Forms\Components\TextInput::make('phone')
-                            ->label('Telefone Fixo'),
-                        Forms\Components\TextInput::make('phone_hours')
-                            ->label('Horário do Telefone'),
-                        Forms\Components\TextInput::make('whatsapp')
-                            ->label('WhatsApp'),
-                        Forms\Components\TextInput::make('whatsapp_desc')
-                            ->label('Descrição do WhatsApp'),
-                        Forms\Components\TextInput::make('email')
-                            ->label('E-mail Comercial'),
-                        Forms\Components\TextInput::make('email_desc')
-                            ->label('Descrição do E-mail'),
+                        Forms\Components\TextInput::make('phone')->label('Telefone Fixo'),
+                        Forms\Components\TextInput::make('whatsapp')->label('WhatsApp'),
+                        Forms\Components\TextInput::make('email')->label('E-mail Comercial'),
                     ])
             ],
 
             'contato_form' => [
-                Forms\Components\Grid::make(1)
-                    ->schema([
-                        Forms\Components\TextInput::make('title')
-                            ->label('Título do Formulário')
-                            ->required(),
-                        Forms\Components\TextInput::make('submit_text')
-                            ->label('Texto do Botão Enviar')
-                            ->required(),
-                        Forms\Components\TextInput::make('success_title')
-                            ->label('Título da Mensagem de Sucesso')
-                            ->required(),
-                        Forms\Components\Textarea::make('success_message')
-                            ->label('Texto da Mensagem de Sucesso')
-                            ->required(),
+                Forms\Components\Tabs::make('Idioma Seção')
+                    ->tabs([
+                        Forms\Components\Tabs\Tab::make('Português (PT)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title')->label('Título Formulário (PT)')->required(),
+                                Forms\Components\TextInput::make('submit_text')->label('Texto Botão Enviar (PT)')->required(),
+                                Forms\Components\TextInput::make('success_title')->label('Título Mensagem Sucesso (PT)')->required(),
+                                Forms\Components\Textarea::make('success_message')->label('Texto Mensagem Sucesso (PT)')->required(),
+                            ]),
+                        Forms\Components\Tabs\Tab::make('Inglês (EN)')
+                            ->schema([
+                                Forms\Components\TextInput::make('title_en')->label('Título Formulário (EN)'),
+                                Forms\Components\TextInput::make('submit_text_en')->label('Texto Botão Enviar (EN)'),
+                                Forms\Components\TextInput::make('success_title_en')->label('Título Mensagem Sucesso (EN)'),
+                                Forms\Components\Textarea::make('success_message_en')->label('Texto Mensagem Sucesso (EN)'),
+                            ]),
                     ])
             ],
 

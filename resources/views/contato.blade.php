@@ -13,15 +13,15 @@
     <section class="internal-hero">
       <div class="container">
         <div class="breadcrumb animate-fade-up">
-          <a href="{{ url('/') }}">Início</a>
+          <a href="{{ url('/') }}">{{ __('Início') }}</a>
           <span class="breadcrumb-separator">/</span>
-          <span>Contato</span>
+          <span>{{ __('Contato') }}</span>
         </div>
         <h1 class="internal-hero-title animate-fade-up delay-100">
-          {{ data_get($hero, 'title', 'Fale Conosco') }}
+          {{ trans_content($hero, 'title', 'Fale Conosco') }}
         </h1>
         <p class="internal-hero-desc animate-fade-up delay-200">
-          {{ data_get($hero, 'subtitle', 'Tire suas dúvidas ou envie uma solicitação para nossa equipe. Estamos prontos para ajudar sua agroindústria.') }}
+          {{ trans_content($hero, 'subtitle', 'Tire suas dúvidas ou envie uma solicitação para nossa equipe. Estamos prontos para ajudar sua agroindústria.') }}
         </p>
       </div>
     </section>
@@ -34,9 +34,9 @@
           <!-- Coluna 1: Informações de Contato -->
           <div class="contact-info-panel animate-fade-up">
             <div>
-              <h2 class="contact-info-title">{{ data_get($info, 'title', 'Nossos Canais') }}</h2>
+              <h2 class="contact-info-title">{{ trans_content($info, 'title', 'Nossos Canais') }}</h2>
               <p class="contact-info-desc">
-                {{ data_get($info, 'description', 'Escolha o canal de sua preferência para falar conosco ou envie uma mensagem no formulário ao lado.') }}
+                {{ trans_content($info, 'description', 'Escolha o canal de sua preferência para falar conosco ou envie uma mensagem no formulário ao lado.') }}
               </p>
             </div>
             
@@ -49,10 +49,10 @@
                   <i data-lucide="phone"></i>
                 </div>
                 <div class="contact-card-details">
-                  <h4>Telefone</h4>
+                  <h4>{{ __('Telefone') }}</h4>
                   <p><a href="tel:{{ preg_replace('/[^0-9+]/', '', data_get($info, 'phone', '+55 11 5194-0325')) }}">{{ data_get($info, 'phone', '+55 11 5194-0325') }}</a></p>
-                  @if(data_get($info, 'phone_hours'))
-                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ data_get($info, 'phone_hours') }}</p>
+                  @if(trans_content($info, 'phone_hours'))
+                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info, 'phone_hours') }}</p>
                   @endif
                 </div>
               </div>
@@ -67,8 +67,8 @@
                 <div class="contact-card-details">
                   <h4>WhatsApp</h4>
                   <p><a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', data_get($info, 'whatsapp', '5511978348438')) }}" target="_blank" rel="noopener noreferrer">{{ data_get($info, 'whatsapp', '+55 11 97834-8438') }}</a></p>
-                  @if(data_get($info, 'whatsapp_desc'))
-                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ data_get($info, 'whatsapp_desc') }}</p>
+                  @if(trans_content($info, 'whatsapp_desc'))
+                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info, 'whatsapp_desc') }}</p>
                   @endif
                 </div>
               </div>
@@ -81,10 +81,10 @@
                   <i data-lucide="mail"></i>
                 </div>
                 <div class="contact-card-details">
-                  <h4>E-mail Comercial</h4>
+                  <h4>{{ __('E-mail Comercial') }}</h4>
                   <p><a href="mailto:{{ data_get($info, 'email', 'vegquality@vegquality.com.br') }}">{{ data_get($info, 'email', 'vegquality@vegquality.com.br') }}</a></p>
-                  @if(data_get($info, 'email_desc'))
-                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ data_get($info, 'email_desc') }}</p>
+                  @if(trans_content($info, 'email_desc'))
+                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info, 'email_desc') }}</p>
                   @endif
                 </div>
               </div>
@@ -97,53 +97,53 @@
           <!-- Coluna 2: Formulário de Contato -->
           <div class="contact-form-panel animate-fade-up delay-100">
             
-            <h2 class="contact-form-title">{{ data_get($form, 'title', 'Envie uma Mensagem') }}</h2>
+            <h2 class="contact-form-title">{{ trans_content($form, 'title', 'Envie uma Mensagem') }}</h2>
             
             <form id="contact-form">
               
               <div class="form-group-grid">
                 <div class="form-group">
-                  <label for="contact-name" class="form-label">Nome Completo *</label>
-                  <input type="text" id="contact-name" name="name" class="form-input" placeholder="Seu nome completo" required>
+                  <label for="contact-name" class="form-label">{{ __('Nome Completo *') }}</label>
+                  <input type="text" id="contact-name" name="name" class="form-input" placeholder="{{ __('Seu nome completo') }}" required>
                 </div>
                 <div class="form-group">
-                  <label for="contact-email" class="form-label">E-mail Corporativo *</label>
-                  <input type="email" id="contact-email" name="email" class="form-input" placeholder="seuemail@empresa.com" required>
+                  <label for="contact-email" class="form-label">{{ __('E-mail Corporativo *') }}</label>
+                  <input type="email" id="contact-email" name="email" class="form-input" placeholder="{{ __('seuemail@empresa.com') }}" required>
                 </div>
               </div>
 
               <div class="form-group-grid">
                 <div class="form-group">
-                  <label for="contact-phone" class="form-label">Telefone / WhatsApp *</label>
+                  <label for="contact-phone" class="form-label">{{ __('Telefone / WhatsApp *') }}</label>
                   <input type="tel" id="contact-phone" name="phone" class="form-input" placeholder="(00) 00000-0000" required>
                 </div>
                 <div class="form-group">
-                  <label for="contact-company" class="form-label">Empresa / Agroindústria</label>
-                  <input type="text" id="contact-company" name="company" class="form-input" placeholder="Nome da empresa">
+                  <label for="contact-company" class="form-label">{{ __('Empresa / Agroindústria') }}</label>
+                  <input type="text" id="contact-company" name="company" class="form-input" placeholder="{{ __('Nome da empresa') }}">
                 </div>
               </div>
 
               <div class="form-group">
-                <label for="contact-subject" class="form-label">Assunto de Interesse *</label>
+                <label for="contact-subject" class="form-label">{{ __('Assunto de Interesse *') }}</label>
                 <select id="contact-subject" name="subject" class="form-select" required>
-                  <option value="" disabled selected>Selecione uma opção</option>
+                  <option value="" disabled selected>{{ __('Selecione uma opção') }}</option>
                   <option value="veg-oxi">Veg Oxi 200</option>
-                  <option value="consultoria">Consultoria</option>
-                  <option value="plano-de-negocios">Plano de Negócios</option>
-                  <option value="treinamento">Treinamento</option>
-                  <option value="seja-distribuidor">Seja um Distribuidor</option>
-                  <option value="outro">Outro Assunto</option>
+                  <option value="consultoria">{{ __('Consultoria') }}</option>
+                  <option value="plano-de-negocios">{{ __('Plano de Negócios') }}</option>
+                  <option value="treinamento">{{ __('Treinamento') }}</option>
+                  <option value="seja-distribuidor">{{ __('Seja um Distribuidor') }}</option>
+                  <option value="outro">{{ __('Outro Assunto') }}</option>
                 </select>
               </div>
 
               <div class="form-group">
-                <label for="contact-message" class="form-label">Mensagem *</label>
-                <textarea id="contact-message" name="message" class="form-textarea" placeholder="Descreva brevemente sua necessidade ou dúvida..." required></textarea>
+                <label for="contact-message" class="form-label">{{ __('Mensagem *') }}</label>
+                <textarea id="contact-message" name="message" class="form-textarea" placeholder="{{ __('Descreva brevemente sua necessidade ou dúvida...') }}" required></textarea>
               </div>
 
               <button type="submit" class="btn btn-primary form-submit-btn" id="submit-btn">
                 <i data-lucide="send"></i>
-                {{ data_get($form, 'submit_text', 'Enviar Mensagem') }}
+                {{ trans_content($form, 'submit_text', 'Enviar Mensagem') }}
               </button>
               
             </form>

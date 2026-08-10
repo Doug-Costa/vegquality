@@ -115,16 +115,16 @@
             <div class="service-card-icon">
               <i data-lucide="leaf"></i>
             </div>
-            <span class="micro-badge" style="margin-bottom: 0.75rem; padding: 0.25rem 0.5rem; font-size: 0.65rem;">{{ data_get($catalog, 'service1_badge', 'Consultoria') }}</span>
-            <h3 class="service-card-title">{{ data_get($catalog, 'service1_title', 'Consultoria') }}</h3>
+            <span class="micro-badge" style="margin-bottom: 0.75rem; padding: 0.25rem 0.5rem; font-size: 0.65rem;">{{ trans_content($catalog, 'service1_badge', 'Consultoria') }}</span>
+            <h3 class="service-card-title">{{ trans_content($catalog, 'service1_title', 'Consultoria') }}</h3>
             <p class="service-card-desc">
-              {{ Str::limit(data_get($catalog, 'service1_desc'), 300, '...') }}
-              @if(strlen(data_get($catalog, 'service1_desc')) > 300)
-                <button type="button" class="leia-mais-btn" data-title="{{ data_get($catalog, 'service1_title') }}" data-text="{{ data_get($catalog, 'service1_desc') }}">Leia mais</button>
+              {{ Str::limit(trans_content($catalog, 'service1_desc'), 300, '...') }}
+              @if(strlen(trans_content($catalog, 'service1_desc')) > 300)
+                <button type="button" class="leia-mais-btn" data-title="{{ trans_content($catalog, 'service1_title') }}" data-text="{{ trans_content($catalog, 'service1_desc') }}">{{ __('Leia mais') }}</button>
               @endif
             </p>
             <a href="{{ url('/contato?subject=consultoria') }}" class="service-card-link">
-              Solicitar Informações
+              {{ __('Solicitar Informações') }}
               <i data-lucide="arrow-right"></i>
             </a>
           </div>
@@ -134,16 +134,16 @@
             <div class="service-card-icon">
               <i data-lucide="graduation-cap"></i>
             </div>
-            <span class="micro-badge" style="margin-bottom: 0.75rem; padding: 0.25rem 0.5rem; font-size: 0.65rem;">{{ data_get($catalog, 'service2_badge', 'Treinamentos') }}</span>
-            <h3 class="service-card-title">{{ data_get($catalog, 'service2_title', 'Treinamentos') }}</h3>
+            <span class="micro-badge" style="margin-bottom: 0.75rem; padding: 0.25rem 0.5rem; font-size: 0.65rem;">{{ trans_content($catalog, 'service2_badge', 'Treinamentos') }}</span>
+            <h3 class="service-card-title">{{ trans_content($catalog, 'service2_title', 'Treinamentos') }}</h3>
             <p class="service-card-desc">
-              {{ Str::limit(data_get($catalog, 'service2_desc'), 300, '...') }}
-              @if(strlen(data_get($catalog, 'service2_desc')) > 300)
-                <button type="button" class="leia-mais-btn" data-title="{{ data_get($catalog, 'service2_title') }}" data-text="{{ data_get($catalog, 'service2_desc') }}">Leia mais</button>
+              {{ Str::limit(trans_content($catalog, 'service2_desc'), 300, '...') }}
+              @if(strlen(trans_content($catalog, 'service2_desc')) > 300)
+                <button type="button" class="leia-mais-btn" data-title="{{ trans_content($catalog, 'service2_title') }}" data-text="{{ trans_content($catalog, 'service2_desc') }}">{{ __('Leia mais') }}</button>
               @endif
             </p>
             <a href="{{ url('/contato?subject=treinamento') }}" class="service-card-link">
-              Solicitar Informações
+              {{ __('Solicitar Informações') }}
               <i data-lucide="arrow-right"></i>
             </a>
           </div>
@@ -153,16 +153,16 @@
             <div class="service-card-icon">
               <i data-lucide="briefcase"></i>
             </div>
-            <span class="micro-badge" style="margin-bottom: 0.75rem; padding: 0.25rem 0.5rem; font-size: 0.65rem;">{{ data_get($catalog, 'service3_badge', 'Projetos') }}</span>
-            <h3 class="service-card-title">{{ data_get($catalog, 'service3_title', 'Plano de Negócios') }}</h3>
+            <span class="micro-badge" style="margin-bottom: 0.75rem; padding: 0.25rem 0.5rem; font-size: 0.65rem;">{{ trans_content($catalog, 'service3_badge', 'Projetos') }}</span>
+            <h3 class="service-card-title">{{ trans_content($catalog, 'service3_title', 'Plano de Negócios') }}</h3>
             <p class="service-card-desc">
-              {{ Str::limit(data_get($catalog, 'service3_desc'), 300, '...') }}
-              @if(strlen(data_get($catalog, 'service3_desc')) > 300)
-                <button type="button" class="leia-mais-btn" data-title="{{ data_get($catalog, 'service3_title') }}" data-text="{{ data_get($catalog, 'service3_desc') }}">Leia mais</button>
+              {{ Str::limit(trans_content($catalog, 'service3_desc'), 300, '...') }}
+              @if(strlen(trans_content($catalog, 'service3_desc')) > 300)
+                <button type="button" class="leia-mais-btn" data-title="{{ trans_content($catalog, 'service3_title') }}" data-text="{{ trans_content($catalog, 'service3_desc') }}">{{ __('Leia mais') }}</button>
               @endif
             </p>
             <a href="{{ url('/contato?subject=plano-de-negocios') }}" class="service-card-link">
-              Solicitar Informações
+              {{ __('Solicitar Informações') }}
               <i data-lucide="arrow-right"></i>
             </a>
           </div>
@@ -179,10 +179,10 @@
         <div class="services-header animate-fade-up">
           <div class="services-tag">
             <span class="micro-badge-dot"></span>
-            {{ data_get($faq, 'badge', 'FAQ Técnico') }}
+            {{ trans_content($faq, 'badge', 'FAQ Técnico') }}
           </div>
-          <h2 class="services-title">{{ data_get($faq, 'title', 'Perguntas Frequentes') }}</h2>
-          <p class="services-desc">{{ data_get($faq, 'description', 'Esclareça suas dúvidas técnicas sobre processos industriais, legislação e biotecnologia agrícola.') }}</p>
+          <h2 class="services-title">{{ trans_content($faq, 'title', 'Perguntas Frequentes') }}</h2>
+          <p class="services-desc">{{ trans_content($faq, 'description', 'Esclareça suas dúvidas técnicas sobre processos industriais, legislação e biotecnologia agrícola.') }}</p>
         </div>
 
         @php
@@ -202,24 +202,24 @@
                   elseif (str_contains($categoryName, 'Legislação')) $icon = 'file-text';
                 @endphp
                 <i data-lucide="{{ $icon }}" style="width: 1.25rem; height: 1.25rem;"></i>
-                {{ $categoryName }}
+                {{ __($categoryName) }}
               </h3>
               <div class="faq-group">
                 @foreach($items as $item)
                   <div class="faq-item">
                     <button class="faq-question">
-                      <span>{{ data_get($item, 'question') }}</span>
+                      <span>{{ trans_content($item, 'question') }}</span>
                       <i data-lucide="chevron-down" class="faq-icon-chevron"></i>
                     </button>
                     <div class="faq-answer">
-                      <p>{{ data_get($item, 'answer') }}</p>
+                      <p>{{ trans_content($item, 'answer') }}</p>
                     </div>
                   </div>
                 @endforeach
               </div>
             </div>
           @empty
-            <p class="text-center text-gray-500">Nenhuma pergunta cadastrada.</p>
+            <p class="text-center text-gray-500">{{ __('Nenhuma pergunta cadastrada.') }}</p>
           @endforelse
         </div>
 
@@ -234,7 +234,7 @@
           <!-- Content Left -->
           <div class="cta-conversar-content animate-fade-up">
             <h2 class="cta-conversar-title">
-              {!! data_get($contacts, 'conversar_title', 'Ainda tem dúvidas sobre a adequação da sua planta ou quer aplicar a tecnologia Veg Oxi 200 no seu negócio?<br><span style="color: var(--color-veg-primary);">VAMOS CONVERSAR!</span>') !!}
+              {!! trans_content($contacts, 'conversar_title', 'Ainda tem dúvidas sobre a adequação da sua planta ou quer aplicar a tecnologia Veg Oxi 200 no seu negócio?<br><span style="color: var(--color-veg-primary);">VAMOS CONVERSAR!</span>') !!}
             </h2>
             
             <div class="conversar-pillars">
@@ -245,8 +245,8 @@
                   <i data-lucide="heart"></i>
                 </div>
                 <div class="conversar-pillar-text">
-                  <h4>{{ data_get($contacts, 'conversar_p1_title', 'Livre de Sulfitos') }}</h4>
-                  <p>{{ data_get($contacts, 'conversar_p1_desc', 'Se você atua com vegetais frescos, higienizados e prontos para o consumo, o Veg Oxi 200 é a alternativa saudável e eficaz para substituir o metabissulfito e demais sulfitos.') }}</p>
+                  <h4>{{ trans_content($contacts, 'conversar_p1_title', 'Livre de Sulfitos') }}</h4>
+                  <p>{{ trans_content($contacts, 'conversar_p1_desc', 'Se você atua com vegetais frescos, higienizados e prontos para o consumo, o Veg Oxi 200 é a alternativa saudável e eficaz para substituir o metabissulfito e demais sulfitos.') }}</p>
                 </div>
               </div>
 
@@ -256,8 +256,8 @@
                   <i data-lucide="trending-up"></i>
                 </div>
                 <div class="conversar-pillar-text">
-                  <h4>{{ data_get($contacts, 'conversar_p2_title', 'Lucro Real') }}</h4>
-                  <p>{{ data_get($contacts, 'conversar_p2_desc', 'Veg Oxi 200, o único antioxidante natural e eficaz que substitui os sulfitos, aumenta a vida útil dos vegetais prontos para o consumo, preserva a qualidade e a saudabilidade desses alimentos, além de reduzir perdas (quebras).') }}</p>
+                  <h4>{{ trans_content($contacts, 'conversar_p2_title', 'Lucro Real') }}</h4>
+                  <p>{{ trans_content($contacts, 'conversar_p2_desc', 'Veg Oxi 200, o único antioxidante natural e eficaz que substitui os sulfitos, aumenta a vida útil dos vegetais prontos para o consumo, preserva a qualidade e a saudabilidade desses alimentos, além de reduzir perdas (quebras).') }}</p>
                 </div>
               </div>
 
@@ -267,25 +267,25 @@
           <!-- Action Box Right -->
           <div class="animate-fade-up delay-100">
             <div class="conversar-action-box">
-              <h3 class="action-box-title">{{ data_get($contacts, 'action_box_title', 'Transforme sua Produção') }}</h3>
+              <h3 class="action-box-title">{{ trans_content($contacts, 'action_box_title', 'Transforme sua Produção') }}</h3>
               <p class="action-box-desc">
-                {{ data_get($contacts, 'action_box_desc', 'Conte com a expertise e a inovação tecnológica da VegQuality para otimizar seus processos de FLV.') }}
+                {{ trans_content($contacts, 'action_box_desc', 'Conte com a expertise e a inovação tecnológica da VegQuality para otimizar seus processos de FLV.') }}
               </p>
               
               <a href="{{ data_get($contacts, 'action_box_cta_link', 'https://wa.me/5511978348438?text=Ol%C3%A1%2C%20gostaria%20de%20conversar%20sobre%20as%20solu%C3%A7%C3%B5es%20da%20VegQuality.') }}" target="_blank" rel="noopener noreferrer" class="btn-conversar" style="display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem; text-decoration: none;">
                 <i data-lucide="message-circle"></i>
-                {{ data_get($contacts, 'action_box_cta_text', 'Falar Conosco') }}
+                {{ trans_content($contacts, 'action_box_cta_text', 'Falar Conosco') }}
               </a>
 
               <!-- Counters inline -->
               <div class="conversar-indicators">
                 <div class="conversar-indicator-card">
                   <div class="conversar-indicator-number">{{ data_get($contacts, 'indicator1_num', '100%') }}</div>
-                  <div class="conversar-indicator-label">{{ data_get($contacts, 'indicator1_label', 'Livre de Sulfitos') }}</div>
+                  <div class="conversar-indicator-label">{{ trans_content($contacts, 'indicator1_label', 'Livre de Sulfitos') }}</div>
                 </div>
                 <div class="conversar-indicator-card">
                   <div class="conversar-indicator-number">{{ data_get($contacts, 'indicator2_num', '60%') }}</div>
-                  <div class="conversar-indicator-label">{{ data_get($contacts, 'indicator2_label', 'Lucro sob perdas') }}</div>
+                  <div class="conversar-indicator-label">{{ trans_content($contacts, 'indicator2_label', 'Lucro sob perdas') }}</div>
                 </div>
               </div>
 
@@ -303,10 +303,10 @@
         <div class="services-header animate-fade-up">
           <div class="services-tag">
             <span class="micro-badge-dot"></span>
-            {{ data_get($clientes, 'badge', 'Parcerias de Sucesso') }}
+            {{ trans_content($clientes, 'badge', 'Parcerias de Sucesso') }}
           </div>
-          <h2 class="services-title">{{ data_get($clientes, 'title', 'Alguns de Nossos Clientes') }}</h2>
-          <p class="services-desc">{{ data_get($clientes, 'description', 'Marcas e cooperativas agrícolas que confiam no suporte técnico e biotecnológico da VegQuality.') }}</p>
+          <h2 class="services-title">{{ trans_content($clientes, 'title', 'Alguns de Nossos Clientes') }}</h2>
+          <p class="services-desc">{{ trans_content($clientes, 'description', 'Marcas e cooperativas agrícolas que confiam no suporte técnico e biotecnológico da VegQuality.') }}</p>
         </div>
 
         @php
