@@ -64,30 +64,30 @@
             
             <!-- Text Content in Glassmorphic Card -->
             <div class="hero-content hero-glass-card">
-              @if(data_get($slide, 'badge1_text'))
+              @if(trans_content($slide, 'badge1_text'))
                 <div class="micro-badge">
                   <span class="micro-badge-dot"></span>
-                  {{ data_get($slide, 'badge1_text') }}
+                  {{ trans_content($slide, 'badge1_text') }}
                 </div>
               @endif
 
               <h1 class="hero-title">
-                {!! data_get($slide, 'title') !!}
+                {!! trans_content($slide, 'title') !!}
               </h1>
 
               <p class="hero-desc">
-                {{ data_get($slide, 'subtitle') }}
+                {{ trans_content($slide, 'subtitle') }}
               </p>
 
               <div class="hero-actions">
-                @if(data_get($slide, 'btn1_text'))
+                @if(trans_content($slide, 'btn1_text'))
                   <a href="{{ data_get($slide, 'btn1_link') }}" class="btn btn-primary hero-btn">
-                    {{ data_get($slide, 'btn1_text') }}
+                    {{ trans_content($slide, 'btn1_text') }}
                   </a>
                 @endif
-                @if(data_get($slide, 'btn2_text'))
+                @if(trans_content($slide, 'btn2_text'))
                   <a href="{{ data_get($slide, 'btn2_link') }}" class="btn btn-ghost hero-btn hero-btn-ghost-glass">
-                    {{ data_get($slide, 'btn2_text') }}
+                    {{ trans_content($slide, 'btn2_text') }}
                   </a>
                 @endif
               </div>
@@ -96,27 +96,27 @@
             <!-- Floating Badges Container -->
             <div class="hero-badges-wrapper">
               <!-- Badge 1 (Fade to Right) -->
-              @if(data_get($slide, 'badge1_text'))
+              @if(trans_content($slide, 'badge1_text'))
                 <div class="badge-floating badge-1 animate-fade-to-right">
                   <div class="badge-icon">
                     <i data-lucide="sprout"></i>
                   </div>
                   <div>
-                    <span class="badge-text-primary">Destaque</span>
-                    <span class="badge-text-secondary">{{ data_get($slide, 'badge1_text') }}</span>
+                    <span class="badge-text-primary">{{ __('Destaque') }}</span>
+                    <span class="badge-text-secondary">{{ trans_content($slide, 'badge1_text') }}</span>
                   </div>
                 </div>
               @endif
 
               <!-- Badge 2 (Fade to Left with Link) -->
-              @if(data_get($slide, 'badge2_text'))
+              @if(trans_content($slide, 'badge2_text'))
                 <a href="{{ data_get($slide, 'badge2_link', '#') }}" class="badge-floating badge-2 animate-fade-to-left block-link-badge">
                   <div class="badge-icon">
                     <i data-lucide="arrow-right-circle" class="badge-icon-accent"></i>
                   </div>
                   <div>
-                    <span class="badge-text-title">{{ data_get($slide, 'badge2_text') }}</span>
-                    <span class="badge-text-subtitle">Saiba mais <i data-lucide="chevron-right" style="width:12px;height:12px;display:inline-block;vertical-align:middle;"></i></span>
+                    <span class="badge-text-title">{{ trans_content($slide, 'badge2_text') }}</span>
+                    <span class="badge-text-subtitle">{{ __('Saiba mais') }} <i data-lucide="chevron-right" style="width:12px;height:12px;display:inline-block;vertical-align:middle;"></i></span>
                   </div>
                 </a>
               @endif
@@ -275,12 +275,12 @@
           <div class="service-card-icon">
             <i data-lucide="{{ data_get($card, 'icon', 'leaf') }}"></i>
           </div>
-          <h3 class="service-card-title">{{ data_get($card, 'title') }}</h3>
+          <h3 class="service-card-title">{{ trans_content($card, 'title') }}</h3>
           <p class="service-card-desc">
-            {{ data_get($card, 'description') }}
+            {{ trans_content($card, 'description') }}
           </p>
           <a href="{{ url(data_get($card, 'link_url', '/servicos')) }}" class="service-card-link">
-            {{ data_get($card, 'link_text', 'Saiba mais') }}
+            {{ trans_content($card, 'link_text', __('Saiba mais')) }}
             <i data-lucide="arrow-right"></i>
           </a>
         </div>
