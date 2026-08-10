@@ -158,13 +158,27 @@
     @endphp
 
     <div class="download-grid animate-fade-up delay-100">
-      @foreach($downloadCards as $dl)
+      @foreach($downloadCards as $index => $dl)
+        @php
+            $defaultEnTitles = [
+                'Technical Spec Sheet',
+                'Usage Protocols',
+                'MSDS (Safety Data Sheet)'
+            ];
+            $defaultEnDescs = [
+                'Consult the Veg Oxi 200 technical data sheet and find all details on composition, application, physical-chemical properties, storage, regulation, and usage recommendations.',
+                'Access the usage protocols to learn how to apply Veg Oxi 200 to each vegetable group for maximum efficiency, performance, and shelf life.',
+                'Access the Veg Oxi 200 MSDS to consult safety, handling, storage, transport, emergency measures, and recommendations for safe product use.'
+            ];
+            $titleDefault = $defaultEnTitles[$index] ?? null;
+            $descDefault = $defaultEnDescs[$index] ?? null;
+        @endphp
         <div class="download-card">
           <div class="download-card-icon">
             <i data-lucide="file-text"></i>
           </div>
-          <h3>{{ trans_content($dl, 'title') }}</h3>
-          <p>{{ trans_content($dl, 'desc') }}</p>
+          <h3>{{ trans_content($dl, 'title', $titleDefault) }}</h3>
+          <p>{{ trans_content($dl, 'desc', $descDefault) }}</p>
           @php
             $fileUrl = data_get($dl, 'file');
             $isAssetFile = Str::startsWith($fileUrl, 'downloads/');
