@@ -191,7 +191,7 @@
 </section>
 @endif
 
-<!-- Section 3.5: Biotecnologia / Veg Oxi 200 Propaganda Section (As requested) -->
+<!-- Section 3.5: Biotecnologia / Veg Oxi 200 Propaganda Section -->
 @if($productHighlight)
 <section class="product-highlight-section" style="background-color: #ffffff;">
   <div class="container">
@@ -201,13 +201,13 @@
       <div class="product-highlight-content animate-fade-up">
         <div class="product-tag">
           <span class="micro-badge-dot"></span>
-          {{ trans_content($productHighlight, 'badge', 'Biotecnologia') }}
+          {{ $isEn ? 'Biotechnology' : trans_content($productHighlight, 'badge', 'Biotecnologia') }}
         </div>
         <h2 class="product-highlight-title">
-          {{ trans_content($productHighlight, 'title', 'Veg Oxi 200 - Coadjuvante de tecnologia') }}
+          {{ $isEn ? 'Veg Oxi 200 - Processing Aid' : trans_content($productHighlight, 'title', 'Veg Oxi 200 - Coadjuvante de tecnologia') }}
         </h2>
         <p class="product-highlight-subtitle">
-          {{ trans_content($productHighlight, 'subtitle', 'Um Investimento que Vale a Pena!') }}
+          {{ $isEn ? 'An Investment Worth Making!' : trans_content($productHighlight, 'subtitle', 'Um Investimento que Vale a Pena!') }}
         </p>
 
         <div class="badges-container">
@@ -215,26 +215,26 @@
           <div class="product-cost-badge">
             <div class="cost-value-wrapper">
               <span class="cost-number">{{ data_get($productHighlight, 'cost_with', '30') }}</span>
-              <span class="cost-unit">{{ trans_content($productHighlight, 'cost_with_unit', 'Cents') }}</span>
+              <span class="cost-unit">{{ $isEn ? 'Cents' : trans_content($productHighlight, 'cost_with_unit', 'Centavos') }}</span>
             </div>
-            <p class="cost-desc">{{ trans_content($productHighlight, 'cost_with_desc', 'Por Vegetal Fresco') }}</p>
-            <span class="cost-sub-badge">{{ trans_content($productHighlight, 'cost_with_tag', 'Livre de Sulfitos (Seguro)') }}</span>
+            <p class="cost-desc">{{ $isEn ? 'Per Fresh Vegetable' : trans_content($productHighlight, 'cost_with_desc', 'Por Vegetal Fresco') }}</p>
+            <span class="cost-sub-badge">{{ $isEn ? 'Sulfite-Free (Safe)' : trans_content($productHighlight, 'cost_with_tag', 'Livre de Sulfitos (Seguro)') }}</span>
           </div>
 
           <!-- Badge 2: Sem Veg Oxi 200 -->
           <div class="product-cost-badge product-cost-badge-bad">
             <div class="cost-value-wrapper">
               <span class="cost-number cost-number-bad">{{ data_get($productHighlight, 'cost_without', '80') }}</span>
-              <span class="cost-unit">{{ trans_content($productHighlight, 'cost_without_unit', 'Cents') }}</span>
+              <span class="cost-unit">{{ $isEn ? 'Cents' : trans_content($productHighlight, 'cost_without_unit', 'Centavos') }}</span>
             </div>
-            <p class="cost-desc">{{ trans_content($productHighlight, 'cost_without_desc', 'Por Vegetal Oxidado') }}</p>
-            <span class="cost-sub-badge cost-sub-badge-bad">{{ trans_content($productHighlight, 'cost_without_tag', 'Com Metabissulfito (Tóxico)') }}</span>
+            <p class="cost-desc">{{ $isEn ? 'Per Oxidized Vegetable' : trans_content($productHighlight, 'cost_without_desc', 'Por Vegetal Oxidado') }}</p>
+            <span class="cost-sub-badge cost-sub-badge-bad">{{ $isEn ? 'With Metabisulfite (Toxic)' : trans_content($productHighlight, 'cost_without_tag', 'Com Metabissulfito (Tóxico)') }}</span>
           </div>
         </div>
 
         <a href="{{ data_get($productHighlight, 'cta_link', '#veg_oxi_contacts') }}" class="btn btn-primary hero-btn">
           <i data-lucide="shield-check"></i>
-          {{ trans_content($productHighlight, 'cta_text', 'Adquirir Veg Oxi 200') }}
+          {{ $isEn ? 'Acquire Veg Oxi 200' : trans_content($productHighlight, 'cta_text', 'Adquirir Veg Oxi 200') }}
         </a>
       </div>
 
@@ -261,22 +261,47 @@
     <div class="services-header animate-fade-up">
       <div class="services-tag">
         <span class="micro-badge-dot"></span>
-        {{ trans_content($contacts, 'badge', 'Distribuição') }}
+        {{ $isEn ? 'Distribution' : trans_content($contacts, 'badge', 'Distribuição') }}
       </div>
       <h2 class="services-title">
-        {{ trans_content($contacts, 'title', 'Distribuição Veg Oxi 200') }}
+        {{ $isEn ? 'Veg Oxi 200 Distribution' : trans_content($contacts, 'title', 'Distribuição Veg Oxi 200') }}
       </h2>
     </div>
 
+    @php
+      $contactCards = [
+          [
+              'title' => $isEn ? 'Purchase in SP' : 'Quero Adquirir em SP',
+              'desc' => $isEn ? 'In agro-industry, every hour counts. If Veg Oxi 200 is urgent for your production, click below and request support.' : 'Na agroindústria, cada hora conta. Se o Veg Oxi 200 é urgente para sua produção, clique no botão abaixo e solicite seu atendimento.',
+              'link' => 'https://wa.me/5511978348438',
+          ],
+          [
+              'title' => $isEn ? 'South of Minas Gerais' : 'No Sul de Minas Gerais',
+              'desc' => $isEn ? 'Also in Minas Gerais: more freshness, higher quality, and reduced losses. Click to contact us!' : 'Também em Minas Gerais: mais frescor, mais qualidade e menos perdas. Clique e fale conosco!',
+              'link' => 'https://wa.me/5511978348438',
+          ],
+          [
+              'title' => $isEn ? 'Other Locations' : 'Outras Localidades',
+              'desc' => $isEn ? 'Located in another region of Brazil? No problem! Our team serves clients nationwide. Click below and contact us!' : 'Está em outra região do Brasil? Sem problema! Nossa equipe atende clientes em todo o país. Clique no botão abaixo e fale conosco!',
+              'link' => 'https://wa.me/5511978348438',
+          ],
+          [
+              'title' => $isEn ? 'How to Distribute?' : 'Como Distribuir?',
+              'desc' => $isEn ? 'Are you a distributor looking to carry Veg Oxi 200 in your region? Click below and talk to our team!' : 'É distribuidor e quer levar o Veg Oxi 200 para sua região? Clique no botão abaixo e fale com nossa equipe!',
+              'link' => 'https://wa.me/5511978348438',
+          ],
+      ];
+    @endphp
+
     <div class="local-grid animate-fade-up delay-100">
-      @foreach(data_get($contacts, 'contacts', []) as $contact)
+      @foreach($contactCards as $contact)
         <div class="local-card">
           <div class="local-card-icon">
             <i data-lucide="map-pin"></i>
           </div>
-          <h4>{{ trans_content($contact, 'title') }}</h4>
-          <p>{{ trans_content($contact, 'desc') }}</p>
-          <a href="{{ data_get($contact, 'link') }}" target="_blank" rel="noopener noreferrer" class="btn-local-cta">
+          <h4>{{ $contact['title'] }}</h4>
+          <p>{{ $contact['desc'] }}</p>
+          <a href="{{ data_get($contact, 'link', 'https://wa.me/5511978348438') }}" target="_blank" rel="noopener noreferrer" class="btn-local-cta">
             {{ __('Fale Conosco') }}
           </a>
         </div>
