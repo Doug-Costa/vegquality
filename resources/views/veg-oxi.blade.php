@@ -134,6 +134,19 @@
       ];
     @endphp
 
+    <style>
+      .download-grid {
+        display: grid !important;
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem !important;
+      }
+      @media (min-width: 768px) {
+        .download-grid {
+          grid-template-columns: repeat(3, 1fr) !important;
+        }
+      }
+    </style>
+
     <div class="download-grid animate-fade-up delay-100">
       @foreach($downloadCards as $dl)
         <div class="download-card">
