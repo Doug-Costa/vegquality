@@ -5,36 +5,50 @@ window.lucide = {
   createIcons: (options = {}) => createIcons({ icons, ...options })
 };
 
-// Comportamento do menu hambúrguer no mobile
+// Comportamento do menu hambúrguer Off-Canvas no mobile
 const menuBtn = document.getElementById('menu-btn');
+const menuCloseBtn = document.getElementById('menu-close-btn');
 const mobileMenu = document.getElementById('mobile-menu');
+const mobileOverlay = document.getElementById('mobile-menu-overlay');
 
-if (menuBtn && mobileMenu) {
-  menuBtn.addEventListener('click', () => {
-    const isActive = mobileMenu.classList.toggle('active');
-    
-    if (isActive) {
-      menuBtn.innerHTML = `<i data-lucide="x"></i>`;
-    } else {
-      menuBtn.innerHTML = `<i data-lucide="menu"></i>`;
-    }
-    
-    // Recriar ícones após atualizar o HTML interno
-    createIcons({ icons });
-  });
+const openMobileMenu = () => {
+  if (mobileMenu) mobileMenu.classList.add('active');
+  if (mobileOverlay) mobileOverlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+};
+
+const closeMobileMenu = () => {
+  if (mobileMenu) mobileMenu.classList.remove('active');
+  if (mobileOverlay) mobileOverlay.classList.remove('active');
+  document.body.style.overflow = '';
+};
+
+if (menuBtn) {
+  menuBtn.addEventListener('click', openMobileMenu);
 }
 
-// Alteração visual da Navbar ao rolar a página
+if (menuCloseBtn) {
+  menuCloseBtn.addEventListener('click', closeMobileMenu);
+}
+
+if (mobileOverlay) {
+  mobileOverlay.addEventListener('click', closeMobileMenu);
+}
+
+// Alteração visual da Navbar ao rolar a página (Sticky Shrink para 64px)
 const navbar = document.getElementById('navbar');
 
 if (navbar) {
-  window.addEventListener('scroll', () => {
+  const handleScroll = () => {
     if (window.scrollY > 20) {
       navbar.classList.add('header-scrolled');
     } else {
       navbar.classList.remove('header-scrolled');
     }
-  });
+  };
+  
+  window.addEventListener('scroll', handleScroll, { passive: true });
+  handleScroll();
 }
 
 // Lógica de Modais de Fatos
