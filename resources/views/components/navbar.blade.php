@@ -17,8 +17,9 @@
         <a href="{{ url('/contato') }}" class="nav-link {{ request()->is('contato') ? 'active' : '' }}">{{ __('Contato') }}</a>
       </nav>
 
-      <!-- Desktop CTA & Lang Switcher -->
-      <div class="nav-cta">
+      <!-- Right Actions (Flags, CTA Desktop, Hamburger) -->
+      <div class="nav-right">
+        <!-- Seletor de Idiomas com Bandeiras (Visível em Desktop e Mobile à direita) -->
         <div class="lang-switcher">
           <a href="{{ url('/lang/pt') }}" class="lang-btn {{ app()->getLocale() === 'pt_BR' ? 'active' : '' }}" title="Português (Brasil)">
             <img src="{{ asset('assets/images/ilustracao-de-bandeira-brasil_53876-27017.avif') }}" alt="Brasil" class="flag-icon">
@@ -31,15 +32,16 @@
           </a>
         </div>
         
-        <a href="{{ url('/contato') }}" class="btn btn-primary">
+        <!-- CTA Fale Conosco (Apenas Desktop) -->
+        <a href="{{ url('/contato') }}" class="btn btn-primary desktop-cta">
           {{ __('Fale Conosco') }}
         </a>
-      </div>
 
-      <!-- Mobile Menu Button -->
-      <button id="menu-btn" class="menu-btn" aria-label="Abrir Menu">
-        <i data-lucide="menu"></i>
-      </button>
+        <!-- Botão Hambúrguer (Mobile e Resoluções Intermediárias) -->
+        <button id="menu-btn" class="menu-btn" aria-label="Abrir Menu">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
 
     </div>
   </div>
