@@ -2235,6 +2235,7 @@ a {
   height: 8rem; /* Logo bem grande e destacado */
   width: auto;
   object-fit: contain;
+  filter: none !important;
   transition: transform var(--transition-normal);
 }
 

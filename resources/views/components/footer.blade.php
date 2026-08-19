@@ -5,7 +5,7 @@
       <!-- Seção 1: Logo e Sobre a Empresa -->
       <div class="footer-col footer-col-about">
         <a href="{{ url('/') }}" class="footer-logo-link" aria-label="VegQuality Home">
-          <img src="{{ asset('assets/logos/logo-colorida-sem-funddo.png') }}" alt="VegQuality" class="footer-logo-img-large">
+          <img src="{{ asset('assets/logos/logo-colorida-sem-funddo.png') }}" alt="VegQuality" class="footer-logo-img-large" style="height: 8rem; width: auto; object-fit: contain; filter: none !important;">
           <span class="footer-logo-tagline">{{ __('Consultoria para indústria de FLV processados') }}</span>
         </a>
         <div class="footer-socials">
