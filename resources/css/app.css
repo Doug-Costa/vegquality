@@ -2224,19 +2224,37 @@ a {
 }
 
 .footer-logo-link {
-  display: inline-block;
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
   max-width: 100%;
+  text-decoration: none;
 }
 
 .footer-logo-img-large {
   height: 8rem; /* Logo bem grande e destacado */
   width: auto;
   object-fit: contain;
+  filter: brightness(0) invert(1); /* Torna o logo branco para contrastar com o fundo verde escuro */
   transition: transform var(--transition-normal);
 }
 
+.footer-logo-tagline {
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.9);
+  line-height: 1.3;
+  margin-top: 0.15rem;
+  letter-spacing: 0.015em;
+  transition: color var(--transition-normal);
+}
+
 .footer-logo-link:hover .footer-logo-img-large {
-  transform: scale(1.03);
+  transform: scale(1.02);
+}
+
+.footer-logo-link:hover .footer-logo-tagline {
+  color: #ffffff;
 }
 
 .footer-about-text {
