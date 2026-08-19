@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>@yield('title', 'VegQuality | Consultoria em Biotecnologia & Segurança Alimentar para Agroindústria')</title>
+  <title>@yield('title', 'VegQuality - Consultoria em FLV Processados.')</title>
   <meta name="description" content="@yield('meta_description', 'Soluções tecnológicas e biotecnologia para extensão de shelf-life e segurança dos alimentos na sua produção. Reduza oxidação e perdas com VegQuality.')">
   
   <!-- Fontes -->
