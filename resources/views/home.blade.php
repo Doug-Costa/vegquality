@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'VegQuality | Consultoria em Biotecnologia & Segurança Alimentar para Agroindústria')
-@section('meta_description', 'Soluções tecnológicas e biotecnologia para extensão de shelf-life e segurança dos alimentos na sua produção. Reduza oxidação e perdas com VegQuality.')
+@section('title', $page?->title ?? 'VegQuality - Consultoria em FLV Processados.')
+@section('meta_description', $page?->meta_description ?? 'Soluções tecnológicas para extensão de shelf-life no processamento de FLV. Reduza oxidação e perdas com VegQuality.')
 
 @section('content')
 @php

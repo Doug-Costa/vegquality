@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
-@section('title', 'A Empresa | VegQuality - Consultoria em FLV Processados')
-@section('meta_description', 'Saiba mais sobre a VegQuality, fundada pela Dra. Roseane Bob. Oferecemos consultoria científica para estender o shelf-life e eliminar o metabissulfito de sódio na agroindústria.')
+@section('title', $page?->title ?? 'A Empresa | VegQuality - Consultoria em FLV Processados')
+@section('meta_description', $page?->meta_description ?? 'Saiba mais sobre a VegQuality, fundada pela Dra. Roseane Bob. Oferecemos consultoria em FLV processados para estender o shelf-life e eliminar o metabissulfito de sódio na agroindústria.')
 
 @section('content')
 @php
