@@ -2232,7 +2232,6 @@ a {
   height: 8rem; /* Logo bem grande e destacado */
   width: auto;
   object-fit: contain;
-  filter: brightness(0) invert(1); /* Torna o logo branco para contrastar com o fundo verde escuro */
   transition: transform var(--transition-normal);
 }
 
