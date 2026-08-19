@@ -53,7 +53,7 @@
     <!-- Drawer Header -->
     <div class="mobile-drawer-header">
       <a href="{{ url('/') }}" class="logo-link">
-        <img src="{{ asset('assets/logos/logo-colorida-sem-funddo.png') }}" alt="VegQuality" style="height: 2.2rem; width: auto;">
+        <img src="{{ asset('assets/logos/logo-colorida-sem-funddo.png') }}" alt="VegQuality" style="height: 2.8rem; width: auto;">
       </a>
       <button id="menu-close-btn" class="menu-close-btn" aria-label="Fechar Menu">
         <i data-lucide="x"></i>

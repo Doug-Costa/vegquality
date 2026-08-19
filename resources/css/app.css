@@ -110,12 +110,12 @@ a {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 5rem; /* 80px padrão */
+  height: 5.5rem; /* 88px padrão para acomodar a logo maior */
   transition: height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .header-scrolled .navbar-container {
-  height: 4rem; /* 64px reduzido */
+  height: 4.25rem; /* 68px reduzido */
 }
 
 .logo-link {
@@ -125,14 +125,14 @@ a {
 }
 
 .logo-img {
-  height: 4rem;
+  height: 4.5rem; /* Aumentado proporcionalmente */
   width: auto;
   object-fit: contain;
   transition: height 0.3s ease, transform var(--transition-normal);
 }
 
 .header-scrolled .logo-img {
-  height: 3rem;
+  height: 3.5rem;
 }
 
 .logo-link:hover .logo-img {
@@ -2229,7 +2229,7 @@ a {
 }
 
 .footer-logo-img-large {
-  height: 7rem; /* Logo bem grande */
+  height: 8rem; /* Logo bem grande e destacado */
   width: auto;
   object-fit: contain;
   filter: brightness(0) invert(1); /* Torna o logo branco para contrastar com o fundo verde escuro */
