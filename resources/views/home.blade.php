@@ -5,6 +5,7 @@
 
 @section('content')
 @php
+    $isEn = app()->getLocale() === 'en' || str_starts_with(app()->getLocale(), 'en');
     $hero = $page?->sections->where('key', 'hero')->first()?->content;
     $about = $page?->sections->where('key', 'about')->first()?->content;
     
