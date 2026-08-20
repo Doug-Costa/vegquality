@@ -463,27 +463,27 @@
           <!-- Badge 1: Com Veg Oxi 200 -->
           <div class="product-cost-badge">
             <div class="cost-value-wrapper">
-              <span class="cost-number">{{ data_get($productHighlight, 'cost_with', '30') }}</span>
-              <span class="cost-unit">{{ trans_content($productHighlight, 'cost_with_unit', 'Cents') }}</span>
+              <span class="cost-number">{{ trans_content($productHighlight, 'cost_with', '30') }}</span>
+              <span class="cost-unit">{{ trans_content($productHighlight, 'cost_with_unit', $isEn ? 'Cents' : 'Centavos') }}</span>
             </div>
-            <p class="cost-desc">{{ trans_content($productHighlight, 'cost_with_desc', 'Por Vegetal Fresco') }}</p>
-            <span class="cost-sub-badge">{{ trans_content($productHighlight, 'cost_with_tag', 'Livre de Sulfitos (Seguro)') }}</span>
+            <p class="cost-desc">{{ trans_content($productHighlight, 'cost_with_desc', $isEn ? 'Per Fresh Vegetable' : 'Por Vegetal Fresco') }}</p>
+            <span class="cost-sub-badge">{{ trans_content($productHighlight, 'cost_with_tag', $isEn ? 'Sulfite-Free (Safe)' : 'Livre de Sulfitos (Seguro)') }}</span>
           </div>
 
           <!-- Badge 2: Sem Veg Oxi 200 -->
           <div class="product-cost-badge product-cost-badge-bad">
             <div class="cost-value-wrapper">
-              <span class="cost-number cost-number-bad">{{ data_get($productHighlight, 'cost_without', '80') }}</span>
-              <span class="cost-unit">{{ trans_content($productHighlight, 'cost_without_unit', 'Cents') }}</span>
+              <span class="cost-number cost-number-bad" style="color: #dc2626 !important;">{{ trans_content($productHighlight, 'cost_without', '80') }}</span>
+              <span class="cost-unit" style="color: #dc2626 !important;">{{ trans_content($productHighlight, 'cost_without_unit', $isEn ? 'Cents' : 'Centavos') }}</span>
             </div>
-            <p class="cost-desc">{{ trans_content($productHighlight, 'cost_without_desc', 'Por Vegetal Oxidado') }}</p>
-            <span class="cost-sub-badge cost-sub-badge-bad">{{ trans_content($productHighlight, 'cost_without_tag', 'Com Metabissulfito (Tóxico)') }}</span>
+            <p class="cost-desc">{{ trans_content($productHighlight, 'cost_without_desc', $isEn ? 'Per Oxidized Vegetable' : 'Por Vegetal Oxidado') }}</p>
+            <span class="cost-sub-badge cost-sub-badge-bad">{{ trans_content($productHighlight, 'cost_without_tag', $isEn ? 'With Metabisulfite (Toxic)' : 'Com Metabissulfito (Tóxico)') }}</span>
           </div>
         </div>
 
-        <a href="{{ url('/veg-oxi') }}" class="btn btn-primary hero-btn">
+        <a href="{{ trans_content($productHighlight, 'cta_link', url('/veg-oxi')) }}" class="btn btn-primary hero-btn">
           <i data-lucide="shield-check"></i>
-          {{ trans_content($productHighlight, 'cta_text', 'Adquirir Veg Oxi 200') }}
+          {{ trans_content($productHighlight, 'cta_text', $isEn ? 'Acquire Veg Oxi 200' : 'Adquirir Veg Oxi 200') }}
         </a>
       </div>
 

@@ -155,20 +155,23 @@ class SectionsRelationManager extends RelationManager
                                 Forms\Components\TextInput::make('title')->label('Título (PT)')->required(),
                                 Forms\Components\TextInput::make('subtitle')->label('Subtítulo (PT)')->required(),
                                 Forms\Components\TextInput::make('cta_text')->label('Texto Botão CTA (PT)')->required(),
+                                Forms\Components\TextInput::make('cta_link')->label('Link do Botão CTA (PT)'),
 
-                                Forms\Components\Section::make('Card Verde (Com Veg Oxi 200)')
+                                Forms\Components\Section::make('Card Verde (Com Veg Oxi 200) - PT')
                                     ->schema([
+                                        Forms\Components\TextInput::make('cost_with')->label('Número do Custo Verde (Ex: 30)'),
                                         Forms\Components\TextInput::make('cost_with_unit')->label('Unidade do Custo'),
                                         Forms\Components\TextInput::make('cost_with_desc')->label('Descrição do Custo'),
                                         Forms\Components\TextInput::make('cost_with_tag')->label('Etiqueta do Custo'),
-                                    ])->columns(3),
+                                    ])->columns(4),
 
-                                Forms\Components\Section::make('Card Vermelho (Sem Veg Oxi 200)')
+                                Forms\Components\Section::make('Card Vermelho (Sem Veg Oxi 200) - PT')
                                     ->schema([
+                                        Forms\Components\TextInput::make('cost_without')->label('Número do Custo Vermelho (Ex: 80)'),
                                         Forms\Components\TextInput::make('cost_without_unit')->label('Unidade do Custo'),
                                         Forms\Components\TextInput::make('cost_without_desc')->label('Descrição do Custo'),
                                         Forms\Components\TextInput::make('cost_without_tag')->label('Etiqueta do Custo'),
-                                    ])->columns(3),
+                                    ])->columns(4),
                             ]),
                         Forms\Components\Tabs\Tab::make('Inglês (EN)')
                             ->schema([
@@ -176,35 +179,32 @@ class SectionsRelationManager extends RelationManager
                                 Forms\Components\TextInput::make('title_en')->label('Título (EN)'),
                                 Forms\Components\TextInput::make('subtitle_en')->label('Subtítulo (EN)'),
                                 Forms\Components\TextInput::make('cta_text_en')->label('Texto Botão CTA (EN)'),
+                                Forms\Components\TextInput::make('cta_link_en')->label('Link do Botão CTA (EN)'),
 
                                 Forms\Components\Section::make('Card Verde (Com Veg Oxi 200) - EN')
                                     ->schema([
+                                        Forms\Components\TextInput::make('cost_with_en')->label('Número do Custo Verde (EN) (Ex: 30)'),
                                         Forms\Components\TextInput::make('cost_with_unit_en')->label('Unidade do Custo (EN)'),
                                         Forms\Components\TextInput::make('cost_with_desc_en')->label('Descrição do Custo (EN)'),
                                         Forms\Components\TextInput::make('cost_with_tag_en')->label('Etiqueta do Custo (EN)'),
-                                    ])->columns(3),
+                                    ])->columns(4),
 
                                 Forms\Components\Section::make('Card Vermelho (Sem Veg Oxi 200) - EN')
                                     ->schema([
+                                        Forms\Components\TextInput::make('cost_without_en')->label('Número do Custo Vermelho (EN) (Ex: 80)'),
                                         Forms\Components\TextInput::make('cost_without_unit_en')->label('Unidade do Custo (EN)'),
                                         Forms\Components\TextInput::make('cost_without_desc_en')->label('Descrição do Custo (EN)'),
                                         Forms\Components\TextInput::make('cost_without_tag_en')->label('Etiqueta do Custo (EN)'),
-                                    ])->columns(3),
+                                    ])->columns(4),
                             ]),
                     ]),
-                Forms\Components\Grid::make(3)
-                    ->schema([
-                        Forms\Components\TextInput::make('cost_with')->label('Número do Custo Verde (Ex: 30)'),
-                        Forms\Components\TextInput::make('cost_without')->label('Número do Custo Vermelho (Ex: 80)'),
-                        Forms\Components\TextInput::make('cta_link')->label('Link do Botão CTA')->required(),
-                        Forms\Components\FileUpload::make('image')
-                            ->label('Imagem Comparativa')
-                            ->image()
-                            ->directory('products')
-                            ->disk('public')
-                            ->maxSize(102400)
-                            ->columnSpanFull(),
-                    ])
+                Forms\Components\FileUpload::make('image')
+                    ->label('Imagem Comparativa')
+                    ->image()
+                    ->directory('products')
+                    ->disk('public')
+                    ->maxSize(102400)
+                    ->columnSpanFull(),
             ],
 
             'about' => [
