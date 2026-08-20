@@ -2232,7 +2232,7 @@ a {
 }
 
 .footer-logo-img-large {
-  height: 8rem; /* Logo bem grande e destacado */
+  height: 10.5rem; /* Logo bem grande e destacado */
   width: auto;
   object-fit: contain;
   filter: none !important;

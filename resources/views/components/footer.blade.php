@@ -5,7 +5,7 @@
       <!-- Seção 1: Logo e Sobre a Empresa -->
       <div class="footer-col footer-col-about">
         <a href="{{ url('/') }}" class="footer-logo-link" aria-label="VegQuality Home">
-          <img src="{{ asset('assets/logos/logo-veg-rodape.png') }}" alt="VegQuality" class="footer-logo-img-large" style="height: 8rem; width: auto; object-fit: contain; filter: none !important;">
+          <img src="{{ asset('assets/logos/logo-veg-rodape.png') }}" alt="VegQuality" class="footer-logo-img-large" style="height: 10.5rem; width: auto; object-fit: contain; filter: none !important;">
           <span class="footer-logo-tagline">{{ __('Soluções FLV minimamente processados') }}</span>
         </a>
         <div class="footer-socials">
