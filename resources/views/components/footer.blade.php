@@ -78,7 +78,7 @@
 
     <!-- Footer Bottom -->
     <div class="footer-bottom">
-      <p>&copy; 2026 VegQuality. {{ __('Todos os direitos reservados. Desenvolvido com foco em Biotecnologia & Sustentabilidade.') }}</p>
+      <p>&copy; 2026 VegQuality. {{ __('Todos os direitos reservados. Desenvolvido por @softystation') }}</p>
     </div>
   </div>
 </footer>
