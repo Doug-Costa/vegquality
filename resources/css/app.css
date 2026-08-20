@@ -297,7 +297,8 @@ a {
 }
 
 /* Mobile Toggle Button */
-.menu-btn {
+.menu-btn,
+.menu-close-btn {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -307,10 +308,20 @@ a {
   border-radius: 0.5rem;
   color: #1E3D2B;
   cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
   transition: background-color var(--transition-fast);
 }
 
-.menu-btn:hover {
+.menu-btn *,
+.menu-close-btn * {
+  pointer-events: none;
+}
+
+.menu-btn:hover,
+.menu-close-btn:hover {
   background-color: #f1f8f3;
 }
 
@@ -424,8 +435,26 @@ a {
 
 .mobile-cta {
   width: 100%;
-  padding: 0.875rem;
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
   border-radius: 8px;
+  text-align: center;
+  box-sizing: border-box;
+}
+
+@media (max-width: 575.98px) {
+  .hero-btn {
+    height: 3rem; /* 48px proporcional no mobile */
+    padding: 0.55rem 1rem;
+    font-size: 0.875rem;
+    max-width: 100%;
+  }
+
+  .btn {
+    font-size: 0.875rem;
+    padding: 0.55rem 1.1rem;
+  }
 }
 
 .mobile-lang-switcher {

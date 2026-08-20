@@ -5,35 +5,73 @@ window.lucide = {
   createIcons: (options = {}) => createIcons({ icons, ...options })
 };
 
-// Comportamento do menu hambúrguer Off-Canvas no mobile
-const menuBtn = document.getElementById('menu-btn');
-const menuCloseBtn = document.getElementById('menu-close-btn');
-const mobileMenu = document.getElementById('mobile-menu');
-const mobileOverlay = document.getElementById('mobile-menu-overlay');
-
-const openMobileMenu = () => {
+// Comportamento do menu hambúrguer Off-Canvas no mobile (Compatibilidade iOS/Safari e Android)
+const openMobileMenu = (e) => {
+  if (e && e.cancelable) e.preventDefault();
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileOverlay = document.getElementById('mobile-menu-overlay');
   if (mobileMenu) mobileMenu.classList.add('active');
   if (mobileOverlay) mobileOverlay.classList.add('active');
   document.body.style.overflow = 'hidden';
 };
 
-const closeMobileMenu = () => {
+const closeMobileMenu = (e) => {
+  if (e && e.cancelable) e.preventDefault();
+  const mobileMenu = document.getElementById('mobile-menu');
+  const mobileOverlay = document.getElementById('mobile-menu-overlay');
   if (mobileMenu) mobileMenu.classList.remove('active');
   if (mobileOverlay) mobileOverlay.classList.remove('active');
   document.body.style.overflow = '';
 };
 
-if (menuBtn) {
-  menuBtn.addEventListener('click', openMobileMenu);
-}
+const initMobileMenu = () => {
+  const menuBtn = document.getElementById('menu-btn');
+  const menuCloseBtn = document.getElementById('menu-close-btn');
+  const mobileOverlay = document.getElementById('mobile-menu-overlay');
+  const mobileMenu = document.getElementById('mobile-menu');
 
-if (menuCloseBtn) {
-  menuCloseBtn.addEventListener('click', closeMobileMenu);
-}
+  if (menuBtn) {
+    menuBtn.removeEventListener('click', openMobileMenu);
+    menuBtn.addEventListener('click', openMobileMenu);
+  }
 
-if (mobileOverlay) {
-  mobileOverlay.addEventListener('click', closeMobileMenu);
-}
+  if (menuCloseBtn) {
+    menuCloseBtn.removeEventListener('click', closeMobileMenu);
+    menuCloseBtn.addEventListener('click', closeMobileMenu);
+  }
+
+  if (mobileOverlay) {
+    mobileOverlay.removeEventListener('click', closeMobileMenu);
+    mobileOverlay.addEventListener('click', closeMobileMenu);
+  }
+
+  if (mobileMenu) {
+    const mobileLinks = mobileMenu.querySelectorAll('.mobile-nav-link');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', closeMobileMenu);
+    });
+  }
+};
+
+// Delegação global no document para capturar toques/cliques no iOS Safari sem falhas
+document.addEventListener('click', (e) => {
+  const btn = e.target.closest('#menu-btn');
+  if (btn) {
+    openMobileMenu(e);
+    return;
+  }
+
+  const closeBtn = e.target.closest('#menu-close-btn');
+  if (closeBtn) {
+    closeMobileMenu(e);
+    return;
+  }
+
+  const overlay = e.target.closest('#mobile-menu-overlay');
+  if (overlay && e.target === overlay) {
+    closeMobileMenu(e);
+  }
+});
 
 // Alteração visual da Navbar ao rolar a página (Sticky Shrink para 64px)
 const navbar = document.getElementById('navbar');
@@ -187,6 +225,7 @@ const runAllInits = () => {
   } catch (error) {
     console.error("VegQuality: Erro ao inicializar ícones Lucide:", error);
   }
+  initMobileMenu();
   initCarousel();
   initAccordions();
 };
