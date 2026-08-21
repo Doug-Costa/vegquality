@@ -110,6 +110,42 @@ class HomeController extends Controller
         return view('contato', compact('page'));
     }
 
+    public function submitContato(Request $request)
+    {
+        $validated = $request->validate([
+            'name' => 'required|string|max:255',
+            'email' => 'required|email|max:255',
+            'phone' => 'required|string|max:30',
+            'company' => 'nullable|string|max:255',
+            'subject' => 'required|string|max:255',
+            'message' => 'required|string',
+        ]);
+
+        try {
+            \Illuminate\Support\Facades\Mail::send([], [], function ($message) use ($validated) {
+                $message->to('vegquality@vegquality.com.br')
+                    ->subject('Novo Contato do Site - Assunto: ' . $validated['subject'])
+                    ->html(
+                        '<h3>Novo contato recebido pelo site:</h3>' .
+                        '<p><strong>Nome:</strong> ' . e($validated['name']) . '</p>' .
+                        '<p><strong>E-mail:</strong> ' . e($validated['email']) . '</p>' .
+                        '<p><strong>Telefone/WhatsApp:</strong> ' . e($validated['phone']) . '</p>' .
+                        '<p><strong>Empresa/Agroindústria:</strong> ' . e($validated['company'] ?? 'Não informada') . '</p>' .
+                        '<p><strong>Assunto:</strong> ' . e($validated['subject']) . '</p>' .
+                        '<p><strong>Mensagem:</strong><br>' . nl2br(e($validated['message'])) . '</p>'
+                    );
+            });
+
+            return response()->json(['success' => true]);
+        } catch (\Exception $e) {
+            \Log::error('Erro ao enviar e-mail de contato: ' . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'error' => 'Ocorreu um erro ao enviar sua mensagem. Por favor, tente novamente mais tarde.'
+            ], 500);
+        }
+    }
+
     public function vegOxi()
     {
         $page = \App\Models\Page::with('sections')->where('slug', 'veg-oxi')->first();

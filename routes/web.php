@@ -29,6 +29,7 @@ Route::get('/radar/{slug}', [HomeController::class, 'showArticle'])->name('blog.
 
 // Contato / Contact Us
 Route::get('/contato', [HomeController::class, 'contato'])->name('contato');
+Route::post('/contato', [HomeController::class, 'submitContato'])->name('contato.submit');
 Route::get('/contact', [HomeController::class, 'contato']);
 Route::get('/contact-us', [HomeController::class, 'contato']);
 

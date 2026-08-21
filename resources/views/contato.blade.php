@@ -100,6 +100,7 @@
             <h2 class="contact-form-title">{{ trans_content($form, 'title', 'Envie uma Mensagem') }}</h2>
             
             <form id="contact-form">
+              @csrf
               
               <div class="form-group-grid">
                 <div class="form-group">
@@ -194,28 +195,49 @@
           contactForm.addEventListener('submit', function (e) {
             e.preventDefault();
             
-            // Simular envio
             const submitBtn = document.getElementById('submit-btn');
             if (submitBtn) {
               submitBtn.disabled = true;
-              submitBtn.innerHTML = '<i class="animate-spin" data-lucide="loader"></i> Enviando...';
+              submitBtn.innerHTML = '<i class="animate-spin" data-lucide="loader"></i> {{ __("Enviando...") }}';
               if (window.lucide) window.lucide.createIcons();
             }
 
-            setTimeout(function () {
-              // Reset form
-              contactForm.reset();
-              
-              // Reset submit button
+            const formData = new FormData(contactForm);
+
+            fetch('{{ route('contato.submit') }}', {
+              method: 'POST',
+              body: formData,
+              headers: {
+                'X-Requested-With': 'XMLHttpRequest'
+              }
+            })
+            .then(response => response.json())
+            .then(data => {
               if (submitBtn) {
                 submitBtn.disabled = false;
-                submitBtn.innerHTML = '<i data-lucide="send"></i> Enviar Mensagem';
+                submitBtn.innerHTML = '<i data-lucide="send"></i> {{ trans_content($form, "submit_text", "Enviar Mensagem") }}';
+                if (window.lucide) window.lucide.createIcons();
               }
-              
-              // Show overlay
-              successOverlay.classList.add('active');
-              if (window.lucide) window.lucide.createIcons();
-            }, 1000);
+
+              if (data.success) {
+                // Reset form
+                contactForm.reset();
+                // Show overlay
+                successOverlay.classList.add('active');
+                if (window.lucide) window.lucide.createIcons();
+              } else {
+                alert(data.error || 'Ocorreu um erro ao enviar o contato. Por favor, tente novamente.');
+              }
+            })
+            .catch(error => {
+              if (submitBtn) {
+                submitBtn.disabled = false;
+                submitBtn.innerHTML = '<i data-lucide="send"></i> {{ trans_content($form, "submit_text", "Enviar Mensagem") }}';
+                if (window.lucide) window.lucide.createIcons();
+              }
+              alert('Erro de conexão. Por favor, verifique seu acesso à internet e tente novamente.');
+              console.error(error);
+            });
           });
         }
 

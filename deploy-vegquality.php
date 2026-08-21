@@ -41,7 +41,15 @@ if (!file_exists($envPath)) {
                   "SESSION_DRIVER=database\n" .
                   "SESSION_LIFETIME=120\n\n" .
                   "CACHE_STORE=database\n" .
-                  "QUEUE_CONNECTION=database\n";
+                  "QUEUE_CONNECTION=database\n\n" .
+                  "MAIL_MAILER=smtp\n" .
+                  "MAIL_HOST=mail.vegquality.com.br\n" .
+                  "MAIL_PORT=465\n" .
+                  "MAIL_USERNAME=vegquality@vegquality.com.br\n" .
+                  "MAIL_PASSWORD=\"veg@#010203\"\n" .
+                  "MAIL_ENCRYPTION=ssl\n" .
+                  "MAIL_FROM_ADDRESS=vegquality@vegquality.com.br\n" .
+                  "MAIL_FROM_NAME=\"\${APP_NAME}\"\n";
     if (file_put_contents($envPath, $envContent)) {
         echo "✅ Arquivo .env criado com sucesso na raiz!\n\n";
     } else {
