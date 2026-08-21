@@ -116,7 +116,7 @@
               <div class="form-group-grid">
                 <div class="form-group">
                   <label for="contact-phone" class="form-label">{{ __('Telefone / WhatsApp *') }}</label>
-                  <input type="tel" id="contact-phone" name="phone" class="form-input" placeholder="(00) 00000-0000" required>
+                  <input type="tel" id="contact-phone" name="phone" class="form-input" placeholder="{{ app()->getLocale() === 'en' ? '+00 000 000 000' : '(00) 00000-0000' }}" required>
                 </div>
                 <div class="form-group">
                   <label for="contact-company" class="form-label">{{ __('Empresa / Agroindústria') }}</label>
@@ -154,12 +154,12 @@
               <div class="form-success-icon">
                 <i data-lucide="check-circle-2"></i>
               </div>
-              <h3 class="form-success-title">{{ data_get($form, 'success_title', 'Mensagem Enviada!') }}</h3>
+              <h3 class="form-success-title">{{ trans_content($form, 'success_title', 'Mensagem Enviada!') }}</h3>
               <p class="form-success-text">
-                {{ data_get($form, 'success_message', 'Obrigado pelo seu contato. Nossa equipe técnica analisará sua mensagem e entrará em contato em breve.') }}
+                {{ trans_content($form, 'success_message', 'Obrigado pelo seu contato. Nossa equipe técnica analisará sua mensagem e entrará em contato em breve.') }}
               </p>
               <button type="button" class="btn btn-primary" id="success-close-btn" style="padding: 0.75rem 2rem;">
-                Voltar
+                {{ __('Voltar') }}
               </button>
             </div>
             
