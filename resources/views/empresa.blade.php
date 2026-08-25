@@ -144,16 +144,6 @@
     <section class="product-highlight-section">
       <div class="container">
         
-        <div class="services-header animate-fade-up" style="margin-bottom: 5rem;">
-          <div class="services-tag">
-            <span class="micro-badge-dot"></span>
-            {{ trans_content($quemSomos, 'badge', 'Fundadora') }}
-          </div>
-          <h2 class="services-title">{!! trans_content($quemSomos, 'title', 'História da VegQuality') !!}</h2>
-          <p class="services-desc">{{ trans_content($quemSomos, 'description1', 'A VegQuality é mais que uma consultoria: é uma parceira estratégica para empresas que atuam na agroindústria de vegetais frescos, do campo aos pontos de distribuição.') }}</p>
-          <p class="services-desc" style="margin-top: 1rem;">{{ trans_content($quemSomos, 'description2', 'Combinando ciência, inovação, experiência prática e propósito, entregamos soluções personalizadas que fortalecem a qualidade, a segurança, a sustentabilidade e a rentabilidade da agroindústria de vegetais frescos higienizados.') }}</p>
-        </div>
-
         <div class="about-grid">
           
           <!-- Image Left (Dra. Roseane Bob) -->
