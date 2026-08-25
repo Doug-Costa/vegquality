@@ -214,8 +214,10 @@
     @endforeach
   </div>
 </section>
+@endif
 
 <!-- Section 2: O Que Oferecemos & Serviços -->
+@if(is_section_visible($homeOffering))
 <section class="services-section">
   <div class="container">
     
@@ -291,8 +293,10 @@
 
   </div>
 </section>
+@endif
 
 <!-- Section 3: Por Trás da VegQuality -->
+@if(is_section_visible($about))
 <section class="about-section" style="background-color: #f9fafb;">
   <div class="container">
     <div class="about-grid">
@@ -373,9 +377,10 @@
     </div>
   </div>
 </section>
+@endif
 
-<!-- Section 4: Por que nos Escolher? (NEW - Moved here as requested) -->
-@if($homeWhyChoose)
+<!-- Section 4: Por que nos Escolher? -->
+@if(is_section_visible($homeWhyChoose) && $homeWhyChoose)
 <section class="why-choose-section" style="background-color: #ffffff;">
   <div class="container">
     <div class="why-choose-banner animate-fade-up">
@@ -389,8 +394,8 @@
 </section>
 @endif
 
-<!-- Section 5: Fatos sobre o Veg Oxi (Moved here as requested) -->
-@if($facts)
+<!-- Section 5: Fatos sobre o Veg Oxi -->
+@if(is_section_visible($facts) && $facts)
 <section class="facts-section" style="background-color: #f9fafb; padding: 5rem 0;">
   <div class="container">
     
@@ -441,8 +446,8 @@
 @endforeach
 @endif
 
-<!-- Section 6: Biotecnologia / Veg Oxi 200 Coadjuvante de Tecnologia Section (NEW for Home page, moved here) -->
-@if($productHighlight)
+<!-- Section 6: Biotecnologia / Veg Oxi 200 Coadjuvante de Tecnologia Section -->
+@if(is_section_visible($productHighlight) && $productHighlight)
 <section class="product-highlight-section" style="background-color: #ffffff; padding: 5rem 0;">
   <div class="container">
     <div class="product-highlight-grid">
@@ -504,8 +509,8 @@
 </section>
 @endif
 
-<!-- Section 7: Insights VegQuality (NEW) -->
-@if($homeInsights)
+<!-- Section 7: Insights VegQuality -->
+@if(is_section_visible($homeInsights) && $homeInsights)
 <section class="home-insights-section">
   <div class="container">
     
@@ -610,8 +615,8 @@
   </div>
 </section>
 
-<!-- Section 9: Chamada Final para Contato (NEW) -->
-@if($homeContactCta)
+<!-- Section 9: Chamada Final para Contato -->
+@if(is_section_visible($homeContactCta) && $homeContactCta)
 <section class="contact-cta-section" id="home_contact_cta">
   <div class="container">
     <div class="contact-cta-grid">

@@ -27,7 +27,20 @@ class SectionsRelationManager extends RelationManager
                     ->columnSpanFull(),
                 Forms\Components\Group::make()
                     ->statePath('content')
-                    ->schema(fn ($record) => self::getSectionSchema($record?->key))
+                    ->schema(fn ($record) => array_merge([
+                        Forms\Components\Section::make('Visibilidade da Seção no Site')
+                            ->description('Habilite ou desabilite a exibição visual desta seção no site por idioma sem alterar a estrutura do banco de dados.')
+                            ->schema([
+                                Forms\Components\Toggle::make('is_visible_pt')
+                                    ->label('Visível em Português (PT)')
+                                    ->default(true),
+                                Forms\Components\Toggle::make('is_visible_en')
+                                    ->label('Visível em Inglês (EN)')
+                                    ->default(true),
+                            ])
+                            ->columns(2)
+                            ->columnSpanFull()
+                    ], self::getSectionSchema($record?->key)))
                     ->columnSpanFull(),
             ]);
     }
@@ -71,6 +84,12 @@ class SectionsRelationManager extends RelationManager
                         'contato_form' => 'Contato - Formulário e Mensagens',
                         default => ucwords(str_replace('_', ' ', $state)),
                     }),
+                Tables\Columns\ToggleColumn::make('content.is_visible_pt')
+                    ->label('Visível (PT)')
+                    ->default(true),
+                Tables\Columns\ToggleColumn::make('content.is_visible_en')
+                    ->label('Visível (EN)')
+                    ->default(true),
             ])
             ->filters([
                 //

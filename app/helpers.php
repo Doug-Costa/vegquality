@@ -48,3 +48,27 @@ if (!function_exists('trans_content')) {
         return $val;
     }
 }
+
+if (!function_exists('is_section_visible')) {
+    /**
+     * Check if a section content array or model is visible for the active locale.
+     * Reads directly from content array keys 'is_visible_pt' and 'is_visible_en' (defaults to true).
+     */
+    function is_section_visible(mixed $section, ?string $locale = null): bool
+    {
+        if (is_null($section)) {
+            return true;
+        }
+
+        $content = ($section instanceof \App\Models\Section) ? $section->content : (is_array($section) ? $section : []);
+
+        $locale = $locale ?? app()->getLocale();
+        $isEn = ($locale === 'en' || str_starts_with($locale, 'en'));
+
+        if ($isEn) {
+            return (bool) data_get($content, 'is_visible_en', true);
+        }
+
+        return (bool) data_get($content, 'is_visible_pt', true);
+    }
+}
