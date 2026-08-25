@@ -21,6 +21,7 @@
 @endphp
 
 <!-- Section 1: Hero Carousel (Dynamic Text + Image + Badges) -->
+@if(is_section_visible($hero))
 <section class="hero hero-carousel-container">
   <!-- Decorative BG Shapes -->
   <div class="hero-bg-shape-1"></div>
