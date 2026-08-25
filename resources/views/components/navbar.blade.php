@@ -45,49 +45,49 @@
 
     </div>
   </div>
-
-  <!-- Mobile Off-Canvas Overlay & Drawer -->
-  <div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
-  <div id="mobile-menu" class="mobile-menu-drawer">
-    
-    <!-- Drawer Header -->
-    <div class="mobile-drawer-header">
-      <a href="{{ url('/') }}" class="logo-link">
-        <img src="{{ asset('assets/logos/logo-colorida-sem-funddo.png') }}" alt="VegQuality" style="height: 2.8rem; width: auto;">
-      </a>
-      <button id="menu-close-btn" class="menu-close-btn" aria-label="Fechar Menu">
-        <i data-lucide="x"></i>
-      </button>
-    </div>
-
-    <!-- Drawer Links -->
-    <nav class="mobile-drawer-nav">
-      <a href="{{ url('/') }}" class="mobile-nav-link {{ request()->is('/') ? 'active' : '' }}">{{ __('Home') }}</a>
-      <a href="{{ url('/servicos') }}" class="mobile-nav-link {{ request()->is('servicos') ? 'active' : '' }}">{{ __('Soluções') }}</a>
-      <a href="{{ url('/veg-oxi') }}" class="mobile-nav-link {{ request()->is('veg-oxi') ? 'active' : '' }}">{{ __('Veg Oxi 200') }}</a>
-      <a href="{{ url('/empresa') }}" class="mobile-nav-link {{ request()->is('empresa') ? 'active' : '' }}">{{ __('Sobre Nós') }}</a>
-      <a href="{{ url('/radar') }}" class="mobile-nav-link {{ request()->is('radar') || request()->is('radar*') || request()->is('insights') ? 'active' : '' }}">{{ __('Conteúdos') }}</a>
-      <a href="{{ url('/contato') }}" class="mobile-nav-link {{ request()->is('contato') ? 'active' : '' }}">{{ __('Contato') }}</a>
-    </nav>
-
-    <!-- Drawer Footer (CTA & Flag Language Switcher) -->
-    <div class="mobile-drawer-footer">
-      <a href="{{ url('/contato') }}" class="btn btn-primary mobile-cta">
-        {{ __('Fale Conosco') }}
-      </a>
-      <div class="lang-switcher mobile-lang-switcher">
-        <a href="{{ url('/lang/pt') }}" class="lang-btn {{ app()->getLocale() === 'pt_BR' ? 'active' : '' }}">
-          <img src="{{ asset('assets/images/ilustracao-de-bandeira-brasil_53876-27017.avif') }}" alt="Brasil" class="flag-icon">
-          <span>PT (Brasil)</span>
-        </a>
-        <span class="lang-divider">|</span>
-        <a href="{{ url('/lang/en') }}" class="lang-btn {{ app()->getLocale() === 'en' ? 'active' : '' }}">
-          <img src="{{ asset('assets/images/Flag_of_Australia.svg') }}" alt="Australia" class="flag-icon">
-          <span>EN (Australia)</span>
-        </a>
-      </div>
-    </div>
-
-  </div>
 </header>
+
+<!-- Mobile Off-Canvas Overlay & Drawer (Colocados fora do <header> para não sofrerem limitação do backdrop-filter no iOS Safari) -->
+<div id="mobile-menu-overlay" class="mobile-menu-overlay"></div>
+<div id="mobile-menu" class="mobile-menu-drawer">
+  
+  <!-- Drawer Header -->
+  <div class="mobile-drawer-header">
+    <a href="{{ url('/') }}" class="logo-link">
+      <img src="{{ asset('assets/logos/logo-colorida-sem-funddo.png') }}" alt="VegQuality" style="height: 2.5rem; width: auto;">
+    </a>
+    <button id="menu-close-btn" class="menu-close-btn" aria-label="Fechar Menu">
+      <i data-lucide="x"></i>
+    </button>
+  </div>
+
+  <!-- Drawer Links -->
+  <nav class="mobile-drawer-nav">
+    <a href="{{ url('/') }}" class="mobile-nav-link {{ request()->is('/') ? 'active' : '' }}">{{ __('Home') }}</a>
+    <a href="{{ url('/servicos') }}" class="mobile-nav-link {{ request()->is('servicos') ? 'active' : '' }}">{{ __('Soluções') }}</a>
+    <a href="{{ url('/veg-oxi') }}" class="mobile-nav-link {{ request()->is('veg-oxi') ? 'active' : '' }}">{{ __('Veg Oxi 200') }}</a>
+    <a href="{{ url('/empresa') }}" class="mobile-nav-link {{ request()->is('empresa') ? 'active' : '' }}">{{ __('Sobre Nós') }}</a>
+    <a href="{{ url('/radar') }}" class="mobile-nav-link {{ request()->is('radar') || request()->is('radar*') || request()->is('insights') ? 'active' : '' }}">{{ __('Conteúdos') }}</a>
+    <a href="{{ url('/contato') }}" class="mobile-nav-link {{ request()->is('contato') ? 'active' : '' }}">{{ __('Contato') }}</a>
+  </nav>
+
+  <!-- Drawer Footer (CTA & Flag Language Switcher) -->
+  <div class="mobile-drawer-footer">
+    <a href="{{ url('/contato') }}" class="btn btn-primary mobile-cta">
+      {{ __('Fale Conosco') }}
+    </a>
+    <div class="lang-switcher mobile-lang-switcher">
+      <a href="{{ url('/lang/pt') }}" class="lang-btn {{ app()->getLocale() === 'pt_BR' ? 'active' : '' }}">
+        <img src="{{ asset('assets/images/ilustracao-de-bandeira-brasil_53876-27017.avif') }}" alt="Brasil" class="flag-icon">
+        <span>PT (Brasil)</span>
+      </a>
+      <span class="lang-divider">|</span>
+      <a href="{{ url('/lang/en') }}" class="lang-btn {{ app()->getLocale() === 'en' ? 'active' : '' }}">
+        <img src="{{ asset('assets/images/Flag_of_Australia.svg') }}" alt="Australia" class="flag-icon">
+        <span>EN (Australia)</span>
+      </a>
+    </div>
+  </div>
+
+</div>
 
