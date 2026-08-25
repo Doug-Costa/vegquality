@@ -3,26 +3,14 @@
 @section('meta_description', $page->meta_description)
 @section('content')
 @php
-    $isEn = app()->getLocale() === 'en' || str_starts_with(app()->getLocale(), 'en');
-
-    $heroSection = $page?->sections->where('key', 'veg_oxi_hero')->first();
-    $hero = $heroSection?->content;
-
-    $productHighlightSection = $page?->sections->where('key', 'product_highlight')->first();
-    $productHighlight = $productHighlightSection?->content;
-
-    $factsSection = $page?->sections->where('key', 'veg_oxi_facts')->first();
-    $facts = $factsSection?->content;
-
-    $downloadsSection = $page?->sections->where('key', 'veg_oxi_downloads')->first();
-    $downloads = $downloadsSection?->content;
-
-    $contactsSection = $page?->sections->where('key', 'veg_oxi_contacts')->first();
-    $contacts = $contactsSection?->content;
+    $hero = $page?->sections->where('key', 'veg_oxi_hero')->first()?->content;
+    $productHighlight = $page?->sections->where('key', 'product_highlight')->first()?->content;
+    $facts = $page?->sections->where('key', 'veg_oxi_facts')->first()?->content;
+    $downloads = $page?->sections->where('key::name', 'veg_oxi_downloads')->first()?->content ?? $page?->sections->where('key', 'veg_oxi_downloads')->first()?->content;
+    $contacts = $page?->sections->where('key', 'veg_oxi_contacts')->first()?->content;
 @endphp
 
 <!-- Subpage Hero -->
-@if(is_section_visible($heroSection))
 <section class="subpage-hero">
   <div class="hero-bg-shape-1"></div>
   <div class="hero-bg-shape-2"></div>
@@ -31,10 +19,9 @@
     <p class="subpage-hero-subtitle animate-fade-up delay-100">{{ trans_content($hero, 'subtitle', 'Tecnologia inovadora para conservação e qualidade de vegetais frescos.') }}</p>
   </div>
 </section>
-@endif
 
 <!-- Facts Section -->
-@if(is_section_visible($factsSection) && $facts)
+@if($facts)
 <section class="facts-section" style="background-color: #ffffff; padding: 5rem 0;">
   <div class="container">
     <div class="services-header animate-fade-up">
@@ -135,7 +122,7 @@
 @endif
 
 <!-- Downloads / Detalhes Adicionais Section -->
-@if(is_section_visible($downloadsSection) && $downloads)
+@if($downloads)
 <section class="resources-section" style="background-color: #f9fafb; padding: 5rem 0;">
   <div class="container">
     <div class="services-header animate-fade-up">
@@ -205,7 +192,7 @@
 @endif
 
 <!-- Section 3.5: Biotecnologia / Veg Oxi 200 Propaganda Section -->
-@if(is_section_visible($productHighlightSection) && $productHighlight)
+@if($productHighlight)
 <section class="product-highlight-section" style="background-color: #ffffff;">
   <div class="container">
     <div class="product-highlight-grid">
@@ -268,7 +255,7 @@
 @endif
 
 <!-- Contacts / Distribuição Section -->
-@if(is_section_visible($contactsSection) && $contacts)
+@if($contacts)
 <section id="veg_oxi_contacts" class="resources-section" style="background-color: #ffffff; padding: 5rem 0;">
   <div class="container">
     <div class="services-header animate-fade-up">

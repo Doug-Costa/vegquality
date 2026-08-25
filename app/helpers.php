@@ -48,33 +48,3 @@ if (!function_exists('trans_content')) {
         return $val;
     }
 }
-
-if (!function_exists('is_section_visible')) {
-    /**
-     * Check if a section model or section object/array is visible for the active locale.
-     */
-    function is_section_visible(mixed $section, ?string $locale = null): bool
-    {
-        if (is_null($section)) {
-            return true; // Default visible if section model is null
-        }
-
-        if ($section instanceof \App\Models\Section) {
-            return $section->isVisible($locale);
-        }
-
-        if (is_object($section) && method_exists($section, 'isVisible')) {
-            return $section->isVisible($locale);
-        }
-
-        if (is_array($section) || is_object($section)) {
-            $locale = $locale ?? app()->getLocale();
-            $isEn = ($locale === 'en' || str_starts_with($locale, 'en'));
-            $key = $isEn ? 'is_visible_en' : 'is_visible_pt';
-            $val = data_get($section, $key, true);
-            return (bool) $val;
-        }
-
-        return true;
-    }
-}

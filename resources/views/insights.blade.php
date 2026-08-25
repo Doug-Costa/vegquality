@@ -3,18 +3,12 @@
 @section('meta_description', $page->meta_description)
 @section('content')
 @php
-    $heroSection = $page?->sections->where('key', 'insights_hero')->first();
-    $hero = $heroSection?->content;
-
-    $cardsSection = $page?->sections->where('key', 'insights_cards')->first();
-    $cards = $cardsSection?->content;
-
-    $whyChooseSection = $page?->sections->where('key', 'insights_why_choose')->first();
-    $whyChoose = $whyChooseSection?->content;
+    $hero = $page?->sections->where('key', 'insights_hero')->first()?->content;
+    $cards = $page?->sections->where('key', 'insights_cards')->first()?->content;
+    $whyChoose = $page?->sections->where('key', 'insights_why_choose')->first()?->content;
 @endphp
 
 <!-- Subpage Hero -->
-@if(is_section_visible($heroSection))
 <section class="subpage-hero">
   <div class="hero-bg-shape-1"></div>
   <div class="hero-bg-shape-2"></div>
@@ -23,10 +17,9 @@
     <p class="subpage-hero-subtitle animate-fade-up delay-100">{{ trans_content($hero, 'subtitle', 'Conhecimento e vivência na cadeia produtiva de vegetais frescos.') }}</p>
   </div>
 </section>
-@endif
 
 <!-- Cards Section -->
-@if(is_section_visible($cardsSection) && $cards)
+@if($cards)
 <section class="home-insights-section">
   <div class="container">
     <div class="services-header animate-fade-up">
@@ -60,7 +53,7 @@
 @endif
 
 <!-- Why Choose Section -->
-@if(is_section_visible($whyChooseSection) && $whyChoose)
+@if($whyChoose)
 <section class="why-choose-section">
   <div class="container">
     <div class="why-choose-banner animate-fade-up">

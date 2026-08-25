@@ -6,36 +6,21 @@
 @section('content')
 @php
     $isEn = app()->getLocale() === 'en' || str_starts_with(app()->getLocale(), 'en');
-    
-    $heroSection = $page?->sections->where('key', 'hero')->first();
-    $hero = $heroSection?->content;
-
-    $aboutSection = $page?->sections->where('key', 'about')->first();
-    $about = $aboutSection?->content;
+    $hero = $page?->sections->where('key', 'hero')->first()?->content;
+    $about = $page?->sections->where('key', 'about')->first()?->content;
     
     // Shared Veg Oxi Sections
-    $factsSection = \App\Models\Section::where('key', 'veg_oxi_facts')->first();
-    $facts = $factsSection?->content;
-
-    $productHighlightSection = \App\Models\Section::where('key', 'product_highlight')->first();
-    $productHighlight = $productHighlightSection?->content;
+    $facts = \App\Models\Section::where('key', 'veg_oxi_facts')->first()?->content;
+    $productHighlight = \App\Models\Section::where('key', 'product_highlight')->first()?->content;
 
     // Homepage specific new sections
-    $homeOfferingSection = $page?->sections->where('key', 'home_offering')->first();
-    $homeOffering = $homeOfferingSection?->content;
-
-    $homeInsightsSection = $page?->sections->where('key', 'home_insights')->first();
-    $homeInsights = $homeInsightsSection?->content;
-
-    $homeWhyChooseSection = $page?->sections->where('key', 'home_why_choose')->first();
-    $homeWhyChoose = $homeWhyChooseSection?->content;
-
-    $homeContactCtaSection = $page?->sections->where('key', 'home_contact_cta')->first();
-    $homeContactCta = $homeContactCtaSection?->content;
+    $homeOffering = $page?->sections->where('key', 'home_offering')->first()?->content;
+    $homeInsights = $page?->sections->where('key', 'home_insights')->first()?->content;
+    $homeWhyChoose = $page?->sections->where('key', 'home_why_choose')->first()?->content;
+    $homeContactCta = $page?->sections->where('key', 'home_contact_cta')->first()?->content;
 @endphp
 
 <!-- Section 1: Hero Carousel (Dynamic Text + Image + Badges) -->
-@if(is_section_visible($heroSection))
 <section class="hero hero-carousel-container">
   <!-- Decorative BG Shapes -->
   <div class="hero-bg-shape-1"></div>
@@ -229,10 +214,8 @@
     @endforeach
   </div>
 </section>
-@endif
 
 <!-- Section 2: O Que Oferecemos & Serviços -->
-@if(is_section_visible($homeOfferingSection))
 <section class="services-section">
   <div class="container">
     
@@ -390,10 +373,9 @@
     </div>
   </div>
 </section>
-@endif
 
 <!-- Section 4: Por que nos Escolher? (NEW - Moved here as requested) -->
-@if(is_section_visible($homeWhyChooseSection) && $homeWhyChoose)
+@if($homeWhyChoose)
 <section class="why-choose-section" style="background-color: #ffffff;">
   <div class="container">
     <div class="why-choose-banner animate-fade-up">
@@ -408,7 +390,7 @@
 @endif
 
 <!-- Section 5: Fatos sobre o Veg Oxi (Moved here as requested) -->
-@if(is_section_visible($factsSection) && $facts)
+@if($facts)
 <section class="facts-section" style="background-color: #f9fafb; padding: 5rem 0;">
   <div class="container">
     
@@ -460,7 +442,7 @@
 @endif
 
 <!-- Section 6: Biotecnologia / Veg Oxi 200 Coadjuvante de Tecnologia Section (NEW for Home page, moved here) -->
-@if(is_section_visible($productHighlightSection) && $productHighlight)
+@if($productHighlight)
 <section class="product-highlight-section" style="background-color: #ffffff; padding: 5rem 0;">
   <div class="container">
     <div class="product-highlight-grid">
@@ -523,7 +505,7 @@
 @endif
 
 <!-- Section 7: Insights VegQuality (NEW) -->
-@if(is_section_visible($homeInsightsSection) && $homeInsights)
+@if($homeInsights)
 <section class="home-insights-section">
   <div class="container">
     
@@ -629,7 +611,7 @@
 </section>
 
 <!-- Section 9: Chamada Final para Contato (NEW) -->
-@if(is_section_visible($homeContactCtaSection) && $homeContactCta)
+@if($homeContactCta)
 <section class="contact-cta-section" id="home_contact_cta">
   <div class="container">
     <div class="contact-cta-grid">
