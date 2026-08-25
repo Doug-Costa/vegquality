@@ -963,24 +963,24 @@ class SectionsRelationManager extends RelationManager
                     ->tabs([
                         Forms\Components\Tabs\Tab::make('Português (PT)')
                             ->schema([
-                                Forms\Components\TextInput::make('title')->label('Título Painel (PT)')->required(),
-                                Forms\Components\Textarea::make('description')->label('Descrição Painel (PT)')->required(),
+                                Forms\Components\TextInput::make('title')->label('Título Painel (PT)'),
+                                Forms\Components\Textarea::make('description')->label('Descrição Painel (PT)'),
 
-                                Forms\Components\Section::make('Canal 1 - Telefone / Atendimento')
+                                Forms\Components\Fieldset::make('Canal 1 - Telefone / Atendimento')
                                     ->schema([
                                         Forms\Components\TextInput::make('phone_title')->label('Título Canal 1 (ex: Telefone)'),
                                         Forms\Components\TextInput::make('phone')->label('Número / Contato'),
                                         Forms\Components\TextInput::make('phone_hours')->label('Subtítulo / Horário (PT)'),
                                     ])->columns(3),
 
-                                Forms\Components\Section::make('Canal 2 - WhatsApp / Telegram / SMS')
+                                Forms\Components\Fieldset::make('Canal 2 - WhatsApp / Telegram / SMS')
                                     ->schema([
                                         Forms\Components\TextInput::make('whatsapp_title')->label('Título Canal 2 (ex: WhatsApp, Telegram)'),
                                         Forms\Components\TextInput::make('whatsapp')->label('Número / Link / Contato'),
                                         Forms\Components\TextInput::make('whatsapp_desc')->label('Subtítulo / Descrição (PT)'),
                                     ])->columns(3),
 
-                                Forms\Components\Section::make('Canal 3 - E-mail Comercial')
+                                Forms\Components\Fieldset::make('Canal 3 - E-mail Comercial')
                                     ->schema([
                                         Forms\Components\TextInput::make('email_title')->label('Título Canal 3 (ex: E-mail Comercial)'),
                                         Forms\Components\TextInput::make('email')->label('Endereço de E-mail'),
@@ -992,19 +992,19 @@ class SectionsRelationManager extends RelationManager
                                 Forms\Components\TextInput::make('title_en')->label('Título Painel (EN)'),
                                 Forms\Components\Textarea::make('description_en')->label('Descrição Painel (EN)'),
 
-                                Forms\Components\Section::make('Canal 1 em Inglês (EN)')
+                                Forms\Components\Fieldset::make('Canal 1 em Inglês (EN)')
                                     ->schema([
                                         Forms\Components\TextInput::make('phone_title_en')->label('Título Canal 1 em Inglês (ex: Phone)'),
                                         Forms\Components\TextInput::make('phone_hours_en')->label('Subtítulo / Horário (EN)'),
                                     ])->columns(2),
 
-                                Forms\Components\Section::make('Canal 2 em Inglês (EN)')
+                                Forms\Components\Fieldset::make('Canal 2 em Inglês (EN)')
                                     ->schema([
                                         Forms\Components\TextInput::make('whatsapp_title_en')->label('Título Canal 2 em Inglês (ex: WhatsApp, Telegram)'),
                                         Forms\Components\TextInput::make('whatsapp_desc_en')->label('Subtítulo / Descrição (EN)'),
                                     ])->columns(2),
 
-                                Forms\Components\Section::make('Canal 3 em Inglês (EN)')
+                                Forms\Components\Fieldset::make('Canal 3 em Inglês (EN)')
                                     ->schema([
                                         Forms\Components\TextInput::make('email_title_en')->label('Título Canal 3 em Inglês (ex: Commercial Email)'),
                                         Forms\Components\TextInput::make('email_desc_en')->label('Subtítulo / Descrição (EN)'),
@@ -1014,11 +1014,10 @@ class SectionsRelationManager extends RelationManager
                             ->schema([
                                 Forms\Components\Repeater::make('channels')
                                     ->label('Lista Dinâmica de Canais de Contato')
-                                    ->description('Se preenchido, esta lista substituirá os 3 canais fixos acima, permitindo adicionar quantos canais desejar (Telegram, SMS, WhatsApp, Telefone, E-mail, etc).')
                                     ->schema([
-                                        Forms\Components\TextInput::make('title')->label('Título (PT)')->required(),
+                                        Forms\Components\TextInput::make('title')->label('Título (PT)'),
                                         Forms\Components\TextInput::make('title_en')->label('Título (EN)'),
-                                        Forms\Components\TextInput::make('value')->label('Valor / Número / E-mail / Link')->required(),
+                                        Forms\Components\TextInput::make('value')->label('Valor / Número / E-mail / Link'),
                                         Forms\Components\TextInput::make('subtitle')->label('Subtítulo / Descrição (PT)'),
                                         Forms\Components\TextInput::make('subtitle_en')->label('Subtítulo / Descrição (EN)'),
                                         Forms\Components\Select::make('icon')
