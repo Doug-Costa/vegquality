@@ -9,6 +9,7 @@
 @endphp
 
 <!-- Subpage Hero -->
+@if(is_section_visible($hero))
 <section class="subpage-hero">
   <div class="hero-bg-shape-1"></div>
   <div class="hero-bg-shape-2"></div>
@@ -17,9 +18,10 @@
     <p class="subpage-hero-subtitle animate-fade-up delay-100">{{ trans_content($hero, 'subtitle', 'Conhecimento e vivência na cadeia produtiva de vegetais frescos.') }}</p>
   </div>
 </section>
+@endif
 
 <!-- Cards Section -->
-@if($cards)
+@if(is_section_visible($cards) && $cards)
 <section class="home-insights-section">
   <div class="container">
     <div class="services-header animate-fade-up">
@@ -53,7 +55,7 @@
 @endif
 
 <!-- Why Choose Section -->
-@if($whyChoose)
+@if(is_section_visible($whyChoose) && $whyChoose)
 <section class="why-choose-section">
   <div class="container">
     <div class="why-choose-banner animate-fade-up">

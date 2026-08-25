@@ -11,6 +11,7 @@
 @endphp
 
 <!-- Subpage Hero -->
+@if(is_section_visible($hero))
 <section class="subpage-hero">
   <div class="hero-bg-shape-1"></div>
   <div class="hero-bg-shape-2"></div>
@@ -19,9 +20,10 @@
     <p class="subpage-hero-subtitle animate-fade-up delay-100">{{ trans_content($hero, 'subtitle', 'Tecnologia inovadora para conservação e qualidade de vegetais frescos.') }}</p>
   </div>
 </section>
+@endif
 
 <!-- Facts Section -->
-@if($facts)
+@if(is_section_visible($facts) && $facts)
 <section class="facts-section" style="background-color: #ffffff; padding: 5rem 0;">
   <div class="container">
     <div class="services-header animate-fade-up">
@@ -122,7 +124,7 @@
 @endif
 
 <!-- Downloads / Detalhes Adicionais Section -->
-@if($downloads)
+@if(is_section_visible($downloads) && $downloads)
 <section class="resources-section" style="background-color: #f9fafb; padding: 5rem 0;">
   <div class="container">
     <div class="services-header animate-fade-up">
@@ -192,7 +194,7 @@
 @endif
 
 <!-- Section 3.5: Biotecnologia / Veg Oxi 200 Propaganda Section -->
-@if($productHighlight)
+@if(is_section_visible($productHighlight) && $productHighlight)
 <section class="product-highlight-section" style="background-color: #ffffff;">
   <div class="container">
     <div class="product-highlight-grid">
@@ -255,7 +257,7 @@
 @endif
 
 <!-- Contacts / Distribuição Section -->
-@if($contacts)
+@if(is_section_visible($contacts) && $contacts)
 <section id="veg_oxi_contacts" class="resources-section" style="background-color: #ffffff; padding: 5rem 0;">
   <div class="container">
     <div class="services-header animate-fade-up">

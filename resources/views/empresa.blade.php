@@ -11,6 +11,7 @@
     $quemSomos = $page?->sections->where('key', 'empresa_quem_somos')->first()?->content;
 @endphp
 <!-- Hero Interno -->
+  @if(is_section_visible($hero))
     <section class="internal-hero">
       <div class="container">
         <div class="breadcrumb animate-fade-up">
@@ -26,8 +27,10 @@
         </p>
       </div>
     </section>
+  @endif
 
     <!-- Seção Mantendo o Frescor da Colheita (Consultoria 360) -->
+  @if(is_section_visible($frescor))
     <section class="about-section">
       <div class="container">
         <div class="about-grid about-grid-7-5">
@@ -96,8 +99,10 @@
         </div>
       </div>
     </section>
+  @endif
 
     <!-- Seção Livre de Sulfitos (Veg Oxi 200) -->
+  @if(is_section_visible($sulfito))
     <section class="sulfito-section" style="background-color: var(--color-veg-light);">
       <div class="container">
         <div class="sulfito-grid">
@@ -139,8 +144,10 @@
         </div>
       </div>
     </section>
+  @endif
 
     <!-- Seção Quem Somos / História -->
+  @if(is_section_visible($quemSomos))
     <section class="product-highlight-section">
       <div class="container">
         
@@ -197,4 +204,5 @@
         </div>
       </div>
     </section>
+  @endif
 @endsection

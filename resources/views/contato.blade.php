@@ -5,11 +5,12 @@
 
 @section('content')
 @php
-    $hero = $page?->sections->where('key', 'contato_hero')->first()?->content;
-    $info = $page?->sections->where('key', 'contato_info')->first()?->content;
-    $form = $page?->sections->where('key', 'contato_form')->first()?->content;
+    $hero = $page?->sections->where('key', 'contato_hero')->first();
+    $info = $page?->sections->where('key', 'contato_info')->first();
+    $form = $page?->sections->where('key', 'contato_form')->first();
 @endphp
 <!-- Hero Interno -->
+@if(is_section_visible($hero))
     <section class="internal-hero">
       <div class="container">
         <div class="breadcrumb animate-fade-up">
@@ -18,13 +19,14 @@
           <span>{{ __('Contato') }}</span>
         </div>
         <h1 class="internal-hero-title animate-fade-up delay-100">
-          {{ trans_content($hero, 'title', 'Fale Conosco') }}
+          {{ trans_content($hero->content, 'title', 'Fale Conosco') }}
         </h1>
         <p class="internal-hero-desc animate-fade-up delay-200">
-          {{ trans_content($hero, 'subtitle', 'Tire suas dúvidas ou envie uma solicitação para nossa equipe. Estamos prontos para ajudar sua agroindústria.') }}
+          {{ trans_content($hero->content, 'subtitle', 'Tire suas dúvidas ou envie uma solicitação para nossa equipe. Estamos prontos para ajudar sua agroindústria.') }}
         </p>
       </div>
     </section>
+@endif
 
     <!-- Seção de Contato -->
     <section class="contact-section">
@@ -32,59 +34,60 @@
         <div class="contact-grid">
           
           <!-- Coluna 1: Informações de Contato -->
+        @if(is_section_visible($info))
           <div class="contact-info-panel animate-fade-up">
             <div>
-              <h2 class="contact-info-title">{{ trans_content($info, 'title', 'Nossos Canais') }}</h2>
+              <h2 class="contact-info-title">{{ trans_content($info->content, 'title', 'Nossos Canais') }}</h2>
               <p class="contact-info-desc">
-                {{ trans_content($info, 'description', 'Escolha o canal de sua preferência para falar conosco ou envie uma mensagem no formulário ao lado.') }}
+                {{ trans_content($info->content, 'description', 'Escolha o canal de sua preferência para falar conosco ou envie uma mensagem no formulário ao lado.') }}
               </p>
             </div>
             
             <div class="contact-cards-container">
               
               <!-- Telefone -->
-              @if(data_get($info, 'phone', '+55 11 5194-0325'))
+              @if(data_get($info->content, 'phone', '+55 11 5194-0325'))
               <div class="contact-card-item">
                 <div class="contact-card-icon">
                   <i data-lucide="phone"></i>
                 </div>
                 <div class="contact-card-details">
                   <h4>{{ __('Telefone') }}</h4>
-                  <p><a href="tel:{{ preg_replace('/[^0-9+]/', '', data_get($info, 'phone', '+55 11 5194-0325')) }}">{{ data_get($info, 'phone', '+55 11 5194-0325') }}</a></p>
-                  @if(trans_content($info, 'phone_hours'))
-                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info, 'phone_hours') }}</p>
+                  <p><a href="tel:{{ preg_replace('/[^0-9+]/', '', data_get($info->content, 'phone', '+55 11 5194-0325')) }}">{{ data_get($info->content, 'phone', '+55 11 5194-0325') }}</a></p>
+                  @if(trans_content($info->content, 'phone_hours'))
+                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info->content, 'phone_hours') }}</p>
                   @endif
                 </div>
               </div>
               @endif
               
               <!-- WhatsApp -->
-              @if(data_get($info, 'whatsapp', '+55 11 97834-8438'))
+              @if(data_get($info->content, 'whatsapp', '+55 11 97834-8438'))
               <div class="contact-card-item">
                 <div class="contact-card-icon">
                   <i data-lucide="message-circle"></i>
                 </div>
                 <div class="contact-card-details">
                   <h4>WhatsApp</h4>
-                  <p><a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', data_get($info, 'whatsapp', '5511978348438')) }}" target="_blank" rel="noopener noreferrer">{{ data_get($info, 'whatsapp', '+55 11 97834-8438') }}</a></p>
-                  @if(trans_content($info, 'whatsapp_desc'))
-                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info, 'whatsapp_desc') }}</p>
+                  <p><a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', data_get($info->content, 'whatsapp', '5511978348438')) }}" target="_blank" rel="noopener noreferrer">{{ data_get($info->content, 'whatsapp', '+55 11 97834-8438') }}</a></p>
+                  @if(trans_content($info->content, 'whatsapp_desc'))
+                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info->content, 'whatsapp_desc') }}</p>
                   @endif
                 </div>
               </div>
               @endif
               
               <!-- E-mail -->
-              @if(data_get($info, 'email', 'vegquality@vegquality.com.br'))
+              @if(data_get($info->content, 'email', 'vegquality@vegquality.com.br'))
               <div class="contact-card-item">
                 <div class="contact-card-icon">
                   <i data-lucide="mail"></i>
                 </div>
                 <div class="contact-card-details">
                   <h4>{{ __('E-mail Comercial') }}</h4>
-                  <p><a href="mailto:{{ data_get($info, 'email', 'vegquality@vegquality.com.br') }}">{{ data_get($info, 'email', 'vegquality@vegquality.com.br') }}</a></p>
-                  @if(trans_content($info, 'email_desc'))
-                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info, 'email_desc') }}</p>
+                  <p><a href="mailto:{{ data_get($info->content, 'email', 'vegquality@vegquality.com.br') }}">{{ data_get($info->content, 'email', 'vegquality@vegquality.com.br') }}</a></p>
+                  @if(trans_content($info->content, 'email_desc'))
+                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info->content, 'email_desc') }}</p>
                   @endif
                 </div>
               </div>
@@ -93,11 +96,13 @@
             </div>
             
           </div>
+        @endif
 
           <!-- Coluna 2: Formulário de Contato -->
+        @if(is_section_visible($form))
           <div class="contact-form-panel animate-fade-up delay-100">
             
-            <h2 class="contact-form-title">{{ trans_content($form, 'title', 'Envie uma Mensagem') }}</h2>
+            <h2 class="contact-form-title">{{ trans_content($form->content, 'title', 'Envie uma Mensagem') }}</h2>
             
             <form id="contact-form">
               @csrf
@@ -144,7 +149,7 @@
 
               <button type="submit" class="btn btn-primary form-submit-btn" id="submit-btn">
                 <i data-lucide="send"></i>
-                {{ trans_content($form, 'submit_text', 'Enviar Mensagem') }}
+                {{ trans_content($form->content, 'submit_text', 'Enviar Mensagem') }}
               </button>
               
             </form>
@@ -154,9 +159,9 @@
               <div class="form-success-icon">
                 <i data-lucide="check-circle-2"></i>
               </div>
-              <h3 class="form-success-title">{{ trans_content($form, 'success_title', 'Mensagem Enviada!') }}</h3>
+              <h3 class="form-success-title">{{ trans_content($form->content, 'success_title', 'Mensagem Enviada!') }}</h3>
               <p class="form-success-text">
-                {{ trans_content($form, 'success_message', 'Obrigado pelo seu contato. Nossa equipe técnica analisará sua mensagem e entrará em contato em breve.') }}
+                {{ trans_content($form->content, 'success_message', 'Obrigado pelo seu contato. Nossa equipe técnica analisará sua mensagem e entrará em contato em breve.') }}
               </p>
               <button type="button" class="btn btn-primary" id="success-close-btn" style="padding: 0.75rem 2rem;">
                 {{ __('Voltar') }}
@@ -164,6 +169,7 @@
             </div>
             
           </div>
+        @endif
           
         </div>
       </div>
