@@ -49,55 +49,91 @@
             </div>
             
             <div class="contact-cards-container">
-              
-              <!-- Telefone -->
-              @if(data_get($info, 'phone', '+55 11 5194-0325'))
-              <div class="contact-card-item">
-                <div class="contact-card-icon">
-                  <i data-lucide="phone"></i>
+              @php
+                $customChannels = data_get($info, 'channels');
+              @endphp
+
+              @if(is_array($customChannels) && count($customChannels) > 0)
+                @foreach($customChannels as $channel)
+                  @php
+                    $cTitle = trans_content($channel, 'title');
+                    $cSub = trans_content($channel, 'subtitle');
+                    $cVal = data_get($channel, 'value');
+                    $cIcon = data_get($channel, 'icon', 'phone');
+                  @endphp
+                  <div class="contact-card-item">
+                    <div class="contact-card-icon">
+                      <i data-lucide="{{ $cIcon }}"></i>
+                    </div>
+                    <div class="contact-card-details">
+                      <h4>{{ $cTitle }}</h4>
+                      @if(str_contains($cVal, '@'))
+                        <p><a href="mailto:{{ $cVal }}">{{ $cVal }}</a></p>
+                      @elseif(str_starts_with($cVal, 'http://') || str_starts_with($cVal, 'https://'))
+                        <p><a href="{{ $cVal }}" target="_blank" rel="noopener noreferrer">{{ $cVal }}</a></p>
+                      @else
+                        <p><a href="tel:{{ preg_replace('/[^0-9+]/', '', $cVal) }}">{{ $cVal }}</a></p>
+                      @endif
+                      @if($cSub)
+                        <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ $cSub }}</p>
+                      @endif
+                    </div>
+                  </div>
+                @endforeach
+              @else
+                <!-- Telefone / Canal 1 -->
+                @if(data_get($info, 'phone', '+55 11 5194-0325'))
+                <div class="contact-card-item">
+                  <div class="contact-card-icon">
+                    <i data-lucide="{{ data_get($info, 'phone_icon', 'phone') }}"></i>
+                  </div>
+                  <div class="contact-card-details">
+                    <h4>{{ trans_content($info, 'phone_title', __('Telefone')) }}</h4>
+                    <p><a href="tel:{{ preg_replace('/[^0-9+]/', '', data_get($info, 'phone', '+55 11 5194-0325')) }}">{{ data_get($info, 'phone', '+55 11 5194-0325') }}</a></p>
+                    @if(trans_content($info, 'phone_hours'))
+                      <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info, 'phone_hours') }}</p>
+                    @endif
+                  </div>
                 </div>
-                <div class="contact-card-details">
-                  <h4>{{ __('Telefone') }}</h4>
-                  <p><a href="tel:{{ preg_replace('/[^0-9+]/', '', data_get($info, 'phone', '+55 11 5194-0325')) }}">{{ data_get($info, 'phone', '+55 11 5194-0325') }}</a></p>
-                  @if(trans_content($info, 'phone_hours'))
-                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info, 'phone_hours') }}</p>
-                  @endif
+                @endif
+                
+                <!-- WhatsApp / Mensageiro / Canal 2 -->
+                @if(data_get($info, 'whatsapp', '+55 11 97834-8438'))
+                <div class="contact-card-item">
+                  <div class="contact-card-icon">
+                    <i data-lucide="{{ data_get($info, 'whatsapp_icon', 'message-circle') }}"></i>
+                  </div>
+                  <div class="contact-card-details">
+                    <h4>{{ trans_content($info, 'whatsapp_title', 'WhatsApp') }}</h4>
+                    @php $waVal = data_get($info, 'whatsapp', '+55 11 97834-8438'); @endphp
+                    @if(str_starts_with($waVal, 'http://') || str_starts_with($waVal, 'https://'))
+                      <p><a href="{{ $waVal }}" target="_blank" rel="noopener noreferrer">{{ $waVal }}</a></p>
+                    @else
+                      <p><a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', $waVal) }}" target="_blank" rel="noopener noreferrer">{{ $waVal }}</a></p>
+                    @endif
+                    @if(trans_content($info, 'whatsapp_desc'))
+                      <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info, 'whatsapp_desc') }}</p>
+                    @endif
+                  </div>
                 </div>
-              </div>
+                @endif
+                
+                <!-- E-mail / Canal 3 -->
+                @if(data_get($info, 'email', 'vegquality@vegquality.com.br'))
+                <div class="contact-card-item">
+                  <div class="contact-card-icon">
+                    <i data-lucide="{{ data_get($info, 'email_icon', 'mail') }}"></i>
+                  </div>
+                  <div class="contact-card-details">
+                    <h4>{{ trans_content($info, 'email_title', __('E-mail Comercial')) }}</h4>
+                    <p><a href="mailto:{{ data_get($info, 'email', 'vegquality@vegquality.com.br') }}">{{ data_get($info, 'email', 'vegquality@vegquality.com.br') }}</a></p>
+                    @if(trans_content($info, 'email_desc'))
+                      <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info, 'email_desc') }}</p>
+                    @endif
+                  </div>
+                </div>
+                @endif
               @endif
-              
-              <!-- WhatsApp -->
-              @if(data_get($info, 'whatsapp', '+55 11 97834-8438'))
-              <div class="contact-card-item">
-                <div class="contact-card-icon">
-                  <i data-lucide="message-circle"></i>
-                </div>
-                <div class="contact-card-details">
-                  <h4>WhatsApp</h4>
-                  <p><a href="https://wa.me/{{ preg_replace('/[^0-9]/', '', data_get($info, 'whatsapp', '5511978348438')) }}" target="_blank" rel="noopener noreferrer">{{ data_get($info, 'whatsapp', '+55 11 97834-8438') }}</a></p>
-                  @if(trans_content($info, 'whatsapp_desc'))
-                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info, 'whatsapp_desc') }}</p>
-                  @endif
-                </div>
-              </div>
-              @endif
-              
-              <!-- E-mail -->
-              @if(data_get($info, 'email', 'vegquality@vegquality.com.br'))
-              <div class="contact-card-item">
-                <div class="contact-card-icon">
-                  <i data-lucide="mail"></i>
-                </div>
-                <div class="contact-card-details">
-                  <h4>{{ __('E-mail Comercial') }}</h4>
-                  <p><a href="mailto:{{ data_get($info, 'email', 'vegquality@vegquality.com.br') }}">{{ data_get($info, 'email', 'vegquality@vegquality.com.br') }}</a></p>
-                  @if(trans_content($info, 'email_desc'))
-                    <p style="font-size: 0.8rem; color: var(--color-text-muted); margin-top: 0.25rem;">{{ trans_content($info, 'email_desc') }}</p>
-                  @endif
-                </div>
-              </div>
-              @endif
-              
             </div>
             
           </div>
