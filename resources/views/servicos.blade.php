@@ -73,13 +73,23 @@
 </style>
 
 @php
-    $hero = $page?->sections->where('key', 'servicos_hero')->first()?->content;
-    $catalog = $page?->sections->where('key', 'servicos_catalog')->first()?->content;
-    $faq = $page?->sections->where('key', 'servicos_faq')->first()?->content;
-    $clientes = $page?->sections->where('key', 'servicos_clientes')->first()?->content;
-    $contacts = $page?->sections->where('key', 'servicos_contacts')->first()?->content;
+    $heroSection = $page?->sections->where('key', 'servicos_hero')->first();
+    $hero = $heroSection?->content;
+
+    $catalogSection = $page?->sections->where('key', 'servicos_catalog')->first();
+    $catalog = $catalogSection?->content;
+
+    $faqSection = $page?->sections->where('key', 'servicos_faq')->first();
+    $faq = $faqSection?->content;
+
+    $clientesSection = $page?->sections->where('key', 'servicos_clientes')->first();
+    $clientes = $clientesSection?->content;
+
+    $contactsSection = $page?->sections->where('key', 'servicos_contacts')->first();
+    $contacts = $contactsSection?->content;
 @endphp
 <!-- Hero Interno -->
+  @if(is_section_visible($heroSection))
     <section class="internal-hero">
       <div class="container">
         <div class="breadcrumb animate-fade-up">
@@ -95,8 +105,10 @@
         </p>
       </div>
     </section>
+  @endif
 
     <!-- Catálogo de Serviços -->
+  @if(is_section_visible($catalogSection))
     <section class="services-section">
       <div class="container">
         
@@ -171,8 +183,10 @@
 
       </div>
     </section>
+  @endif
 
     <!-- Seção FAQ (Perguntas Frequentes) -->
+  @if(is_section_visible($faqSection))
     <section class="faq-section">
       <div class="container">
         
@@ -337,8 +351,10 @@
 
       </div>
     </section>
+  @endif
 
     <!-- Seção CTA (Fale Conosco - Vamos Conversar) -->
+  @if(is_section_visible($contactsSection))
     <section class="cta-conversar-section" style="background-color: var(--color-veg-light);">
       <div class="container">
         <div class="cta-conversar-grid">
@@ -407,8 +423,10 @@
         </div>
       </div>
     </section>
+  @endif
 
     <!-- Seção Clientes -->
+  @if(is_section_visible($clientesSection))
     <section class="faq-section" style="background-color: var(--color-bg-base);">
       <div class="container">
         
@@ -441,6 +459,7 @@
 
       </div>
     </section>
+  @endif
 
 
     <!-- Modal de "Leia Mais" -->

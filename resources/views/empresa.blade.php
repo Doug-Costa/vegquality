@@ -5,12 +5,20 @@
 
 @section('content')
 @php
-    $hero = $page?->sections->where('key', 'empresa_hero')->first()?->content;
-    $sulfito = $page?->sections->where('key', 'empresa_sulfito')->first()?->content;
-    $frescor = $page?->sections->where('key', 'empresa_frescor')->first()?->content;
-    $quemSomos = $page?->sections->where('key', 'empresa_quem_somos')->first()?->content;
+    $heroSection = $page?->sections->where('key', 'empresa_hero')->first();
+    $hero = $heroSection?->content;
+
+    $sulfitoSection = $page?->sections->where('key', 'empresa_sulfito')->first();
+    $sulfito = $sulfitoSection?->content;
+
+    $frescorSection = $page?->sections->where('key', 'empresa_frescor')->first();
+    $frescor = $frescorSection?->content;
+
+    $quemSomosSection = $page?->sections->where('key', 'empresa_quem_somos')->first();
+    $quemSomos = $quemSomosSection?->content;
 @endphp
 <!-- Hero Interno -->
+  @if(is_section_visible($heroSection))
     <section class="internal-hero">
       <div class="container">
         <div class="breadcrumb animate-fade-up">
@@ -26,8 +34,10 @@
         </p>
       </div>
     </section>
+  @endif
 
     <!-- Seção Mantendo o Frescor da Colheita (Consultoria 360) -->
+  @if(is_section_visible($frescorSection))
     <section class="about-section">
       <div class="container">
         <div class="about-grid about-grid-7-5">
@@ -96,8 +106,10 @@
         </div>
       </div>
     </section>
+  @endif
 
     <!-- Seção Livre de Sulfitos (Veg Oxi 200) -->
+  @if(is_section_visible($sulfitoSection))
     <section class="sulfito-section" style="background-color: var(--color-veg-light);">
       <div class="container">
         <div class="sulfito-grid">
@@ -139,8 +151,10 @@
         </div>
       </div>
     </section>
+  @endif
 
     <!-- Seção Quem Somos / História -->
+  @if(is_section_visible($quemSomosSection))
     <section class="product-highlight-section">
       <div class="container">
         
@@ -197,4 +211,5 @@
         </div>
       </div>
     </section>
+  @endif
 @endsection

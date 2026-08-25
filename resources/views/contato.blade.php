@@ -5,11 +5,17 @@
 
 @section('content')
 @php
-    $hero = $page?->sections->where('key', 'contato_hero')->first()?->content;
-    $info = $page?->sections->where('key', 'contato_info')->first()?->content;
-    $form = $page?->sections->where('key', 'contato_form')->first()?->content;
+    $heroSection = $page?->sections->where('key', 'contato_hero')->first();
+    $hero = $heroSection?->content;
+
+    $infoSection = $page?->sections->where('key', 'contato_info')->first();
+    $info = $infoSection?->content;
+
+    $formSection = $page?->sections->where('key', 'contato_form')->first();
+    $form = $formSection?->content;
 @endphp
 <!-- Hero Interno -->
+  @if(is_section_visible($heroSection))
     <section class="internal-hero">
       <div class="container">
         <div class="breadcrumb animate-fade-up">
@@ -25,6 +31,7 @@
         </p>
       </div>
     </section>
+  @endif
 
     <!-- Seção de Contato -->
     <section class="contact-section">
@@ -32,6 +39,7 @@
         <div class="contact-grid">
           
           <!-- Coluna 1: Informações de Contato -->
+        @if(is_section_visible($infoSection))
           <div class="contact-info-panel animate-fade-up">
             <div>
               <h2 class="contact-info-title">{{ trans_content($info, 'title', 'Nossos Canais') }}</h2>
@@ -93,8 +101,10 @@
             </div>
             
           </div>
+        @endif
 
           <!-- Coluna 2: Formulário de Contato -->
+        @if(is_section_visible($formSection))
           <div class="contact-form-panel animate-fade-up delay-100">
             
             <h2 class="contact-form-title">{{ trans_content($form, 'title', 'Envie uma Mensagem') }}</h2>
@@ -164,6 +174,7 @@
             </div>
             
           </div>
+        @endif
           
         </div>
       </div>
