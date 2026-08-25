@@ -97,11 +97,13 @@
 
               <div>
                 <!-- Tags -->
-                @if($article->tags && is_array($article->tags) && count($article->tags) > 0)
-                  <div class="flex flex-wrap gap-1.5 mb-5">
-                    @foreach($article->tags as $tag)
-                      <a href="{{ url('/radar?tag=' . $tag) }}" class="text-[10px] font-bold text-veg-primary bg-veg-light/50 hover:bg-veg-light px-2.5 py-1 rounded-full border border-veg-primary/10 transition-colors">
-                        #{{ $tag }}
+                @if(count($article->clean_tags) > 0)
+                  <div class="flex flex-wrap gap-1.5 mb-5" style="max-width: 100%; word-break: break-word; overflow-wrap: anywhere;">
+                    @foreach($article->clean_tags as $tag)
+                      <a href="{{ url('/radar?tag=' . urlencode($tag)) }}" 
+                         class="text-[10px] font-bold text-veg-primary bg-veg-light/50 hover:bg-veg-light px-2.5 py-1 rounded-full border border-veg-primary/10 transition-colors inline-block max-w-full whitespace-normal break-words"
+                         style="word-break: break-word; overflow-wrap: anywhere; max-width: 100%;">
+                        #{{ trim($tag, '# ') }}
                       </a>
                     @endforeach
                   </div>
@@ -216,20 +218,21 @@
         </div>
 
         <!-- Widget: Tags Principais -->
-        <div class="bg-white rounded-[32px] border border-gray-100 shadow-md" style="padding: 2.25rem 2rem;">
+        <div class="bg-white rounded-[32px] border border-gray-100 shadow-md" style="padding: 2.25rem 2rem; overflow: hidden; max-width: 100%;">
           <h3 class="text-base font-extrabold text-veg-dark mb-5 pb-3 border-b border-veg-primary/10 flex items-center gap-2">
             <i data-lucide="hash" class="w-5 h-5 text-veg-primary"></i>
             {{ __('Tags Principais') }}
           </h3>
           
-          <div class="flex flex-wrap gap-2">
+          <div class="flex flex-wrap gap-2" style="max-width: 100%; word-break: break-word; overflow-wrap: anywhere;">
             @forelse($tags as $tag)
-              <a href="{{ url('/radar?tag=' . $tag) }}" 
-                 class="text-xs font-bold px-4 py-2 rounded-full border transition-all duration-300 hover:scale-105
+              <a href="{{ url('/radar?tag=' . urlencode($tag)) }}" 
+                 class="text-xs font-bold px-3.5 py-1.5 rounded-full border transition-all duration-300 hover:scale-105 inline-block max-w-full whitespace-normal break-words
                         {{ $activeTag === $tag 
                            ? 'bg-veg-primary text-white border-veg-primary shadow-md' 
-                           : 'bg-gray-50 text-gray-600 border-gray-100 hover:border-veg-primary hover:text-veg-primary hover:bg-veg-light' }}">
-                #{{ $tag }}
+                           : 'bg-gray-50 text-gray-600 border-gray-100 hover:border-veg-primary hover:text-veg-primary hover:bg-veg-light' }}"
+                 style="word-break: break-word; overflow-wrap: anywhere; max-width: 100%;">
+                #{{ trim($tag, '# ') }}
               </a>
             @empty
               <p class="text-xs text-gray-400">{{ __('Nenhuma tag cadastrada.') }}</p>

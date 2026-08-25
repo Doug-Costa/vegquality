@@ -53,12 +53,14 @@
     </div>
 
     <!-- Tags do Artigo -->
-    @if($article->tags && is_array($article->tags) && count($article->tags) > 0)
-      <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border); display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;">
+    @if(count($article->clean_tags) > 0)
+      <div style="margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--color-border); display: flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; max-width: 100%; word-break: break-word; overflow-wrap: anywhere;">
         <span style="font-size: 0.875rem; font-weight: 700; color: var(--color-veg-dark); margin-right: 0.5rem;">Tags:</span>
-        @foreach($article->tags as $tag)
-          <a href="{{ url('/radar?tag=' . $tag) }}" class="text-xs font-bold text-veg-primary bg-veg-light/50 hover:bg-veg-primary hover:text-white px-3.5 py-1.5 rounded-full border border-veg-primary/10 transition-all">
-            #{{ $tag }}
+        @foreach($article->clean_tags as $tag)
+          <a href="{{ url('/radar?tag=' . urlencode($tag)) }}" 
+             class="text-xs font-bold text-veg-primary bg-veg-light/50 hover:bg-veg-primary hover:text-white px-3.5 py-1.5 rounded-full border border-veg-primary/10 transition-all inline-block max-w-full whitespace-normal break-words"
+             style="word-break: break-word; overflow-wrap: anywhere; max-width: 100%;">
+            #{{ trim($tag, '# ') }}
           </a>
         @endforeach
       </div>

@@ -61,6 +61,42 @@ class Article extends Model
     }
 
     /**
+     * Get clean array of tags (splitting concatenated comma-separated tags and stripping extra hashes).
+     */
+    public function getCleanTagsAttribute(): array
+    {
+        $tags = $this->tags;
+        if (!$tags) {
+            return [];
+        }
+
+        if (is_string($tags)) {
+            $tags = json_decode($tags, true) ?? [$tags];
+        }
+
+        if (!is_array($tags)) {
+            return [];
+        }
+
+        $result = [];
+        foreach ($tags as $item) {
+            if (!is_string($item)) {
+                continue;
+            }
+            // Split by comma or semicolon or newline
+            $parts = preg_split('/[,;\n\r]+/', $item, -1, PREG_SPLIT_NO_EMPTY);
+            foreach ($parts as $part) {
+                $cleaned = trim($part, "# \t\n\r\0\x0B");
+                if (!empty($cleaned)) {
+                    $result[] = $cleaned;
+                }
+            }
+        }
+
+        return array_values(array_unique($result));
+    }
+
+    /**
      * Get related articles that share the same category or tags, excluding the current article.
      */
     public function getRelatedArticles($limit = 2)

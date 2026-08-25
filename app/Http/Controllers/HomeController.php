@@ -84,9 +84,10 @@ class HomeController extends Controller
             })
             ->values();
 
-        // Extract distinct tags
-        $tags = $allArticles->pluck('tags')
-            ->flatten()
+        // Extract distinct clean tags
+        $tags = $allArticles->flatMap(function ($article) {
+                return $article->clean_tags;
+            })
             ->filter()
             ->unique()
             ->values();
