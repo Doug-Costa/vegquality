@@ -138,23 +138,47 @@
     </div>
 
     @php
-      $downloadCards = [
-          [
-              'title' => $isEn ? 'Technical Spec Sheet' : 'Ficha técnica',
-              'desc' => $isEn ? 'Consult the Veg Oxi 200 technical data sheet and find all details on composition, application, physical-chemical properties, storage, regulation, and usage recommendations.' : 'Consulte a ficha técnica do Veg Oxi 200 e conheça todos os detalhes sobre sua composição, aplicação, propriedades físico-químicas, armazenamento, regulamentação e recomendações de uso.',
-              'file' => 'downloads/ficha-tecnica-veg-oxi-200.pdf',
-          ],
-          [
-              'title' => $isEn ? 'Usage Protocols' : 'Protocolos de uso',
-              'desc' => $isEn ? 'Access the usage protocols to learn how to apply Veg Oxi 200 to each vegetable group for maximum efficiency, performance, and shelf life.' : 'Acesse os protocolos de uso e descubra como aplicar o Veg Oxi 200 em cada grupo de vegetais para obter máxima eficiência, desempenho e vida útil dos FLV minimamente processados.',
-              'file' => 'downloads/protocolos-de-uso-veg-oxi-200.pdf',
-          ],
-          [
-              'title' => $isEn ? 'MSDS (Safety Data Sheet)' : 'FDS',
-              'desc' => $isEn ? 'Access the Veg Oxi 200 MSDS to consult safety, handling, storage, transport, emergency measures, and recommendations for safe product use.' : 'Acesse a FDS do Veg Oxi 200 e consulte informações sobre segurança, manuseio, armazenamento, transporte, medidas de emergência e recomendações para o uso seguro do produto.',
-              'file' => 'downloads/fds-veg-oxi-200.pdf',
-          ],
-      ];
+      $downloadCards = [];
+      $dynamicList = data_get($downloads, 'downloads');
+      
+      if (!empty($dynamicList) && is_array($dynamicList)) {
+          foreach ($dynamicList as $dl) {
+              $title = $isEn ? (data_get($dl, 'title_en') ?: data_get($dl, 'title')) : data_get($dl, 'title');
+              $desc = $isEn ? (data_get($dl, 'desc_en') ?: data_get($dl, 'desc')) : data_get($dl, 'desc');
+              $file = data_get($dl, 'file');
+              if ($file) {
+                  $downloadCards[] = [
+                      'title' => $title,
+                      'desc' => $desc,
+                      'file' => $file,
+                      'is_dynamic' => true,
+                  ];
+              }
+          }
+      }
+
+      if (empty($downloadCards)) {
+          $downloadCards = [
+              [
+                  'title' => $isEn ? 'Technical Spec Sheet' : 'Ficha técnica',
+                  'desc' => $isEn ? 'Consult the Veg Oxi 200 technical data sheet and find all details on composition, application, physical-chemical properties, storage, regulation, and usage recommendations.' : 'Consulte a ficha técnica do Veg Oxi 200 e conheça todos os detalhes sobre sua composição, aplicação, propriedades físico-químicas, armazenamento, regulamentação e recomendações de uso.',
+                  'file' => 'downloads/ficha-tecnica-veg-oxi-200.pdf',
+                  'is_dynamic' => false,
+              ],
+              [
+                  'title' => $isEn ? 'Usage Protocols' : 'Protocolos de uso',
+                  'desc' => $isEn ? 'Access the usage protocols to learn how to apply Veg Oxi 200 to each vegetable group for maximum efficiency, performance, and shelf life.' : 'Acesse os protocolos de uso e descubra como aplicar o Veg Oxi 200 em cada grupo de vegetais para obter máxima eficiência, desempenho e vida útil dos FLV minimamente processados.',
+                  'file' => 'downloads/protocolos-de-uso-veg-oxi-200.pdf',
+                  'is_dynamic' => false,
+              ],
+              [
+                  'title' => $isEn ? 'MSDS (Safety Data Sheet)' : 'FDS',
+                  'desc' => $isEn ? 'Access the Veg Oxi 200 MSDS to consult safety, handling, storage, transport, emergency measures, and recommendations for safe product use.' : 'Acesse a FDS do Veg Oxi 200 e consulte informações sobre segurança, manuseio, armazenamento, transporte, medidas de emergência e recomendações para o uso seguro do produto.',
+                  'file' => 'downloads/fds-veg-oxi-200.pdf',
+                  'is_dynamic' => false,
+              ],
+          ];
+      }
     @endphp
 
     <style>
@@ -180,9 +204,21 @@
           <p>{{ $dl['desc'] }}</p>
           @php
             $fileUrl = data_get($dl, 'file');
-            $isAssetFile = Str::startsWith($fileUrl, 'downloads/');
+            
+            if (str_starts_with($fileUrl, 'http://') || str_starts_with($fileUrl, 'https://')) {
+                $finalUrl = $fileUrl;
+            } elseif (str_starts_with($fileUrl, 'downloads/')) {
+                // If the file exists directly in public/downloads, use it. Otherwise, serve from storage.
+                if (empty($dl['is_dynamic']) && file_exists(public_path($fileUrl))) {
+                    $finalUrl = asset($fileUrl);
+                } else {
+                    $finalUrl = asset('storage/' . $fileUrl);
+                }
+            } else {
+                $finalUrl = asset('storage/' . $fileUrl);
+            }
           @endphp
-          <a href="{{ $isAssetFile ? asset($fileUrl) : asset('storage/' . $fileUrl) }}" download class="btn-download">
+          <a href="{{ $finalUrl }}" download class="btn-download">
             <i data-lucide="download"></i>
             {{ __('Baixe o PDF') }}
           </a>
