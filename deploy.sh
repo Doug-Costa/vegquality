@@ -15,6 +15,10 @@ git pull origin main
 echo "🗄️ Executando migrações de banco (php artisan migrate)..."
 php artisan migrate --force
 
+# TEMPORARIO: cria home_offering sem sobrescrever conteudo existente.
+# Remover depois de confirmar a secao no painel administrativo.
+php artisan db:seed --class='Database\Seeders\HomeOfferingSeeder' --force
+
 # 3. Limpa e regenera os caches de performance do Laravel
 echo "🧹 Otimizando caches da aplicação..."
 php artisan optimize:clear
