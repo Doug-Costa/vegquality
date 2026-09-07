@@ -17,6 +17,8 @@ class Article extends Model
         'cover_image',
         'published_at',
         'status',
+        'is_visible_pt',
+        'is_visible_en',
         'category',
         'tags',
         'author_name',
@@ -25,32 +27,61 @@ class Article extends Model
 
     public function getDisplayTitleAttribute(): string
     {
-        if (app()->getLocale() === 'en' && !empty($this->title_en)) {
+        $locale = app()->getLocale();
+        $isEn = ($locale === 'en' || str_starts_with($locale, 'en'));
+
+        if ($isEn && !empty($this->title_en)) {
             return $this->title_en;
         }
-        return $this->title ?? '';
+        
+        return $this->title ?: ($this->title_en ?? '');
     }
 
     public function getDisplayExcerptAttribute(): string
     {
-        if (app()->getLocale() === 'en' && !empty($this->excerpt_en)) {
+        $locale = app()->getLocale();
+        $isEn = ($locale === 'en' || str_starts_with($locale, 'en'));
+
+        if ($isEn && !empty($this->excerpt_en)) {
             return $this->excerpt_en;
         }
-        return $this->excerpt ?? '';
+
+        return $this->excerpt ?: ($this->excerpt_en ?? '');
     }
 
     public function getDisplayContentAttribute(): string
     {
-        if (app()->getLocale() === 'en' && !empty($this->content_en)) {
+        $locale = app()->getLocale();
+        $isEn = ($locale === 'en' || str_starts_with($locale, 'en'));
+
+        if ($isEn && !empty($this->content_en)) {
             return $this->content_en;
         }
-        return $this->content ?? '';
+
+        return $this->content ?: ($this->content_en ?? '');
     }
 
     protected $casts = [
         'published_at' => 'datetime',
         'tags' => 'array',
+        'is_visible_pt' => 'boolean',
+        'is_visible_en' => 'boolean',
     ];
+
+    /**
+     * Scope a query to only include articles visible in the active (or specified) locale.
+     */
+    public function scopeForLocale($query, ?string $locale = null)
+    {
+        $locale = $locale ?? app()->getLocale();
+        $isEn = ($locale === 'en' || str_starts_with($locale, 'en'));
+
+        if ($isEn) {
+            return $query->where('is_visible_en', true);
+        }
+
+        return $query->where('is_visible_pt', true);
+    }
 
     /**
      * Get the columnist associated with the article.
@@ -97,12 +128,13 @@ class Article extends Model
     }
 
     /**
-     * Get related articles that share the same category or tags, excluding the current article.
+     * Get related articles that share the same category or tags, excluding the current article and filtered by locale.
      */
-    public function getRelatedArticles($limit = 2)
+    public function getRelatedArticles($limit = 2, ?string $locale = null)
     {
         return self::where('id', '!=', $this->id)
             ->where('status', 'published')
+            ->forLocale($locale)
             ->where(function ($query) {
                 $query->where('published_at', '<=', now())
                       ->orWhereNull('published_at');

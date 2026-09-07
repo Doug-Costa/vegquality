@@ -13,6 +13,7 @@ class HomeController extends Controller
         
         $articles = \App\Models\Article::with('columnist')
             ->where('status', 'published')
+            ->forLocale()
             ->where(function ($q) {
                 $q->where('published_at', '<=', now())
                   ->orWhereNull('published_at');
@@ -41,6 +42,7 @@ class HomeController extends Controller
     {
         $query = \App\Models\Article::with('columnist')
             ->where('status', 'published')
+            ->forLocale()
             ->where(function ($q) {
                 $q->where('published_at', '<=', now())
                   ->orWhereNull('published_at');
@@ -66,8 +68,9 @@ class HomeController extends Controller
             ->paginate(5)
             ->withQueryString();
 
-        // Get all published articles to extract unique categories and tags
+        // Get all published articles in current locale to extract unique categories and tags
         $allArticles = \App\Models\Article::where('status', 'published')
+            ->forLocale()
             ->where(function ($q) {
                 $q->where('published_at', '<=', now())
                   ->orWhereNull('published_at');
@@ -92,8 +95,9 @@ class HomeController extends Controller
             ->unique()
             ->values();
 
-        // Get recent posts (top 5 published posts)
+        // Get recent posts (top 5 published posts in current locale)
         $recentArticles = \App\Models\Article::where('status', 'published')
+            ->forLocale()
             ->where(function ($q) {
                 $q->where('published_at', '<=', now())
                   ->orWhereNull('published_at');
@@ -172,10 +176,11 @@ class HomeController extends Controller
             
         $relatedArticles = $article->getRelatedArticles(2);
         
-        // If there are less than 2 related articles, fill the remaining with the most recent articles
+        // If there are less than 2 related articles, fill the remaining with the most recent articles in current locale
         if ($relatedArticles->count() < 2) {
             $recent = \App\Models\Article::where('id', '!=', $article->id)
                 ->where('status', 'published')
+                ->forLocale()
                 ->where(function ($q) {
                     $q->where('published_at', '<=', now())
                       ->orWhereNull('published_at');

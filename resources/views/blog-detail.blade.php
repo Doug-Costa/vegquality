@@ -12,7 +12,7 @@
       <span class="breadcrumb-separator" style="color: rgba(255, 255, 255, 0.4) !important;">/</span>
       <a href="{{ url('/radar') }}" style="color: rgba(255, 255, 255, 0.85) !important;">{{ __('Radar FLV') }}</a>
       <span class="breadcrumb-separator" style="color: rgba(255, 255, 255, 0.4) !important;">/</span>
-      <span style="color: rgba(255, 255, 255, 0.6) !important;">Artigo</span>
+      <span style="color: rgba(255, 255, 255, 0.6) !important;">{{ __('Artigo') }}</span>
     </div>
     <h1 class="internal-hero-title animate-fade-up delay-100" style="font-size: 2.25rem; line-height: 1.2; max-width: 900px; color: #ffffff !important; text-shadow: none !important;">
       {{ $article->display_title }}
@@ -80,7 +80,7 @@
         <img src="{{ $authorAvatar }}" alt="{{ $authorName }}" style="width: 100%; height: 100%; object-fit: cover; display: block;">
       </div>
       <div style="flex-grow: 1; text-align: center; md:text-align: left;">
-        <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-veg-primary); display: block; margin-bottom: 0.25rem;">Colunista / Autor</span>
+        <span style="font-size: 10px; font-weight: 800; text-transform: uppercase; letter-spacing: 0.05em; color: var(--color-veg-primary); display: block; margin-bottom: 0.25rem;">{{ __('Colunista / Autor') }}</span>
         <h4 style="font-size: 1.25rem; font-weight: 800; color: var(--color-veg-dark); margin: 0 0 0.25rem 0;">{{ $authorName }}</h4>
         @if($authorRole)
           <p style="font-size: 0.825rem; font-weight: 700; color: #6b7280; margin: 0 0 0.75rem 0;">{{ $authorRole }}</p>

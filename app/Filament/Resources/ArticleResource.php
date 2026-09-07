@@ -41,11 +41,11 @@ class ArticleResource extends Resource
                                             ->schema([
                                                 Forms\Components\TextInput::make('title')
                                                     ->label('Título do Artigo (PT)')
-                                                    ->required()
+                                                    ->required(fn (Forms\Get $get) => (bool) $get('is_visible_pt'))
                                                     ->maxLength(255)
                                                     ->live(onBlur: true)
-                                                    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set) => 
-                                                        $operation === 'create' ? $set('slug', \Illuminate\Support\Str::slug($state)) : null
+                                                    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set, Forms\Get $get) => 
+                                                        $operation === 'create' && !empty($state) ? $set('slug', \Illuminate\Support\Str::slug($state)) : null
                                                     ),
                                                 Forms\Components\TextInput::make('slug')
                                                     ->label('Slug / URL do Artigo')
@@ -60,7 +60,7 @@ class ArticleResource extends Resource
                                                     ->columnSpanFull(),
                                                 Forms\Components\RichEditor::make('content')
                                                     ->label('Corpo do Artigo (PT)')
-                                                    ->required()
+                                                    ->required(fn (Forms\Get $get) => (bool) $get('is_visible_pt'))
                                                     ->columnSpanFull(),
                                             ]),
 
@@ -69,7 +69,12 @@ class ArticleResource extends Resource
                                                 Forms\Components\TextInput::make('title_en')
                                                     ->label('Título do Artigo (English)')
                                                     ->placeholder('Article title in English')
-                                                    ->maxLength(255),
+                                                    ->required(fn (Forms\Get $get) => (bool) $get('is_visible_en') && !(bool) $get('is_visible_pt'))
+                                                    ->maxLength(255)
+                                                    ->live(onBlur: true)
+                                                    ->afterStateUpdated(fn (string $operation, $state, Forms\Set $set, Forms\Get $get) => 
+                                                        $operation === 'create' && empty($get('title')) && !empty($state) ? $set('slug', \Illuminate\Support\Str::slug($state)) : null
+                                                    ),
                                                 Forms\Components\Textarea::make('excerpt_en')
                                                     ->label('Resumo (English)')
                                                     ->placeholder('Write a short introduction in English...')
@@ -77,6 +82,7 @@ class ArticleResource extends Resource
                                                     ->columnSpanFull(),
                                                 Forms\Components\RichEditor::make('content_en')
                                                     ->label('Corpo do Artigo (English)')
+                                                    ->required(fn (Forms\Get $get) => (bool) $get('is_visible_en') && !(bool) $get('is_visible_pt'))
                                                     ->columnSpanFull(),
                                             ]),
                                     ])
@@ -87,6 +93,21 @@ class ArticleResource extends Resource
                         Forms\Components\Grid::make(1)
                             ->columnSpan(4)
                             ->schema([
+                                Forms\Components\Section::make('Disponibilidade de Idiomas')
+                                    ->description('Defina em quais idiomas o artigo será listado.')
+                                    ->schema([
+                                        Forms\Components\Toggle::make('is_visible_pt')
+                                            ->label('Exibir em Português (PT)')
+                                            ->default(true)
+                                            ->live()
+                                            ->helperText('Artigo disponível quando o site estiver em PT.'),
+                                        Forms\Components\Toggle::make('is_visible_en')
+                                            ->label('Exibir em Inglês (EN)')
+                                            ->default(true)
+                                            ->live()
+                                            ->helperText('Artigo disponível quando o site estiver em EN.'),
+                                    ]),
+
                                 Forms\Components\Section::make('Status & Agendamento')
                                     ->schema([
                                         Forms\Components\Select::make('status')
@@ -194,6 +215,21 @@ class ArticleResource extends Resource
                     ->searchable()
                     ->sortable()
                     ->limit(40),
+                Tables\Columns\TextColumn::make('languages')
+                    ->label('Idiomas')
+                    ->state(function (Article $record): string {
+                        $langs = [];
+                        if ($record->is_visible_pt) $langs[] = 'PT';
+                        if ($record->is_visible_en) $langs[] = 'EN';
+                        return count($langs) > 0 ? implode(' / ', $langs) : 'Oculto';
+                    })
+                    ->badge()
+                    ->color(fn (string $state): string => match ($state) {
+                        'PT / EN' => 'success',
+                        'PT' => 'primary',
+                        'EN' => 'info',
+                        default => 'gray',
+                    }),
                 Tables\Columns\TextColumn::make('columnist.name')
                     ->label('Colunista')
                     ->searchable()
@@ -222,6 +258,21 @@ class ArticleResource extends Resource
                         'draft' => 'Rascunho',
                         'published' => 'Publicado',
                     ]),
+                Tables\Filters\SelectFilter::make('language_visibility')
+                    ->label('Disponibilidade de Idioma')
+                    ->options([
+                        'both' => 'Bilíngue (PT & EN)',
+                        'pt_only' => 'Exclusivo PT',
+                        'en_only' => 'Exclusivo EN',
+                    ])
+                    ->query(function (Builder $query, array $data): Builder {
+                        return match ($data['value'] ?? null) {
+                            'both' => $query->where('is_visible_pt', true)->where('is_visible_en', true),
+                            'pt_only' => $query->where('is_visible_pt', true)->where('is_visible_en', false),
+                            'en_only' => $query->where('is_visible_pt', false)->where('is_visible_en', true),
+                            default => $query,
+                        };
+                    }),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
