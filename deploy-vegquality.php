@@ -149,10 +149,6 @@ $commands = [
     
     // 3. Roda migrations pendentes em produção (seguro - não apaga dados existentes)
     "cd {$basePath} && php artisan migrate --force 2>&1",
-
-    // TEMPORARIO: cria home_offering sem sobrescrever conteudo existente.
-    // Remover depois de confirmar a secao no painel administrativo.
-    "cd {$basePath} && php artisan db:seed --class='Database\\Seeders\\HomeOfferingSeeder' --force 2>&1",
     
     // ATENÇÃO: db:seed foi DESATIVADO para não sobrescrever/resetar os dados cadastrados no painel administrativo pela dona do site!
     // "cd {$basePath} && php artisan db:seed --force 2>&1",
