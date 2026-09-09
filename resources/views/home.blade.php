@@ -466,8 +466,20 @@
           {{ trans_content($productHighlight, 'subtitle', 'Um Investimento que Vale a Pena!') }}
         </p>
 
+        @php
+          $showCardGreen = $isEn
+              ? (bool) data_get($productHighlight, 'show_cost_with_en', true)
+              : (bool) data_get($productHighlight, 'show_cost_with', true);
+
+          $showCardRed = $isEn
+              ? (bool) data_get($productHighlight, 'show_cost_without_en', true)
+              : (bool) data_get($productHighlight, 'show_cost_without', true);
+        @endphp
+
+        @if($showCardGreen || $showCardRed)
         <div class="badges-container">
           <!-- Badge 1: Com Veg Oxi 200 -->
+          @if($showCardGreen)
           <div class="product-cost-badge">
             <div class="cost-value-wrapper">
               <span class="cost-number">{{ trans_content($productHighlight, 'cost_with', '30') }}</span>
@@ -476,8 +488,10 @@
             <p class="cost-desc">{{ trans_content($productHighlight, 'cost_with_desc', $isEn ? 'Per Fresh Vegetable' : 'Por Vegetal Fresco') }}</p>
             <span class="cost-sub-badge">{{ trans_content($productHighlight, 'cost_with_tag', $isEn ? 'Sulfite-Free (Safe)' : 'Livre de Sulfitos (Seguro)') }}</span>
           </div>
+          @endif
 
           <!-- Badge 2: Sem Veg Oxi 200 -->
+          @if($showCardRed)
           <div class="product-cost-badge product-cost-badge-bad">
             <div class="cost-value-wrapper">
               <span class="cost-number cost-number-bad" style="color: #dc2626 !important;">{{ trans_content($productHighlight, 'cost_without', '80') }}</span>
@@ -486,7 +500,9 @@
             <p class="cost-desc">{{ trans_content($productHighlight, 'cost_without_desc', $isEn ? 'Per Oxidized Vegetable' : 'Por Vegetal Oxidado') }}</p>
             <span class="cost-sub-badge cost-sub-badge-bad">{{ trans_content($productHighlight, 'cost_without_tag', $isEn ? 'With Metabisulfite (Toxic)' : 'Com Metabissulfito (Tóxico)') }}</span>
           </div>
+          @endif
         </div>
+        @endif
 
         <a href="{{ trans_content($productHighlight, 'cta_link', url('/veg-oxi')) }}" class="btn btn-primary hero-btn">
           <i data-lucide="shield-check"></i>

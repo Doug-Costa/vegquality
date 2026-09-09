@@ -178,6 +178,10 @@ class SectionsRelationManager extends RelationManager
 
                                 Forms\Components\Section::make('Card Verde (Com Veg Oxi 200) - PT')
                                     ->schema([
+                                        Forms\Components\Toggle::make('show_cost_with')
+                                            ->label('Exibir Card Verde (PT)')
+                                            ->default(true)
+                                            ->columnSpanFull(),
                                         Forms\Components\TextInput::make('cost_with')->label('Número do Custo Verde (Ex: 30)'),
                                         Forms\Components\TextInput::make('cost_with_unit')->label('Unidade do Custo'),
                                         Forms\Components\TextInput::make('cost_with_desc')->label('Descrição do Custo'),
@@ -186,6 +190,10 @@ class SectionsRelationManager extends RelationManager
 
                                 Forms\Components\Section::make('Card Vermelho (Sem Veg Oxi 200) - PT')
                                     ->schema([
+                                        Forms\Components\Toggle::make('show_cost_without')
+                                            ->label('Exibir Card Vermelho (PT)')
+                                            ->default(true)
+                                            ->columnSpanFull(),
                                         Forms\Components\TextInput::make('cost_without')->label('Número do Custo Vermelho (Ex: 80)'),
                                         Forms\Components\TextInput::make('cost_without_unit')->label('Unidade do Custo'),
                                         Forms\Components\TextInput::make('cost_without_desc')->label('Descrição do Custo'),
@@ -202,6 +210,10 @@ class SectionsRelationManager extends RelationManager
 
                                 Forms\Components\Section::make('Card Verde (Com Veg Oxi 200) - EN')
                                     ->schema([
+                                        Forms\Components\Toggle::make('show_cost_with_en')
+                                            ->label('Exibir Card Verde (EN)')
+                                            ->default(true)
+                                            ->columnSpanFull(),
                                         Forms\Components\TextInput::make('cost_with_en')->label('Número do Custo Verde (EN) (Ex: 30)'),
                                         Forms\Components\TextInput::make('cost_with_unit_en')->label('Unidade do Custo (EN)'),
                                         Forms\Components\TextInput::make('cost_with_desc_en')->label('Descrição do Custo (EN)'),
@@ -210,6 +222,10 @@ class SectionsRelationManager extends RelationManager
 
                                 Forms\Components\Section::make('Card Vermelho (Sem Veg Oxi 200) - EN')
                                     ->schema([
+                                        Forms\Components\Toggle::make('show_cost_without_en')
+                                            ->label('Exibir Card Vermelho (EN)')
+                                            ->default(true)
+                                            ->columnSpanFull(),
                                         Forms\Components\TextInput::make('cost_without_en')->label('Número do Custo Vermelho (EN) (Ex: 80)'),
                                         Forms\Components\TextInput::make('cost_without_unit_en')->label('Unidade do Custo (EN)'),
                                         Forms\Components\TextInput::make('cost_without_desc_en')->label('Descrição do Custo (EN)'),
