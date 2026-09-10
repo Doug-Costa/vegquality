@@ -649,7 +649,16 @@ class SectionsRelationManager extends RelationManager
                 Forms\Components\Repeater::make('cards')
                     ->label('Fatos sobre o Veg Oxi')
                     ->schema([
-                        Forms\Components\TextInput::make('icon')->label('Ícone (history, award, factory, settings, etc.)')->required(),
+                        Forms\Components\Grid::make(2)
+                            ->schema([
+                                Forms\Components\Toggle::make('is_visible_pt')
+                                    ->label('Visível em PT')
+                                    ->default(true),
+                                Forms\Components\Toggle::make('is_visible_en')
+                                    ->label('Visível em EN')
+                                    ->default(true),
+                            ]),
+                        Forms\Components\TextInput::make('icon')->label('Ícone (flask-conical, leaf, trending-up, settings, etc.)')->required(),
                         Forms\Components\Tabs::make('Traduções Fato')
                             ->tabs([
                                 Forms\Components\Tabs\Tab::make('Português (PT)')
@@ -689,6 +698,15 @@ class SectionsRelationManager extends RelationManager
                 Forms\Components\Repeater::make('downloads')
                     ->label('Arquivos para Download')
                     ->schema([
+                        Forms\Components\Grid::make(2)
+                            ->schema([
+                                Forms\Components\Toggle::make('is_visible_pt')
+                                    ->label('Visível em PT')
+                                    ->default(true),
+                                Forms\Components\Toggle::make('is_visible_en')
+                                    ->label('Visível em EN')
+                                    ->default(true),
+                            ]),
                         Forms\Components\FileUpload::make('file')
                             ->label('Arquivo PDF')
                             ->directory('downloads')
@@ -736,6 +754,15 @@ class SectionsRelationManager extends RelationManager
                 Forms\Components\Repeater::make('contacts')
                     ->label('Canais de Distribuição / Contatos Regionais')
                     ->schema([
+                        Forms\Components\Grid::make(2)
+                            ->schema([
+                                Forms\Components\Toggle::make('is_visible_pt')
+                                    ->label('Visível em PT')
+                                    ->default(true),
+                                Forms\Components\Toggle::make('is_visible_en')
+                                    ->label('Visível em EN')
+                                    ->default(true),
+                            ]),
                         Forms\Components\TextInput::make('link')->label('Link do WhatsApp ou Site')->required(),
                         Forms\Components\Tabs::make('Traduções Distribuição')
                             ->tabs([

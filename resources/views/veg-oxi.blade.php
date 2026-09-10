@@ -20,9 +20,7 @@
     <p class="subpage-hero-subtitle animate-fade-up delay-100">{{ trans_content($hero, 'subtitle', 'Tecnologia inovadora para conservação e qualidade de vegetais frescos.') }}</p>
   </div>
 </section>
-@endif
-
-<!-- Facts Section -->
+@endif<!-- Facts Section -->
 @if(is_section_visible($facts) && $facts)
 <section class="facts-section" style="background-color: #ffffff; padding: 5rem 0;">
   <div class="container">
@@ -38,32 +36,49 @@
 
     @php
       $isEn = app()->getLocale() === 'en' || str_starts_with(app()->getLocale(), 'en');
-      $factCards = [
-          [
-              'icon' => 'flask-conical',
-              'title' => $isEn ? "Scientifically\nDeveloped" : "Desenvolvido\nCientificamente",
-              'desc' => $isEn ? 'Formulated based on years of research in post-harvest food technology.' : 'Formulado com base em anos de pesquisa em tecnologia pós-colheita.',
-              'body' => $isEn ? 'Developed to replace sodium metabisulfite without leaving toxic residues or altering taste and aroma.' : 'Desenvolvido para substituir o metabissulfito de sódio sem deixar resíduos tóxicos nem alterar sabor e aroma dos alimentos.',
-          ],
-          [
-              'icon' => 'leaf',
-              'title' => $isEn ? "Sulfite-Free\n& Organic" : "Livre de Sulfitos\n& Orgânico",
-              'desc' => $isEn ? 'Eliminates chemical preservatives harmful to health.' : 'Elimina conservantes químicos nocivos à saúde.',
-              'body' => $isEn ? '100% natural formula compliant with health and environmental regulatory standards.' : 'Fórmula 100% natural em conformidade com as normas regulatórias sanitárias e ambientais mais exigentes.',
-          ],
-          [
-              'icon' => 'trending-up',
-              'title' => $isEn ? "Proven\nCost-Benefit" : "Custo-Benefício\nComprovado",
-              'desc' => $isEn ? 'Drastically reduces waste and breakdown losses.' : 'Reduz drasticamente o desperdício e perdas por quebra.',
-              'body' => $isEn ? 'Costs only around 1 cent per processed vegetable, generating real profit by preserving quality.' : 'Custa apenas cerca de 1 centavo por hortaliça processada, gerando lucro real ao preservar a qualidade.',
-          ],
-          [
-              'icon' => 'settings',
-              'title' => $isEn ? "Easy Industrial\nApplication" : "Fácil Aplicação\nIndustrial",
-              'desc' => $isEn ? 'Integrates seamlessly into existing wash and sanitization lines.' : 'Integra-se perfeitamente em linhas de lavagem existentes.',
-              'body' => $isEn ? 'Requires no costly machinery overhauls; easily dosed into standard processing wash tanks.' : 'Não exige reformas estruturais em maquinários; facilmente dosado em tanques de lavagem padrão.',
-          ],
-      ];
+      $dynamicFacts = data_get($facts, 'cards', []);
+      if (!empty($dynamicFacts) && is_array($dynamicFacts)) {
+          $factCards = $dynamicFacts;
+      } else {
+          $factCards = [
+              [
+                  'icon' => 'flask-conical',
+                  'title' => "Desenvolvido\nCientificamente",
+                  'title_en' => "Scientifically\nDeveloped",
+                  'desc' => 'Formulado com base em anos de pesquisa em tecnologia pós-colheita.',
+                  'desc_en' => 'Formulated based on years of research in post-harvest food technology.',
+                  'body' => 'Desenvolvido para substituir o metabissulfito de sódio sem deixar resíduos tóxicos nem alterar sabor e aroma dos alimentos.',
+                  'body_en' => 'Developed to replace sodium metabisulfite without leaving toxic residues or altering taste and aroma.',
+              ],
+              [
+                  'icon' => 'leaf',
+                  'title' => "Livre de Sulfitos\n& Orgânico",
+                  'title_en' => "Sulfite-Free\n& Organic",
+                  'desc' => 'Elimina conservantes químicos nocivos à saúde.',
+                  'desc_en' => 'Eliminates chemical preservatives harmful to health.',
+                  'body' => 'Fórmula 100% natural em conformidade com as normas regulatórias sanitárias e ambientais mais exigentes.',
+                  'body_en' => '100% natural formula compliant with health and environmental regulatory standards.',
+              ],
+              [
+                  'icon' => 'trending-up',
+                  'title' => "Custo-Benefício\nComprovado",
+                  'title_en' => "Proven\nCost-Benefit",
+                  'desc' => 'Reduz drasticamente o desperdício e perdas por quebra.',
+                  'desc_en' => 'Drastically reduces waste and breakdown losses.',
+                  'body' => 'Custa apenas cerca de 1 centavo por hortaliça processada, gerando lucro real ao preservar a qualidade.',
+                  'body_en' => 'Costs only around 1 cent per processed vegetable, generating real profit by preserving quality.',
+              ],
+              [
+                  'icon' => 'settings',
+                  'title' => "Fácil Aplicação\nIndustrial",
+                  'title_en' => "Easy Industrial\nApplication",
+                  'desc' => 'Integra-se perfeitamente em linhas de lavagem existentes.',
+                  'desc_en' => 'Integrates seamlessly into existing wash and sanitization lines.',
+                  'body' => 'Não exige reformas estruturais em maquinários; facilmente dosado em tanques de lavagem padrão.',
+                  'body_en' => 'Requires no costly machinery overhauls; easily dosed into standard processing wash tanks.',
+              ],
+          ];
+      }
     @endphp
 
     <style>
@@ -89,19 +104,21 @@
 
     <div class="facts-grid animate-fade-up delay-100">
       @foreach($factCards as $index => $card)
+        @if(is_section_visible($card))
         <div class="fact-card">
           <div class="fact-card-icon">
             <i data-lucide="{{ data_get($card, 'icon', 'info') }}"></i>
           </div>
-          <h3 class="fact-card-title">{!! nl2br(e($card['title'])) !!}</h3>
+          <h3 class="fact-card-title">{!! nl2br(e(trans_content($card, 'title'))) !!}</h3>
           <p class="fact-card-desc">
-            {{ $card['desc'] }}
+            {{ trans_content($card, 'desc') }}
           </p>
           <span class="fact-card-link" data-modal-target="modal-fact-{{ $index }}">
             {{ __('Saiba Mais') }}
             <i data-lucide="chevron-right"></i>
           </span>
         </div>
+        @endif
       @endforeach
     </div>
   </div>
@@ -109,17 +126,19 @@
 
 <!-- Modals for Facts -->
 @foreach($factCards as $index => $card)
+  @if(is_section_visible($card))
   <div id="modal-fact-{{ $index }}" class="modal-overlay">
     <div class="modal-container">
       <button class="modal-close" aria-label="Fechar Modal">
         <i data-lucide="x"></i>
       </button>
-      <h3 class="modal-title">{{ $card['title'] }}</h3>
+      <h3 class="modal-title">{{ trans_content($card, 'title') }}</h3>
       <div class="modal-body">
-        <p>{!! nl2br(e($card['body'])) !!}</p>
+        <p>{!! nl2br(e(trans_content($card, 'body'))) !!}</p>
       </div>
     </div>
   </div>
+  @endif
 @endforeach
 @endif
 
@@ -143,13 +162,14 @@
       
       if (!empty($dynamicList) && is_array($dynamicList)) {
           foreach ($dynamicList as $dl) {
-              $title = $isEn ? (data_get($dl, 'title_en') ?: data_get($dl, 'title')) : data_get($dl, 'title');
-              $desc = $isEn ? (data_get($dl, 'desc_en') ?: data_get($dl, 'desc')) : data_get($dl, 'desc');
+              if (!is_section_visible($dl)) {
+                  continue;
+              }
               $file = data_get($dl, 'file');
               if ($file) {
                   $downloadCards[] = [
-                      'title' => $title,
-                      'desc' => $desc,
+                      'title' => trans_content($dl, 'title'),
+                      'desc' => trans_content($dl, 'desc'),
                       'file' => $file,
                       'is_dynamic' => true,
                   ];
@@ -157,7 +177,7 @@
           }
       }
 
-      if (empty($downloadCards)) {
+      if (empty($downloadCards) && empty($dynamicList)) {
           $downloadCards = [
               [
                   'title' => $isEn ? 'Technical Spec Sheet' : 'Ficha técnica',
@@ -208,7 +228,6 @@
             if (str_starts_with($fileUrl, 'http://') || str_starts_with($fileUrl, 'https://')) {
                 $finalUrl = $fileUrl;
             } elseif (str_starts_with($fileUrl, 'downloads/')) {
-                // If the file exists directly in public/downloads, use it. Otherwise, serve from storage.
                 if (empty($dl['is_dynamic']) && file_exists(public_path($fileUrl))) {
                     $finalUrl = asset($fileUrl);
                 } else {
@@ -315,50 +334,65 @@
     <div class="services-header animate-fade-up">
       <div class="services-tag">
         <span class="micro-badge-dot"></span>
-        {{ $isEn ? 'Distribution' : trans_content($contacts, 'badge', 'Distribuição') }}
+        {{ trans_content($contacts, 'badge', 'Distribuição') }}
       </div>
       <h2 class="services-title">
-        {{ $isEn ? 'Veg Oxi 200 Distribution' : trans_content($contacts, 'title', 'Distribuição Veg Oxi 200') }}
+        {{ trans_content($contacts, 'title', 'Distribuição Veg Oxi 200') }}
       </h2>
     </div>
 
     @php
-      $contactCards = [
-          [
-              'title' => $isEn ? 'Purchase in SP' : 'Quero Adquirir em SP',
-              'desc' => $isEn ? 'In agro-industry, every hour counts. If Veg Oxi 200 is urgent for your production, click below and request support.' : 'Na agroindústria, cada hora conta. Se o Veg Oxi 200 é urgente para sua produção, clique no botão abaixo e solicite seu atendimento.',
-              'link' => 'https://wa.me/5511978348438',
-          ],
-          [
-              'title' => $isEn ? 'South of Minas Gerais' : 'No Sul de Minas Gerais',
-              'desc' => $isEn ? 'Also in Minas Gerais: more freshness, higher quality, and reduced losses. Click to contact us!' : 'Também em Minas Gerais: mais frescor, mais qualidade e menos perdas. Clique e fale conosco!',
-              'link' => 'https://wa.me/5511978348438',
-          ],
-          [
-              'title' => $isEn ? 'Other Locations' : 'Outras Localidades',
-              'desc' => $isEn ? 'Located in another region of Brazil? No problem! Our team serves clients nationwide. Click below and contact us!' : 'Está em outra região do Brasil? Sem problema! Nossa equipe atende clientes em todo o país. Clique no botão abaixo e fale conosco!',
-              'link' => 'https://wa.me/5511978348438',
-          ],
-          [
-              'title' => $isEn ? 'How to Distribute?' : 'Como Distribuir?',
-              'desc' => $isEn ? 'Are you a distributor looking to carry Veg Oxi 200 in your region? Click below and talk to our team!' : 'É distribuidor e quer levar o Veg Oxi 200 para sua região? Clique no botão abaixo e fale com nossa equipe!',
-              'link' => 'https://wa.me/5511978348438',
-          ],
-      ];
+      $dynamicContacts = data_get($contacts, 'contacts', []);
+      if (!empty($dynamicContacts) && is_array($dynamicContacts)) {
+          $contactCards = $dynamicContacts;
+      } else {
+          $contactCards = [
+              [
+                  'title' => 'Quero Adquirir em SP',
+                  'title_en' => 'Purchase in SP',
+                  'desc' => 'Na agroindústria, cada hora conta. Se o Veg Oxi 200 é urgente para sua produção, clique no botão abaixo e solicite seu atendimento.',
+                  'desc_en' => 'In agro-industry, every hour counts. If Veg Oxi 200 is urgent for your production, click below and request support.',
+                  'link' => 'https://wa.me/5511978348438',
+              ],
+              [
+                  'title' => 'No Sul de Minas Gerais',
+                  'title_en' => 'South of Minas Gerais',
+                  'desc' => 'Também em Minas Gerais: mais frescor, mais qualidade e menos perdas. Clique e fale conosco!',
+                  'desc_en' => 'Also in Minas Gerais: more freshness, higher quality, and reduced losses. Click to contact us!',
+                  'link' => 'https://wa.me/5511978348438',
+              ],
+              [
+                  'title' => 'Outras Localidades',
+                  'title_en' => 'Other Locations',
+                  'desc' => 'Está em outra região do Brasil? Sem problema! Nossa equipe atende clientes em todo o país. Clique no botão abaixo e fale conosco!',
+                  'desc_en' => 'Located in another region of Brazil? No problem! Our team serves clients nationwide. Click below and contact us!',
+                  'link' => 'https://wa.me/5511978348438',
+              ],
+              [
+                  'title' => 'Como Distribuir?',
+                  'title_en' => 'How to Distribute?',
+                  'desc' => 'É distribuidor e quer levar o Veg Oxi 200 para sua região? Clique no botão abaixo e fale com nossa equipe!',
+                  'desc_en' => 'Are you a distributor looking to carry Veg Oxi 200 in your region? Click below and talk to our team!',
+                  'link' => 'https://wa.me/5511978348438',
+              ],
+          ];
+      }
     @endphp
 
     <div class="local-grid animate-fade-up delay-100">
       @foreach($contactCards as $contact)
+        @if(is_section_visible($contact))
         <div class="local-card">
           <div class="local-card-icon">
             <i data-lucide="map-pin"></i>
           </div>
-          <h4>{{ $contact['title'] }}</h4>
-          <p>{{ $contact['desc'] }}</p>
+          <h4>{{ trans_content($contact, 'title') }}</h4>
+          <p>{{ trans_content($contact, 'desc') }}</p>
           <a href="{{ data_get($contact, 'link', 'https://wa.me/5511978348438') }}" target="_blank" rel="noopener noreferrer" class="btn-local-cta">
             {{ __('Fale Conosco') }}
           </a>
         </div>
+        @endif
       @endforeach
     </div>
 
